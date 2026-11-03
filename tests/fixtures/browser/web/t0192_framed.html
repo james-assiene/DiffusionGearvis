@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Product with a widget</title>
+<style>body{margin:0;font:24px sans-serif}button{display:block;margin:40px;padding:20px;width:400px;font:24px sans-serif}iframe{margin:40px;width:500px;height:200px}</style></head>
+<body>
+<!-- T-0192 A (f) / A6: an ordinary page framing a cross-origin iframe whose URL is checkout-shaped
+     (https://pay.example/checkout/<token>/frame, as a payment or CAPTCHA widget would be); only main-frame URLs count -->
+<h1>Product with a widget</h1>
+<button id="bump" onclick="window.__bumps=(window.__bumps||0)+1">Add to cart</button>
+<iframe id="widget" src="https://pay.example/checkout/T0192TOKq7w3/frame"></iframe>
+<script>window.__bumps = 0;</script>
+</body>
+</html>

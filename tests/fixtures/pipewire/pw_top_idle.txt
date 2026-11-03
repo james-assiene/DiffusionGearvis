@@ -1,0 +1,14 @@
+S   ID  QUANT   RATE    WAIT    BUSY   W/Q   B/Q  ERR FORMAT           NAME 
+C   29      0      0    ---     ---   ---   ---     0                  Dummy-Driver
+C   30      0      0    ---     ---   ---   ---     0                  Freewheel-Driver
+C   45      0      0    ---     ---   ---   ---     0                  Midi-Bridge
+C   56      0      0    ---     ---   ---   ---     0                  v4l2_input.pci-0000_0d_00.0-usb-0_5.2.2_1.0
+C   52      0      0    ---     ---   ---   ---     0                  alsa_input.usb-046d_Logitech_Webcam_C925e_8473F8AF-02.analog-stereo
+C  123      0      0    ---     ---   ---   ---     0                  auto_null
+S   ID  QUANT   RATE    WAIT    BUSY   W/Q   B/Q  ERR FORMAT           NAME 
+S   29      0      0    ---     ---   ---   ---     0                  Dummy-Driver
+S   30      0      0    ---     ---   ---   ---     0                  Freewheel-Driver
+S   45      0      0    ---     ---   ---   ---     0                  Midi-Bridge
+S   56      0      0    ---     ---   ---   ---     0                  v4l2_input.pci-0000_0d_00.0-usb-0_5.2.2_1.0
+S   52      0      0    ---     ---   ---   ---     0                  alsa_input.usb-046d_Logitech_Webcam_C925e_8473F8AF-02.analog-stereo
+S  123      0      0    ---     ---   ---   ---     0                  auto_null

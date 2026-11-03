@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0111c keys</title>
+<style>
+  html { scroll-behavior: auto; }
+  body { margin: 0; height: 4000px; width: 1280px; font: 16px sans-serif;
+         background: repeating-linear-gradient(180deg, #fff 0 100px, #ddd 100px 200px); }
+  #inp, #b { position: absolute; left: 100px; width: 400px; height: 40px; box-sizing: border-box; }
+  #inp { top: 100px; }
+  #ta { position: absolute; left: 100px; top: 200px; width: 400px; height: 120px; box-sizing: border-box; }
+  #b { top: 360px; }
+  #btn { position: absolute; left: 100px; top: 440px; width: 200px; height: 40px; }
+</style>
+<script src="recorder.js"></script>
+</head>
+<body>
+<form id="kf"><input id="inp" autocomplete="off" value=""></form>
+<textarea id="ta">line one
+line two
+line three</textarea>
+<input id="b" autocomplete="off" value="">
+<button id="btn" type="button">button</button>
+<dialog id="dlg"><p>modal</p></dialog>
+<div id="status" style="position:absolute;left:600px;top:100px;font-size:32px"></div>
+<script>
+  document.getElementById("kf").addEventListener("submit", (e) => e.preventDefault());
+  document.getElementById("btn").addEventListener("click", () => window.__log.push({ type: "btn-activated" }));
+  // Chromium gives Ctrl+Enter no default action (probe_press_key.py); web apps bind it ("send").
+  // This page's binding is the visible effect the e2e row checks for that combo.
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && e.ctrlKey && !e.altKey) {
+      document.getElementById("status").textContent = "ctrl-enter handled";
+      window.__log.push({ type: "ctrl-enter-handled" });
+    }
+  });
+</script>
+</body>
+</html>

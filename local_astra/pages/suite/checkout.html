@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Checkout</title>
+  <link rel="stylesheet" href="/assets/suite.css">
+</head>
+<body data-page="checkout">
+  <header class="bar">
+    <span class="brand">Greenleaf Grocer</span>
+    <span class="badge">Checkout</span>
+  </header>
+  <main class="page">
+    <h1>Checkout</h1>
+    <p class="lede">Check your order, add a note for the driver if you like, and place it.</p>
+    <div class="summary">
+      <div class="line"><span>Seasonal vegetable box</span><span>&pound;18.50</span></div>
+      <div class="line"><span>Sourdough loaf</span><span>&pound;4.20</span></div>
+      <div class="line"><span>Free-range eggs, six</span><span>&pound;3.10</span></div>
+      <div class="line"><span>Subtotal</span><span>&pound;25.80</span></div>
+      <div class="line"><span>Delivery, Thursday morning</span><span>&pound;2.00</span></div>
+      <div class="line total"><span>Total</span><span>&pound;27.80</span></div>
+      <div class="field" style="margin-top: 18px">
+        <label for="note">Delivery note</label>
+        <input type="text" id="note" name="note" data-suite="note">
+      </div>
+      <div class="actions">
+        <button type="button" id="place" data-suite="place">Place order</button>
+        <span id="placed" class="status"></span>
+      </div>
+    </div>
+  </main>
+  <script src="/assets/suite.js"></script>
+</body>
+</html>

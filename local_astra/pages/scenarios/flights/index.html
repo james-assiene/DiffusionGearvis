@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Flights: compare round trips</title>
+  <link rel="stylesheet" href="/assets/scenarios.css">
+</head>
+<body class="flights" data-page="search" data-scenario="d9">
+  <header class="bar">
+    <a class="brand" href="/flights/">Flights</a>
+    <nav><span class="muted">Round trips &middot; 1 adult &middot; Economy</span></nav>
+  </header>
+  <main class="page">
+    <div class="flight-search" id="flight-search">
+      <div class="pick">
+        <label for="origin">From</label>
+        <input type="text" id="origin" name="origin" data-scn="origin" autocomplete="off" spellcheck="false" placeholder="Where from?">
+        <ul class="suggest gone" id="origin-suggest"></ul>
+      </div>
+      <div class="pick">
+        <label for="destination">To</label>
+        <input type="text" id="destination" name="destination" data-scn="destination" autocomplete="off" spellcheck="false" placeholder="Where to?">
+        <ul class="suggest gone" id="destination-suggest"></ul>
+      </div>
+      <div class="pick">
+        <span class="label">Depart</span>
+        <button type="button" class="date" id="depart" data-scn="depart">Choose date</button>
+      </div>
+      <div class="pick">
+        <span class="label">Return</span>
+        <button type="button" class="date" id="return" data-scn="return">Choose date</button>
+      </div>
+      <div class="pick">
+        <span class="label">&nbsp;</span>
+        <button type="button" id="search" data-scn="search">Search</button>
+      </div>
+      <div class="calendar gone" id="calendar">
+        <div class="cal-head"><strong id="cal-for"></strong><span>November 2026</span></div>
+        <div class="cal-grid" id="cal-grid"></div>
+      </div>
+    </div>
+    <p class="muted" id="search-note"></p>
+    <div class="chosen gone" id="chosen">
+      <span id="chosen-text"></span>
+      <a class="button" id="continue" data-scn="continue" href="/flights/united/checkout.html">Continue</a>
+    </div>
+    <ul class="flight-list" id="flight-list"></ul>
+  </main>
+  <footer class="demo-note">Demo copy for testing; not affiliated with United Airlines, Alaska Airlines, Delta Air Lines, Frontier Airlines or any travel site. Flights and fares are made up.</footer>
+  <script src="/assets/scenarios.js"></script>
+</body>
+</html>

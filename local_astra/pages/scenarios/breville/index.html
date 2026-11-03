@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Breville parts and accessories</title>
+  <link rel="stylesheet" href="/assets/scenarios.css">
+</head>
+<body class="breville shop" data-page="home" data-scenario="d4">
+  <header class="bar">
+    <a class="brand" href="/breville/">Breville</a>
+    <nav><span class="muted">Parts and accessories</span><a href="/breville/cart.html" data-scn="nav-cart">Cart (<span id="cart-count">0</span>)</a></nav>
+  </header>
+  <main class="page">
+    <h1>Find parts for your machine</h1>
+    <p class="lede">Search by your machine's model name or number. The model number is on the label under the drip tray.</p>
+    <form class="search-row" id="model-search" autocomplete="off">
+      <input type="text" id="q" name="q" data-scn="q" placeholder="Model name or number">
+      <button type="submit" data-scn="search">Search</button>
+    </form>
+    <p class="muted" id="results-note"></p>
+    <ul class="results" id="results"></ul>
+  </main>
+  <footer class="demo-note">Demo copy for testing; not affiliated with Breville.</footer>
+  <script src="/assets/scenarios.js"></script>
+</body>
+</html>

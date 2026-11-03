@@ -1,0 +1,38 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>t0204 lazy scroll</title>
+<style>
+html, body { margin: 0; padding: 0; overflow-anchor: none; background: rgb(250, 250, 250); }
+#top { height: 600px; background: rgb(250, 250, 250); border-top: 80px solid rgb(40, 40, 40); box-sizing: border-box; }
+#ins > div, .band { height: 120px; }
+.band:nth-child(odd) { background: rgb(60, 60, 60); }
+.band:nth-child(even) { background: rgb(180, 180, 180); }
+</style></head>
+<body>
+<div id="top"></div>
+<div id="ins"></div>
+<div id="bands">
+<div class="band"></div><div class="band"></div><div class="band"></div><div class="band"></div><div class="band"></div>
+<div class="band"></div><div class="band"></div><div class="band"></div><div class="band"></div><div class="band"></div>
+</div>
+<script>
+// T-0204 C4: on the first scroll event, a 120 px block is inserted at the top of #ins (document y 600, the viewport
+// top after a 600 px scroll) every 80 ms, five times (80..400 ms; ``?n=N``: N times, the colours cycling): each
+// insert pushes everything below it down.
+const PALETTE = ["rgb(200, 30, 30)", "rgb(30, 160, 60)", "rgb(40, 70, 200)", "rgb(220, 180, 30)", "rgb(150, 50, 170)"];
+const N = Number(new URLSearchParams(location.search).get("n") || PALETTE.length);
+window.__inserted = 0;
+let started = false;
+addEventListener("scroll", () => {
+  if (started) return;
+  started = true;
+  const ins = document.getElementById("ins");
+  const t = setInterval(() => {
+    const b = document.createElement("div");
+    b.style.background = PALETTE[window.__inserted % PALETTE.length];
+    ins.insertBefore(b, ins.firstChild);
+    window.__inserted++;
+    if (window.__inserted === N) clearInterval(t);
+  }, 80);
+});
+</script>
+</body></html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Copy fixture</title>
+<style>body{font:16px sans-serif;margin:40px} button{font-size:20px;padding:16px 32px}</style></head>
+<body>
+<h1>Copy fixture (T-0160 C, reviewer A)</h1>
+<textarea id="src" readonly>T0160-CLIP-EXEC-7c1e</textarea>
+<p><button id="copy" type="button">Copy the code</button></p>
+<pre id="out"></pre>
+<script>
+  window.__state = { exec: null, api: null };
+  document.getElementById("copy").addEventListener("click", function () {
+    var src = document.getElementById("src");
+    src.select();
+    try { window.__state.exec = document.execCommand("copy"); } catch (e) { window.__state.exec = "threw: " + e; }
+    try {
+      navigator.clipboard.writeText("T0160-CLIP-API-7c1e").then(
+        function () { window.__state.api = "ok"; },
+        function (e) { window.__state.api = "rejected: " + e; });
+    } catch (e) { window.__state.api = "threw: " + e; }
+    document.getElementById("out").textContent = "clicked";
+  });
+</script>
+</body>
+</html>

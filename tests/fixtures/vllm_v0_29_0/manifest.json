@@ -1,0 +1,62 @@
+{
+  "image": "vllm/vllm-openai:v0.29.0@sha256:c2914767605584b6d8f45686b82de173ecc99e781897aa3d0a66dacd72c51ae1",
+  "license": "Apache-2.0",
+  "segments": {
+    "_compiled_sample_step": {
+      "path": "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/models/diffusion_gemma.py",
+      "lines": [
+        470,
+        657
+      ],
+      "sha256": "91354b71f6527892b40000edec73f5d6332b0a978def833333fe6dce2d1d6fd8"
+    },
+    "_compute_num_rejected": {
+      "path": "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/models/diffusion_gemma.py",
+      "lines": [
+        458,
+        466
+      ],
+      "sha256": "487cfa4c0ac79f1c3772d94126a8197428909e19a8065f9dcdc5d12159992633"
+    },
+    "_NO_PENALTIES_STATE": {
+      "path": "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/models/diffusion_gemma.py",
+      "lines": [
+        1038,
+        1038
+      ],
+      "sha256": "b260e319e0c815f993f75950cfa6d99d0a8aa42318279be02bf907dc3b738d78"
+    },
+    "DiffusionGemmaRequestStates": {
+      "path": "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/models/diffusion_gemma.py",
+      "lines": [
+        660,
+        759
+      ],
+      "sha256": "836f453c6d1658f5a363eafb4e564468d33c3e20acef7e07ea4fa4981c05937e"
+    },
+    "DiffusionSampler": {
+      "path": "/usr/local/lib/python3.12/dist-packages/vllm/model_executor/models/diffusion_gemma.py",
+      "lines": [
+        1041,
+        1425
+      ],
+      "sha256": "a783f5eadd7cfed95a4c31a0cd9af1865eb52ab71389c930c75c160820022515"
+    },
+    "SamplingStates": {
+      "path": "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu/sample/states.py",
+      "lines": [
+        17,
+        121
+      ],
+      "sha256": "e8dfddbb2a3f185816efb334f6a1fe970c68c2969cbd8786df0026c2cc494dec"
+    },
+    "apply_top_k_top_p_pytorch": {
+      "path": "/usr/local/lib/python3.12/dist-packages/vllm/v1/sample/ops/topk_topp_sampler.py",
+      "lines": [
+        367,
+        408
+      ],
+      "sha256": "d6bcc4924866e6b9b049a7a908d77a07d396fa38d1bdb5334fc98ac55067365e"
+    }
+  }
+}

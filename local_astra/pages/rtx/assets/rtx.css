@@ -1,0 +1,153 @@
+/* T-0209 RTX scenario copies: one plain stylesheet for every page. System fonts only, no motion, no images. */
+:root {
+  --ink: #1f2328;
+  --muted: #59636e;
+  --line: #d1d9e0;
+  --paper: #ffffff;
+  --wash: #f6f8fa;
+  --accent: #1f5fbf;
+  --site: #2b2b2b;
+  --warn: #b3261e;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--wash);
+}
+
+a { color: var(--accent); }
+
+.site-bar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 28px;
+  background: var(--site);
+  color: #f2f2f2;
+}
+.site-bar .site-name { font-weight: 700; font-size: 19px; }
+.site-bar a { color: #f2f2f2; text-decoration: none; }
+.site-bar .host { color: #b8b8b8; font-size: 14px; margin-left: auto; }
+
+.forum .site-bar { background: #3a2f55; }
+.projects .site-bar { background: #24384f; }
+.notes .site-bar { background: #2f4a3a; }
+
+main {
+  max-width: 980px;
+  margin: 24px auto;
+  padding: 24px 32px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+h1 { font-size: 28px; line-height: 1.25; margin: 0 0 12px; }
+h2 { font-size: 21px; margin: 28px 0 8px; }
+h3 { font-size: 18px; margin: 20px 0 6px; }
+
+.crumbs { color: var(--muted); font-size: 14px; margin: 0 0 12px; }
+
+code, .mono { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 15px; }
+
+.message {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  background: var(--wash);
+  border-left: 4px solid var(--warn);
+  padding: 8px 12px;
+  margin: 8px 0;
+}
+
+.path { font-weight: 600; }
+
+.status {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  background: #dafbe1;
+  color: #1a7f37;
+}
+.status.open { background: #ddf4ff; color: #0969da; }
+
+.meta { color: var(--muted); font-size: 14px; }
+
+.post {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 16px 0;
+}
+.post .who { font-weight: 600; }
+.post .likes { color: var(--muted); font-size: 14px; }
+
+.list { list-style: none; padding: 0; margin: 0; }
+.list li { border-bottom: 1px solid var(--line); padding: 10px 0; }
+.list li:last-child { border-bottom: 0; }
+
+.button, button {
+  display: inline-block;
+  font: inherit;
+  font-size: 16px;
+  padding: 8px 18px;
+  border: 1px solid #1b4f9c;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #ffffff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.buttons { display: flex; gap: 14px; flex-wrap: wrap; margin: 16px 0; }
+
+.notice { color: var(--warn); min-height: 1.5em; margin: 12px 0 0; }
+
+label { display: block; font-weight: 600; margin: 12px 0 4px; }
+
+input[type="text"], input[type="search"], input[type="password"] {
+  font: inherit;
+  width: 100%;
+  max-width: 460px;
+  padding: 8px 10px;
+  border: 1px solid #8c959f;
+  border-radius: 6px;
+}
+
+.gone { display: none; }
+
+footer {
+  max-width: 980px;
+  margin: 0 auto 32px;
+  padding: 0 32px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* the start-page stand-in, laid out as the live start page */
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: none;
+  margin: 0;
+  min-height: 100vh;
+  padding: 120px 24px 24px;
+  background: var(--wash);
+  border: 0;
+  border-radius: 0;
+}
+.home-title { font-size: 34px; font-weight: 700; margin: 0 0 6px; }
+.home-sub { color: var(--muted); margin: 0 0 28px; }
+.home-search { display: flex; gap: 10px; width: 100%; max-width: 600px; }
+.home-search input { flex: 1; max-width: none; font-size: 18px; padding: 10px 12px; }
+.web-label { display: block; font-weight: 600; margin: 0 0 8px; }
+.web-error { color: var(--warn); min-height: 1.45em; margin: 14px 0 0; }
+.web-notice { color: var(--muted); max-width: 600px; text-align: center; margin: 28px 0 0; }

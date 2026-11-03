@@ -1,0 +1,4472 @@
+[
+ {
+  "id": 0,
+  "type": "PipeWire:Interface:Core",
+  "version": 4,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "cookie": 1510567997,
+   "user-name": "user",
+   "host-name": "gpu-box",
+   "version": "1.0.5",
+   "name": "pipewire-0",
+   "change-mask": [
+    "props"
+   ],
+   "props": {
+    "clock.power-of-two-quantum": true,
+    "config.name": "pipewire.conf",
+    "core.daemon": true,
+    "core.name": "pipewire-0",
+    "cpu.max-align": 64,
+    "default.clock.max-quantum": 2048,
+    "default.clock.min-quantum": 32,
+    "default.clock.quantum": 1024,
+    "default.clock.quantum-floor": 4,
+    "default.clock.quantum-limit": 8192,
+    "default.clock.rate": 48000,
+    "default.video.height": 480,
+    "default.video.rate.denom": 1,
+    "default.video.rate.num": 25,
+    "default.video.width": 640,
+    "link.max-buffers": 16,
+    "log.level": 2,
+    "mem.allow-mlock": true,
+    "mem.warn-mlock": false,
+    "module.access": true,
+    "module.jackdbus-detect": true,
+    "module.x11.bell": true,
+    "object.id": 0,
+    "object.serial": 0,
+    "settings.check-quantum": false,
+    "settings.check-rate": false
+   }
+  }
+ },
+ {
+  "id": 29,
+  "type": "PipeWire:Interface:Node",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "max-input-ports": 0,
+   "max-output-ports": 0,
+   "change-mask": [
+    "input-ports",
+    "output-ports",
+    "state",
+    "props",
+    "params"
+   ],
+   "n-input-ports": 0,
+   "n-output-ports": 0,
+   "state": "suspended",
+   "error": null,
+   "props": {
+    "clock.id": "monotonic",
+    "clock.name": "clock.system.monotonic",
+    "clock.quantum-limit": 8192,
+    "factory.id": 10,
+    "factory.name": "support.node.driver",
+    "node.driver": true,
+    "node.group": "pipewire.dummy",
+    "node.name": "Dummy-Driver",
+    "object.id": 29,
+    "object.serial": 29,
+    "priority.driver": 20000
+   },
+   "params": {}
+  }
+ },
+ {
+  "id": 30,
+  "type": "PipeWire:Interface:Node",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "max-input-ports": 0,
+   "max-output-ports": 0,
+   "change-mask": [
+    "input-ports",
+    "output-ports",
+    "state",
+    "props",
+    "params"
+   ],
+   "n-input-ports": 0,
+   "n-output-ports": 0,
+   "state": "suspended",
+   "error": null,
+   "props": {
+    "clock.id": "monotonic",
+    "clock.name": "clock.system.monotonic",
+    "clock.quantum-limit": 8192,
+    "factory.id": 10,
+    "factory.name": "support.node.driver",
+    "node.driver": true,
+    "node.freewheel": true,
+    "node.group": "pipewire.freewheel",
+    "node.name": "Freewheel-Driver",
+    "object.id": 30,
+    "object.serial": 30,
+    "priority.driver": 19000
+   },
+   "params": {}
+  }
+ },
+ {
+  "id": 31,
+  "type": "PipeWire:Interface:Metadata",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x"
+  ],
+  "props": {
+   "metadata.name": "settings",
+   "object.serial": 31
+  },
+  "metadata": [
+   {
+    "subject": 0,
+    "key": "log.level",
+    "type": "",
+    "value": 2
+   },
+   {
+    "subject": 0,
+    "key": "clock.rate",
+    "type": "",
+    "value": 48000
+   },
+   {
+    "subject": 0,
+    "key": "clock.allowed-rates",
+    "type": "",
+    "value": "[ 48000 ]"
+   },
+   {
+    "subject": 0,
+    "key": "clock.quantum",
+    "type": "",
+    "value": 1024
+   },
+   {
+    "subject": 0,
+    "key": "clock.min-quantum",
+    "type": "",
+    "value": 32
+   },
+   {
+    "subject": 0,
+    "key": "clock.max-quantum",
+    "type": "",
+    "value": 2048
+   },
+   {
+    "subject": 0,
+    "key": "clock.force-quantum",
+    "type": "",
+    "value": 0
+   },
+   {
+    "subject": 0,
+    "key": "clock.force-rate",
+    "type": "",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": 32,
+  "type": "PipeWire:Interface:Client",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props"
+   ],
+   "props": {
+    "application.language": "en_US.UTF-8",
+    "application.name": "pipewire",
+    "application.process.binary": "pipewire",
+    "application.process.host": "gpu-box",
+    "application.process.id": 3312,
+    "application.process.user": "user",
+    "clock.power-of-two-quantum": true,
+    "config.name": "pipewire-pulse.conf",
+    "core.name": "pipewire-user-3312",
+    "core.version": "1.0.5",
+    "cpu.max-align": 64,
+    "default.clock.max-quantum": 2048,
+    "default.clock.min-quantum": 32,
+    "default.clock.quantum": 1024,
+    "default.clock.quantum-floor": 4,
+    "default.clock.quantum-limit": 8192,
+    "default.clock.rate": 48000,
+    "default.video.height": 480,
+    "default.video.rate.denom": 1,
+    "default.video.rate.num": 25,
+    "default.video.width": 640,
+    "link.max-buffers": 64,
+    "log.level": 2,
+    "mem.allow-mlock": true,
+    "mem.warn-mlock": false,
+    "module.id": 2,
+    "object.id": 32,
+    "object.serial": 32,
+    "pipewire.access": "unrestricted",
+    "pipewire.protocol": "protocol-native",
+    "pipewire.sec.gid": 1000,
+    "pipewire.sec.label": "unconfined",
+    "pipewire.sec.pid": 3312,
+    "pipewire.sec.socket": "pipewire-0",
+    "pipewire.sec.uid": 1000,
+    "settings.check-quantum": false,
+    "settings.check-rate": false
+   }
+  }
+ },
+ {
+  "id": 34,
+  "type": "PipeWire:Interface:Client",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props"
+   ],
+   "props": {
+    "application.language": "en_US.UTF-8",
+    "application.name": "WirePlumber",
+    "application.process.binary": "wireplumber",
+    "application.process.host": "gpu-box",
+    "application.process.id": 3310,
+    "application.process.user": "user",
+    "clock.power-of-two-quantum": true,
+    "config.name": "/usr/share/wireplumber/wireplumber.conf",
+    "core.name": "pipewire-user-3310",
+    "core.version": "1.0.5",
+    "cpu.max-align": 64,
+    "default.clock.max-quantum": 2048,
+    "default.clock.min-quantum": 32,
+    "default.clock.quantum": 1024,
+    "default.clock.quantum-floor": 4,
+    "default.clock.quantum-limit": 8192,
+    "default.clock.rate": 48000,
+    "default.video.height": 480,
+    "default.video.rate.denom": 1,
+    "default.video.rate.num": 25,
+    "default.video.width": 640,
+    "link.max-buffers": 64,
+    "log.level": 2,
+    "mem.allow-mlock": true,
+    "mem.warn-mlock": false,
+    "module.id": 2,
+    "object.id": 34,
+    "object.serial": 34,
+    "pipewire.access": "unrestricted",
+    "pipewire.protocol": "protocol-native",
+    "pipewire.sec.gid": 1000,
+    "pipewire.sec.label": "unconfined",
+    "pipewire.sec.pid": 3310,
+    "pipewire.sec.socket": "pipewire-0",
+    "pipewire.sec.uid": 1000,
+    "settings.check-quantum": false,
+    "settings.check-rate": false,
+    "wireplumber.daemon": true,
+    "wireplumber.export-core": true,
+    "wireplumber.script-engine": "lua-scripting"
+   }
+  }
+ },
+ {
+  "id": 35,
+  "type": "PipeWire:Interface:Client",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props"
+   ],
+   "props": {
+    "application.language": "en_US.UTF-8",
+    "application.name": "WirePlumber [export]",
+    "application.process.binary": "wireplumber",
+    "application.process.host": "gpu-box",
+    "application.process.id": 3310,
+    "application.process.user": "user",
+    "clock.power-of-two-quantum": true,
+    "config.name": "/usr/share/wireplumber/wireplumber.conf",
+    "core.name": "pipewire-user-3310",
+    "core.version": "1.0.5",
+    "cpu.max-align": 64,
+    "default.clock.max-quantum": 2048,
+    "default.clock.min-quantum": 32,
+    "default.clock.quantum": 1024,
+    "default.clock.quantum-floor": 4,
+    "default.clock.quantum-limit": 8192,
+    "default.clock.rate": 48000,
+    "default.video.height": 480,
+    "default.video.rate.denom": 1,
+    "default.video.rate.num": 25,
+    "default.video.width": 640,
+    "link.max-buffers": 64,
+    "log.level": 2,
+    "mem.allow-mlock": true,
+    "mem.warn-mlock": false,
+    "module.id": 2,
+    "object.id": 35,
+    "object.serial": 35,
+    "pipewire.access": "unrestricted",
+    "pipewire.protocol": "protocol-native",
+    "pipewire.sec.gid": 1000,
+    "pipewire.sec.label": "unconfined",
+    "pipewire.sec.pid": 3310,
+    "pipewire.sec.socket": "pipewire-0",
+    "pipewire.sec.uid": 1000,
+    "settings.check-quantum": false,
+    "settings.check-rate": false,
+    "wireplumber.daemon": true,
+    "wireplumber.export-core": true,
+    "wireplumber.script-engine": "lua-scripting"
+   }
+  }
+ },
+ {
+  "id": 36,
+  "type": "PipeWire:Interface:Metadata",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x"
+  ],
+  "props": {
+   "client.id": 34,
+   "factory.id": 6,
+   "metadata.name": "default",
+   "module.id": 5,
+   "object.serial": 36
+  },
+  "metadata": [
+   {
+    "subject": 0,
+    "key": "default.video.source",
+    "type": "Spa:String:JSON",
+    "value": {
+     "name": "v4l2_input.pci-0000_0d_00.0-usb-0_5.2.2_1.0"
+    }
+   },
+   {
+    "subject": 0,
+    "key": "default.audio.source",
+    "type": "Spa:String:JSON",
+    "value": {
+     "name": "alsa_input.usb-046d_Logitech_Webcam_C925e_8473F8AF-02.analog-stereo"
+    }
+   },
+   {
+    "subject": 0,
+    "key": "default.audio.sink",
+    "type": "Spa:String:JSON",
+    "value": {
+     "name": "auto_null"
+    }
+   },
+   {
+    "subject": 137,
+    "key": "target.node",
+    "type": "Spa:Id",
+    "value": -1
+   }
+  ]
+ },
+ {
+  "id": 38,
+  "type": "PipeWire:Interface:Metadata",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x"
+  ],
+  "props": {
+   "client.id": 34,
+   "factory.id": 6,
+   "metadata.name": "route-settings",
+   "module.id": 5,
+   "object.serial": 38
+  },
+  "metadata": [
+   {
+    "subject": 0,
+    "key": "restore.stream.Output/Audio.media.role:Notification",
+    "type": "Spa:String:JSON",
+    "value": {
+     "mute": false,
+     "volume": 1.0,
+     "channels": [
+      "FL",
+      "FR"
+     ],
+     "volumes": [
+      1.0,
+      1.0
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": 45,
+  "type": "PipeWire:Interface:Node",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "max-input-ports": 256,
+   "max-output-ports": 256,
+   "change-mask": [
+    "input-ports",
+    "output-ports",
+    "state",
+    "props",
+    "params"
+   ],
+   "n-input-ports": 1,
+   "n-output-ports": 1,
+   "state": "suspended",
+   "error": null,
+   "props": {
+    "client.id": 35,
+    "clock.quantum-limit": 8192,
+    "device.api": "alsa",
+    "factory.id": 10,
+    "factory.name": "api.alsa.seq.bridge",
+    "media.class": "Midi/Bridge",
+    "node.driver": true,
+    "node.name": "Midi-Bridge",
+    "object.id": 45,
+    "object.serial": 45,
+    "priority.driver": 1,
+    "priority.session": 100
+   },
+   "params": {
+    "Props": [
+     {
+      "device": "default"
+     }
+    ],
+    "IO": [
+     {
+      "id": "Clock",
+      "size": 160
+     },
+     {
+      "id": "Position",
+      "size": 1688
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 46,
+  "type": "PipeWire:Interface:Port",
+  "version": 3,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "direction": "input",
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "format.dsp": "8 bit raw midi",
+    "node.id": 45,
+    "object.id": 46,
+    "object.path": "alsa:seq:default:client_14:playback_0",
+    "object.serial": 46,
+    "port.alias": "Midi Through:Midi Through Port-0",
+    "port.direction": "in",
+    "port.id": 0,
+    "port.name": "Midi Through:(playback_0) Midi Through Port-0",
+    "port.physical": true,
+    "port.terminal": true
+   },
+   "params": {
+    "Meta": [
+     {
+      "type": "Header",
+      "size": 32
+     }
+    ],
+    "IO": [
+     {
+      "id": "Buffers",
+      "size": 8
+     }
+    ],
+    "Buffers": [],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 1.0,
+      "maxQuantum": 1.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 47,
+  "type": "PipeWire:Interface:Port",
+  "version": 3,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "direction": "output",
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "format.dsp": "8 bit raw midi",
+    "node.id": 45,
+    "object.id": 47,
+    "object.path": "alsa:seq:default:client_14:capture_0",
+    "object.serial": 47,
+    "port.alias": "Midi Through:Midi Through Port-0",
+    "port.direction": "out",
+    "port.id": 0,
+    "port.name": "Midi Through:(capture_0) Midi Through Port-0",
+    "port.physical": true,
+    "port.terminal": true
+   },
+   "params": {
+    "Meta": [
+     {
+      "type": "Header",
+      "size": 32
+     }
+    ],
+    "IO": [
+     {
+      "id": "Buffers",
+      "size": 8
+     }
+    ],
+    "Buffers": [],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 1.0,
+      "maxQuantum": 1.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 39,
+  "type": "PipeWire:Interface:Client",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props"
+   ],
+   "props": {
+    "application.icon-name": "multimedia-volume-control",
+    "application.id": "org.gnome.VolumeControl",
+    "application.language": "en_US.UTF-8",
+    "application.name": "GNOME Volume Control Media Keys",
+    "application.process.binary": "gsd-media-keys",
+    "application.process.host": "gpu-box",
+    "application.process.id": 3808,
+    "application.process.machine-id": "00000000000000000000000000000000",
+    "application.process.user": "user",
+    "application.version": "",
+    "client.api": "pipewire-pulse",
+    "clock.power-of-two-quantum": true,
+    "config.name": "pipewire-pulse.conf",
+    "core.name": "pipewire-user-3312",
+    "core.version": "1.0.5",
+    "cpu.max-align": 64,
+    "default.clock.max-quantum": 2048,
+    "default.clock.min-quantum": 32,
+    "default.clock.quantum": 1024,
+    "default.clock.quantum-floor": 4,
+    "default.clock.quantum-limit": 8192,
+    "default.clock.rate": 48000,
+    "default.video.height": 480,
+    "default.video.rate.denom": 1,
+    "default.video.rate.num": 25,
+    "default.video.width": 640,
+    "link.max-buffers": 64,
+    "log.level": 2,
+    "mem.allow-mlock": true,
+    "mem.warn-mlock": false,
+    "module.id": 2,
+    "object.id": 39,
+    "object.serial": 62,
+    "pipewire.access": "unrestricted",
+    "pipewire.protocol": "protocol-native",
+    "pipewire.sec.gid": 1000,
+    "pipewire.sec.label": "unconfined",
+    "pipewire.sec.pid": 3312,
+    "pipewire.sec.socket": "pipewire-0",
+    "pipewire.sec.uid": 1000,
+    "pulse.server.type": "unix",
+    "settings.check-quantum": false,
+    "settings.check-rate": false,
+    "window.x11.display": ":1"
+   }
+  }
+ },
+ {
+  "id": 58,
+  "type": "PipeWire:Interface:Client",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props"
+   ],
+   "props": {
+    "application.language": "en_US.UTF-8",
+    "application.name": "gnome-shell",
+    "application.process.binary": "gnome-shell",
+    "application.process.host": "gpu-box",
+    "application.process.id": 3653,
+    "application.process.user": "user",
+    "clock.power-of-two-quantum": true,
+    "core.name": "pipewire-user-3653",
+    "core.version": "1.0.5",
+    "cpu.max-align": 64,
+    "default.clock.max-quantum": 2048,
+    "default.clock.min-quantum": 32,
+    "default.clock.quantum": 1024,
+    "default.clock.quantum-floor": 4,
+    "default.clock.quantum-limit": 8192,
+    "default.clock.rate": 48000,
+    "default.video.height": 480,
+    "default.video.rate.denom": 1,
+    "default.video.rate.num": 25,
+    "default.video.width": 640,
+    "link.max-buffers": 64,
+    "log.level": 0,
+    "mem.allow-mlock": true,
+    "mem.warn-mlock": false,
+    "module.id": 2,
+    "object.id": 58,
+    "object.serial": 63,
+    "pipewire.access": "unrestricted",
+    "pipewire.protocol": "protocol-native",
+    "pipewire.sec.gid": 1000,
+    "pipewire.sec.label": "unconfined",
+    "pipewire.sec.pid": 3653,
+    "pipewire.sec.socket": "pipewire-0",
+    "pipewire.sec.uid": 1000,
+    "settings.check-quantum": false,
+    "settings.check-rate": false,
+    "window.x11.display": ":1"
+   }
+  }
+ },
+ {
+  "id": 59,
+  "type": "PipeWire:Interface:Client",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props"
+   ],
+   "props": {
+    "application.icon-name": "multimedia-volume-control",
+    "application.id": "org.gnome.VolumeControl",
+    "application.language": "en_US.UTF-8",
+    "application.name": "GNOME Shell Volume Control",
+    "application.process.binary": "gnome-shell",
+    "application.process.host": "gpu-box",
+    "application.process.id": 3653,
+    "application.process.machine-id": "00000000000000000000000000000000",
+    "application.process.user": "user",
+    "application.version": 46.0,
+    "client.api": "pipewire-pulse",
+    "clock.power-of-two-quantum": true,
+    "config.name": "pipewire-pulse.conf",
+    "core.name": "pipewire-user-3312",
+    "core.version": "1.0.5",
+    "cpu.max-align": 64,
+    "default.clock.max-quantum": 2048,
+    "default.clock.min-quantum": 32,
+    "default.clock.quantum": 1024,
+    "default.clock.quantum-floor": 4,
+    "default.clock.quantum-limit": 8192,
+    "default.clock.rate": 48000,
+    "default.video.height": 480,
+    "default.video.rate.denom": 1,
+    "default.video.rate.num": 25,
+    "default.video.width": 640,
+    "link.max-buffers": 64,
+    "log.level": 2,
+    "mem.allow-mlock": true,
+    "mem.warn-mlock": false,
+    "module.id": 2,
+    "object.id": 59,
+    "object.serial": 64,
+    "pipewire.access": "unrestricted",
+    "pipewire.protocol": "protocol-native",
+    "pipewire.sec.gid": 1000,
+    "pipewire.sec.label": "unconfined",
+    "pipewire.sec.pid": 3312,
+    "pipewire.sec.socket": "pipewire-0",
+    "pipewire.sec.uid": 1000,
+    "pulse.server.type": "unix",
+    "settings.check-quantum": false,
+    "settings.check-rate": false,
+    "window.x11.display": ":1"
+   }
+  }
+ },
+ {
+  "id": 60,
+  "type": "PipeWire:Interface:Client",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props"
+   ],
+   "props": {
+    "application.language": "en_US.UTF-8",
+    "application.name": "xdg-desktop-portal",
+    "application.process.binary": "xdg-desktop-portal",
+    "application.process.host": "gpu-box",
+    "application.process.id": 4220,
+    "application.process.user": "user",
+    "clock.power-of-two-quantum": true,
+    "core.name": "pipewire-user-4220",
+    "core.version": "1.0.5",
+    "cpu.max-align": 64,
+    "default.clock.max-quantum": 2048,
+    "default.clock.min-quantum": 32,
+    "default.clock.quantum": 1024,
+    "default.clock.quantum-floor": 4,
+    "default.clock.quantum-limit": 8192,
+    "default.clock.rate": 48000,
+    "default.video.height": 480,
+    "default.video.rate.denom": 1,
+    "default.video.rate.num": 25,
+    "default.video.width": 640,
+    "link.max-buffers": 64,
+    "log.level": 0,
+    "mem.allow-mlock": true,
+    "mem.warn-mlock": false,
+    "module.id": 2,
+    "object.id": 60,
+    "object.serial": 65,
+    "pipewire.access": "unrestricted",
+    "pipewire.access.portal.is_portal": true,
+    "pipewire.protocol": "protocol-native",
+    "pipewire.sec.gid": 1000,
+    "pipewire.sec.label": "unconfined",
+    "pipewire.sec.pid": 4220,
+    "pipewire.sec.socket": "pipewire-0",
+    "pipewire.sec.uid": 1000,
+    "portal.monitor": "Camera",
+    "settings.check-quantum": false,
+    "settings.check-rate": false,
+    "window.x11.display": ":1"
+   }
+  }
+ },
+ {
+  "id": 43,
+  "type": "PipeWire:Interface:Device",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "api.v4l2.cap.bus_info": "usb-0000:0d:00.0-5.2.2",
+    "api.v4l2.cap.capabilities": "84a00001",
+    "api.v4l2.cap.card": "Logitech Webcam C925e",
+    "api.v4l2.cap.device-caps": 4200001,
+    "api.v4l2.cap.driver": "uvcvideo",
+    "api.v4l2.cap.version": "7.0.14",
+    "api.v4l2.path": "/dev/video0",
+    "client.id": 35,
+    "device.api": "v4l2",
+    "device.bus": "usb",
+    "device.bus-path": "pci-0000:0d:00.0-usb-0:5.2.2:1.0",
+    "device.capabilities": ":capture:",
+    "device.description": "Logitech Webcam C925e",
+    "device.devids": 20736,
+    "device.enum.api": "udev",
+    "device.name": "v4l2_device.pci-0000_0d_00.0-usb-0_5.2.2_1.0",
+    "device.plugged.usec": 133369801,
+    "device.product.id": "0x085",
+    "device.product.name": "Logitech Webcam C925e",
+    "device.serial": "046d_Logitech_Webcam_C925e_8473F8AF",
+    "device.subsystem": "video4linux",
+    "device.sysfs.path": "/devices/pci0000:00/0000:00:02.1/0000:03:00.0/0000:04:08.0/0000:06:00.0/0000:07:0c.0/0000:0d:00.0/usb1/1-5/1-5.2/1-5.2.2/1-5.2.2:1.0/video4linux/video0",
+    "device.vendor.id": "0x046",
+    "device.vendor.name": "046d",
+    "factory.id": 14,
+    "media.class": "Video/Device",
+    "object.id": 43,
+    "object.path": "v4l2:/dev/video0",
+    "object.serial": 92
+   },
+   "params": {}
+  }
+ },
+ {
+  "id": 51,
+  "type": "PipeWire:Interface:Device",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "api.v4l2.cap.bus_info": "usb-0000:0d:00.0-5.2.2",
+    "api.v4l2.cap.capabilities": "84a00001",
+    "api.v4l2.cap.card": "Logitech Webcam C925e",
+    "api.v4l2.cap.device-caps": "04a00000",
+    "api.v4l2.cap.driver": "uvcvideo",
+    "api.v4l2.cap.version": "7.0.14",
+    "api.v4l2.path": "/dev/video1",
+    "client.id": 35,
+    "device.api": "v4l2",
+    "device.bus": "usb",
+    "device.bus-path": "pci-0000:0d:00.0-usb-0:5.2.2:1.0",
+    "device.capabilities": ":",
+    "device.description": "Logitech Webcam C925e",
+    "device.devids": 20737,
+    "device.enum.api": "udev",
+    "device.name": "v4l2_device.pci-0000_0d_00.0-usb-0_5.2.2_1.0.2",
+    "device.plugged.usec": 133369815,
+    "device.product.id": "0x085",
+    "device.product.name": "Logitech Webcam C925e",
+    "device.serial": "046d_Logitech_Webcam_C925e_8473F8AF",
+    "device.subsystem": "video4linux",
+    "device.sysfs.path": "/devices/pci0000:00/0000:00:02.1/0000:03:00.0/0000:04:08.0/0000:06:00.0/0000:07:0c.0/0000:0d:00.0/usb1/1-5/1-5.2/1-5.2.2/1-5.2.2:1.0/video4linux/video1",
+    "device.vendor.id": "0x046",
+    "device.vendor.name": "046d",
+    "factory.id": 14,
+    "media.class": "Video/Device",
+    "object.id": 51,
+    "object.path": "v4l2:/dev/video1",
+    "object.serial": 93
+   },
+   "params": {}
+  }
+ },
+ {
+  "id": 49,
+  "type": "PipeWire:Interface:Device",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "alsa.card": 1,
+    "alsa.card_name": "HD-Audio Generic",
+    "alsa.components": "HDA:1002aa01,00aa0100,00100800",
+    "alsa.driver_name": "snd_hda_intel",
+    "alsa.id": "Generic",
+    "alsa.long_card_name": "HD-Audio Generic at 0xdd988000 irq 176",
+    "alsa.mixer_name": "ATI R6xx HDMI",
+    "api.acp.auto-port": false,
+    "api.acp.auto-profile": false,
+    "api.alsa.card": 1,
+    "api.alsa.card.longname": "HD-Audio Generic at 0xdd988000 irq 176",
+    "api.alsa.card.name": "HD-Audio Generic",
+    "api.alsa.path": "hw:1",
+    "api.alsa.use-acp": true,
+    "api.dbus.ReserveDevice1": "Audio1",
+    "client.id": 35,
+    "device.api": "alsa",
+    "device.bus": "pci",
+    "device.bus-path": "pci-0000:79:00.1",
+    "device.description": "Rembrandt Radeon High Definition Audio Controller",
+    "device.enum.api": "udev",
+    "device.icon-name": "audio-card-analog-pci",
+    "device.name": "alsa_card.pci-0000_79_00.1",
+    "device.nick": "HD-Audio Generic",
+    "device.plugged.usec": 133322709,
+    "device.product.id": "0x1640",
+    "device.product.name": "Rembrandt Radeon High Definition Audio Controller",
+    "device.string": 1,
+    "device.subsystem": "sound",
+    "device.sysfs.path": "/devices/pci0000:00/0000:00:08.1/0000:79:00.1/sound/card1",
+    "device.vendor.id": "0x1002",
+    "device.vendor.name": "Advanced Micro Devices, Inc. [AMD/ATI]",
+    "factory.id": 14,
+    "media.class": "Audio/Device",
+    "object.id": 49,
+    "object.path": "alsa:pcm:1",
+    "object.serial": 94
+   },
+   "params": {
+    "EnumProfile": [
+     {
+      "index": 0,
+      "name": "off",
+      "description": "Off",
+      "priority": 0,
+      "available": "yes",
+      "classes": [
+       0
+      ]
+     },
+     {
+      "index": 1,
+      "name": "output:hdmi-stereo",
+      "description": "Digital Stereo (HDMI) Output",
+      "priority": 5900,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         3
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 2,
+      "name": "output:hdmi-stereo-extra1",
+      "description": "Digital Stereo (HDMI 2) Output",
+      "priority": 5700,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         6
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 3,
+      "name": "output:hdmi-stereo-extra2",
+      "description": "Digital Stereo (HDMI 3) Output",
+      "priority": 5700,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         9
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 4,
+      "name": "output:hdmi-surround",
+      "description": "Digital Surround 5.1 (HDMI) Output",
+      "priority": 800,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         4
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 5,
+      "name": "output:hdmi-surround71",
+      "description": "Digital Surround 7.1 (HDMI) Output",
+      "priority": 800,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         5
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 6,
+      "name": "output:hdmi-surround-extra1",
+      "description": "Digital Surround 5.1 (HDMI 2) Output",
+      "priority": 600,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         7
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 7,
+      "name": "output:hdmi-surround71-extra1",
+      "description": "Digital Surround 7.1 (HDMI 2) Output",
+      "priority": 600,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         8
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 8,
+      "name": "output:hdmi-surround-extra2",
+      "description": "Digital Surround 5.1 (HDMI 3) Output",
+      "priority": 600,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         10
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 9,
+      "name": "output:hdmi-surround71-extra2",
+      "description": "Digital Surround 7.1 (HDMI 3) Output",
+      "priority": 600,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         11
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 10,
+      "name": "pro-audio",
+      "description": "Pro Audio",
+      "priority": 1,
+      "available": "unknown",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        3,
+        "card.profile.devices",
+        [
+         0,
+         1,
+         2
+        ]
+       ]
+      ]
+     }
+    ],
+    "Profile": [
+     {
+      "index": 0,
+      "name": "off",
+      "description": "Off",
+      "priority": 0,
+      "available": "yes",
+      "classes": [
+       0
+      ],
+      "save": false
+     }
+    ],
+    "EnumRoute": [
+     {
+      "index": 0,
+      "direction": "Output",
+      "name": "hdmi-output-0",
+      "description": "HDMI / DisplayPort",
+      "priority": 5900,
+      "available": "no",
+      "info": [
+       4,
+       "port.type",
+       "hdmi",
+       "port.availability-group",
+       "Legacy 1",
+       "device.icon_name",
+       "video-display",
+       "card.profile.port",
+       "0"
+      ],
+      "profiles": [
+       1,
+       4,
+       5
+      ],
+      "devices": [
+       3,
+       4,
+       5
+      ]
+     },
+     {
+      "index": 1,
+      "direction": "Output",
+      "name": "hdmi-output-1",
+      "description": "HDMI / DisplayPort 2",
+      "priority": 5800,
+      "available": "no",
+      "info": [
+       4,
+       "port.type",
+       "hdmi",
+       "port.availability-group",
+       "Legacy 2",
+       "device.icon_name",
+       "video-display",
+       "card.profile.port",
+       "1"
+      ],
+      "profiles": [
+       2,
+       6,
+       7
+      ],
+      "devices": [
+       6,
+       7,
+       8
+      ]
+     },
+     {
+      "index": 2,
+      "direction": "Output",
+      "name": "hdmi-output-2",
+      "description": "HDMI / DisplayPort 3",
+      "priority": 5700,
+      "available": "no",
+      "info": [
+       4,
+       "port.type",
+       "hdmi",
+       "port.availability-group",
+       "Legacy 3",
+       "device.icon_name",
+       "video-display",
+       "card.profile.port",
+       "2"
+      ],
+      "profiles": [
+       3,
+       8,
+       9
+      ],
+      "devices": [
+       9,
+       10,
+       11
+      ]
+     }
+    ],
+    "Route": []
+   }
+  }
+ },
+ {
+  "id": 40,
+  "type": "PipeWire:Interface:Device",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "alsa.card": 2,
+    "alsa.card_name": "HD-Audio Generic",
+    "alsa.components": "HDA:10ec1168,1043886b,00100101",
+    "alsa.driver_name": "snd_hda_intel",
+    "alsa.id": "Generic_1",
+    "alsa.long_card_name": "HD-Audio Generic at 0xdd980000 irq 177",
+    "alsa.mixer_name": "Realtek ALC1220",
+    "api.acp.auto-port": false,
+    "api.acp.auto-profile": false,
+    "api.alsa.card": 2,
+    "api.alsa.card.longname": "HD-Audio Generic at 0xdd980000 irq 177",
+    "api.alsa.card.name": "HD-Audio Generic",
+    "api.alsa.path": "hw:2",
+    "api.alsa.use-acp": true,
+    "api.dbus.ReserveDevice1": "Audio2",
+    "client.id": 35,
+    "device.api": "alsa",
+    "device.bus": "pci",
+    "device.bus-path": "pci-0000:79:00.6",
+    "device.description": "Family 17h/19h HD Audio Controller",
+    "device.enum.api": "udev",
+    "device.icon-name": "audio-card-analog-pci",
+    "device.name": "alsa_card.pci-0000_79_00.6",
+    "device.nick": "HD-Audio Generic",
+    "device.plugged.usec": 133346528,
+    "device.product.id": "0x15e3",
+    "device.product.name": "Family 17h/19h HD Audio Controller",
+    "device.string": 2,
+    "device.subsystem": "sound",
+    "device.sysfs.path": "/devices/pci0000:00/0000:00:08.1/0000:79:00.6/sound/card2",
+    "device.vendor.id": "0x1022",
+    "device.vendor.name": "Advanced Micro Devices, Inc. [AMD]",
+    "factory.id": 14,
+    "media.class": "Audio/Device",
+    "object.id": 40,
+    "object.path": "alsa:pcm:2",
+    "object.serial": 95
+   },
+   "params": {
+    "EnumProfile": [
+     {
+      "index": 0,
+      "name": "off",
+      "description": "Off",
+      "priority": 0,
+      "available": "yes",
+      "classes": [
+       0
+      ]
+     },
+     {
+      "index": 1,
+      "name": "output:analog-stereo+input:analog-stereo",
+      "description": "Analog Stereo Duplex",
+      "priority": 6565,
+      "available": "no",
+      "classes": [
+       2,
+       [
+        "Audio/Source",
+        1,
+        "card.profile.devices",
+        [
+         0
+        ]
+       ],
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         4
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 2,
+      "name": "output:analog-stereo",
+      "description": "Analog Stereo Output",
+      "priority": 6500,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         4
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 3,
+      "name": "input:analog-stereo",
+      "description": "Analog Stereo Input",
+      "priority": 65,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Source",
+        1,
+        "card.profile.devices",
+        [
+         0
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 4,
+      "name": "pro-audio",
+      "description": "Pro Audio",
+      "priority": 1,
+      "available": "unknown",
+      "classes": [
+       2,
+       [
+        "Audio/Source",
+        2,
+        "card.profile.devices",
+        [
+         2,
+         3
+        ]
+       ],
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         1
+        ]
+       ]
+      ]
+     }
+    ],
+    "Profile": [
+     {
+      "index": 0,
+      "name": "off",
+      "description": "Off",
+      "priority": 0,
+      "available": "yes",
+      "classes": [
+       0
+      ],
+      "save": false
+     }
+    ],
+    "EnumRoute": [
+     {
+      "index": 0,
+      "direction": "Input",
+      "name": "analog-input-front-mic",
+      "description": "Front Microphone",
+      "priority": 8500,
+      "available": "no",
+      "info": [
+       4,
+       "port.type",
+       "mic",
+       "port.availability-group",
+       "Legacy 1",
+       "device.icon_name",
+       "audio-input-microphone",
+       "card.profile.port",
+       "0"
+      ],
+      "profiles": [
+       3,
+       1
+      ],
+      "devices": [
+       0
+      ]
+     },
+     {
+      "index": 1,
+      "direction": "Input",
+      "name": "analog-input-rear-mic",
+      "description": "Rear Microphone",
+      "priority": 8200,
+      "available": "no",
+      "info": [
+       4,
+       "port.type",
+       "mic",
+       "port.availability-group",
+       "Legacy 2",
+       "device.icon_name",
+       "audio-input-microphone",
+       "card.profile.port",
+       "1"
+      ],
+      "profiles": [
+       3,
+       1
+      ],
+      "devices": [
+       0
+      ]
+     },
+     {
+      "index": 2,
+      "direction": "Input",
+      "name": "analog-input-linein",
+      "description": "Line In",
+      "priority": 8100,
+      "available": "no",
+      "info": [
+       3,
+       "port.type",
+       "line",
+       "port.availability-group",
+       "Legacy 3",
+       "card.profile.port",
+       "2"
+      ],
+      "profiles": [
+       3,
+       1
+      ],
+      "devices": [
+       0
+      ]
+     },
+     {
+      "index": 3,
+      "direction": "Output",
+      "name": "analog-output-lineout",
+      "description": "Line Out",
+      "priority": 9000,
+      "available": "no",
+      "info": [
+       3,
+       "port.type",
+       "line",
+       "port.availability-group",
+       "Legacy 4",
+       "card.profile.port",
+       "3"
+      ],
+      "profiles": [
+       2,
+       1
+      ],
+      "devices": [
+       4
+      ]
+     },
+     {
+      "index": 4,
+      "direction": "Output",
+      "name": "analog-output-headphones",
+      "description": "Headphones",
+      "priority": 9900,
+      "available": "no",
+      "info": [
+       4,
+       "port.type",
+       "headphones",
+       "port.availability-group",
+       "Legacy 5",
+       "device.icon_name",
+       "audio-headphones",
+       "card.profile.port",
+       "4"
+      ],
+      "profiles": [
+       2,
+       1
+      ],
+      "devices": [
+       4
+      ]
+     }
+    ],
+    "Route": []
+   }
+  }
+ },
+ {
+  "id": 41,
+  "type": "PipeWire:Interface:Device",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "alsa.card": 0,
+    "alsa.card_name": "HDA NVidia",
+    "alsa.components": "HDA:10de00aa,10de0000,00100100",
+    "alsa.driver_name": "snd_hda_intel",
+    "alsa.id": "NVidia",
+    "alsa.long_card_name": "HDA NVidia at 0xdc080000 irq 174",
+    "alsa.mixer_name": "Nvidia GPU aa HDMI/DP",
+    "api.acp.auto-port": false,
+    "api.acp.auto-profile": false,
+    "api.alsa.card": 0,
+    "api.alsa.card.longname": "HDA NVidia at 0xdc080000 irq 174",
+    "api.alsa.card.name": "HDA NVidia",
+    "api.alsa.path": "hw:0",
+    "api.alsa.use-acp": true,
+    "api.dbus.ReserveDevice1": "Audio0",
+    "client.id": 35,
+    "device.api": "alsa",
+    "device.bus": "pci",
+    "device.bus-path": "pci-0000:01:00.1",
+    "device.description": "HDA NVidia",
+    "device.enum.api": "udev",
+    "device.icon-name": "audio-card-analog-pci",
+    "device.name": "alsa_card.pci-0000_01_00.1",
+    "device.nick": "HDA NVidia",
+    "device.plugged.usec": 133334134,
+    "device.product.id": "0x22e8",
+    "device.string": 0,
+    "device.subsystem": "sound",
+    "device.sysfs.path": "/devices/pci0000:00/0000:00:01.1/0000:01:00.1/sound/card0",
+    "device.vendor.id": "0x10de",
+    "device.vendor.name": "NVIDIA Corporation",
+    "factory.id": 14,
+    "media.class": "Audio/Device",
+    "object.id": 41,
+    "object.path": "alsa:pcm:0",
+    "object.serial": 96
+   },
+   "params": {
+    "EnumProfile": [
+     {
+      "index": 0,
+      "name": "off",
+      "description": "Off",
+      "priority": 0,
+      "available": "yes",
+      "classes": [
+       0
+      ]
+     },
+     {
+      "index": 1,
+      "name": "output:hdmi-stereo",
+      "description": "Digital Stereo (HDMI) Output",
+      "priority": 5900,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         4
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 2,
+      "name": "output:hdmi-stereo-extra1",
+      "description": "Digital Stereo (HDMI 2) Output",
+      "priority": 5700,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         5
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 3,
+      "name": "output:hdmi-stereo-extra2",
+      "description": "Digital Stereo (HDMI 3) Output",
+      "priority": 5700,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         8
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 4,
+      "name": "output:hdmi-stereo-extra3",
+      "description": "Digital Stereo (HDMI 4) Output",
+      "priority": 5700,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         11
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 5,
+      "name": "output:hdmi-surround-extra1",
+      "description": "Digital Surround 5.1 (HDMI 2) Output",
+      "priority": 600,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         6
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 6,
+      "name": "output:hdmi-surround71-extra1",
+      "description": "Digital Surround 7.1 (HDMI 2) Output",
+      "priority": 600,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         7
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 7,
+      "name": "output:hdmi-surround-extra2",
+      "description": "Digital Surround 5.1 (HDMI 3) Output",
+      "priority": 600,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         9
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 8,
+      "name": "output:hdmi-surround71-extra2",
+      "description": "Digital Surround 7.1 (HDMI 3) Output",
+      "priority": 600,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         10
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 9,
+      "name": "output:hdmi-surround-extra3",
+      "description": "Digital Surround 5.1 (HDMI 4) Output",
+      "priority": 600,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         12
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 10,
+      "name": "output:hdmi-surround71-extra3",
+      "description": "Digital Surround 7.1 (HDMI 4) Output",
+      "priority": 600,
+      "available": "no",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        1,
+        "card.profile.devices",
+        [
+         13
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 11,
+      "name": "pro-audio",
+      "description": "Pro Audio",
+      "priority": 1,
+      "available": "unknown",
+      "classes": [
+       1,
+       [
+        "Audio/Sink",
+        4,
+        "card.profile.devices",
+        [
+         0,
+         1,
+         2,
+         3
+        ]
+       ]
+      ]
+     }
+    ],
+    "Profile": [
+     {
+      "index": 0,
+      "name": "off",
+      "description": "Off",
+      "priority": 0,
+      "available": "yes",
+      "classes": [
+       0
+      ],
+      "save": false
+     }
+    ],
+    "EnumRoute": [
+     {
+      "index": 0,
+      "direction": "Output",
+      "name": "hdmi-output-0",
+      "description": "HDMI / DisplayPort",
+      "priority": 5900,
+      "available": "no",
+      "info": [
+       4,
+       "port.type",
+       "hdmi",
+       "port.availability-group",
+       "Legacy 1",
+       "device.icon_name",
+       "video-display",
+       "card.profile.port",
+       "0"
+      ],
+      "profiles": [
+       1
+      ],
+      "devices": [
+       4
+      ]
+     },
+     {
+      "index": 1,
+      "direction": "Output",
+      "name": "hdmi-output-1",
+      "description": "HDMI / DisplayPort 2",
+      "priority": 5800,
+      "available": "no",
+      "info": [
+       4,
+       "port.type",
+       "hdmi",
+       "port.availability-group",
+       "Legacy 2",
+       "device.icon_name",
+       "video-display",
+       "card.profile.port",
+       "1"
+      ],
+      "profiles": [
+       2,
+       5,
+       6
+      ],
+      "devices": [
+       5,
+       6,
+       7
+      ]
+     },
+     {
+      "index": 2,
+      "direction": "Output",
+      "name": "hdmi-output-2",
+      "description": "HDMI / DisplayPort 3",
+      "priority": 5700,
+      "available": "no",
+      "info": [
+       4,
+       "port.type",
+       "hdmi",
+       "port.availability-group",
+       "Legacy 3",
+       "device.icon_name",
+       "video-display",
+       "card.profile.port",
+       "2"
+      ],
+      "profiles": [
+       3,
+       7,
+       8
+      ],
+      "devices": [
+       8,
+       9,
+       10
+      ]
+     },
+     {
+      "index": 3,
+      "direction": "Output",
+      "name": "hdmi-output-3",
+      "description": "HDMI / DisplayPort 4",
+      "priority": 5600,
+      "available": "no",
+      "info": [
+       4,
+       "port.type",
+       "hdmi",
+       "port.availability-group",
+       "Legacy 4",
+       "device.icon_name",
+       "video-display",
+       "card.profile.port",
+       "3"
+      ],
+      "profiles": [
+       4,
+       9,
+       10
+      ],
+      "devices": [
+       11,
+       12,
+       13
+      ]
+     }
+    ],
+    "Route": [
+     {
+      "index": 0,
+      "direction": "Output",
+      "name": "hdmi-output-0",
+      "description": "HDMI / DisplayPort",
+      "priority": 5900,
+      "available": "no",
+      "info": [
+       6,
+       "port.type",
+       "hdmi",
+       "port.availability-group",
+       "Legacy 1",
+       "device.icon_name",
+       "video-display",
+       "card.profile.port",
+       "0",
+       "route.hw-mute",
+       "false",
+       "route.hw-volume",
+       "false"
+      ],
+      "profiles": [
+       1
+      ],
+      "device": 4,
+      "props": {
+       "mute": false,
+       "channelVolumes": [
+        0.342973,
+        0.342973
+       ],
+       "volumeBase": 1.0,
+       "volumeStep": 1.5e-05,
+       "channelMap": [
+        "FL",
+        "FR"
+       ],
+       "softVolumes": [
+        0.342973,
+        0.342973
+       ],
+       "latencyOffsetNsec": 0,
+       "iec958Codecs": []
+      },
+      "devices": [
+       4
+      ],
+      "profile": 1,
+      "save": true
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 42,
+  "type": "PipeWire:Interface:Device",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "alsa.card": 3,
+    "alsa.card_name": "Logitech Webcam C925e",
+    "alsa.components": "USB046d:085b",
+    "alsa.driver_name": "snd_usb_audio",
+    "alsa.id": "C925e",
+    "alsa.long_card_name": "Logitech Webcam C925e at usb-0000:0d:00.0-5.2.2, high speed",
+    "alsa.mixer_name": "USB Mixer",
+    "api.acp.auto-port": false,
+    "api.acp.auto-profile": false,
+    "api.alsa.card": 3,
+    "api.alsa.card.longname": "Logitech Webcam C925e at usb-0000:0d:00.0-5.2.2, high speed",
+    "api.alsa.card.name": "Logitech Webcam C925e",
+    "api.alsa.path": "hw:3",
+    "api.alsa.use-acp": true,
+    "api.dbus.ReserveDevice1": "Audio3",
+    "client.id": 35,
+    "device.api": "alsa",
+    "device.bus": "usb",
+    "device.bus-id": "usb-046d_Logitech_Webcam_C925e_8473F8AF-02",
+    "device.bus-path": "pci-0000:0d:00.0-usb-0:5.2.2:1.2",
+    "device.description": "Logitech Webcam C925e",
+    "device.enum.api": "udev",
+    "device.form-factor": "webcam",
+    "device.icon-name": "camera-web-analog-usb",
+    "device.name": "alsa_card.usb-046d_Logitech_Webcam_C925e_8473F8AF-02",
+    "device.nick": "Logitech Webcam C925e",
+    "device.plugged.usec": 133556033,
+    "device.product.id": "0x085b",
+    "device.product.name": "Logitech Webcam C925e",
+    "device.serial": "046d_Logitech_Webcam_C925e_8473F8AF",
+    "device.string": 3,
+    "device.subsystem": "sound",
+    "device.sysfs.path": "/devices/pci0000:00/0000:00:02.1/0000:03:00.0/0000:04:08.0/0000:06:00.0/0000:07:0c.0/0000:0d:00.0/usb1/1-5/1-5.2/1-5.2.2/1-5.2.2:1.2/sound/card3",
+    "device.vendor.id": "0x046d",
+    "device.vendor.name": "Logitech, Inc.",
+    "factory.id": 14,
+    "media.class": "Audio/Device",
+    "object.id": 42,
+    "object.path": "alsa:pcm:3",
+    "object.serial": 97
+   },
+   "params": {
+    "EnumProfile": [
+     {
+      "index": 0,
+      "name": "off",
+      "description": "Off",
+      "priority": 0,
+      "available": "yes",
+      "classes": [
+       0
+      ]
+     },
+     {
+      "index": 1,
+      "name": "input:analog-stereo",
+      "description": "Analog Stereo Input",
+      "priority": 65,
+      "available": "unknown",
+      "classes": [
+       1,
+       [
+        "Audio/Source",
+        1,
+        "card.profile.devices",
+        [
+         0
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 2,
+      "name": "input:iec958-stereo",
+      "description": "Digital Stereo (IEC958) Input",
+      "priority": 55,
+      "available": "unknown",
+      "classes": [
+       1,
+       [
+        "Audio/Source",
+        1,
+        "card.profile.devices",
+        [
+         2
+        ]
+       ]
+      ]
+     },
+     {
+      "index": 3,
+      "name": "pro-audio",
+      "description": "Pro Audio",
+      "priority": 1,
+      "available": "yes",
+      "classes": [
+       1,
+       [
+        "Audio/Source",
+        1,
+        "card.profile.devices",
+        [
+         1
+        ]
+       ]
+      ]
+     }
+    ],
+    "Profile": [
+     {
+      "index": 1,
+      "name": "input:analog-stereo",
+      "description": "Analog Stereo Input",
+      "priority": 65,
+      "available": "unknown",
+      "classes": [
+       1,
+       [
+        "Audio/Source",
+        1,
+        "card.profile.devices",
+        [
+         0
+        ]
+       ]
+      ],
+      "save": false
+     }
+    ],
+    "EnumRoute": [
+     {
+      "index": 0,
+      "direction": "Input",
+      "name": "analog-input-mic",
+      "description": "Microphone",
+      "priority": 8700,
+      "available": "unknown",
+      "info": [
+       3,
+       "port.type",
+       "mic",
+       "device.icon_name",
+       "audio-input-microphone",
+       "card.profile.port",
+       "0"
+      ],
+      "profiles": [
+       1
+      ],
+      "devices": [
+       0
+      ]
+     },
+     {
+      "index": 1,
+      "direction": "Input",
+      "name": "iec958-stereo-input",
+      "description": "Digital Input (S/PDIF)",
+      "priority": 0,
+      "available": "unknown",
+      "info": [
+       2,
+       "port.type",
+       "spdif",
+       "card.profile.port",
+       "1"
+      ],
+      "profiles": [
+       2
+      ],
+      "devices": [
+       2
+      ]
+     }
+    ],
+    "Route": [
+     {
+      "index": 0,
+      "direction": "Input",
+      "name": "analog-input-mic",
+      "description": "Microphone",
+      "priority": 8700,
+      "available": "unknown",
+      "info": [
+       5,
+       "port.type",
+       "mic",
+       "device.icon_name",
+       "audio-input-microphone",
+       "card.profile.port",
+       "0",
+       "route.hw-mute",
+       "true",
+       "route.hw-volume",
+       "true"
+      ],
+      "profiles": [
+       1
+      ],
+      "device": 0,
+      "props": {
+       "mute": false,
+       "channelVolumes": [
+        1.0,
+        1.0
+       ],
+       "volumeBase": 0.003162,
+       "volumeStep": 1.5e-05,
+       "channelMap": [
+        "FL",
+        "FR"
+       ],
+       "softVolumes": [
+        1.0,
+        1.0
+       ],
+       "latencyOffsetNsec": 0
+      },
+      "devices": [
+       0
+      ],
+      "profile": 1,
+      "save": false
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 56,
+  "type": "PipeWire:Interface:Node",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "max-input-ports": 0,
+   "max-output-ports": 1,
+   "change-mask": [
+    "input-ports",
+    "output-ports",
+    "state",
+    "props",
+    "params"
+   ],
+   "n-input-ports": 0,
+   "n-output-ports": 1,
+   "state": "suspended",
+   "error": null,
+   "props": {
+    "api.v4l2.cap.bus_info": "usb-0000:0d:00.0-5.2.2",
+    "api.v4l2.cap.capabilities": "84a00001",
+    "api.v4l2.cap.card": "Logitech Webcam C925e",
+    "api.v4l2.cap.device-caps": 4200001,
+    "api.v4l2.cap.driver": "uvcvideo",
+    "api.v4l2.cap.version": "7.0.14",
+    "api.v4l2.path": "/dev/video0",
+    "client.id": 35,
+    "clock.quantum-limit": 8192,
+    "device.api": "v4l2",
+    "device.devids": 20736,
+    "device.id": 43,
+    "device.product.id": "0x085",
+    "device.vendor.id": "0x046",
+    "factory.id": 10,
+    "factory.name": "api.v4l2.source",
+    "media.class": "Video/Source",
+    "media.role": "Camera",
+    "node.description": "Logitech Webcam C925e (V4L2)",
+    "node.driver": true,
+    "node.name": "v4l2_input.pci-0000_0d_00.0-usb-0_5.2.2_1.0",
+    "node.nick": "Logitech Webcam C925e",
+    "node.pause-on-idle": false,
+    "object.id": 56,
+    "object.path": "v4l2:/dev/video0",
+    "object.serial": 98,
+    "priority.session": 1000
+   },
+   "params": {
+    "Props": [
+     {
+      "device": "/dev/video0",
+      "deviceName": "",
+      "deviceFd": 0,
+      "brightness": 128,
+      "contrast": 128,
+      "saturation": 128,
+      "id-0198090c": true,
+      "gain": 0,
+      "id-01980918": 2,
+      "id-0198091a": 4000,
+      "sharpness": 128,
+      "id-0198091c": 0,
+      "id-019a0901": 3,
+      "id-019a0902": 250,
+      "id-019a0903": true,
+      "id-019a0908": 0,
+      "id-019a0909": 0,
+      "id-019a090a": 0,
+      "id-019a090c": true,
+      "id-019a090d": 100
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 48,
+  "type": "PipeWire:Interface:Port",
+  "version": 3,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "direction": "output",
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "node.id": 56,
+    "object.id": 48,
+    "object.path": "v4l2:/dev/video0:capture_0",
+    "object.serial": 99,
+    "port.alias": "Logitech Webcam C925e:capture_1",
+    "port.direction": "out",
+    "port.id": 0,
+    "port.name": "capture_1",
+    "port.physical": true,
+    "port.terminal": true
+   },
+   "params": {
+    "Meta": [
+     {
+      "type": "Header",
+      "size": 32
+     }
+    ],
+    "IO": [
+     {
+      "id": "Buffers",
+      "size": 8
+     },
+     {
+      "id": "Clock",
+      "size": 160
+     },
+     {
+      "id": "Control",
+      "size": 16
+     }
+    ],
+    "Buffers": [],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 52,
+  "type": "PipeWire:Interface:Node",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "max-input-ports": 0,
+   "max-output-ports": 65,
+   "change-mask": [
+    "input-ports",
+    "output-ports",
+    "state",
+    "props",
+    "params"
+   ],
+   "n-input-ports": 0,
+   "n-output-ports": 2,
+   "state": "suspended",
+   "error": null,
+   "props": {
+    "alsa.card": 3,
+    "alsa.card_name": "Logitech Webcam C925e",
+    "alsa.class": "generic",
+    "alsa.components": "USB046d:085b",
+    "alsa.device": 0,
+    "alsa.driver_name": "snd_usb_audio",
+    "alsa.id": "C925e",
+    "alsa.long_card_name": "Logitech Webcam C925e at usb-0000:0d:00.0-5.2.2, high speed",
+    "alsa.mixer_name": "USB Mixer",
+    "alsa.name": "USB Audio",
+    "alsa.resolution_bits": 16,
+    "alsa.subclass": "generic-mix",
+    "alsa.subdevice": 0,
+    "alsa.subdevice_name": "subdevice #0",
+    "api.alsa.card.longname": "Logitech Webcam C925e at usb-0000:0d:00.0-5.2.2, high speed",
+    "api.alsa.card.name": "Logitech Webcam C925e",
+    "api.alsa.path": "front:3",
+    "api.alsa.pcm.card": 3,
+    "api.alsa.pcm.stream": "capture",
+    "audio.adapt.follower": "",
+    "audio.channels": 2,
+    "audio.position": "FL,FR",
+    "card.profile.device": 0,
+    "client.id": 35,
+    "clock.quantum-limit": 8192,
+    "device.api": "alsa",
+    "device.class": "sound",
+    "device.id": 42,
+    "device.profile.description": "Analog Stereo",
+    "device.profile.name": "analog-stereo",
+    "device.routes": 1,
+    "factory.id": 18,
+    "factory.mode": "split",
+    "factory.name": "api.alsa.pcm.source",
+    "library.name": "audioconvert/libspa-audioconvert",
+    "media.class": "Audio/Source",
+    "node.description": "Logitech Webcam C925e Analog Stereo",
+    "node.driver": true,
+    "node.name": "alsa_input.usb-046d_Logitech_Webcam_C925e_8473F8AF-02.analog-stereo",
+    "node.nick": "Logitech Webcam C925e",
+    "node.pause-on-idle": false,
+    "object.id": 52,
+    "object.path": "alsa:pcm:3:front:3:capture",
+    "object.serial": 101,
+    "priority.driver": 2009,
+    "priority.session": 2009
+   },
+   "params": {
+    "Props": [
+     {
+      "volume": 1.0,
+      "mute": false,
+      "channelVolumes": [
+       1.0,
+       1.0
+      ],
+      "channelMap": [
+       "FL",
+       "FR"
+      ],
+      "softMute": false,
+      "softVolumes": [
+       1.0,
+       1.0
+      ],
+      "monitorMute": false,
+      "monitorVolumes": [
+       1.0,
+       1.0
+      ],
+      "params": [
+       "monitor.channel-volumes",
+       false,
+       "channelmix.disable",
+       false,
+       "channelmix.min-volume",
+       0.0,
+       "channelmix.max-volume",
+       10.0,
+       "channelmix.normalize",
+       false,
+       "channelmix.mix-lfe",
+       true,
+       "channelmix.upmix",
+       true,
+       "channelmix.lfe-cutoff",
+       0.0,
+       "channelmix.fc-cutoff",
+       0.0,
+       "channelmix.rear-delay",
+       0.0,
+       "channelmix.stereo-widen",
+       0.0,
+       "channelmix.hilbert-taps",
+       0,
+       "channelmix.upmix-method",
+       "none",
+       "resample.quality",
+       4,
+       "resample.disable",
+       false,
+       "dither.noise",
+       0,
+       "dither.method",
+       "none",
+       "debug.wav-path",
+       "",
+       "channelmix.lock-volumes",
+       false
+      ]
+     },
+     {
+      "device": "front:3",
+      "deviceName": "",
+      "cardName": "",
+      "latencyOffsetNsec": 0,
+      "params": [
+       "audio.channels",
+       2,
+       "audio.rate",
+       0,
+       "audio.format",
+       "UNKNOWN",
+       "audio.position",
+       "[ FL, FR ]",
+       "audio.allowed-rates",
+       "[  ]",
+       "api.alsa.period-size",
+       0,
+       "api.alsa.period-num",
+       0,
+       "api.alsa.headroom",
+       0,
+       "api.alsa.start-delay",
+       0,
+       "api.alsa.disable-mmap",
+       false,
+       "api.alsa.disable-batch",
+       false,
+       "api.alsa.disable-tsched",
+       false,
+       "api.alsa.use-chmap",
+       false,
+       "api.alsa.multi-rate",
+       true,
+       "api.alsa.htimestamp",
+       false,
+       "api.alsa.htimestamp.max-errors",
+       64,
+       "latency.internal.rate",
+       0,
+       "latency.internal.ns",
+       0,
+       "clock.name",
+       "api.alsa.c-3"
+      ]
+     }
+    ],
+    "PortConfig": [
+     {
+      "direction": "Output",
+      "mode": "dsp",
+      "monitor": true,
+      "control": false,
+      "format": {
+       "mediaType": "audio",
+       "mediaSubtype": "raw",
+       "format": "F32P",
+       "channels": 2,
+       "position": [
+        "FL",
+        "FR"
+       ]
+      }
+     }
+    ],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 1.0,
+      "maxQuantum": 1.0,
+      "minRate": 768,
+      "maxRate": 768,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ],
+    "ProcessLatency": [
+     {
+      "quantum": 0.0,
+      "rate": 0,
+      "ns": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 57,
+  "type": "PipeWire:Interface:Port",
+  "version": 3,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "direction": "output",
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "audio.channel": "FL",
+    "format.dsp": "32 bit float mono audio",
+    "node.id": 52,
+    "object.id": 57,
+    "object.path": "alsa:pcm:3:front:3:capture:capture_0",
+    "object.serial": 106,
+    "port.alias": "Logitech Webcam C925e:capture_FL",
+    "port.direction": "out",
+    "port.id": 0,
+    "port.name": "capture_FL",
+    "port.physical": true,
+    "port.terminal": true
+   },
+   "params": {
+    "Meta": [
+     {
+      "type": "Header",
+      "size": 32
+     }
+    ],
+    "IO": [
+     {
+      "id": "Buffers",
+      "size": 8
+     }
+    ],
+    "Buffers": [],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 1.0,
+      "maxQuantum": 1.0,
+      "minRate": 768,
+      "maxRate": 768,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 53,
+  "type": "PipeWire:Interface:Port",
+  "version": 3,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "direction": "output",
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "audio.channel": "FR",
+    "format.dsp": "32 bit float mono audio",
+    "node.id": 52,
+    "object.id": 53,
+    "object.path": "alsa:pcm:3:front:3:capture:capture_1",
+    "object.serial": 107,
+    "port.alias": "Logitech Webcam C925e:capture_FR",
+    "port.direction": "out",
+    "port.id": 1,
+    "port.name": "capture_FR",
+    "port.physical": true,
+    "port.terminal": true
+   },
+   "params": {
+    "Meta": [
+     {
+      "type": "Header",
+      "size": 32
+     }
+    ],
+    "IO": [
+     {
+      "id": "Buffers",
+      "size": 8
+     }
+    ],
+    "Buffers": [],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 1.0,
+      "maxQuantum": 1.0,
+      "minRate": 768,
+      "maxRate": 768,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 55,
+  "type": "PipeWire:Interface:Client",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props"
+   ],
+   "props": {
+    "application.icon-name": "org.gnome.Terminal",
+    "application.language": "en_US.UTF-8",
+    "application.name": "Terminal",
+    "application.process.binary": "gnome-terminal-server",
+    "application.process.host": "gpu-box",
+    "application.process.id": 4812,
+    "application.process.machine-id": "00000000000000000000000000000000",
+    "application.process.user": "user",
+    "client.api": "pipewire-pulse",
+    "clock.power-of-two-quantum": true,
+    "config.name": "pipewire-pulse.conf",
+    "core.name": "pipewire-user-3312",
+    "core.version": "1.0.5",
+    "cpu.max-align": 64,
+    "default.clock.max-quantum": 2048,
+    "default.clock.min-quantum": 32,
+    "default.clock.quantum": 1024,
+    "default.clock.quantum-floor": 4,
+    "default.clock.quantum-limit": 8192,
+    "default.clock.rate": 48000,
+    "default.video.height": 480,
+    "default.video.rate.denom": 1,
+    "default.video.rate.num": 25,
+    "default.video.width": 640,
+    "link.max-buffers": 64,
+    "log.level": 2,
+    "mem.allow-mlock": true,
+    "mem.warn-mlock": false,
+    "module.id": 2,
+    "object.id": 55,
+    "object.serial": 118,
+    "pipewire.access": "unrestricted",
+    "pipewire.protocol": "protocol-native",
+    "pipewire.sec.gid": 1000,
+    "pipewire.sec.label": "unconfined",
+    "pipewire.sec.pid": 3312,
+    "pipewire.sec.socket": "pipewire-0",
+    "pipewire.sec.uid": 1000,
+    "pulse.server.type": "unix",
+    "settings.check-quantum": false,
+    "settings.check-rate": false,
+    "window.x11.display": ":1",
+    "window.x11.screen": 0
+   }
+  }
+ },
+ {
+  "id": 62,
+  "type": "PipeWire:Interface:Client",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props"
+   ],
+   "props": {
+    "application.language": "en_US.UTF-8",
+    "application.name": "Mutter",
+    "application.process.binary": "gnome-shell",
+    "application.process.host": "gpu-box",
+    "application.process.id": 3653,
+    "application.process.machine-id": "00000000000000000000000000000000",
+    "application.process.user": "user",
+    "client.api": "pipewire-pulse",
+    "clock.power-of-two-quantum": true,
+    "config.name": "pipewire-pulse.conf",
+    "core.name": "pipewire-user-3312",
+    "core.version": "1.0.5",
+    "cpu.max-align": 64,
+    "default.clock.max-quantum": 2048,
+    "default.clock.min-quantum": 32,
+    "default.clock.quantum": 1024,
+    "default.clock.quantum-floor": 4,
+    "default.clock.quantum-limit": 8192,
+    "default.clock.rate": 48000,
+    "default.video.height": 480,
+    "default.video.rate.denom": 1,
+    "default.video.rate.num": 25,
+    "default.video.width": 640,
+    "link.max-buffers": 64,
+    "log.level": 2,
+    "mem.allow-mlock": true,
+    "mem.warn-mlock": false,
+    "module.id": 2,
+    "object.id": 62,
+    "object.serial": 119,
+    "pipewire.access": "unrestricted",
+    "pipewire.protocol": "protocol-native",
+    "pipewire.sec.gid": 1000,
+    "pipewire.sec.label": "unconfined",
+    "pipewire.sec.pid": 3312,
+    "pipewire.sec.socket": "pipewire-0",
+    "pipewire.sec.uid": 1000,
+    "pulse.server.type": "unix",
+    "settings.check-quantum": false,
+    "settings.check-rate": false,
+    "window.x11.display": ":1"
+   }
+  }
+ },
+ {
+  "id": 80,
+  "type": "PipeWire:Interface:Client",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props"
+   ],
+   "props": {
+    "application.language": "en_US.UTF-8",
+    "application.name": "Claude",
+    "application.process.binary": "claude-desktop",
+    "application.process.host": "gpu-box",
+    "application.process.id": 7958,
+    "application.process.machine-id": "00000000000000000000000000000000",
+    "application.process.user": "user",
+    "client.api": "pipewire-pulse",
+    "clock.power-of-two-quantum": true,
+    "config.name": "pipewire-pulse.conf",
+    "core.name": "pipewire-user-3312",
+    "core.version": "1.0.5",
+    "cpu.max-align": 64,
+    "default.clock.max-quantum": 2048,
+    "default.clock.min-quantum": 32,
+    "default.clock.quantum": 1024,
+    "default.clock.quantum-floor": 4,
+    "default.clock.quantum-limit": 8192,
+    "default.clock.rate": 48000,
+    "default.video.height": 480,
+    "default.video.rate.denom": 1,
+    "default.video.rate.num": 25,
+    "default.video.width": 640,
+    "link.max-buffers": 64,
+    "log.level": 2,
+    "mem.allow-mlock": true,
+    "mem.warn-mlock": false,
+    "module.id": 2,
+    "object.id": 80,
+    "object.serial": 146,
+    "pipewire.access": "unrestricted",
+    "pipewire.protocol": "protocol-native",
+    "pipewire.sec.gid": 1000,
+    "pipewire.sec.label": "unconfined",
+    "pipewire.sec.pid": 3312,
+    "pipewire.sec.socket": "pipewire-0",
+    "pipewire.sec.uid": 1000,
+    "pulse.server.type": "unix",
+    "settings.check-quantum": false,
+    "settings.check-rate": false,
+    "window.x11.display": ":1"
+   }
+  }
+ },
+ {
+  "id": 79,
+  "type": "PipeWire:Interface:Client",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props"
+   ],
+   "props": {
+    "application.id": "org.freedesktop.libcanberra",
+    "application.language": "en_US.UTF-8",
+    "application.name": "libcanberra",
+    "application.process.binary": "gsd-media-keys",
+    "application.process.host": "gpu-box",
+    "application.process.id": 3808,
+    "application.process.machine-id": "00000000000000000000000000000000",
+    "application.process.user": "user",
+    "application.version": 0.3,
+    "client.api": "pipewire-pulse",
+    "clock.power-of-two-quantum": true,
+    "config.name": "pipewire-pulse.conf",
+    "core.name": "pipewire-user-3312",
+    "core.version": "1.0.5",
+    "cpu.max-align": 64,
+    "default.clock.max-quantum": 2048,
+    "default.clock.min-quantum": 32,
+    "default.clock.quantum": 1024,
+    "default.clock.quantum-floor": 4,
+    "default.clock.quantum-limit": 8192,
+    "default.clock.rate": 48000,
+    "default.video.height": 480,
+    "default.video.rate.denom": 1,
+    "default.video.rate.num": 25,
+    "default.video.width": 640,
+    "link.max-buffers": 64,
+    "log.level": 2,
+    "mem.allow-mlock": true,
+    "mem.warn-mlock": false,
+    "module.id": 2,
+    "object.id": 79,
+    "object.serial": 177,
+    "pipewire.access": "unrestricted",
+    "pipewire.protocol": "protocol-native",
+    "pipewire.sec.gid": 1000,
+    "pipewire.sec.label": "unconfined",
+    "pipewire.sec.pid": 3312,
+    "pipewire.sec.socket": "pipewire-0",
+    "pipewire.sec.uid": 1000,
+    "pulse.server.type": "unix",
+    "settings.check-quantum": false,
+    "settings.check-rate": false,
+    "window.x11.display": ":1"
+   }
+  }
+ },
+ {
+  "id": 73,
+  "type": "PipeWire:Interface:Client",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props"
+   ],
+   "props": {
+    "application.icon-name": "org.gnome.Screenshot",
+    "application.language": "en_US.UTF-8",
+    "application.name": "Screenshot",
+    "application.process.binary": "gnome-screenshot",
+    "application.process.host": "gpu-box",
+    "application.process.id": 225532,
+    "application.process.machine-id": "00000000000000000000000000000000",
+    "application.process.user": "user",
+    "client.api": "pipewire-pulse",
+    "clock.power-of-two-quantum": true,
+    "config.name": "pipewire-pulse.conf",
+    "core.name": "pipewire-user-3312",
+    "core.version": "1.0.5",
+    "cpu.max-align": 64,
+    "default.clock.max-quantum": 2048,
+    "default.clock.min-quantum": 32,
+    "default.clock.quantum": 1024,
+    "default.clock.quantum-floor": 4,
+    "default.clock.quantum-limit": 8192,
+    "default.clock.rate": 48000,
+    "default.video.height": 480,
+    "default.video.rate.denom": 1,
+    "default.video.rate.num": 25,
+    "default.video.width": 640,
+    "link.max-buffers": 64,
+    "log.level": 2,
+    "mem.allow-mlock": true,
+    "mem.warn-mlock": false,
+    "module.id": 2,
+    "object.id": 73,
+    "object.serial": 189,
+    "pipewire.access": "unrestricted",
+    "pipewire.protocol": "protocol-native",
+    "pipewire.sec.gid": 1000,
+    "pipewire.sec.label": "unconfined",
+    "pipewire.sec.pid": 3312,
+    "pipewire.sec.socket": "pipewire-0",
+    "pipewire.sec.uid": 1000,
+    "pulse.server.type": "unix",
+    "settings.check-quantum": false,
+    "settings.check-rate": false,
+    "window.x11.display": ":1",
+    "window.x11.screen": 0
+   }
+  }
+ },
+ {
+  "id": 123,
+  "type": "PipeWire:Interface:Node",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "max-input-ports": 65,
+   "max-output-ports": 0,
+   "change-mask": [
+    "input-ports",
+    "output-ports",
+    "state",
+    "props",
+    "params"
+   ],
+   "n-input-ports": 2,
+   "n-output-ports": 2,
+   "state": "running",
+   "error": null,
+   "props": {
+    "audio.adapt.follower": "",
+    "audio.channels": 2,
+    "audio.position": "FL,FR",
+    "audio.rate": 48000,
+    "client.id": 32,
+    "clock.quantum-limit": 8192,
+    "factory.id": 18,
+    "factory.mode": "merge",
+    "factory.name": "support.null-audio-sink",
+    "library.name": "audioconvert/libspa-audioconvert",
+    "media.class": "Audio/Sink",
+    "monitor.channel-volumes": true,
+    "node.description": "Dummy Output",
+    "node.driver": true,
+    "node.name": "auto_null",
+    "node.virtual": true,
+    "object.id": 123,
+    "object.serial": 4999
+   },
+   "params": {
+    "Props": [
+     {
+      "volume": 1.0,
+      "mute": false,
+      "channelVolumes": [
+       1.0,
+       1.0
+      ],
+      "channelMap": [
+       "FL",
+       "FR"
+      ],
+      "softMute": false,
+      "softVolumes": [
+       1.0,
+       1.0
+      ],
+      "monitorMute": false,
+      "monitorVolumes": [
+       1.0,
+       1.0
+      ],
+      "params": [
+       "monitor.channel-volumes",
+       true,
+       "channelmix.disable",
+       false,
+       "channelmix.min-volume",
+       0.0,
+       "channelmix.max-volume",
+       10.0,
+       "channelmix.normalize",
+       false,
+       "channelmix.mix-lfe",
+       true,
+       "channelmix.upmix",
+       true,
+       "channelmix.lfe-cutoff",
+       0.0,
+       "channelmix.fc-cutoff",
+       0.0,
+       "channelmix.rear-delay",
+       0.0,
+       "channelmix.stereo-widen",
+       0.0,
+       "channelmix.hilbert-taps",
+       0,
+       "channelmix.upmix-method",
+       "none",
+       "resample.quality",
+       4,
+       "resample.disable",
+       false,
+       "dither.noise",
+       0,
+       "dither.method",
+       "none",
+       "debug.wav-path",
+       "",
+       "channelmix.lock-volumes",
+       false
+      ]
+     }
+    ],
+    "PortConfig": [
+     {
+      "direction": "Input",
+      "mode": "dsp",
+      "monitor": true,
+      "control": false,
+      "format": {
+       "mediaType": "audio",
+       "mediaSubtype": "raw",
+       "format": "F32P",
+       "channels": 2,
+       "position": [
+        "FL",
+        "FR"
+       ]
+      }
+     }
+    ],
+    "Latency": [],
+    "ProcessLatency": []
+   }
+  }
+ },
+ {
+  "id": 106,
+  "type": "PipeWire:Interface:Port",
+  "version": 3,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "direction": "input",
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "audio.channel": "FL",
+    "format.dsp": "32 bit float mono audio",
+    "node.id": 123,
+    "object.id": 106,
+    "object.path": "auto_null:playback_0",
+    "object.serial": 5000,
+    "port.alias": "Dummy Output:playback_FL",
+    "port.direction": "in",
+    "port.id": 0,
+    "port.name": "playback_FL"
+   },
+   "params": {
+    "Meta": [
+     {
+      "type": "Header",
+      "size": 32
+     }
+    ],
+    "IO": [
+     {
+      "id": "Buffers",
+      "size": 8
+     }
+    ],
+    "Buffers": [
+     {
+      "buffers": {
+       "default": 1,
+       "min": 1,
+       "max": 32
+      },
+      "blocks": 1,
+      "size": {
+       "default": 32768,
+       "min": 64,
+       "max": 2147483647
+      },
+      "stride": 4
+     }
+    ],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 99,
+  "type": "PipeWire:Interface:Port",
+  "version": 3,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "direction": "output",
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "audio.channel": "FL",
+    "format.dsp": "32 bit float mono audio",
+    "node.id": 123,
+    "object.id": 99,
+    "object.path": "auto_null:monitor_0",
+    "object.serial": 5001,
+    "port.alias": "Dummy Output:monitor_FL",
+    "port.direction": "out",
+    "port.id": 0,
+    "port.monitor": true,
+    "port.name": "monitor_FL"
+   },
+   "params": {
+    "Meta": [
+     {
+      "type": "Header",
+      "size": 32
+     }
+    ],
+    "IO": [
+     {
+      "id": "Buffers",
+      "size": 8
+     }
+    ],
+    "Buffers": [],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 78,
+  "type": "PipeWire:Interface:Port",
+  "version": 3,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "direction": "input",
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "audio.channel": "FR",
+    "format.dsp": "32 bit float mono audio",
+    "node.id": 123,
+    "object.id": 78,
+    "object.path": "auto_null:playback_1",
+    "object.serial": 5002,
+    "port.alias": "Dummy Output:playback_FR",
+    "port.direction": "in",
+    "port.id": 1,
+    "port.name": "playback_FR"
+   },
+   "params": {
+    "Meta": [
+     {
+      "type": "Header",
+      "size": 32
+     }
+    ],
+    "IO": [
+     {
+      "id": "Buffers",
+      "size": 8
+     }
+    ],
+    "Buffers": [
+     {
+      "buffers": {
+       "default": 1,
+       "min": 1,
+       "max": 32
+      },
+      "blocks": 1,
+      "size": {
+       "default": 32768,
+       "min": 64,
+       "max": 2147483647
+      },
+      "stride": 4
+     }
+    ],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 33,
+  "type": "PipeWire:Interface:Port",
+  "version": 3,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "direction": "output",
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "audio.channel": "FR",
+    "format.dsp": "32 bit float mono audio",
+    "node.id": 123,
+    "object.id": 33,
+    "object.path": "auto_null:monitor_1",
+    "object.serial": 5003,
+    "port.alias": "Dummy Output:monitor_FR",
+    "port.direction": "out",
+    "port.id": 1,
+    "port.monitor": true,
+    "port.name": "monitor_FR"
+   },
+   "params": {
+    "Meta": [
+     {
+      "type": "Header",
+      "size": 32
+     }
+    ],
+    "IO": [
+     {
+      "id": "Buffers",
+      "size": 8
+     }
+    ],
+    "Buffers": [],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 134,
+  "type": "PipeWire:Interface:Client",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props"
+   ],
+   "props": {
+    "application.language": "en_US.UTF-8",
+    "application.name": "astra-conductor",
+    "application.process.binary": "pw-cat",
+    "application.process.host": "gpu-box",
+    "application.process.id": 1801525,
+    "application.process.user": "user",
+    "clock.power-of-two-quantum": true,
+    "config.name": "client-rt.conf",
+    "core.name": "pipewire-user-1801525",
+    "core.version": "1.0.5",
+    "cpu.max-align": 64,
+    "default.clock.max-quantum": 2048,
+    "default.clock.min-quantum": 32,
+    "default.clock.quantum": 1024,
+    "default.clock.quantum-floor": 4,
+    "default.clock.quantum-limit": 8192,
+    "default.clock.rate": 48000,
+    "default.video.height": 480,
+    "default.video.rate.denom": 1,
+    "default.video.rate.num": 25,
+    "default.video.width": 640,
+    "link.max-buffers": 64,
+    "log.level": 0,
+    "mem.allow-mlock": true,
+    "mem.warn-mlock": false,
+    "module.id": 2,
+    "object.id": 134,
+    "object.serial": 5245,
+    "pipewire.access": "unrestricted",
+    "pipewire.protocol": "protocol-native",
+    "pipewire.sec.gid": 1000,
+    "pipewire.sec.label": "unconfined",
+    "pipewire.sec.pid": 1801525,
+    "pipewire.sec.socket": "pipewire-0",
+    "pipewire.sec.uid": 1000,
+    "settings.check-quantum": false,
+    "settings.check-rate": false,
+    "window.x11.display": ":1"
+   }
+  }
+ },
+ {
+  "id": 137,
+  "type": "PipeWire:Interface:Node",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "max-input-ports": 0,
+   "max-output-ports": 65,
+   "change-mask": [
+    "input-ports",
+    "output-ports",
+    "state",
+    "props",
+    "params"
+   ],
+   "n-input-ports": 0,
+   "n-output-ports": 2,
+   "state": "running",
+   "error": null,
+   "props": {
+    "adapt.follower.spa-node": "",
+    "application.name": "pw-play",
+    "audio.adapt.follower": "",
+    "client.id": 134,
+    "clock.quantum-limit": 8192,
+    "factory.id": 8,
+    "factory.mode": "split",
+    "library.name": "audioconvert/libspa-audioconvert",
+    "media.category": "Playback",
+    "media.class": "Stream/Output/Audio",
+    "media.filename": "sil.wav",
+    "media.format": "WAV (Microsoft)",
+    "media.name": "sil.wav",
+    "media.role": "Music",
+    "media.type": "Audio",
+    "node.autoconnect": true,
+    "node.latency": "480/48000",
+    "node.name": "astra-conductor",
+    "node.rate": "1/48000",
+    "node.want-driver": true,
+    "object.id": 137,
+    "object.register": false,
+    "object.serial": 5246,
+    "stream.is-live": true,
+    "target.object": "astra-test-sink"
+   },
+   "params": {
+    "Props": [
+     {
+      "volume": 1.0,
+      "mute": false,
+      "channelVolumes": [
+       1.0
+      ],
+      "channelMap": [
+       "MONO"
+      ],
+      "softMute": false,
+      "softVolumes": [
+       1.0
+      ],
+      "monitorMute": false,
+      "monitorVolumes": [
+       1.0
+      ],
+      "params": [
+       "monitor.channel-volumes",
+       false,
+       "channelmix.disable",
+       false,
+       "channelmix.min-volume",
+       0.0,
+       "channelmix.max-volume",
+       10.0,
+       "channelmix.normalize",
+       false,
+       "channelmix.mix-lfe",
+       true,
+       "channelmix.upmix",
+       true,
+       "channelmix.lfe-cutoff",
+       0.0,
+       "channelmix.fc-cutoff",
+       0.0,
+       "channelmix.rear-delay",
+       0.0,
+       "channelmix.stereo-widen",
+       0.0,
+       "channelmix.hilbert-taps",
+       0,
+       "channelmix.upmix-method",
+       "none",
+       "resample.quality",
+       4,
+       "resample.disable",
+       false,
+       "dither.noise",
+       0,
+       "dither.method",
+       "none",
+       "debug.wav-path",
+       "",
+       "channelmix.lock-volumes",
+       false
+      ]
+     }
+    ],
+    "PortConfig": [
+     {
+      "direction": "Output",
+      "mode": "dsp",
+      "monitor": true,
+      "control": false,
+      "format": {
+       "mediaType": "audio",
+       "mediaSubtype": "raw",
+       "format": "F32P",
+       "channels": 2,
+       "position": [
+        "FL",
+        "FR"
+       ]
+      }
+     }
+    ],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ],
+    "ProcessLatency": []
+   }
+  }
+ },
+ {
+  "id": 151,
+  "type": "PipeWire:Interface:Port",
+  "version": 3,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "direction": "output",
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "audio.channel": "FL",
+    "format.dsp": "32 bit float mono audio",
+    "node.id": 137,
+    "object.id": 151,
+    "object.path": "pw-play:output_0",
+    "object.serial": 5247,
+    "port.alias": "pw-play:output_FL",
+    "port.direction": "out",
+    "port.id": 0,
+    "port.name": "output_FL"
+   },
+   "params": {
+    "Meta": [
+     {
+      "type": "Header",
+      "size": 32
+     }
+    ],
+    "IO": [
+     {
+      "id": "Buffers",
+      "size": 8
+     }
+    ],
+    "Buffers": [
+     {
+      "buffers": {
+       "default": 1,
+       "min": 1,
+       "max": 32
+      },
+      "blocks": 1,
+      "size": {
+       "default": 32768,
+       "min": 64,
+       "max": 2147483647
+      },
+      "stride": 4
+     }
+    ],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 124,
+  "type": "PipeWire:Interface:Port",
+  "version": 3,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "direction": "output",
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "audio.channel": "FR",
+    "format.dsp": "32 bit float mono audio",
+    "node.id": 137,
+    "object.id": 124,
+    "object.path": "pw-play:output_1",
+    "object.serial": 5248,
+    "port.alias": "pw-play:output_FR",
+    "port.direction": "out",
+    "port.id": 1,
+    "port.name": "output_FR"
+   },
+   "params": {
+    "Meta": [
+     {
+      "type": "Header",
+      "size": 32
+     }
+    ],
+    "IO": [
+     {
+      "id": "Buffers",
+      "size": 8
+     }
+    ],
+    "Buffers": [
+     {
+      "buffers": {
+       "default": 1,
+       "min": 1,
+       "max": 32
+      },
+      "blocks": 1,
+      "size": {
+       "default": 32768,
+       "min": 64,
+       "max": 2147483647
+      },
+      "stride": 4
+     }
+    ],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 147,
+  "type": "PipeWire:Interface:Client",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "change-mask": [
+    "props"
+   ],
+   "props": {
+    "application.language": "en_US.UTF-8",
+    "application.name": "pw-dump",
+    "application.process.binary": "pw-dump",
+    "application.process.host": "gpu-box",
+    "application.process.id": 1805549,
+    "application.process.user": "user",
+    "clock.power-of-two-quantum": true,
+    "core.name": "pipewire-user-1805549",
+    "core.version": "1.0.5",
+    "cpu.max-align": 64,
+    "default.clock.max-quantum": 2048,
+    "default.clock.min-quantum": 32,
+    "default.clock.quantum": 1024,
+    "default.clock.quantum-floor": 4,
+    "default.clock.quantum-limit": 8192,
+    "default.clock.rate": 48000,
+    "default.video.height": 480,
+    "default.video.rate.denom": 1,
+    "default.video.rate.num": 25,
+    "default.video.width": 640,
+    "link.max-buffers": 64,
+    "log.level": 0,
+    "mem.allow-mlock": true,
+    "mem.warn-mlock": false,
+    "module.id": 2,
+    "object.id": 147,
+    "object.serial": 5251,
+    "pipewire.access": "unrestricted",
+    "pipewire.protocol": "protocol-native",
+    "pipewire.sec.gid": 1000,
+    "pipewire.sec.label": "unconfined",
+    "pipewire.sec.pid": 1805549,
+    "pipewire.sec.socket": "pipewire-0-manager",
+    "pipewire.sec.uid": 1000,
+    "remote.name": "[pipewire-0-manager,pipewire-0]",
+    "settings.check-quantum": false,
+    "settings.check-rate": false,
+    "window.x11.display": ":1"
+   }
+  }
+ },
+ {
+  "id": 300,
+  "type": "PipeWire:Interface:Node",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "max-input-ports": 65,
+   "max-output-ports": 0,
+   "change-mask": [
+    "input-ports",
+    "output-ports",
+    "state",
+    "props",
+    "params"
+   ],
+   "n-input-ports": 2,
+   "n-output-ports": 2,
+   "state": "running",
+   "error": null,
+   "props": {
+    "audio.adapt.follower": "",
+    "audio.channels": 2,
+    "audio.position": "FL,FR",
+    "audio.rate": 48000,
+    "client.id": 32,
+    "clock.quantum-limit": 8192,
+    "factory.id": 18,
+    "factory.mode": "merge",
+    "factory.name": "support.null-audio-sink",
+    "library.name": "audioconvert/libspa-audioconvert",
+    "media.class": "Audio/Sink",
+    "monitor.channel-volumes": true,
+    "node.description": "astra-test-sink",
+    "node.driver": true,
+    "node.name": "astra-test-sink",
+    "node.virtual": true,
+    "object.id": 300,
+    "object.serial": 6001
+   },
+   "params": {
+    "Props": [
+     {
+      "volume": 1.0,
+      "mute": false,
+      "channelVolumes": [
+       1.0,
+       1.0
+      ],
+      "channelMap": [
+       "FL",
+       "FR"
+      ],
+      "softMute": false,
+      "softVolumes": [
+       1.0,
+       1.0
+      ],
+      "monitorMute": false,
+      "monitorVolumes": [
+       1.0,
+       1.0
+      ],
+      "params": [
+       "monitor.channel-volumes",
+       true,
+       "channelmix.disable",
+       false,
+       "channelmix.min-volume",
+       0.0,
+       "channelmix.max-volume",
+       10.0,
+       "channelmix.normalize",
+       false,
+       "channelmix.mix-lfe",
+       true,
+       "channelmix.upmix",
+       true,
+       "channelmix.lfe-cutoff",
+       0.0,
+       "channelmix.fc-cutoff",
+       0.0,
+       "channelmix.rear-delay",
+       0.0,
+       "channelmix.stereo-widen",
+       0.0,
+       "channelmix.hilbert-taps",
+       0,
+       "channelmix.upmix-method",
+       "none",
+       "resample.quality",
+       4,
+       "resample.disable",
+       false,
+       "dither.noise",
+       0,
+       "dither.method",
+       "none",
+       "debug.wav-path",
+       "",
+       "channelmix.lock-volumes",
+       false
+      ]
+     }
+    ],
+    "PortConfig": [
+     {
+      "direction": "Input",
+      "mode": "dsp",
+      "monitor": true,
+      "control": false,
+      "format": {
+       "mediaType": "audio",
+       "mediaSubtype": "raw",
+       "format": "F32P",
+       "channels": 2,
+       "position": [
+        "FL",
+        "FR"
+       ]
+      }
+     }
+    ],
+    "Latency": [],
+    "ProcessLatency": []
+   }
+  }
+ },
+ {
+  "id": 301,
+  "type": "PipeWire:Interface:Port",
+  "version": 3,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "direction": "input",
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "audio.channel": "FL",
+    "format.dsp": "32 bit float mono audio",
+    "node.id": 300,
+    "object.id": 301,
+    "object.path": "auto_null:playback_0",
+    "object.serial": 6301,
+    "port.alias": "Dummy Output:playback_FL",
+    "port.direction": "in",
+    "port.id": 0,
+    "port.name": "playback_FL"
+   },
+   "params": {
+    "Meta": [
+     {
+      "type": "Header",
+      "size": 32
+     }
+    ],
+    "IO": [
+     {
+      "id": "Buffers",
+      "size": 8
+     }
+    ],
+    "Buffers": [
+     {
+      "buffers": {
+       "default": 1,
+       "min": 1,
+       "max": 32
+      },
+      "blocks": 1,
+      "size": {
+       "default": 32768,
+       "min": 64,
+       "max": 2147483647
+      },
+      "stride": 4
+     }
+    ],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 302,
+  "type": "PipeWire:Interface:Port",
+  "version": 3,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "direction": "input",
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "audio.channel": "FR",
+    "format.dsp": "32 bit float mono audio",
+    "node.id": 300,
+    "object.id": 302,
+    "object.path": "auto_null:playback_1",
+    "object.serial": 6302,
+    "port.alias": "Dummy Output:playback_FR",
+    "port.direction": "in",
+    "port.id": 1,
+    "port.name": "playback_FR"
+   },
+   "params": {
+    "Meta": [
+     {
+      "type": "Header",
+      "size": 32
+     }
+    ],
+    "IO": [
+     {
+      "id": "Buffers",
+      "size": 8
+     }
+    ],
+    "Buffers": [
+     {
+      "buffers": {
+       "default": 1,
+       "min": 1,
+       "max": 32
+      },
+      "blocks": 1,
+      "size": {
+       "default": 32768,
+       "min": 64,
+       "max": 2147483647
+      },
+      "stride": 4
+     }
+    ],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 303,
+  "type": "PipeWire:Interface:Port",
+  "version": 3,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "direction": "output",
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "audio.channel": "FL",
+    "format.dsp": "32 bit float mono audio",
+    "node.id": 300,
+    "object.id": 303,
+    "object.path": "auto_null:monitor_0",
+    "object.serial": 6303,
+    "port.alias": "Dummy Output:monitor_FL",
+    "port.direction": "out",
+    "port.id": 0,
+    "port.monitor": true,
+    "port.name": "monitor_FL"
+   },
+   "params": {
+    "Meta": [
+     {
+      "type": "Header",
+      "size": 32
+     }
+    ],
+    "IO": [
+     {
+      "id": "Buffers",
+      "size": 8
+     }
+    ],
+    "Buffers": [],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 304,
+  "type": "PipeWire:Interface:Port",
+  "version": 3,
+  "permissions": [
+   "r",
+   "x",
+   "m"
+  ],
+  "info": {
+   "direction": "output",
+   "change-mask": [
+    "props",
+    "params"
+   ],
+   "props": {
+    "audio.channel": "FR",
+    "format.dsp": "32 bit float mono audio",
+    "node.id": 300,
+    "object.id": 304,
+    "object.path": "auto_null:monitor_1",
+    "object.serial": 6304,
+    "port.alias": "Dummy Output:monitor_FR",
+    "port.direction": "out",
+    "port.id": 1,
+    "port.monitor": true,
+    "port.name": "monitor_FR"
+   },
+   "params": {
+    "Meta": [
+     {
+      "type": "Header",
+      "size": 32
+     }
+    ],
+    "IO": [
+     {
+      "id": "Buffers",
+      "size": 8
+     }
+    ],
+    "Buffers": [],
+    "Latency": [
+     {
+      "direction": "Input",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     },
+     {
+      "direction": "Output",
+      "minQuantum": 0.0,
+      "maxQuantum": 0.0,
+      "minRate": 0,
+      "maxRate": 0,
+      "minNs": 0,
+      "maxNs": 0
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": 138,
+  "type": "PipeWire:Interface:Link",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "output-node-id": 137,
+   "output-port-id": 151,
+   "input-node-id": 123,
+   "input-port-id": 106,
+   "change-mask": [
+    "state",
+    "format",
+    "props"
+   ],
+   "state": "active",
+   "error": null,
+   "format": {
+    "mediaType": "audio",
+    "mediaSubtype": "dsp",
+    "format": "F32P"
+   },
+   "props": {
+    "client.id": 34,
+    "factory.id": 20,
+    "link.input.node": 123,
+    "link.input.port": 106,
+    "link.output.node": 137,
+    "link.output.port": 151,
+    "object.id": 138,
+    "object.serial": 7138
+   }
+  }
+ },
+ {
+  "id": 143,
+  "type": "PipeWire:Interface:Link",
+  "version": 3,
+  "permissions": [
+   "r",
+   "w",
+   "x",
+   "m"
+  ],
+  "info": {
+   "output-node-id": 137,
+   "output-port-id": 124,
+   "input-node-id": 123,
+   "input-port-id": 78,
+   "change-mask": [
+    "state",
+    "format",
+    "props"
+   ],
+   "state": "active",
+   "error": null,
+   "format": {
+    "mediaType": "audio",
+    "mediaSubtype": "dsp",
+    "format": "F32P"
+   },
+   "props": {
+    "client.id": 34,
+    "factory.id": 20,
+    "link.input.node": 123,
+    "link.input.port": 78,
+    "link.output.node": 137,
+    "link.output.port": 124,
+    "object.id": 143,
+    "object.serial": 7143
+   }
+  }
+ }
+]

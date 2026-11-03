@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0111c late popup misdirect</title>
+<style>
+  html, body { margin: 0; overflow: hidden; }
+  /* left half: the opener's first target; right half: its second target */
+  #open { position: fixed; left: 0; top: 0; width: 640px; height: 800px; background: rgb(255, 0, 0); }
+  #second { position: fixed; left: 640px; top: 0; width: 640px; height: 800px; background: rgb(0, 160, 0); }
+</style>
+<script src="recorder.js"></script>
+</head>
+<body>
+<div id="open"></div>
+<div id="second"></div>
+<script>
+  // A click on #open opens popup.html?n=2 (blue) 400 ms later, after the executor's settle has returned
+  // (T-0111c ruling 683cc1e: a page adopted in ensure() refuses the pending action).
+  document.getElementById("open").addEventListener("click", () => {
+    setTimeout(() => { window.__opened = !!window.open("popup.html?n=2", "_blank"); }, 400);
+  });
+</script>
+</body>
+</html>

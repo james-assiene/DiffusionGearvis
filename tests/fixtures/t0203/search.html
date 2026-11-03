@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>T-0203 search</title>
+<style>
+html, body { margin: 0; overflow: hidden; background: rgb(30, 60, 200); }
+#f { position: fixed; left: 0; top: 0; width: 1280px; height: 800px; }
+#q { position: fixed; left: 340px; top: 100px; width: 600px; height: 60px; box-sizing: border-box;
+     font: 28px sans-serif; border: 0; background: rgb(255, 255, 255); }
+</style></head>
+<body>
+<form id="f" action="/results.html" method="get">
+<input id="q" name="q" autocomplete="off">
+<input id="delay" type="hidden" name="delay" value="">
+<input id="key" type="hidden" name="key" value="">
+<input id="mode" type="hidden" name="mode" value="">
+<input id="ttfb" type="hidden" name="ttfb" value="">
+</form>
+<script>
+// The search page copies its own ``delay``/``key``/``mode``/``ttfb`` query parameters into the form, so the server's results response
+// is delayed (``delay`` ms) or held on a gate (``key``). ``js=N`` replaces the native submit by a script that assigns
+// ``location`` N ms after Enter (readings R1).
+(function () {
+  const p = new URLSearchParams(location.search);
+  const f = document.getElementById("f");
+  for (const n of ["delay", "key", "mode", "ttfb"]) {
+    const el = document.getElementById(n);
+    if (p.has(n)) { el.value = p.get(n); } else { el.remove(); }
+  }
+  if (p.has("to")) { f.action = p.get("to"); }
+  const js = p.get("js");
+  if (js !== null) {
+    f.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const u = new URL(f.action, location.href);
+      for (const [k, v] of new FormData(f)) u.searchParams.set(k, v);
+      setTimeout(() => location.assign(u.href), Number(js));
+    });
+  }
+  window.__doc = Math.random().toString(36).slice(2);
+})();
+</script>
+</body></html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gearvis HUD</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- T-0128: the System / Light / Dark setting. It writes <html data-theme>; without it the
+         page is the dark theme that :root declares, and nothing else depends on it. -->
+    <script type="module" src="src/theme.js"></script>
+  </head>
+  <body>
+    <!-- T-0154 A4: one header row — brand, the state pill, the synthetic-capture notice (only
+         while a synthetic capture runs), the mic control and its badge (T-0181 B), Share, Stop
+         sharing and the theme setting. Nothing in it is a control with nothing behind it: the
+         mockup's "Headset" and ⋯ have no data here. The page has no keyboard shortcut (H-T181-4). -->
+    <header class="bar">
+      <span class="brand"><span class="logo" aria-hidden="true"></span><span class="word">Gearvis</span></span>
+      <span class="chip" id="turn-chip" data-turn-state="IDLE">IDLE</span>
+      <!-- T-0193 B (H-T193-4): hud/src/stop.js + main.js show it after the first astra.turn.state,
+           enabled only in THINKING, SPEAKING and PAUSED; a click sends astra.turn.stop. No key. -->
+      <button id="stop-button" type="button" hidden title="Interrupt Gearvis: it stops talking and stops what it is doing in the browser">Interrupt Gearvis</button>
+      <span class="spacer"></span>
+      <span class="banner" id="capture-banner" hidden></span>
+      <!-- hud/src/main.js relabels it "Sharing screen" / "Sharing camera" (data-sharing) while a
+           real capture runs; a synthetic capture never says it is sharing anything. -->
+      <!-- T-0181 B1/B2: hud/src/mic.js + main.js show the mic control only after an astra.mic.state
+           and label it from the last echo; the badge shows "Mic muted" while the echo is muted. -->
+      <span class="mic-badge" data-mic-badge hidden></span>
+      <button id="mic-button" type="button" hidden></button>
+      <button id="share-button" type="button">Share</button>
+      <button id="mute-button" type="button" disabled title="Stop sharing: end the screen or camera capture">Stop sharing</button>
+      <!-- T-0162 D-1: hud/src/session/index.js mounts the Restart button and its two-step inline
+           confirm here; it sends astra.session.reset only from the confirm, never on a key. -->
+      <span class="session-control" data-session-slot></span>
+      <!-- T-0162 B-7 (D12a): the server's assist badge, verbatim, whenever an assist is on, so
+           hiding the switches behind Settings never hides that one is on. hud/src/main.js fills
+           it from astra.assist.state; empty and hidden otherwise. -->
+      <span class="header-badge" id="assist-header-badge" data-header-badge hidden></span>
+      <!-- T-0162 B-6: the Settings gear and its popover. hud/src/assists/index.js mounts the
+           #assist-panel into [data-settings-slot]; hud/src/main.js opens and closes it (Escape
+           and an outside click close it). -->
+      <span class="settings">
+        <button
+          id="settings-button"
+          type="button"
+          aria-label="Settings"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="settings-popover"
+          title="Gearvis reads your screen from pixels only; these optional helpers also send it the page's text, a PDF's text layer, spreadsheet cells or the accessibility tree. They are all off by default, and every turn records which ones were on."
+        >
+          <svg class="gear" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+            <!-- Eight teeth: a dashed ring (circumference 2π·8.5 ≈ 53.4, eight dash periods) round
+                 a solid ring; drawn here, no icon font and nothing fetched. -->
+            <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="3.5" stroke-dasharray="3.34 3.34" />
+            <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="3" />
+          </svg>
+        </button>
+        <div class="settings-popover" id="settings-popover" role="dialog" aria-label="Settings" data-settings-popover hidden>
+          <div data-settings-slot></div>
+          <!-- T-0213 B-1: hud/src/settings/index.js mounts the Settings panel here, below
+               Context helpers (main.js passes it this slot). -->
+          <div data-settings-panel-slot></div>
+        </div>
+      </span>
+      <!-- T-0128 criterion 8: a native, labelled control; src/theme.js reflects the preference in
+           force. -->
+      <label class="theme-setting">
+        <select data-theme-control aria-label="Theme" title="Theme">
+          <option value="system">System</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </label>
+    </header>
+
+    <div class="errors" id="error-strip" hidden></div>
+
+    <!-- Every pane is a direct child of <main> (T-0056 criterion 4): hud/src/assists/index.js,
+         hud/src/log/index.js and T-0047's listen panel append `.pane` here themselves, so the
+         grid container has to be <main> and no wrapper may sit between it and the panes. The
+         conversation panes are placed in the left column by class; every other pane, declared or
+         appended, lands in the right rail (T-0128 implementation note 1). -->
+    <main>
+      <!-- T-0154 B1: one conversation pane holding one thread. hud/src/panels/thread.js builds one
+           article per turn in [data-thread] (the user bubble, the assistant's utterances, a meta
+           line, the turn's A2UI card and its action cards); the ask form sits at its bottom. -->
+      <section class="pane pane-convo" aria-label="Conversation">
+        <p class="empty-line thread-empty" data-empty>nothing said yet — speak, or type a question below</p>
+        <div class="thread" data-thread></div>
+        <!-- T-0039 criterion 10: the box the ask panel (src/ask/index.js) mounts into. Ruling
+             A19 (2): the controls ship `disabled` and the form is method="dialog", so before the
+             panel mounts — or on a page where it is missing — a submit neither navigates nor
+             blanks the query string that carries ?ws= and ?source=. mount() enables them. -->
+        <form class="ask" method="dialog" data-ask-form>
+          <input
+            type="text"
+            class="ask-input"
+            data-ask-input
+            disabled
+            autocomplete="off"
+            placeholder="type a question, press Enter"
+            aria-label="type a question"
+          />
+          <button type="submit" data-ask-submit disabled>Ask</button>
+        </form>
+      </section>
+      <section class="pane thumb">
+        <h2>What I see</h2>
+        <!-- T-0177 C4: shown only while the newest image in this pane is a shared one and a capture
+             runs (hud/src/main.js sets data-vision-live on the pane; hud/styles.css keys on it). -->
+        <span class="live">Live</span>
+        <!-- T-0177 C1: what Gearvis looks at. Hidden until the session echoes an
+             astra.vision.state (live only); its value is always that echo, never the click. -->
+        <label class="vision-source" hidden>
+          <span class="vision-source-label">Looking at</span>
+          <select data-vision-source>
+            <option value="browser">Gearvis's browser</option>
+            <option value="shared">Shared screen</option>
+          </select>
+        </label>
+        <!-- T-0177 C3: only the images the session sent to the model (astra.vision.frame), never
+             the page's own capture: the newest here, the earlier ones of that request below. -->
+        <img id="preview" alt="the most recent image sent to the model" hidden />
+        <div class="vision-thumbs" data-vision-thumbs></div>
+        <p class="empty-line" data-empty>no frame yet — press Share</p>
+        <!-- T-0177 C4: the source, the size, the turn and the step of the image shown, written by
+             hud/src/main.js from astra.vision.frame. Empty with no frame. -->
+        <p class="capture-caption" data-capture-caption></p>
+      </section>
+      <section class="pane pane-thinking">
+        <h2>Thinking</h2>
+        <!-- T-0128c B4: the honest label of the drawn frame ("canvas k · step s/N"), written by
+             hud/src/denoise/index.js; right-aligned in the heading row by styles.css. Empty until
+             the first real frame. -->
+        <span class="denoise-label" data-denoise-label></span>
+        <!-- The meter is a measurement (thinking_ms, hud/src/panels/thinking.js); the bar renders
+             the inline --fill it is given and nothing else. -->
+        <div class="meter">
+          <span class="meter-label">thinking time</span>
+          <span class="bar-track" id="thinking-bar"></span>
+          <b id="thinking-meter" data-thinking-ms="">—</b>
+        </div>
+        <!-- T-0128 criterion 5: the mount point of the real denoising view (./denoise/index.js in
+             PANEL_SPECS, T-0128c). Nothing draws here until per-step canvases arrive: no grid, no
+             shimmer, no pulse; the first real frame creates its canvas's <details> section of
+             token cells (T-0159 B-6/B-7). -->
+        <div class="denoise" data-denoise-root></div>
+        <p class="empty-line denoise-empty" data-denoise-empty>no denoising data yet — the model's real canvases appear here while it thinks</p>
+      </section>
+      <section class="pane pane-diagnostics">
+        <h2>Diagnostics</h2>
+        <!-- T-0056 ruling A1 (2): every counter stays — they have diagnosed four bugs. The ids and
+             data-* are what hud/src/main.js renderCounters() and onStatus() write. -->
+        <p class="counters">
+          sent <b id="frames-sent" data-frames-sent="0">0</b>
+          drop <b id="frames-dropped" data-frames-dropped="0">0</b>
+          size <b id="capture-size" data-capture-size="">—</b>
+          ign <b id="ignored-count">0</b>
+        </p>
+        <p class="link">link <span class="status" id="conn-status">idle</span></p>
+      </section>
+    </main>
+
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>

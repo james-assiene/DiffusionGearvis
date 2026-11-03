@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Open a website</title>
+  <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    .web-label { display: block; font-weight: 600; margin: 0 0 8px; }
+    .web-error { color: #b3261e; min-height: 1.45em; margin: 14px 0 0; }
+    .web-notice { color: var(--muted); max-width: 600px; text-align: center; margin: 28px 0 0; }
+  </style>
+</head>
+<body data-page="web">
+  <main class="home">
+    <div class="home-title">Open a website</div>
+    <p class="home-sub">Type a web address and press Go</p>
+    <label class="web-label" for="address">Web address</label>
+    <form class="home-search" id="go-form" autocomplete="off">
+      <input type="text" id="address" name="address" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type a web address" autofocus>
+      <button type="submit" id="go">Go</button>
+    </form>
+    <p class="web-error" id="error" role="alert"></p>
+    <p class="web-notice" id="notice">Gearvis can open public websites. Web pages can contain instructions that mislead it. It never types passwords or card numbers.</p>
+  </main>
+  <script>
+    (function () {
+      "use strict";
+      // T-0160 B-5. A convenience only: the egress proxy and the browser's routes are the fence, never this script.
+      window.__state = { page: "web" };
+      const SECURE = "https:";
+      const HINT = "Type a web address, such as example.com";
+      const form = document.getElementById("go-form");
+      const input = document.getElementById("address");
+      const error = document.getElementById("error");
+      input.focus();
+
+      function refuse(message) {
+        error.textContent = message;
+        window.__state = { page: "web", refused: message };
+      }
+
+      // "https:" and "http:" (upgraded) are the only schemes taken; with none, "https:" is added. A colon before
+      // digits is a port ("example.com:443"), not a scheme.
+      function target(text) {
+        if (/\s/.test(text)) return { error: "A web address has no spaces. " + HINT };
+        if (text.indexOf(".") < 0) return { error: HINT };
+        const scheme = /^([a-zA-Z][a-zA-Z0-9+.\-]*):(?!\d)/.exec(text);
+        let rest = text;
+        if (scheme) {
+          const name = scheme[1].toLowerCase();
+          if (name !== "https" && name !== "http") {
+            return { error: "Only https web addresses can be opened here. " + HINT };
+          }
+          rest = text.slice(scheme[0].length).replace(/^\/\//, "");
+        }
+        let url;
+        try {
+          url = new URL(SECURE + "//" + rest);
+        } catch (e) {
+          return { error: HINT };
+        }
+        if (url.hostname.indexOf(".") < 0) return { error: HINT };
+        return { href: url.href };
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const text = input.value.trim();
+        if (!text) {
+          refuse(HINT);
+          return;
+        }
+        const got = target(text);
+        if (got.error) {
+          refuse(got.error);
+          return;
+        }
+        error.textContent = "";
+        location.assign(got.href);
+      });
+    })();
+  </script>
+</body>
+</html>

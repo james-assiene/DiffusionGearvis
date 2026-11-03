@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>New tab</title>
+  <link rel="stylesheet" href="/assets/scenarios.css">
+</head>
+<body data-page="web">
+  <main class="web">
+    <h1>New tab</h1>
+    <label class="field" for="address"><span class="muted">Search or type a web address</span></label>
+    <input type="text" id="address" name="address" data-scn="address" autocomplete="off" spellcheck="false" placeholder="Search or type a web address">
+    <ul id="sites">
+      <li data-words="louvre museum paris art hours tickets">
+        <a href="/louvre/" data-scn="site-louvre">Mus&eacute;e du Louvre</a>
+        <div class="muted">Opening hours, tickets and visitor information</div>
+      </li>
+      <li data-words="ramen seattle noodles restaurants food guide reviews">
+        <a href="/ramen/" data-scn="site-ramen">Seattle Eats: ramen guide</a>
+        <div class="muted">Reviews of ramen places in Seattle</div>
+      </li>
+      <li data-words="recipes lasagna cooking dinner food">
+        <a href="/recipes/lasagna.html" data-scn="site-recipes">Good Food recipes: classic lasagna</a>
+        <div class="muted">Recipes for every day</div>
+      </li>
+      <li data-words="breville espresso coffee machine parts spare">
+        <a href="/breville/" data-scn="site-breville">Breville parts and accessories</a>
+        <div class="muted">Spare parts for espresso machines</div>
+      </li>
+      <li data-words="outdoor camping stoves gear rei co-op hiking">
+        <a href="/outdoor/stoves.html" data-scn="site-outdoor">Pinecone Outdoor Co-op: camping stoves</a>
+        <div class="muted">Camping and hiking gear</div>
+      </li>
+      <li data-words="dominos domino pizza order carryout pickup delivery food">
+        <a href="/pizza/" data-scn="site-pizza">Domino's: order pizza online</a>
+        <div class="muted">Delivery or carryout from a store near you</div>
+      </li>
+      <li data-words="austin tree service removal arborist quote">
+        <a href="/trees/" data-scn="site-trees">Austin Tree Pros</a>
+        <div class="muted">Tree care in Austin, TX: free quotes</div>
+      </li>
+      <li data-words="trips travel day trip san francisco bay area weekend">
+        <a href="/trips/" data-scn="site-trips">Bay Day Trips</a>
+        <div class="muted">Day trips from San Francisco</div>
+      </li>
+      <li data-words="flights airline airfare plane tickets travel round trip">
+        <a href="/flights/" data-scn="site-flights">Flights: compare round trips</a>
+        <div class="muted">Search airfares and book with the airline</div>
+      </li>
+    </ul>
+    <p class="muted gone" id="none">No site in this list matches. This page only lists demo sites.</p>
+  </main>
+  <script src="/assets/scenarios.js"></script>
+</body>
+</html>

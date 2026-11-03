@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Shopwise</title>
+  <style>
+    body { margin: 0; font-family: sans-serif; background: #ffffff; color: #111111; }
+    .bar { display: flex; align-items: center; gap: 24px; padding: 14px 24px; background: #131921; color: #ffffff; }
+    .brand { font-size: 26px; font-weight: bold; }
+    .bar input { width: 560px; font-size: 18px; padding: 8px 10px; border: 0; border-radius: 4px; }
+    .page { padding: 24px; }
+    #heading { font-size: 20px; margin: 0 0 18px 0; }
+    #results { display: flex; flex-direction: column; gap: 14px; max-width: 760px; }
+    .item { display: flex; justify-content: space-between; padding: 14px 18px; border: 1px solid #d5d9d9;
+      border-radius: 6px; background: #f7fafa; font-size: 18px; }
+    .price { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <span class="brand">Shopwise</span>
+    <input type="text" id="q" name="q" placeholder="Search Shopwise" aria-label="Search Shopwise">
+  </header>
+  <main class="page">
+    <p id="heading"></p>
+    <section id="results"></section>
+  </main>
+  <script>
+    // T-0202 C3 (W1): the results heading paints at once on Enter; the results paint RESULTS_DELAY_MS later, with
+    // nothing changing on the page in between (no spinner) and no price anywhere before. Deterministic: no clock
+    // read, no randomness; every query gets the same results.
+    var RESULTS_DELAY_MS = 1500;
+    var RESULTS = [
+      ["Hartley Cordless Kettle, 1.5 L", "$29.99"],
+      ["Brightwell Electric Kettle, 1.7 L", "$34.99"],
+      ["Corran Stovetop Kettle", "$41.50"],
+      ["Ardent Espresso Machine", "$134.99"]
+    ];
+    var pending = false;
+    function paintResults() {
+      var list = document.getElementById("results");
+      list.textContent = "";
+      RESULTS.forEach(function (row) {
+        var item = document.createElement("div");
+        item.className = "item";
+        var name = document.createElement("span");
+        name.textContent = row[0];
+        var price = document.createElement("span");
+        price.className = "price";
+        price.textContent = row[1];
+        item.appendChild(name);
+        item.appendChild(price);
+        list.appendChild(item);
+      });
+      pending = false;
+    }
+    document.getElementById("q").addEventListener("keydown", function (event) {
+      if (event.key !== "Enter" || pending) {
+        return;
+      }
+      event.preventDefault();
+      pending = true;
+      document.getElementById("results").textContent = "";
+      document.getElementById("heading").textContent = "Results for “" + event.target.value + "”";
+      setTimeout(paintResults, RESULTS_DELAY_MS);
+    });
+  </script>
+</body>
+</html>

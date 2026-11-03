@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0191 shop search results</title>
+<style>html, body { margin: 0; font: 16px sans-serif; background: #f4efe1; }</style>
+</head>
+<body>
+<h1 id="results">Results</h1>
+<script>
+  // T-0191 (hand-written by the T-0191 test-author, 2026-10-28): the shop's own results page.
+  window.__doc = Math.random().toString(36).slice(2);
+  window.__query = new URLSearchParams(location.search).get("q");
+  document.getElementById("results").textContent = "No products match " + window.__query;
+</script>
+</body>
+</html>

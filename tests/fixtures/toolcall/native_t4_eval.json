@@ -1,0 +1,240 @@
+{
+ "provenance": {
+  "artifacts": {
+   "t0084e-dev": {
+    "path": "logs/t0084-native-dev-794161d/20261011T022440.808068Z-toolcall-dev.jsonl",
+    "sha256": "06a71fc7413828ba5ff2843accf0811b5ce8303014ebf0177e99904060bd5c7f"
+   },
+   "t0084f-test": {
+    "path": "logs/t0084-native-test-794161d/20261011T031521.606364Z-toolcall-test.jsonl",
+    "sha256": "14728634eee2a8621e4bf3fbaf3c84c52ccc224e7c6b0383c82a4dcac0595101"
+   }
+  },
+  "cell": "native/T4/named/perstep_mar+seed",
+  "generator": "tests/fixtures/toolcall/build_native_t4_eval.py"
+ },
+ "regime": {
+  "compiler_version": "dgfa_compile@27c7d0d+local_astra.T-0063;outlines-core==0.2.14",
+  "model_revision": "2ea837236295d617ac27f8c17d61228081932c40",
+  "perstep_mar_calibration_sha256": "4084026c580a3148b4351699af64832e22b8e756fb288b551a17e642585ba74a",
+  "seed_draft": {
+   "arm": "perstep_mar+seed",
+   "base_arm": "perstep_mar",
+   "canvas_length": 256,
+   "draft_noise": 0.0,
+   "draft_start_step": 24,
+   "source": "T-0081 tier 2, dad1382, mar_n0_s24"
+  },
+  "tokenizer_sha256": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+  "tools_sha256": "bbfc53ccdd80a390e55a7550805ee5aa78309287f7a1171c091f67d9db9cd707",
+  "whitespace": "json"
+ },
+ "seeded": {
+  "click_at": {
+   "artifact": "t0084e-dev",
+   "case": "click-01",
+   "draft_call_text": "call:click_at{x:500,y:515}<tool_call|>",
+   "knobs": {
+    "automaton_sha256": "2e96c21cc412d716cdcfa20e75cf30704addf15c0607635c5a04e849c716b768",
+    "confidence_threshold": 0.005,
+    "entropy_bound": 1.0,
+    "mode": "perstep_mar",
+    "self_conditioning": "model"
+   },
+   "seed_ids": [
+    6639,
+    236787,
+    4513,
+    236779,
+    502,
+    236782,
+    236781,
+    236787,
+    236810,
+    236771,
+    236771,
+    236764,
+    236762,
+    236787,
+    236810,
+    236770,
+    236810,
+    236783,
+    49,
+    50
+   ],
+   "stop_id": 50
+  },
+  "google_search": {
+   "artifact": "t0084e-dev",
+   "case": "search-01",
+   "draft_call_text": "call:google_search{query:<|\"|>weather in Lisbon tomorrow<|\"|>}<tool_call|>",
+   "knobs": {
+    "automaton_sha256": "fac0b7e675b4c45fd3ecd04290a958a155fd3f66058eb40219489f600adfe07c",
+    "confidence_threshold": 0.005,
+    "entropy_bound": 1.0,
+    "mode": "perstep_mar",
+    "self_conditioning": "model"
+   },
+   "seed_ids": [
+    6639,
+    236787,
+    7239,
+    236779,
+    2305,
+    236782,
+    3278,
+    236787,
+    52,
+    19323,
+    528,
+    72449,
+    16922,
+    52,
+    236783,
+    49,
+    50
+   ],
+   "stop_id": 50
+  },
+  "press_key": {
+   "artifact": "t0084e-dev",
+   "case": "key-01",
+   "draft_call_text": "call:press_key{combo:<|\"|>Ctrl+Z<|\"|>}<tool_call|>",
+   "knobs": {
+    "automaton_sha256": "b1161b87ceaf7baf595f1eb3c8faa18cd2f54182d299c9961251641b18e10228",
+    "confidence_threshold": 0.005,
+    "entropy_bound": 1.0,
+    "mode": "perstep_mar",
+    "self_conditioning": "model"
+   },
+   "seed_ids": [
+    6639,
+    236787,
+    6473,
+    236779,
+    2478,
+    236782,
+    84051,
+    236787,
+    52,
+    30671,
+    236862,
+    236953,
+    52,
+    236783,
+    49,
+    50
+   ],
+   "stop_id": 50
+  },
+  "scroll": {
+   "artifact": "t0084e-dev",
+   "case": "scroll-01",
+   "draft_call_text": "call:scroll{direction:<|\"|>down<|\"|>}<tool_call|>",
+   "knobs": {
+    "automaton_sha256": "16123ae60132b1cf70b1b5d49d4d011b295b541e11236969a93c2029eb567895",
+    "confidence_threshold": 0.005,
+    "entropy_bound": 1.0,
+    "mode": "perstep_mar",
+    "self_conditioning": "model"
+   },
+   "seed_ids": [
+    6639,
+    236787,
+    16113,
+    236782,
+    16145,
+    236787,
+    52,
+    3843,
+    52,
+    236783,
+    49,
+    50
+   ],
+   "stop_id": 50
+  },
+  "type_at": {
+   "artifact": "t0084e-dev",
+   "case": "type-01",
+   "draft_call_text": "call:type_at{press_enter:false,text:<|\"|>anna.berg@northwind.example<|\"|>,x:488,y:311}<tool_call|>",
+   "knobs": {
+    "automaton_sha256": "20242ec4c67ad17fdfe29414a9c6e71b13cca2b56932464aae141bf06ea904fb",
+    "confidence_threshold": 0.005,
+    "entropy_bound": 1.0,
+    "mode": "perstep_mar",
+    "self_conditioning": "model"
+   },
+   "seed_ids": [
+    6639,
+    236787,
+    2084,
+    236779,
+    502,
+    236782,
+    6473,
+    236779,
+    7703,
+    236787,
+    4530,
+    236764,
+    1005,
+    236787,
+    52,
+    11644,
+    236761,
+    6315,
+    236940,
+    36227,
+    15879,
+    236761,
+    8358,
+    52,
+    236764,
+    236781,
+    236787,
+    236812,
+    236828,
+    236828,
+    236764,
+    236762,
+    236787,
+    236800,
+    236770,
+    236770,
+    236783,
+    49,
+    50
+   ],
+   "stop_id": 50
+  }
+ },
+ "tools": {
+  "click_at": {
+   "automaton_sha256": "2e96c21cc412d716cdcfa20e75cf30704addf15c0607635c5a04e849c716b768",
+   "bucket": 32,
+   "n_states": 29
+  },
+  "google_search": {
+   "automaton_sha256": "fac0b7e675b4c45fd3ecd04290a958a155fd3f66058eb40219489f600adfe07c",
+   "bucket": 64,
+   "n_states": 41
+  },
+  "press_key": {
+   "automaton_sha256": "b1161b87ceaf7baf595f1eb3c8faa18cd2f54182d299c9961251641b18e10228",
+   "bucket": 128,
+   "n_states": 80
+  },
+  "scroll": {
+   "automaton_sha256": "16123ae60132b1cf70b1b5d49d4d011b295b541e11236969a93c2029eb567895",
+   "bucket": 64,
+   "n_states": 39
+  },
+  "type_at": {
+   "automaton_sha256": "20242ec4c67ad17fdfe29414a9c6e71b13cca2b56932464aae141bf06ea904fb",
+   "bucket": 128,
+   "n_states": 66
+  }
+ }
+}

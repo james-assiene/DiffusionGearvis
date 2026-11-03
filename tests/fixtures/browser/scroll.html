@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0111c tall page</title>
+<style>
+  html { scroll-behavior: auto; }
+  /* Three viewports tall. The base gradient runs over the whole height, so no two scroll offsets
+     look alike (a periodic pattern alone would repeat at a multiple of its period). */
+  body { margin: 0; width: 100vw; height: 300vh; overflow-x: hidden;
+         background:
+           repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0 37px, transparent 37px 90px),
+           linear-gradient(180deg, rgb(230, 30, 30), rgb(30, 200, 30) 50%, rgb(30, 30, 230)); }
+</style>
+<script src="recorder.js"></script>
+</head>
+<body></body>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A2UI card theme (mockup)</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  .page { max-width: 1480px; margin: 0 auto; padding: 34px 32px 40px; }
+  h1 { font-size: 22px; letter-spacing: -0.02em; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 26px; }
+  .gallery { columns: 3 400px; column-gap: 22px; }
+  .gallery .a2-card { break-inside: avoid; margin: 0 0 22px; }
+  .tag { display: inline-block; font-size: 11.5px; color: var(--muted); margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>Card theme — your six cards from 20 Oct, as they would render</h1>
+  <p class="sub">Same content the model wrote at the desk. Components: Card · Column · Row · List · Text (h3/caption) · Divider.</p>
+  <div class="gallery">
+
+    <div class="a2-card">
+      <div class="a2-eyebrow">Kitchen Notes · lemon cake</div>
+      <div class="a2-h3">Shopping list</div>
+      <ul class="a2-list">
+        <li><span class="a2-tick"></span>225 g unsalted butter</li>
+        <li><span class="a2-tick"></span>225 g caster sugar</li>
+        <li><span class="a2-tick"></span>4 large eggs</li>
+        <li><span class="a2-tick"></span>275 g self-raising flour</li>
+        <li><span class="a2-tick"></span>2 tsp baking powder</li>
+        <li><span class="a2-tick"></span>4 tbsp milk</li>
+        <li><span class="a2-tick"></span>Zest of 2 lemons</li>
+        <li><span class="a2-tick"></span>Juice of 1½ lemons</li>
+        <li><span class="a2-tick"></span>175 g granulated sugar</li>
+      </ul>
+    </div>
+
+    <div class="a2-card">
+      <div class="a2-eyebrow">From your spreadsheet</div>
+      <div class="a2-h3">Expense summary</div>
+      <div class="a2-kv num">
+        <div class="k">Rent</div><div class="v">1,200</div>
+        <div class="k">Food</div><div class="v">420</div>
+        <div class="k">Travel</div><div class="v">180</div>
+        <div class="k">Energy</div><div class="v">95</div>
+        <div class="k">Phone</div><div class="v">30</div>
+      </div>
+      <div class="a2-total num"><span class="k">Total</span><span class="v">1,925</span></div>
+    </div>
+
+    <div class="a2-card">
+      <div class="a2-eyebrow">Repair</div>
+      <div class="a2-h3">How to change a bike tyre</div>
+      <ol class="a2-steps">
+        <li>Remove the wheel from the bike</li>
+        <li>Deflate, and use tyre levers to pry the edge off</li>
+        <li>Remove the old tube and check for debris</li>
+        <li>Insert a new, partially inflated tube</li>
+        <li>Push the tyre bead back onto the rim</li>
+        <li>Pump up the tyre and reinstall the wheel</li>
+      </ol>
+    </div>
+
+    <div class="a2-card">
+      <div class="a2-eyebrow">Recipe</div>
+      <div class="a2-h3">Simple omelette</div>
+      <div class="a2-h4" style="margin-top:2px">Ingredients</div>
+      <div class="a2-chips"><span class="a2-chip">2 eggs</span><span class="a2-chip">1 tbsp butter</span><span class="a2-chip">Salt &amp; pepper</span><span class="a2-chip">Cheese</span></div>
+      <div class="a2-h4">Method</div>
+      <ol class="a2-steps">
+        <li>Whisk the eggs</li>
+        <li>Melt the butter in a pan</li>
+        <li>Pour in the eggs and cook until just set</li>
+        <li>Add the cheese and fold</li>
+      </ol>
+    </div>
+
+    <div class="a2-card">
+      <div class="a2-eyebrow">Phone</div>
+      <div class="a2-h3">iPhone 16 vs Pixel 9</div>
+      <div class="a2-kv">
+        <div class="k">Chip</div><div class="v">A18</div>
+        <div class="k">Display</div><div class="v">Super Retina XDR</div>
+        <div class="k">Camera</div><div class="v">Dual 48 MP</div>
+        <div class="k">Port</div><div class="v">USB-C</div>
+      </div>
+      <div class="a2-foot">The model only filled in the iPhone side — a content problem, shown as written.</div>
+    </div>
+
+    <div class="a2-card">
+      <div class="a2-eyebrow">Geography</div>
+      <div class="a2-h3">10 largest countries by area</div>
+      <table class="a2-table num">
+        <colgroup><col style="width:30px"><col><col style="width:110px"><col style="width:34%"></colgroup><thead><tr><th></th><th>Country</th><th class="r">Population</th><th></th></tr></thead>
+        <tbody id="ctry"></tbody>
+      </table>
+      <div class="a2-foot">Populations approximate, as the model gave them.</div>
+    </div>
+
+  </div>
+</div>
+<script>
+  const params = new URLSearchParams(location.search);
+  document.documentElement.dataset.theme = params.get('theme') || 'dark';
+  const rows = [["Russia","146 m",146],["Canada","38 m",38],["China","1.4 bn",1400],["United States","333 m",333],["Brazil","214 m",214],["Australia","26 m",26],["India","1.4 bn",1400],["Kazakhstan","19 m",19],["Algeria","45 m",45],["DR Congo","100 m",100]];
+  const tb = document.getElementById('ctry');
+  rows.forEach((r, i) => { const tr = document.createElement('tr');
+    tr.innerHTML = `<td class="a2-rank">${i+1}</td><td>${r[0]}</td><td class="r">${r[1]}</td><td><div class="a2-bar" style="width:${Math.max(4, Math.round(r[2]/1400*100))}%"></div></td>`; tb.appendChild(tr); });
+</script>
+</body>
+</html>

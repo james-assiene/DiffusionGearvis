@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Files - Documents</title><style>
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: "DejaVu Sans", "Liberation Sans", Arial, sans-serif; font-size: 15px; color: #1f2328;
+       background: #f6f7f9; width: 1280px; }
+.top { height: 56px; background: #24292f; color: #fff; display: flex; align-items: center; padding: 0 20px; gap: 18px; }
+.top .brand { font-weight: bold; font-size: 19px; }
+.top a, .top span { color: #d0d7de; text-decoration: none; }
+.side { position: absolute; left: 0; top: 56px; width: 220px; bottom: 0; background: #fff; border-right: 1px solid #d0d7de; padding: 14px; }
+.side div { padding: 9px 10px; border-radius: 6px; margin-bottom: 4px; }
+.side .on { background: #ddf4ff; font-weight: bold; }
+.main { position: absolute; left: 240px; top: 76px; right: 20px; }
+.card { background: #fff; border: 1px solid #d0d7de; border-radius: 8px; padding: 16px; }
+.row { display: flex; gap: 12px; align-items: center; }
+.btn { display: inline-block; padding: 8px 16px; border-radius: 6px; border: 1px solid #1f883d; background: #1f883d; color: #fff; font-weight: bold; }
+.btn.sec { background: #f6f8fa; color: #24292f; border-color: #d0d7de; }
+.btn.red { background: #cf222e; border-color: #cf222e; }
+.btn.blue { background: #0969da; border-color: #0969da; }
+input.f, .f { display: block; width: 100%; height: 38px; border: 1px solid #8c959f; border-radius: 6px; padding: 0 10px; font-size: 15px; background: #fff; font-family: inherit; }
+label { display: block; font-weight: bold; margin: 12px 0 6px; }
+.muted { color: #57606a; }
+.list > div { padding: 12px 14px; border-bottom: 1px solid #eaeef2; background: #fff; }
+.grid { display: grid; gap: 14px; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 10px; background: #eaeef2; font-size: 13px; }
+.toggle { display: inline-block; width: 44px; height: 24px; border-radius: 12px; background: #8c959f; position: relative; vertical-align: middle; }
+.toggle.on { background: #1f883d; }
+.toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 9px; background: #fff; }
+.toggle.on::after { left: 23px; }
+.box { display: inline-block; width: 18px; height: 18px; border: 2px solid #57606a; border-radius: 3px; vertical-align: middle; background: #fff; }
+.box.on { background: #0969da; border-color: #0969da; }
+.strip { display: flex; gap: 14px; overflow-x: auto; overflow-y: hidden; white-space: nowrap; }
+.strip::-webkit-scrollbar { display: none; }
+.thumb { flex: 0 0 auto; width: 220px; height: 150px; border-radius: 8px; color: #fff; font-weight: bold; display: flex; align-items: flex-end; padding: 10px; }
+.sel { background: #b6e3ff; }
+table { border-collapse: collapse; background: #fff; }
+td, th { border: 1px solid #d0d7de; padding: 6px 10px; text-align: left; }
+th { background: #f6f8fa; }
+p { line-height: 1.6; margin: 0 0 14px; }
+</style></head>
+<body>
+<div class="top"><span class="brand">Files</span><span>Home / Documents</span></div>
+<div style="position:absolute;left:20px;top:70px;right:20px" class="row">
+  <span class="btn sec" data-t="new_folder">New folder</span><span class="btn sec" data-t="upload">Upload</span>
+  <span class="btn sec" data-t="rename">Rename</span><span class="btn red" data-t="delete">Delete</span><span style="flex:1"></span>
+  <input class="f" data-t="search" placeholder="Search files" style="width:300px"></div>
+<div class="card list" data-t="files" style="position:absolute;left:20px;top:130px;right:20px;padding:0">
+  <div data-t="f_budget">&#128196; budget-2027.xlsx <span class="muted">2.1 MB</span></div>
+  <div data-t="f_contract" class="sel">&#128196; contract-draft.docx <span class="muted">88 KB</span></div>
+  <div data-t="f_photos">&#128193; Holiday photos <span class="muted">142 items</span></div>
+  <div data-t="f_taxes">&#128193; Taxes <span class="muted">12 items</span></div>
+  <div data-t="f_cv">&#128196; cv-anna-berg.pdf <span class="muted">240 KB</span></div>
+  <div data-t="f_notes">&#128196; meeting-notes.txt <span class="muted">4 KB</span></div>
+</div>
+</body></html>

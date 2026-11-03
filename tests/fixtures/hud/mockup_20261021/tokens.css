@@ -1,0 +1,100 @@
+/* Shared design tokens for the local_astra HUD + A2UI card theme mockups. System fonts only (the HUD is loopback-only). */
+:root, :root[data-theme="dark"] {
+  --bg: #0d0f13;
+  --bg-grad: radial-gradient(1200px 600px at 15% -10%, #18203a 0%, transparent 60%), radial-gradient(900px 500px at 110% 10%, #1b1730 0%, transparent 55%);
+  --surface: #14171d;
+  --surface-2: #1a1e26;
+  --surface-3: #222733;
+  --line: rgba(255,255,255,0.07);
+  --line-strong: rgba(255,255,255,0.12);
+  --text: #eceef3;
+  --text-2: #b4bac8;
+  --muted: #7d8597;
+  --faint: #4b5262;
+  --accent: #8ea2ff;
+  --accent-2: #b48cff;
+  --accent-soft: rgba(142,162,255,0.14);
+  --green: #5ee09a;
+  --green-soft: rgba(94,224,154,0.14);
+  --amber: #f5c26b;
+  --amber-soft: rgba(245,194,107,0.14);
+  --red: #ff7b8a;
+  --shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 10px 30px rgba(0,0,0,0.35);
+  --card-shadow: 0 1px 0 rgba(255,255,255,0.05) inset, 0 12px 32px rgba(0,0,0,0.30);
+  --bubble: #1f2430;
+}
+:root[data-theme="light"] {
+  --bg: #f4f5f8;
+  --bg-grad: radial-gradient(1200px 600px at 15% -10%, #e6eaff 0%, transparent 60%), radial-gradient(900px 500px at 110% 10%, #f1e9ff 0%, transparent 55%);
+  --surface: #ffffff;
+  --surface-2: #f7f8fb;
+  --surface-3: #eef0f5;
+  --line: rgba(15,20,35,0.07);
+  --line-strong: rgba(15,20,35,0.12);
+  --text: #141822;
+  --text-2: #3b4252;
+  --muted: #6b7386;
+  --faint: #a7adbb;
+  --accent: #4f63e6;
+  --accent-2: #8a5cf0;
+  --accent-soft: rgba(79,99,230,0.10);
+  --green: #149a5a;
+  --green-soft: rgba(20,154,90,0.10);
+  --amber: #b7791f;
+  --amber-soft: rgba(183,121,31,0.10);
+  --red: #d6455a;
+  --shadow: 0 1px 2px rgba(15,20,35,0.04), 0 8px 24px rgba(15,20,35,0.06);
+  --card-shadow: 0 1px 2px rgba(15,20,35,0.05), 0 10px 28px rgba(15,20,35,0.07);
+  --bubble: #eef1fb;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg-grad), var(--bg);
+  color: var(--text);
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh; background-attachment: fixed;
+  font-feature-settings: "cv11", "ss01";
+}
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- A2UI card theme ---------- */
+.a2-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--card-shadow);
+  padding: 20px 22px;
+}
+.a2-eyebrow { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 0 0 6px; }
+.a2-h3 { font-size: 19px; font-weight: 650; letter-spacing: -0.01em; margin: 0 0 14px; line-height: 1.3; }
+.a2-h4 { font-size: 12.5px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 18px 0 8px; }
+.a2-col { display: flex; flex-direction: column; }
+.a2-list { list-style: none; margin: 0; padding: 0; }
+.a2-list li { display: flex; align-items: center; gap: 12px; padding: 10px 2px; border-top: 1px solid var(--line); color: var(--text-2); }
+.a2-list li:first-child { border-top: 0; }
+.a2-tick { width: 18px; height: 18px; border-radius: 6px; border: 1.5px solid var(--line-strong); flex: none; }
+.a2-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex: none; opacity: .8; }
+.a2-kv { display: grid; grid-template-columns: 1fr auto; row-gap: 0; }
+.a2-kv > div { padding: 10px 2px; border-top: 1px solid var(--line); }
+.a2-kv > div:nth-child(-n+2) { border-top: 0; }
+.a2-kv .k { color: var(--muted); }
+.a2-kv .v { color: var(--text); text-align: right; font-weight: 550; }
+.a2-total { display: flex; justify-content: space-between; align-items: baseline; margin-top: 10px; padding-top: 14px; border-top: 1px solid var(--line-strong); }
+.a2-total .k { font-weight: 600; }
+.a2-total .v { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+.a2-steps { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+.a2-steps li { counter-increment: s; display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 9px 0; color: var(--text-2); }
+.a2-steps li::before { content: counter(s); width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 12.5px; font-weight: 650; color: var(--accent); background: var(--accent-soft); }
+.a2-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.a2-chip { padding: 6px 11px; border-radius: 999px; background: var(--surface-3); color: var(--text-2); font-size: 13.5px; }
+.a2-table { width: 100%; border-collapse: collapse; }
+.a2-table th { text-align: left; font-size: 11.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 0 2px 8px; }
+.a2-table td { padding: 8px 2px; border-top: 1px solid var(--line); color: var(--text-2); }
+.a2-table td.r, .a2-table th.r { text-align: right; padding-right: 14px; }
+.a2-table td:last-child { padding-left: 4px; }
+.a2-rank { color: var(--faint); width: 26px; }
+.a2-bar { height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); opacity: .75; }
+.a2-foot { margin-top: 14px; font-size: 12.5px; color: var(--muted); }

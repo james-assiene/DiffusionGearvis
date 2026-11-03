@@ -1,0 +1,115 @@
+{
+  "cases_sha256": "3d474b680c87b49bf92d52b4dc69d44d294ec54032a8a81a342ab708a572814e",
+  "commit_call": "a list of alternatives shaped like a v1 gt; a routed call commits iff it parses and score.exact(call, alternative) holds for at least one",
+  "counts": {
+    "high_stakes": {
+      "delete": 3,
+      "pay_order": 2,
+      "send": 3,
+      "total": 8
+    },
+    "no_tool": 4,
+    "routine": 16,
+    "s3": 3,
+    "total": 28
+  },
+  "dom_elements": [
+    {
+      "bbox": [
+        296,
+        89,
+        364,
+        133
+      ],
+      "element": "delete",
+      "rect": {
+        "bottom": 107,
+        "left": 377.65625,
+        "right": 466.953125,
+        "top": 71
+      },
+      "screen": "t05_files"
+    },
+    {
+      "bbox": [
+        279,
+        519,
+        413,
+        563
+      ],
+      "element": "clear",
+      "rect": {
+        "bottom": 451,
+        "left": 357,
+        "right": 529.03125,
+        "top": 415
+      },
+      "screen": "t07_todo"
+    },
+    {
+      "bbox": [
+        201,
+        555,
+        336,
+        599
+      ],
+      "element": "confirm",
+      "rect": {
+        "bottom": 479.671875,
+        "left": 257,
+        "right": 430.765625,
+        "top": 443.671875
+      },
+      "screen": "t11_bank"
+    },
+    {
+      "bbox": [
+        681,
+        209,
+        736,
+        253
+      ],
+      "element": "post",
+      "rect": {
+        "bottom": 203,
+        "left": 871.59375,
+        "right": 943,
+        "top": 167
+      },
+      "screen": "t14_feed"
+    }
+  ],
+  "dom_render": {
+    "date": "2026-10-19",
+    "how": "tests.eval.toolcall.build.render_all(<scratch dir>) then build._bboxes(rects, clip=False); viewport 1280 x 800, device scale 1, offline; nothing written under tests/eval/toolcall",
+    "jpeg_identical_to_v1": true,
+    "renderer": "Chrome/147.0.7727.101",
+    "v1_targets_identical": true
+  },
+  "generator": {
+    "cases_src.py": "4f01793ac29506e0758ad70bfad3b27a1e1f5f1b9489dd6bb61de0cf09e65a9f"
+  },
+  "screens": {
+    "screens/d01_login.jpg": "181cb0692d9168a41252e035cb1a5b884500a69f70bcf2c66e641d4cabf70e42",
+    "screens/d02_store.jpg": "b2dfede5393217a631215e9580cca25cdcdbcb6d8eace444b1611cc9f313ccc9",
+    "screens/d03_mail.jpg": "75a676677132438dec0c0d2d81d497e9153903d65e418c957595046651bd1889",
+    "screens/d06_chat.jpg": "fe1faf94074a8d7ac6d1777ff0cee56e08837fe09ce7d6eec1c84fec1fda89ba",
+    "screens/t01_signup.jpg": "6fd239e0fe8769971437b2dcd9041f32bbf332a60b07f603740112654fb3c7e8",
+    "screens/t03_flights.jpg": "dec6ff30a7a348da9ba09feded8459aa507ceb86f0c2b05bfe9ea10392e242d9",
+    "screens/t04_calendar.jpg": "148ac296ace3690d9857e150f128ea54827f80f72121d35003072af6efc6ca5e",
+    "screens/t05_files.jpg": "76884c89eac59bf4c05565edd94aaade9b68125ef5b038fb7898316b2c13e337",
+    "screens/t07_todo.jpg": "065a50a61e4957417afab7ed8d3f1ea177ea9763f778d2b17beeff55c9b3e6f4",
+    "screens/t11_bank.jpg": "94a343537807bdef9348f5804312611c4e592f583046b71f9a7e82d02adeaf51",
+    "screens/t13_checkout.jpg": "474c9bf39fb90608a6dedcfc40f05758040d163f79ac114e98adfc7c2086ca9c",
+    "screens/t14_feed.jpg": "0a5621eca105c2e4a91455029e0f47ca338af379c37b736f0ac2507548032163",
+    "screens/t15_dialog.jpg": "9de053b746d9c10b2dee039fdd25be67f2da4dd712031908b4e11db44b8b2195"
+  },
+  "screens_root": "tests/eval/toolcall",
+  "set": "toolcall-q13",
+  "task": "T-0107b",
+  "transcripts": {
+    "no": "No, leave it.",
+    "yes": "Yes, go ahead."
+  },
+  "v1_manifest_sha256": "e6ff5c9582b8093ef474b37d3fc652f149e27630a5d030358bd5fe99828855ed"
+}

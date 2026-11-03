@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0194 slow page after a click</title>
+<style>
+  html, body { margin: 0; overflow: hidden; background: #fafafa; font: 16px monospace; }
+  /* Two single-line inputs at x 100..499, 40 px tall: #q (text) at y 100, #pw (password) at y 200. */
+  input { position: absolute; left: 100px; width: 400px; height: 40px; box-sizing: border-box; font: 16px monospace; }
+  #q { top: 100px; }
+  #pw { top: 200px; }
+</style>
+<script src="recorder.js"></script>
+<script>
+  // A page whose main thread is busy right after the click, as a loading page is: each field's mouseup schedules
+  // one BUSY_MS synchronous busy-wait (a MessageChannel task, so the mouseup itself returns at once and the click's
+  // ack is not delayed). A focus read sent just after the click must wait behind it.
+  //
+  // Why the second trigger: Chromium runs a DevTools Runtime.evaluate ahead of an ordinary queued task, so a read
+  // arriving before that task has started would jump the queue (T-0194 test-author probe, Chromium 156.0.8078.4
+  // headless: 5 of 6 reads answered in < 15 ms with the task alone). The busy-wait is therefore also armed on the
+  // page's getAttribute, which the focus read calls first: whichever comes first runs it, once per mouseup, so the
+  // read always meets the busy main thread. window.__busyMs lists the busy-waits that ran (ms).
+  const BUSY_MS = 1000;
+  window.__busyMs = [];
+  let armed = false;
+  const work = () => {
+    if (!armed) return;
+    armed = false;
+    const t0 = performance.now();
+    while (performance.now() - t0 < BUSY_MS) { /* the page is loading */ }
+    window.__busyMs.push(Math.round(performance.now() - t0));
+  };
+  const nativeGetAttribute = Element.prototype.getAttribute;
+  Element.prototype.getAttribute = function (name) {
+    work();
+    return nativeGetAttribute.call(this, name);
+  };
+  const channel = new MessageChannel();
+  channel.port1.onmessage = work;
+  const busy = () => {
+    armed = true;
+    channel.port2.postMessage(0);
+  };
+  document.addEventListener("DOMContentLoaded", () => {
+    for (const id of ["q", "pw"]) document.getElementById(id).addEventListener("mouseup", busy);
+  });
+</script>
+</head>
+<body>
+<input id="q" type="text" autocomplete="off" value="old">
+<input id="pw" type="password" autocomplete="off" value="old-secret">
+</body>
+</html>

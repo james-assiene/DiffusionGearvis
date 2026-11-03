@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0111c form</title>
+<style>
+  html, body { margin: 0; overflow: hidden; background: #fafafa; font: 16px sans-serif; }
+  /* #q covers CSS x 100..499, y 100..139; (234, 150) in 0-999 maps to (300, 120) at 1280x800. */
+  #q { position: absolute; left: 100px; top: 100px; width: 400px; height: 40px; box-sizing: border-box; }
+  /* #other covers x 100..499, y 300..339: focused first, so a type_at that does not click types here. */
+  #other { position: absolute; left: 100px; top: 300px; width: 400px; height: 40px; box-sizing: border-box; }
+</style>
+<script src="recorder.js"></script>
+</head>
+<body>
+<form id="f"><input id="q" name="q" autocomplete="off" value="pre-"></form>
+<input id="other" autocomplete="off" value="">
+<script>
+  document.getElementById("f").addEventListener("submit", (e) => e.preventDefault());
+  document.getElementById("other").focus();
+</script>
+</body>
+</html>

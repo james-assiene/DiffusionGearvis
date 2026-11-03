@@ -1,0 +1,32 @@
+{
+ "text": "one, two, three, four, five.",
+ "sample_rate": 24000,
+ "duration_ms": 4040,
+ "words": [
+  {
+   "text": "one,",
+   "start_ms": 50,
+   "end_ms": 570
+  },
+  {
+   "text": "two,",
+   "start_ms": 880,
+   "end_ms": 1330
+  },
+  {
+   "text": "three,",
+   "start_ms": 1780,
+   "end_ms": 2170
+  },
+  {
+   "text": "four,",
+   "start_ms": 2510,
+   "end_ms": 2980
+  },
+  {
+   "text": "five.",
+   "start_ms": 3310,
+   "end_ms": 3790
+  }
+ ]
+}

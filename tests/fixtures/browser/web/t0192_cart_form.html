@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Cart (form)</title>
+<style>body{margin:0;font:20px sans-serif}input{display:block;margin:12px 40px;padding:14px;width:420px;font:20px sans-serif}</style></head>
+<body>
+<!-- T-0192 A (review R-A): a cart whose "proceed" is a form POST to /gp/cart/submit, which 302s to /checkout/entry,
+     which 302s to /signin.html: the checkout is only the middle hop (Amazon's cart -> /checkout/entry -> /ap/signin). -->
+<h1>Cart</h1>
+<form id="cart" method="post" action="/gp/cart/submit">
+<input id="qty" name="quantity" type="text" value="" placeholder="Quantity">
+</form>
+</body>
+</html>

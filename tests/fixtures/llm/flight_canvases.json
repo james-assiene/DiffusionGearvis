@@ -1,0 +1,102 @@
+{
+ "note": "Turn t6 of the human's desk session of 2026-09-16 18:19-18:21 local, reconstructed from logs/sessions/20260916-181929-3900425.jsonl records seq 2151 / 2178 / 2179 / 2221 (llm.commit), 2181 (ui.gate) and 2223 / 2228 (tts.utterance). RECONSTRUCTION RULE: the log stores *post-split* pieces, not the raw SSE deltas, so the raw content delta of canvas 1 is UI_OPEN ('<a2ui>') + the 409-character ui piece, and the raw content delta of canvas 2 is the 902-character answer piece verbatim (_strip_markup removed nothing from it: the text contains neither '<a2ui>' nor '</a2ui>'). Reasoning deltas are the thought pieces. The model never wrote a closing fence; 'json_tail_canvas2' / 'prose_tail_canvas2' are the hand-measured split of canvas 2 at the structural end of the JSON (bracket depth back to zero outside a string, trailing run of closers consumed, remainder not resuming with '{'), which is character 750 of canvas 2 and character 1159 of the fenced body. 'tts_utterance_*' is what Pocket TTS actually said: the negative oracle for the voice guard (T-0052 criterion 8) - no test may ever allow that string to be spoken.",
+ "provenance": {
+  "session_log": "logs/sessions/20260916-181929-3900425.jsonl",
+  "records": [
+   2151,
+   2178,
+   2179,
+   2181,
+   2221,
+   2223,
+   2228
+  ],
+  "session_id": "970ae08ab809",
+  "turn_id": "t6",
+  "request_id": "t6-gen",
+  "git_commit": "40957df",
+  "recorded_at": "2026-09-16T18:19:29+01:00",
+  "request": "a flight booking interface (voice input)",
+  "licence": "Apache-2.0 (this repo); the model output is the user's own session"
+ },
+ "regime": {
+  "profile": "lean",
+  "canvas_length": 256,
+  "max_denoising_steps": 48,
+  "thinking": true,
+  "vllm_container": "vllm/vllm-openai:v0.29.0",
+  "model": "nvidia/diffusiongemma-26B-A4B-it-NVFP4",
+  "stt": "kyutai/stt-1b-en_fr",
+  "tts": "pocket-tts@3.1.0",
+  "audio_path": "speakers",
+  "assists": "pixels only (all four flags false)",
+  "seed": null,
+  "input": "voice",
+  "n": 1
+ },
+ "canvases": [
+  {
+   "canvas_idx": 0,
+   "reasoning": "The user wants me to create a UI for a flight booking website.\nI need to use the A2UI tool to build this.\nA flight booking website UI typically includes:\n- Departure and destination fields.\n- Date pickers\n- Passenger count.\n- Search button.\n- Maybe a list of flight results.\n\nI will design a simple version:\n- A root column.\n- A header text \"Flight Booking\".\n- A row for Departure and Destination.\n- A row for Dates (Departure and Return).\n- A \"Search\" button.\n- A list of sample flight results.\n\nLet's break down the components:\n- `root` (Column)\n- `header` (Text, \"Find Flights\", variant h3)\n- `row1` (Row for Source/Dest)\n  - `src` (TextField, placeholder \"From: London\")\n  - `dest` (TextField, placeholder \"To: Paris\")\n- `row2` (Row for Dates)\n  - `date1` (DateTimeInput)\n  - `date2` (DateTimeInput)\n- `row3` (Row for Passengers and Search)\n  -",
+   "content": null
+  },
+  {
+   "canvas_idx": 1,
+   "reasoning": " `passengers` (ChoicePicker, \"1 Adult\")\n  - `searchBtn` (Button, \"Search\")\n- `divider`\n- `results` (List)\n  - `item1` (Card with \"LHR to CDG - £120\")\n  - `item2` (Card with \"LHR to CDG - £95\")\n\nWait, the components available are: Text, Column, Row, List, Card, Divider, Icon, Tabs, Modal, Button, CheckBox, ChoicePicker, TextField, Slider, DateTimeInput.\n\nI will refine the JSON.",
+   "content": "<a2ui>\n{\"version\":\"v0.9.1\",\"createSurface\":{\"surfaceId\":\"s\",\"catalogId\":\"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json\"}}\n{\"version\":\"v0.9.1\",\"updateComponents\":{\"surfaceId\":\"s\",\"components\":[{\"id\":\"root\",\"component\":\"Column\",\"children\":[\"header\",\"row1\",\"row2\",\"row3\",\"divider\",\"results\"]},{\"id\":\"header\",\"component\":\"Text\",\"text\":\"Book Your Flight\",\"variant\":\"h3\"},{\"id\":\"row1\",\"component\":\"Row"
+  },
+  {
+   "canvas_idx": 2,
+   "reasoning": null,
+   "content": "\",\"children\":[\"src\",\"dest\"]},{\"id\":\"src\",\"component\":\"TextField\",\"placeholder\":\"From\"},{\"id\":\"dest\",\"component\":\"TextField\",\"placeholder\":\"To\"},{\"id\":\"row2\",\"component\":\"Row\",\"children\":[\"date1\",\"date2\"]},{\"id\":\"date1\",\"component\":\"DateTimeInput\"},{\"id\":\"date2\",\"component\":\"DateTimeInput\"},{\"id\":\"row3\",\"component\":\"Row\",\"children\":[\"passengers\",\"search\"]},{\"id\":\"passengers\",\"component\":\"ChoicePicker\",\"label\":\"1 Passenger\"},{\"id\":\"search\",\"component\":\"Button\",\"text\":\"Search\"},{\"id\":\"divider\",\"component\":\"Divider\"},{\"id\":\"results\",\"component\":\"List\",\"children\":[\"f1\",\"f2\"]},{\"id\":\"f1\",\"component\":\"Card\",\"children\":[{\"Text\",\"text\":\"London to Paris - £120\"]},{\"id\":\"f2\",\"component\":\"Card\",\"children\":[{\"Text\",\"text\":\"London to Paris - £95\"}]}]}}}}\n\n\nI've designed a simple flight booking interface for you. You can select your departure and destination, pick dates, and search for available flights."
+  }
+ ],
+ "recorded": {
+  "canvas_chars": [
+   848,
+   788,
+   902
+  ],
+  "closing_fence_emitted": false,
+  "ui_piece_canvas1": "\n{\"version\":\"v0.9.1\",\"createSurface\":{\"surfaceId\":\"s\",\"catalogId\":\"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json\"}}\n{\"version\":\"v0.9.1\",\"updateComponents\":{\"surfaceId\":\"s\",\"components\":[{\"id\":\"root\",\"component\":\"Column\",\"children\":[\"header\",\"row1\",\"row2\",\"row3\",\"divider\",\"results\"]},{\"id\":\"header\",\"component\":\"Text\",\"text\":\"Book Your Flight\",\"variant\":\"h3\"},{\"id\":\"row1\",\"component\":\"Row",
+  "answer_piece_canvas2": "\",\"children\":[\"src\",\"dest\"]},{\"id\":\"src\",\"component\":\"TextField\",\"placeholder\":\"From\"},{\"id\":\"dest\",\"component\":\"TextField\",\"placeholder\":\"To\"},{\"id\":\"row2\",\"component\":\"Row\",\"children\":[\"date1\",\"date2\"]},{\"id\":\"date1\",\"component\":\"DateTimeInput\"},{\"id\":\"date2\",\"component\":\"DateTimeInput\"},{\"id\":\"row3\",\"component\":\"Row\",\"children\":[\"passengers\",\"search\"]},{\"id\":\"passengers\",\"component\":\"ChoicePicker\",\"label\":\"1 Passenger\"},{\"id\":\"search\",\"component\":\"Button\",\"text\":\"Search\"},{\"id\":\"divider\",\"component\":\"Divider\"},{\"id\":\"results\",\"component\":\"List\",\"children\":[\"f1\",\"f2\"]},{\"id\":\"f1\",\"component\":\"Card\",\"children\":[{\"Text\",\"text\":\"London to Paris - £120\"]},{\"id\":\"f2\",\"component\":\"Card\",\"children\":[{\"Text\",\"text\":\"London to Paris - £95\"}]}]}}}}\n\n\nI've designed a simple flight booking interface for you. You can select your departure and destination, pick dates, and search for available flights.",
+  "json_tail_canvas2": "\",\"children\":[\"src\",\"dest\"]},{\"id\":\"src\",\"component\":\"TextField\",\"placeholder\":\"From\"},{\"id\":\"dest\",\"component\":\"TextField\",\"placeholder\":\"To\"},{\"id\":\"row2\",\"component\":\"Row\",\"children\":[\"date1\",\"date2\"]},{\"id\":\"date1\",\"component\":\"DateTimeInput\"},{\"id\":\"date2\",\"component\":\"DateTimeInput\"},{\"id\":\"row3\",\"component\":\"Row\",\"children\":[\"passengers\",\"search\"]},{\"id\":\"passengers\",\"component\":\"ChoicePicker\",\"label\":\"1 Passenger\"},{\"id\":\"search\",\"component\":\"Button\",\"text\":\"Search\"},{\"id\":\"divider\",\"component\":\"Divider\"},{\"id\":\"results\",\"component\":\"List\",\"children\":[\"f1\",\"f2\"]},{\"id\":\"f1\",\"component\":\"Card\",\"children\":[{\"Text\",\"text\":\"London to Paris - £120\"]},{\"id\":\"f2\",\"component\":\"Card\",\"children\":[{\"Text\",\"text\":\"London to Paris - £95\"}]}]}}}}",
+  "prose_tail_canvas2": "\n\n\nI've designed a simple flight booking interface for you. You can select your departure and destination, pick dates, and search for available flights.",
+  "fenced_body_chars": 1159,
+  "ui_gate_canvas1": {
+   "repairs": 4,
+   "resamples": 1,
+   "surface_emitted": true,
+   "raw_len": 409,
+   "ok": true
+  },
+  "tts_utterance_text": "\",\"children\":[\"src\",\"dest\"]},{\"id\":\"src\",\"component\":\"TextField\",\"placeholder\":\"From\"},{\"id\":\"dest\",\"component\":\"TextField\",\"placeholder\":\"To\"},{\"id\":\"row2\",\"component\":\"Row\",\"children\":[\"date1\",\"date2\"]},{\"id\":\"date1\",\"component\":\"DateTimeInput\"},{\"id\":\"date2\",\"component\":\"DateTimeInput\"},{\"id\":\"row3\",\"component\":\"Row\",\"children\":[\"passengers\",\"search\"]},{\"id\":\"passengers\",\"component\":\"ChoicePicker\",\"label\":\"1 Passenger\"},{\"id\":\"search\",\"component\":\"Button\",\"text\":\"Search\"},{\"id\":\"divider\",\"component\":\"Divider\"},{\"id\":\"results\",\"component\":\"List\",\"children\":[\"f1\",\"f2\"]},{\"id\":\"f1\",\"component\":\"Card\",\"children\":[{\"Text\",\"text\":\"London to Paris - £120\"]},{\"id\":\"f2\",\"component\":\"Card\",\"children\":[{\"Text\",\"text\":\"London to Paris - £95\"}]}]}}}} I've designed a simple flight booking interface for you.",
+  "tts_utterance_source": "\",\"children\":[\"src\",\"dest\"]},{\"id\":\"src\",\"component\":\"TextField\",\"placeholder\":\"From\"},{\"id\":\"dest\",\"component\":\"TextField\",\"placeholder\":\"To\"},{\"id\":\"row2\",\"component\":\"Row\",\"children\":[\"date1\",\"date2\"]},{\"id\":\"date1\",\"component\":\"DateTimeInput\"},{\"id\":\"date2\",\"component\":\"DateTimeInput\"},{\"id\":\"row3\",\"component\":\"Row\",\"children\":[\"passengers\",\"search\"]},{\"id\":\"passengers\",\"component\":\"ChoicePicker\",\"label\":\"1 Passenger\"},{\"id\":\"search\",\"component\":\"Button\",\"text\":\"Search\"},{\"id\":\"divider\",\"component\":\"Divider\"},{\"id\":\"results\",\"component\":\"List\",\"children\":[\"f1\",\"f2\"]},{\"id\":\"f1\",\"component\":\"Card\",\"children\":[{\"Text\",\"text\":\"London to Paris - £120\"]},{\"id\":\"f2\",\"component\":\"Card\",\"children\":[{\"Text\",\"text\":\"London to Paris - £95\"}]}]}}}}\n\n\nI've designed a simple flight booking interface for you. ",
+  "tts_second_utterance_text": "You can select your departure and destination, pick dates, and search for available flights.",
+  "rendered_only_after_reassembly": [
+   "row1",
+   "row2",
+   "row3",
+   "divider",
+   "results"
+  ],
+  "rendered_from_canvas_1_alone": [
+   "root",
+   "header"
+  ],
+  "leaf_inputs_the_schema_rejects": [
+   "date1",
+   "date2",
+   "passengers",
+   "search"
+  ],
+  "gate_note": "The five ids in 'rendered_only_after_reassembly' are the components the real UiGate renders from the reassembled 1159-character body and does NOT render from canvas 1 alone: canvas 1 alone emits exactly root and header (repairs 4, resample ('row1',)), the reassembled body emits root, header, row1, row2, row3, divider, results (repairs 22, resample ('src', 'dest', 'date1')). Two components to seven is the measured win. The four ids in 'leaf_inputs_the_schema_rejects' never render in either run: they are leaf inputs written without the properties the A2UI v0.9.1 catalog requires - date1 is literally {\"id\":\"date1\",\"component\":\"DateTimeInput\"} with no properties at all - so the cause is a MISSING REQUIRED property, not a rejected one, and they leave through the resample path rather than the render path. That is a prompt / T-0010 matter, not something T-0052 may fix: the task forbids touching ui_gate.py. Recorded separately as T-0052 ruling A7: six leaf components fail the schema and UiGate.max_resamples is 3, so the gate asked for three and silently did not ask for the other three.",
+  "ui_gate_reassembled": {
+   "repairs": 22,
+   "resamples": 3,
+   "surface_emitted": true,
+   "raw_len": 1159,
+   "ok": true
+  }
+ }
+}

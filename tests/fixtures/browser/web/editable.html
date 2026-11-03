@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Editable</title>
+<style>body{margin:0;font:24px sans-serif}div{position:absolute;left:100px;width:600px;height:60px;border:1px solid #333}
+#ed{top:100px}#tab{top:300px}</style></head>
+<body>
+<!-- a contenteditable div (a rich-text editor: typing goes ahead) and a plain focusable div[tabindex] (no field:
+     in web mode "could not be checked", FOCUS_UNKNOWN). No secret hints on either. -->
+<div id="ed" contenteditable="true"></div>
+<div id="tab" tabindex="0"></div>
+<script>window.__tabKeys = 0; document.getElementById("tab").addEventListener("keydown", () => { window.__tabKeys++; });</script>
+</body>
+</html>

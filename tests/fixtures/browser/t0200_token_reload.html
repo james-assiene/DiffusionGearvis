@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0200 token reload</title>
+<style>
+  html, body { margin: 0; overflow: hidden; background: #fff; }
+  #block { position: absolute; left: 340px; top: 250px; width: 600px; height: 300px; background: rgb(0, 150, 60);
+           color: #fff; font: 32px sans-serif; display: block; text-decoration: none; }
+</style>
+</head>
+<body>
+<script>
+  // WAF-shaped (the AWS WAF token reload seen on amazon.com, T-0200 Goal): with ?start=1 the page is a link to
+  // itself (the row's click target); without a token in sessionStorage the document stays white, stores one and
+  // reloads after 800 ms; with the token it paints at once.
+  const KEY = "t0200-token";
+  function paint(href) {
+    const a = document.createElement("a");
+    a.id = "block";
+    a.href = href;
+    a.textContent = href ? "go" : "painted";
+    document.body.appendChild(a);
+  }
+  if (new URLSearchParams(location.search).get("start") === "1") {
+    paint("t0200_token_reload.html");
+  } else if (sessionStorage.getItem(KEY) === null) {
+    sessionStorage.setItem(KEY, "1");
+    setTimeout(() => location.reload(), 800);
+  } else {
+    paint("");
+  }
+</script>
+</body>
+</html>

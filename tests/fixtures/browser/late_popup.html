@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0111c late popup</title>
+<style>
+  html, body { margin: 0; overflow: hidden; }
+  #late { position: fixed; inset: 0; background: rgb(255, 0, 0); }
+</style>
+<script src="recorder.js"></script>
+</head>
+<body>
+<div id="late"></div>
+<script>
+  // A click opens popup.html?n=2 (blue) 300 ms later, after the executor's settle has returned
+  // (T-0111c ruling a918d74: a popup opened after the action settles is adopted before the next frame()).
+  document.getElementById("late").addEventListener("click", () => {
+    setTimeout(() => { window.__opened = !!window.open("popup.html?n=2", "_blank"); }, 300);
+  });
+</script>
+</body>
+</html>

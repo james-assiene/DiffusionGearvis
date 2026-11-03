@@ -1,0 +1,273 @@
+[
+    {
+        "Id": "b99f2d368854237c899f1e6565b037919eb04b2f883a88e0f6d612186350d149",
+        "Created": "2026-09-13T16:07:07.134379416Z",
+        "Path": "bash",
+        "Args": [
+            "-c",
+            "pip install --no-deps --no-index -q /plugin/dist/astra_vllm_plugin-0.0.1-py3-none-any.whl && exec vllm serve nvidia/diffusiongemma-26B-A4B-it-NVFP4     --host 127.0.0.1 --port 8001     --max-model-len 16384 --max-num-seqs 3 --max-num-batched-tokens 4096     --kv-cache-memory-bytes 4294967296 --kv-cache-dtype bfloat16 --enable-prefix-caching     --attention-backend TRITON_ATTN     --diffusion-config '{\"canvas_length\": 256, \"max_denoising_steps\": 48}'     --override-generation-config '{\"max_new_tokens\": null}'     --reasoning-parser gemma4 --enable-auto-tool-choice --tool-call-parser gemma4     --limit-mm-per-prompt '{\"image\": 4, \"video\": 1}'     --hf-overrides '{\"architectures\": [\"AstraDiffusionGemma\"]}'"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 53406,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-09-13T16:07:07.210475181Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:c2914767605584b6d8f45686b82de173ecc99e781897aa3d0a66dacd72c51ae1",
+        "ResolvConfPath": "/var/lib/docker/containers/b99f2d368854237c899f1e6565b037919eb04b2f883a88e0f6d612186350d149/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/b99f2d368854237c899f1e6565b037919eb04b2f883a88e0f6d612186350d149/hostname",
+        "HostsPath": "/var/lib/docker/containers/b99f2d368854237c899f1e6565b037919eb04b2f883a88e0f6d612186350d149/hosts",
+        "LogPath": "/var/lib/docker/containers/b99f2d368854237c899f1e6565b037919eb04b2f883a88e0f6d612186350d149/b99f2d368854237c899f1e6565b037919eb04b2f883a88e0f6d612186350d149-json.log",
+        "Name": "/infallible_kepler",
+        "RestartCount": 0,
+        "Driver": "overlayfs",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "docker-default",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": [
+                "/home/user/.cache/huggingface:/root/.cache/huggingface",
+                "/home/user/demos/local_astra/plugin/astra_vllm_plugin:/plugin:ro",
+                "/home/user/demos/local_astra/services/generation:/config/generation:ro"
+            ],
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "host",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": true,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "private",
+            "Dns": null,
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "host",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": [
+                "label=disable"
+            ],
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": [
+                {
+                    "Driver": "",
+                    "Count": -1,
+                    "DeviceIDs": null,
+                    "Capabilities": [
+                        [
+                            "gpu"
+                        ]
+                    ],
+                    "Options": {}
+                }
+            ],
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": null,
+            "Ulimits": [],
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/acpi",
+                "/proc/asound",
+                "/proc/interrupts",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/sys/devices/virtual/powercap",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "Storage": {
+            "RootFS": {
+                "Snapshot": {
+                    "Name": "overlayfs"
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/home/user/.cache/huggingface",
+                "Destination": "/root/.cache/huggingface",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/home/user/demos/local_astra/plugin/astra_vllm_plugin",
+                "Destination": "/plugin",
+                "Mode": "ro",
+                "RW": false,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/home/user/demos/local_astra/services/generation",
+                "Destination": "/config/generation",
+                "Mode": "ro",
+                "RW": false,
+                "Propagation": "rprivate"
+            }
+        ],
+        "Config": {
+            "Hostname": "gpu-box",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "HF_HUB_OFFLINE=1",
+                "ASTRA_TAP_ENDPOINT=tcp://127.0.0.1:8002",
+                "PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "NVARCH=x86_64",
+                "NVIDIA_REQUIRE_CUDA=cuda>=13.0 brand=unknown,driver>=535,driver<536 brand=grid,driver>=535,driver<536 brand=tesla,driver>=535,driver<536 brand=nvidia,driver>=535,driver<536 brand=quadro,driver>=535,driver<536 brand=quadrortx,driver>=535,driver<536 brand=nvidiartx,driver>=535,driver<536 brand=vapps,driver>=535,driver<536 brand=vpc,driver>=535,driver<536 brand=vcs,driver>=535,driver<536 brand=vws,driver>=535,driver<536 brand=cloudgaming,driver>=535,driver<536 brand=unknown,driver>=550,driver<551 brand=grid,driver>=550,driver<551 brand=tesla,driver>=550,driver<551 brand=nvidia,driver>=550,driver<551 brand=quadro,driver>=550,driver<551 brand=quadrortx,driver>=550,driver<551 brand=nvidiartx,driver>=550,driver<551 brand=vapps,driver>=550,driver<551 brand=vpc,driver>=550,driver<551 brand=vcs,driver>=550,driver<551 brand=vws,driver>=550,driver<551 brand=cloudgaming,driver>=550,driver<551 brand=unknown,driver>=565,driver<566 brand=grid,driver>=565,driver<566 brand=tesla,driver>=565,driver<566 brand=nvidia,driver>=565,driver<566 brand=quadro,driver>=565,driver<566 brand=quadrortx,driver>=565,driver<566 brand=nvidiartx,driver>=565,driver<566 brand=vapps,driver>=565,driver<566 brand=vpc,driver>=565,driver<566 brand=vcs,driver>=565,driver<566 brand=vws,driver>=565,driver<566 brand=cloudgaming,driver>=565,driver<566 brand=unknown,driver>=570,driver<571 brand=grid,driver>=570,driver<571 brand=tesla,driver>=570,driver<571 brand=nvidia,driver>=570,driver<571 brand=quadro,driver>=570,driver<571 brand=quadrortx,driver>=570,driver<571 brand=nvidiartx,driver>=570,driver<571 brand=vapps,driver>=570,driver<571 brand=vpc,driver>=570,driver<571 brand=vcs,driver>=570,driver<571 brand=vws,driver>=570,driver<571 brand=cloudgaming,driver>=570,driver<571 brand=unknown,driver>=575,driver<576 brand=grid,driver>=575,driver<576 brand=tesla,driver>=575,driver<576 brand=nvidia,driver>=575,driver<576 brand=quadro,driver>=575,driver<576 brand=quadrortx,driver>=575,driver<576 brand=nvidiartx,driver>=575,driver<576 brand=vapps,driver>=575,driver<576 brand=vpc,driver>=575,driver<576 brand=vcs,driver>=575,driver<576 brand=vws,driver>=575,driver<576 brand=cloudgaming,driver>=575,driver<576",
+                "NV_CUDA_CUDART_VERSION=13.0.96-1",
+                "CUDA_VERSION=13.0.2",
+                "LD_LIBRARY_PATH=/usr/local/nvidia/lib64:/usr/local/cuda/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/lib64",
+                "NVIDIA_VISIBLE_DEVICES=all",
+                "NVIDIA_DRIVER_CAPABILITIES=compute,utility",
+                "DEBIAN_FRONTEND=noninteractive",
+                "UV_HTTP_TIMEOUT=500",
+                "UV_INDEX_STRATEGY=unsafe-best-match",
+                "UV_LINK_MODE=copy",
+                "UV_PYTHON_INSTALL_DIR=/opt/uv/python",
+                "UV_CACHE_DIR=/opt/uv/cache",
+                "UV_OVERRIDE=/etc/uv-overrides.txt",
+                "VLLM_ENABLE_CUDA_COMPATIBILITY=0",
+                "TORCH_CUDA_ARCH_LIST=7.5 8.0 8.6 8.9 9.0 10.0 12.0",
+                "VLLM_USAGE_SOURCE=production-docker-image",
+                "VLLM_BUILD_COMMIT=98dff2a81d747d1dba01a47f939f48c3526d4206",
+                "VLLM_BUILD_PIPELINE=019d130e-464e-4ff7-b84b-492992c0c06b",
+                "VLLM_BUILD_URL=https://buildkite.com/vllm/release-v2/builds/6292",
+                "VLLM_IMAGE_TAG=vllm/vllm-openai:v0.29.0"
+            ],
+            "Cmd": [
+                "-c",
+                "pip install --no-deps --no-index -q /plugin/dist/astra_vllm_plugin-0.0.1-py3-none-any.whl && exec vllm serve nvidia/diffusiongemma-26B-A4B-it-NVFP4     --host 127.0.0.1 --port 8001     --max-model-len 16384 --max-num-seqs 3 --max-num-batched-tokens 4096     --kv-cache-memory-bytes 4294967296 --kv-cache-dtype bfloat16 --enable-prefix-caching     --attention-backend TRITON_ATTN     --diffusion-config '{\"canvas_length\": 256, \"max_denoising_steps\": 48}'     --override-generation-config '{\"max_new_tokens\": null}'     --reasoning-parser gemma4 --enable-auto-tool-choice --tool-call-parser gemma4     --limit-mm-per-prompt '{\"image\": 4, \"video\": 1}'     --hf-overrides '{\"architectures\": [\"AstraDiffusionGemma\"]}'"
+            ],
+            "Image": "vllm/vllm-openai:v0.29.0",
+            "Volumes": null,
+            "WorkingDir": "/vllm-workspace",
+            "Entrypoint": [
+                "bash"
+            ],
+            "Labels": {
+                "ai.vllm.build.commit": "98dff2a81d747d1dba01a47f939f48c3526d4206",
+                "ai.vllm.build.pipeline": "019d130e-464e-4ff7-b84b-492992c0c06b",
+                "ai.vllm.build.url": "https://buildkite.com/vllm/release-v2/builds/6292",
+                "ai.vllm.image.tag": "vllm/vllm-openai:v0.29.0",
+                "maintainer": "NVIDIA CORPORATION <cudatools@nvidia.com>",
+                "org.opencontainers.image.ref.name": "ubuntu",
+                "org.opencontainers.image.revision": "98dff2a81d747d1dba01a47f939f48c3526d4206",
+                "org.opencontainers.image.source": "https://github.com/vllm-project/vllm",
+                "org.opencontainers.image.url": "https://buildkite.com/vllm/release-v2/builds/6292",
+                "org.opencontainers.image.version": "vllm/vllm-openai:v0.29.0"
+            }
+        },
+        "NetworkSettings": {
+            "SandboxID": "d0bd7f2fb2ece3cdc970857c0d03c83e66c73bfd4cf5f13ec5c03cf9892d51eb",
+            "SandboxKey": "/var/run/docker/netns/default",
+            "Ports": {},
+            "Networks": {
+                "host": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "5303d3bdd2d069297068a3cdceeb7a96af6f14c1e9140dd1f8adc9c9e678b735",
+                    "EndpointID": "c88936bfb36cadac2bc5ee0da700c028a02a280877434566a71fb27245bb02c9",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+            "digest": "sha256:082ca6f035279109041ffd3fe0695cb568b29bc580b35c4f297a66a08b216c1b",
+            "size": 8058,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        }
+    }
+]

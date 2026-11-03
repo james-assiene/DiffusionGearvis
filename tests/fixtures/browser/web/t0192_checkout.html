@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Checkout</title>
+<style>body{margin:0;font:24px sans-serif}button,input{display:block;margin:40px;padding:20px;width:400px;font:24px sans-serif}</style></head>
+<body>
+<!-- T-0192 A: the checkout page (served under /checkout/<token>/pay). #place and #note count every input they get. -->
+<h1>Checkout</h1>
+<button id="place" onclick="window.__clicks=(window.__clicks||0)+1">Place your order</button>
+<label for="note">Delivery note</label><input id="note" type="text" oninput="window.__inputs=(window.__inputs||0)+1">
+<div style="height:3000px"></div>
+<script>window.__clicks = 0; window.__inputs = 0;</script>
+</body>
+</html>

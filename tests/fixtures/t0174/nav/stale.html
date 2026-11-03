@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0174 B1 stale navigation</title>
+<style>
+  html, body { margin: 0; overflow: hidden; background: rgb(200, 0, 0); }
+</style>
+</head>
+<body>
+<script>
+  // navigates by itself 300 ms after load, with no input: a commit that lands between two actions, before the
+  // next action's dispatch begins (B1-1: it must not count for that action)
+  setTimeout(() => { location.replace("target.html?from=stale"); }, 300);
+</script>
+</body>
+</html>

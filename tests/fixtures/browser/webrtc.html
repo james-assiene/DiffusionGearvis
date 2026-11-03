@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0111c WebRTC</title>
+<style>html, body { margin: 0; background: #fff; }</style>
+<script src="recorder.js"></script>
+</head>
+<body>
+<iframe id="same" src="grid.html" style="width:200px;height:100px;border:0"></iframe>
+<script>
+  // The WebRTC constructors the agent browser must not have (T-0111c ruling a918d74), in this frame, in a
+  // same-origin child that loaded a page, and in a fresh about:blank child created by script.
+  const NAMES = ["RTCPeerConnection", "webkitRTCPeerConnection", "RTCDataChannel", "RTCSessionDescription"];
+  window.__rtcTypes = () => {
+    const blank = document.createElement("iframe");
+    document.body.appendChild(blank);
+    const out = {};
+    for (const [where, w] of [["top", window], ["child", document.getElementById("same").contentWindow],
+                              ["blank", blank.contentWindow]]) {
+      out[where] = Object.fromEntries(NAMES.map((n) => [n, typeof w[n]]));
+    }
+    return out;
+  };
+  // STUN and TURN (UDP) to the given URLs; each attempt reports "made" or the exception name. Uses the
+  // constructor from a fresh about:blank child when the top frame has none, so a top-only removal fails.
+  window.__rtcAttempt = async (stun, turn) => {
+    const out = [];
+    for (const cfg of [{ urls: stun }, { urls: turn, username: "u", credential: "p" }]) {
+      try {
+        let PC = window.RTCPeerConnection;
+        if (typeof PC !== "function") {
+          const f = document.createElement("iframe");
+          document.body.appendChild(f);
+          PC = f.contentWindow.RTCPeerConnection;
+        }
+        const pc = new PC({ iceServers: [cfg] });
+        pc.createDataChannel("x");
+        await pc.setLocalDescription(await pc.createOffer());
+        (window.__pcs = window.__pcs || []).push(pc);
+        out.push("made");
+      } catch (e) {
+        out.push("threw " + (e && e.name));
+      }
+    }
+    return out;
+  };
+</script>
+</body>
+</html>

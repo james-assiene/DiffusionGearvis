@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Checkout</title>
+<style>body{margin:0;font:24px sans-serif}#cc{position:absolute;left:100px;top:100px;width:600px;height:60px;font:24px sans-serif}
+#payframe{position:absolute;left:100px;top:300px;width:700px;height:200px;border:2px solid #333}</style></head>
+<body>
+<!-- autocomplete=cc-number only: no name, id or label hints, so only A-4's autocomplete rule classifies it -->
+<input id="cc" type="text" autocomplete="cc-number">
+<!-- a cross-origin (pay.example) card field: the guard must walk into an out-of-process frame -->
+<iframe id="payframe" src="https://pay.example/card_iframe.html" title="payment"></iframe>
+</body>
+</html>

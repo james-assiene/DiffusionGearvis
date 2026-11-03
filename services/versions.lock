@@ -1,0 +1,46 @@
+# services/versions.lock — pinned versions of everything outside uv.lock.
+# Changing a line is its own task with a bench run (CLAUDE.md). Hooks deny edits by agents.
+# Format: key = "value"   # provenance / date verified
+
+[gpu]
+driver_min = "580"                       # cu130 container requirement; verified 2026-09-12
+cuda = "13.0"
+vllm_container = "vllm/vllm-openai:v0.29.0"   # first release with DiffusionGemma; cu130 build
+vllm_attention_backend = "TRITON_ATTN"   # mandatory on sm_120 (RTX 5090)
+model = "nvidia/diffusiongemma-26B-A4B-it-NVFP4"
+model_revision = "2ea837236295d617ac27f8c17d61228081932c40"   # pinned from the 2026-09-13 boot (X3)
+model_fallback = "google/diffusiongemma-26B-A4B-it"   # bf16 reference for parity checks only (does not fit with speech)
+chat_template_revision = "sha256:36e3a42e5cf14cd0020e72d92e1fdd9970f59b82170e421f0cbe1bb42bead3f0"   # chat_template.jinja in the pinned model snapshot, 17466 bytes
+
+[diffusion]
+canvas_length = 256                      # engine-global (--diffusion-config)
+max_denoising_steps = 48
+max_num_seqs = 3
+kv_cache_memory_bytes = 4294967296       # bytes, not "4GiB": parser takes 4G/4g only. T-0048 ruling A13 restored this on 2026-09-16, reversing the 2684354560 of ruling A2: the shrink was to fit Kyutai STT on the GPU, and STT went to the GPU without needing it. This is what services/vllm.sh passes and what the engine runs with. No doctor row compares the two (T-0048 criterion 19 is unstarted), so nothing warns when they diverge.
+gpu_memory_utilization = 0.86   # T-0058: startup gate only; the window on this card with STT resident is 27434/32082 < v <= 27882/32082
+
+[speech]
+moshi_server = "0.6.4"                   # crate in kyutai-labs/moshi; /api/asr-streaming
+stt_model = "kyutai/stt-1b-en_fr"
+stt_batch_size = 2                       # 1–2 avoids the idle-spin bug (#390)
+pocket_tts = "3.1.0"                       # pin kyutai pocket-tts release on first install; weights CC-BY-4.0
+silero_vad = "v6"
+smart_turn = "v3.2"
+
+[talker]
+llama_cpp = "TBD"                        # pin build tag when the talker profile is first exercised (X9)
+talker_model = "google/gemma-4-E2B-it"   # Q4 GGUF, ~3.5 GiB
+
+[ui]
+a2ui_spec = "v0.9.1"
+a2ui_lit = "0.11.0"                      # @a2ui/lit renderer
+a2ui_agent_sdk = "0.6.0"                 # source of the vendored schemas (local_astra/ui/schemas/a2ui_v0_9_1)
+json_repair = "0.63.4"                   # schema= and schema_repair_mode="salvage" verified 2026-09-12
+
+[plugin]
+astra_vllm_plugin = "0.0.1"
+tap_endpoint = "tcp://127.0.0.1:8002"
+
+[browser]
+playwright = "1.64.0"                    # uv.lock, optional extra "browser"; installed 2026-10-20
+chromium = "156.0.8078.4"                # Playwright-bundled Chrome for Testing (playwright chromium v1248, ~/.cache/ms-playwright/chromium-1248); never the system Chrome

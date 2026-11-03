@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0151 two screens</title>
+<style>
+  /* Exactly 1600 CSS px tall at any viewport (2.0 screens at 1280x800), in fixed px, no vh, no smooth scrolling. */
+  html { scroll-behavior: auto; margin: 0; padding: 0; }
+  body { margin: 0; padding: 0; height: 1600px; position: relative; font: 16px sans-serif;
+         background: repeating-linear-gradient(180deg, #fff 0 100px, #e4e4e4 100px 200px); }
+  /* ?wide=1: three viewports wide (a page wider than the screen: never an overview frame) */
+  body.wide { width: 3840px; }
+  button { position: absolute; left: 140px; width: 140px; height: 48px; margin: 0; padding: 0;
+           border: 2px solid #333; background: #fc6; font: 16px sans-serif; }
+  /* page y ranges (left 140..280 in x): top 150..198, decoy 420..468, mid 860..908, low 1500..1548 */
+  #top { top: 150px; }
+  #decoy { top: 420px; background: #f66; }
+  #mid { top: 860px; }
+  #low { top: 1500px; }
+</style>
+</head>
+<body>
+<button id="top" type="button">top</button>
+<button id="decoy" type="button">decoy</button>
+<button id="mid" type="button">mid</button>
+<button id="low" type="button">low</button>
+<script>
+  // Every button click is recorded by id, in order; the row reads window.__clicks (test-side only).
+  window.__clicks = [];
+  if (new URLSearchParams(location.search).get("wide") === "1") document.body.classList.add("wide");
+  for (const b of document.querySelectorAll("button")) {
+    b.addEventListener("click", () => window.__clicks.push(b.id));
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0111c egress</title>
+<style>
+  html, body { margin: 0; overflow: hidden; background: #fff; }
+  /* the whole viewport is one link; the test points it at the navigation target before clicking */
+  #nav { position: fixed; inset: 0; display: block; }
+</style>
+<script src="recorder.js"></script>
+</head>
+<body>
+<a id="nav" href="grid.html">navigate</a>
+<script>
+  // Every off-loopback URL carries a secret path and query: the executor's egress log must record
+  // {host, scheme} only, so neither string may appear in it.
+  const SECRET = "/t0111c-secret-path/x?token=t0111c-secret-query";
+  const TIMEOUT_MS = 3000;
+  const settle = (p) => Promise.race([
+    p.then((ok) => ({ ok }), (err) => ({ ok: false, error: String(err && err.name || err) })),
+    new Promise((r) => setTimeout(() => r({ ok: false, error: "timeout" }), TIMEOUT_MS)),
+  ]);
+
+  // img, fetch, sendBeacon, iframe, WebSocket against one authority ("host" or "host:port").
+  window.__attempt = async (authority) => {
+    const http = `http://${authority}${SECRET}`;
+    const ws = `ws://${authority}${SECRET}`;
+    const img = settle(new Promise((res, rej) => {
+      const i = new Image();
+      i.onload = () => res(true);
+      i.onerror = () => rej(new Error("img error"));
+      i.src = http;
+    }));
+    const fetched = settle(fetch(http, { mode: "no-cors", cache: "no-store" }).then(() => true));
+    let beacon;
+    try { beacon = { queued: navigator.sendBeacon(http, "t0111c") }; } catch (e) { beacon = { queued: false, error: String(e.name) }; }
+    const frame = settle(new Promise((res) => {
+      const f = document.createElement("iframe");
+      f.onload = () => {
+        // a cross-origin document that loaded is unreadable; a blocked load leaves an error page
+        let readable = null;
+        try { readable = f.contentDocument ? f.contentDocument.URL : null; } catch (e) { readable = "cross-origin"; }
+        res(readable === "cross-origin");
+      };
+      f.src = http;
+      document.body.appendChild(f);
+    }));
+    const sock = settle(new Promise((res, rej) => {
+      let s;
+      try { s = new WebSocket(ws); } catch (e) { rej(e); return; }
+      s.onopen = () => { s.close(); res(true); };
+      s.onerror = () => rej(new Error("ws error"));
+    }));
+    const [a, b, c, d] = await Promise.all([img, fetched, frame, sock]);
+    return { img: a, fetch: b, beacon, iframe: c, websocket: d };
+  };
+
+  // DNS-prefetch and preconnect hints for one authority.
+  window.__hints = (authority) => {
+    for (const rel of ["dns-prefetch", "preconnect"]) {
+      const l = document.createElement("link");
+      l.rel = rel;
+      l.href = `http://${authority}`;
+      document.head.appendChild(l);
+    }
+    return true;
+  };
+
+  // A service-worker registration (the worker itself would fetch `target` on install).
+  window.__registerSW = (target) => settle(
+    navigator.serviceWorker
+      ? navigator.serviceWorker.register(`sw.js?target=${encodeURIComponent(target)}`).then(() => true)
+      : Promise.reject(new Error("no navigator.serviceWorker")),
+  );
+
+  // Loopback controls: these must succeed.
+  window.__loopback = async () => {
+    const img = await settle(new Promise((res, rej) => {
+      const i = new Image();
+      i.onload = () => res(i.naturalWidth > 0);
+      i.onerror = () => rej(new Error("img error"));
+      i.src = "ok.svg";
+    }));
+    const fetched = await settle(fetch("ok.txt", { cache: "no-store" }).then((r) => r.text()).then((t) => t.trim() === "t0111c ok"));
+    return { img, fetch: fetched };
+  };
+</script>
+</body>
+</html>

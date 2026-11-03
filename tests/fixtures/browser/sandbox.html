@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0111c sandbox</title>
+<style>
+  html, body { margin: 0; overflow: hidden; background: #fff; font: 20px sans-serif; }
+  .box { position: absolute; width: 300px; height: 100px; box-sizing: border-box; display: block;
+         border: 2px solid #333; background: #eee; }
+  /* centres at 1280x800: dl (250,150), file (650,150), alert (250,350), confirm (650,350),
+     prompt (1050,350), leave (250,550) */
+  #dl { left: 100px; top: 100px; }
+  #file { left: 500px; top: 100px; }
+  #alert { left: 100px; top: 300px; }
+  #confirm { left: 500px; top: 300px; }
+  #prompt { left: 900px; top: 300px; }
+  #leave { left: 100px; top: 500px; }
+</style>
+<script src="recorder.js"></script>
+</head>
+<body>
+<a id="dl" class="box" href="t0111c-payload.txt" download="t0111c-payload.txt">download</a>
+<input id="file" class="box" type="file">
+<button id="alert" class="box" type="button">alert</button>
+<button id="confirm" class="box" type="button">confirm</button>
+<button id="prompt" class="box" type="button">prompt</button>
+<a id="leave" class="box" href="grid.html">leave</a>
+<script>
+  const out = (r) => window.__log.push(r);
+  document.getElementById("alert").addEventListener("click", () => {
+    alert("t0111c alert"); out({ type: "dialog-returned", kind: "alert" });
+  });
+  document.getElementById("confirm").addEventListener("click", () => {
+    out({ type: "dialog-returned", kind: "confirm", value: confirm("t0111c confirm") });
+  });
+  document.getElementById("prompt").addEventListener("click", () => {
+    out({ type: "dialog-returned", kind: "prompt", value: prompt("t0111c prompt", "default") });
+  });
+  document.getElementById("file").addEventListener("change", (e) => out({ type: "file-change", n: e.target.files.length }));
+  window.addEventListener("beforeunload", (e) => {
+    if (!window.__armBeforeUnload) return;
+    out({ type: "beforeunload-fired" });
+    e.preventDefault();
+    e.returnValue = "t0111c leave?";
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.hypothesis/
+artifacts/
+dist/
+*.egg-info/
+hud/dist/
+.claude/agent-memory/*/scratch/
+logs/
+.claude/worktrees/
+.claude/agent-memory/
+*.wav
+!tests/fixtures/audio/*.wav

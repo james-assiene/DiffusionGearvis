@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0202 slow results</title>
+<style>
+  html, body { margin: 0; overflow: hidden; background: #fff; font: 20px sans-serif; }
+  /* the search box: x 340..939, y 40..79 of the 1280x800 viewport (centre (640, 60)) */
+  #q { position: absolute; left: 340px; top: 40px; width: 600px; height: 40px; box-sizing: border-box;
+       border: 2px solid #888; font: 20px sans-serif; padding: 0 8px; }
+  /* painted at once on Enter: a dark header bar, y 100..159 */
+  #header { position: absolute; left: 0; top: 100px; width: 1280px; height: 60px; background: rgb(50, 50, 50);
+            color: #fff; display: none; }
+  /* painted 800 ms after Enter: the results block, x 140..1139, y 250..649 (centre (640, 450)) */
+  #results { position: absolute; left: 140px; top: 250px; width: 1000px; height: 400px; background: rgb(0, 90, 200);
+             color: #fff; display: none; }
+</style>
+</head>
+<body>
+<input id="q" type="search" autocomplete="off" aria-label="search">
+<div id="header">results for your search</div>
+<div id="results">result one, result two, result three</div>
+<script>
+  // Enter in the box: the header paints at once, the results block 800 ms later (a page still loading its results).
+  document.getElementById("q").addEventListener("keydown", (e) => {
+    if (e.key !== "Enter") return;
+    e.preventDefault();
+    document.getElementById("header").style.display = "block";
+    setTimeout(() => { document.getElementById("results").style.display = "block"; }, 800);
+  });
+</script>
+</body>
+</html>

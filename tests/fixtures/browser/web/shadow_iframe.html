@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Shadow iframe</title>
+<style>body{margin:0;font:24px sans-serif}#host{position:absolute;left:100px;top:100px;width:700px;height:200px;display:block}</style></head>
+<body>
+<!-- an iframe inside an OPEN shadow root, holding a password field: the walk goes host -> iframe -> frame -> input -->
+<div id="host"></div>
+<script>
+  const root = document.getElementById("host").attachShadow({ mode: "open" });
+  root.innerHTML = '<iframe id="sif" src="https://shop.example/pw_inner.html" title="inner" ' +
+    'style="width:700px;height:200px;border:2px solid #333"></iframe>';
+</script>
+</body>
+</html>

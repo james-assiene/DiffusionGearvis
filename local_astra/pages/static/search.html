@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search results</title>
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body data-page="search">
+  <header class="bar">
+    <a class="brand" href="/">Astra</a>
+  </header>
+  <main class="page">
+    <form class="search-row" action="/search.html" method="get" role="search">
+      <input type="search" name="q" id="q" aria-label="Search" autocomplete="off" spellcheck="false">
+      <button type="submit">Search</button>
+    </form>
+    <p class="lede" id="summary"></p>
+    <ul class="results" id="results"></ul>
+  </main>
+  <script>
+    (function () {
+      "use strict";
+      // The fixed local catalogue: every entry links to a demo page on this origin.
+      const CATALOGUE = [
+        { title: "Red mug", text: "Glazed stoneware mug, 350 ml, dishwasher safe. In the shop.", page: "/demo/shop.html" },
+        { title: "Blue mug", text: "Glazed stoneware mug, 350 ml, dishwasher safe. In the shop.", page: "/demo/shop.html" },
+        { title: "Green mug", text: "Glazed stoneware mug, 350 ml, dishwasher safe. In the shop.", page: "/demo/shop.html" },
+        { title: "Enamel mug on offer", text: "Camping enamel mug and seven more kitchen deals this week.", page: "/demo/deals.html" },
+        { title: "Kitchen deals", text: "Teapots, boards, bowls and towels at this week's prices.", page: "/demo/deals.html" },
+        { title: "Contact us", text: "Questions about an order? Send us a message.", page: "/demo/contact.html" }
+      ];
+
+      // Words are runs of letters and digits, lowercased; a trailing "s" is dropped from words longer than three
+      // letters on both sides, so "mugs" finds "mug". Query words shorter than two letters ("a") are ignored.
+      function stem(word) {
+        return word.length > 3 && word.endsWith("s") ? word.slice(0, -1) : word;
+      }
+      function words(text) {
+        return text.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean).map(stem);
+      }
+      const query = (new URLSearchParams(location.search).get("q") || "").trim();
+      // A term empty after stemming (a bare "s") matches nothing, and neither does any other term under two letters.
+      // Query-side stop words are ignored too (every shop entry says "In the shop."), so a query of stop words only
+      // lists nothing.
+      const STOP_WORDS = new Set(["the", "a", "an", "to", "and", "for", "of", "in", "on", "at", "me", "my", "find",
+                                  "show", "add", "search", "page", "please"]);
+      const terms = Array.from(new Set(words(query).filter(function (t) {
+        return t.length >= 2 && !STOP_WORDS.has(t);
+      })));
+      // An entry matches when any query word is one of its words. Each query word scores 2 when it is in the title
+      // and 1 when it is only in the description; results are ordered by total score, highest first, then by
+      // catalogue order: deterministic for a given query.
+      const matches = CATALOGUE.map(function (entry, index) {
+        const title = new Set(words(entry.title));
+        const text = new Set(words(entry.text));
+        let score = 0;
+        for (const t of terms) {
+          score += title.has(t) ? 2 : text.has(t) ? 1 : 0;
+        }
+        return { entry: entry, index: index, score: score };
+      }).filter(function (m) { return m.score > 0; }).sort(function (a, b) {
+        return b.score - a.score || a.index - b.index;
+      }).map(function (m) { return m.entry; });
+
+      document.getElementById("q").value = query;
+      const list = document.getElementById("results");
+      for (const entry of matches) {
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        link.setAttribute("href", entry.page);
+        const title = document.createElement("span");
+        title.className = "result-title";
+        title.textContent = entry.title;
+        const text = document.createElement("span");
+        text.className = "result-text";
+        text.textContent = entry.text;
+        link.append(title, text);
+        item.append(link);
+        list.append(item);
+      }
+      const summary = document.getElementById("summary");
+      if (query === "") {
+        summary.textContent = "Type something to search the catalogue.";
+      } else if (matches.length === 0) {
+        summary.textContent = "No results for “" + query + "”.";
+      } else {
+        summary.textContent = matches.length + (matches.length === 1 ? " result" : " results") + " for “" + query + "”";
+      }
+      window.__state = { page: "search", query: query, results: matches.map(function (e) { return e.title; }) };
+    })();
+  </script>
+</body>
+</html>

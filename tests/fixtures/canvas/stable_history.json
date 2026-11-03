@@ -1,0 +1,70 @@
+{
+  "_comment": "Hand-built accepted_canvas_history fixtures for T-0011 criterion 7. Provenance and the by-hand derivation of every expected value: tests/fixtures/canvas/MANIFEST.md. Do NOT regenerate these from the implementation.",
+  "cases": [
+    {
+      "name": "one_unstable_head_and_a_stale_tail",
+      "canvas_length": 12,
+      "stability_window": 4,
+      "history_len": 4,
+      "history": [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      ],
+      "expected_bits": [true, false, true, true, true, true, true, true, false, false, false, false],
+      "expected_hex": "bf00"
+    },
+    {
+      "name": "three_row_window",
+      "canvas_length": 8,
+      "stability_window": 3,
+      "history_len": 3,
+      "history": [
+        [5, 5, 5, 5, 5, 5, 5, 5],
+        [5, 9, 5, 5, 5, 5, 5, 5],
+        [5, 5, 5, 5, 9, 5, 5, 5]
+      ],
+      "expected_bits": [true, false, true, true, false, true, true, true],
+      "expected_hex": "b7"
+    },
+    {
+      "name": "fully_settled",
+      "canvas_length": 8,
+      "stability_window": 2,
+      "history_len": 2,
+      "history": [
+        [4, 4, 4, 4, 4, 4, 4, 4],
+        [4, 4, 4, 4, 4, 4, 4, 4]
+      ],
+      "expected_bits": [true, true, true, true, true, true, true, true],
+      "expected_hex": "ff"
+    },
+    {
+      "name": "four_positions_padded_to_a_byte",
+      "canvas_length": 4,
+      "stability_window": 2,
+      "history_len": 2,
+      "history": [
+        [1, 2, 3, 4],
+        [1, 0, 3, 0]
+      ],
+      "expected_bits": [true, false, true, false],
+      "expected_hex": "a0"
+    },
+    {
+      "name": "history_not_full_yet",
+      "canvas_length": 12,
+      "stability_window": 4,
+      "history_len": 3,
+      "history": [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      ],
+      "expected_bits": [false, false, false, false, false, false, false, false, false, false, false, false],
+      "expected_hex": "0000"
+    }
+  ]
+}

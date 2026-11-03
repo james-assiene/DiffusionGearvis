@@ -1,0 +1,88 @@
+DiffusionGearvis, Copyright 2026 James Assiene
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This repository ships, or refers to, the third-party items below. Each section names
+the files concerned, their licence and the in-repo provenance record the claim was
+checked against.
+
+------------------------------------------------------------------------------------
+1. diffgemma-fa (vendored code)
+------------------------------------------------------------------------------------
+
+Files:      local_astra/decoding/_vendor/dgfa_compile/
+            local_astra/eval/cd/_vendor/
+            tests/fixtures/cd/dgfa_preserved/ (preserved evaluation rows)
+Upstream:   diffgemma-fa (github james-assiene), commit
+            27c7d0d3cc9c9e338d2fe4f6a1e64d3da01c8c03
+Copyright:  Copyright James Assiene
+            [both PROVENANCE.md files, Licence line; ruling 2026-10-25 in docs/tasks/T-0157.md]
+Licence:    Apache-2.0 for this distribution (ruling 2026-10-25)
+Provenance: local_astra/decoding/_vendor/PROVENANCE.md,
+            local_astra/eval/cd/_vendor/PROVENANCE.md,
+            tests/fixtures/cd/dgfa_preserved/MANIFEST.md
+
+------------------------------------------------------------------------------------
+2. A2UI v0.9.1 schema assets
+------------------------------------------------------------------------------------
+
+Files:      local_astra/ui/schemas/a2ui_v0_9_1/{catalog,common_types,server_to_client}.json
+Upstream:   the a2ui-agent-sdk 0.6.0 wheel, a2ui/assets/0.9.1/
+Licence:    Apache-2.0
+Provenance: tests/fixtures/a2ui/MANIFEST.md (with the sha256 of each file at vendoring time)
+
+------------------------------------------------------------------------------------
+3. vLLM (verbatim excerpts, test oracles only)
+------------------------------------------------------------------------------------
+
+Files:      tests/cd/oracle/vllm_gemma4_args.py
+            tests/fixtures/vllm_v0_29_0/diffusion_gemma_step.py
+            tests/fixtures/vllm_v0_29_0/diffusion_sampler.py
+Upstream:   vLLM v0.29.0, read from the image vllm/vllm-openai:v0.29.0
+Copyright:  Copyright contributors to the vLLM project
+            [the SPDX-FileCopyrightText header of each of the three files]
+Licence:    Apache-2.0; the SPDX headers are kept in each file
+Provenance: tests/cd/oracle/MANIFEST.md, tests/fixtures/vllm_v0_29_0/MANIFEST.md
+
+------------------------------------------------------------------------------------
+4. Berkeley Function Calling Leaderboard data (Gorilla)
+------------------------------------------------------------------------------------
+
+Files:      tests/fixtures/cd/bfcl/BFCL_v4_live_simple.json
+            tests/fixtures/cd/bfcl/possible_answer/BFCL_v4_live_simple.json
+Upstream:   ShishirPatil/gorilla at commit 6ea57973c7a6097fd7c5915698c54c17c5b1b6c8,
+            berkeley-function-call-leaderboard/bfcl_eval/data/, verbatim
+Licence:    Apache-2.0
+Provenance: tests/fixtures/cd/bfcl/MANIFEST.md
+
+------------------------------------------------------------------------------------
+5. Kyutai Pocket TTS and Kyutai STT
+------------------------------------------------------------------------------------
+
+tests/fixtures/audio/pocket_tts_sentence.wav is speech synthesised by Kyutai's Pocket TTS
+3.1.0 (default voice) running locally. Pocket TTS weights are licensed CC-BY-4.0
+(https://creativecommons.org/licenses/by/4.0/); this notice is the attribution.
+Provenance: tests/fixtures/audio/MANIFEST.md.
+
+Kyutai STT (stt-1b-en_fr, served by moshi-server) is referenced and run by the user;
+it is not distributed here.
+
+------------------------------------------------------------------------------------
+6. Unmute (Kyutai)
+------------------------------------------------------------------------------------
+
+The Conductor's design (local_astra/conductor/) is derived from Kyutai's Unmute handler
+(MIT): the OpenAI-Realtime-style event vocabulary Unmute uses and its pause-probability
+end-of-turn threshold (0.6). Design derived from; no code copied.
+
+------------------------------------------------------------------------------------
+7. Gemma / DiffusionGemma and NVIDIA's NVFP4 checkpoint
+------------------------------------------------------------------------------------
+
+The model (nvidia/diffusiongemma-26B-A4B-it-NVFP4, revision
+2ea837236295d617ac27f8c17d61228081932c40, pinned in services/versions.lock) is referenced,
+not distributed: the user downloads it, and the terms on its model card apply to that
+download. Two small verbatim excerpts of that snapshot ship as test fixtures:
+
+  tests/fixtures/cd/model/generation_config.json   (provenance: tests/fixtures/cd/model/MANIFEST.md)
+  tests/fixtures/llm/vocab_subset_cc8d3a0c.json     562 pieces of tokenizer.json
+                                                    (provenance: tests/fixtures/llm/MANIFEST.md)

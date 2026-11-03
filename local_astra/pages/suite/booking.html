@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Book a table</title>
+  <link rel="stylesheet" href="/assets/suite.css">
+</head>
+<body data-page="booking">
+  <header class="bar">
+    <span class="brand">The Larder Kitchen</span>
+    <span class="badge">Open tonight from 6 pm</span>
+  </header>
+  <main class="page">
+    <h1>Book a table</h1>
+    <p class="lede">Tell us who is coming and when. We will hold the table for fifteen minutes.</p>
+    <form id="booking" class="booking" autocomplete="off">
+      <div class="field">
+        <label for="f-name">Name</label>
+        <input type="text" id="f-name" name="name" data-suite="name" required>
+      </div>
+      <div class="field">
+        <label for="f-guests">Guests</label>
+        <input type="text" id="f-guests" name="guests" data-suite="guests" placeholder="2" inputmode="numeric">
+      </div>
+      <div class="field">
+        <span class="label">Time</span>
+        <div class="choices">
+          <label><input type="radio" name="time" value="19:00" checked> 7:00 pm</label>
+          <label><input type="radio" name="time" value="19:30" data-suite="time-1930"> 7:30 pm</label>
+          <label><input type="radio" name="time" value="20:00"> 8:00 pm</label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-note">Note</label>
+        <input type="text" id="f-note" name="note" data-suite="note">
+      </div>
+      <div class="info">
+        <h2>Before you send</h2>
+        <p>Tables for up to six can be booked here. For larger groups, call the restaurant and ask for the events team.</p>
+        <p>We seat the whole party together, so please tell us the number of guests you expect, including children.
+          High chairs are available on request; add it to the note.</p>
+        <p>If you need to cancel, let us know at least two hours ahead so that we can offer the table to someone on
+          the waiting list.</p>
+        <p>Window seats, the garden room and the counter are given on a first come, first served basis. Mention a
+          preference in the note and we will do our best.</p>
+      </div>
+      <button type="submit" data-suite="send">Send booking</button>
+    </form>
+    <section class="info">
+      <h2>Opening hours</h2>
+      <p>Tuesday to Saturday, 6 pm to 11 pm. Sunday lunch from 12 noon to 4 pm. Closed on Mondays.</p>
+      <h2>Finding us</h2>
+      <p>At the end of Mill Lane, beside the old bakery. Parking is on the street after 6 pm.</p>
+    </section>
+  </main>
+  <script src="/assets/suite.js"></script>
+</body>
+</html>

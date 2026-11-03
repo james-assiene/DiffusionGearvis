@@ -1,0 +1,303 @@
+"""End-to-end compilation. SPEC §4.1.
+
+```
+grammar spec (JSON Schema | regex | task DSL)
+      |  §4.2      ->  byte-level regex
+      |  regex-automata dense::DFA (anchored, via outlines_core)
+   byte DFA        ->  minimize (inside outlines, over ByteClasses)
+      |  §4.3         token lift
+   token DFA/NFA   ->  minimize (Valmari, §4.5)
+      |  §4.4         label interning -> classes -> CSR x2 (sum and max)
+   Automaton artifact (padded to a power-of-two |S| bucket)
+```
+"""
+
+from __future__ import annotations
+
+import dataclasses
+import time
+from typing import Any, Sequence
+
+from local_astra.decoding._vendor.dgfa_compile import schema as schema_mod
+from local_astra.decoding._vendor.dgfa_compile import vocab as vocab_mod
+from local_astra.decoding._vendor.dgfa_compile.automaton import CompiledAutomaton, compile_automaton
+from local_astra.decoding._vendor.dgfa_compile.lift import lift_regex
+
+__all__ = ["CompileReport", "compile_regex", "compile_json_schema"]
+
+
+@dataclasses.dataclass(frozen=True)
+class CompileReport:
+    """The artifact plus the numbers Phase 1 must report."""
+
+    automaton: CompiledAutomaton
+    regex_len: int
+    seconds_regex: float
+    seconds_index: float
+    seconds_transitions: float
+    seconds_minimize: float
+    seconds_classes: float
+    states_raw: int
+    states_minimized: int
+    transitions_raw: int
+    transitions_minimized: int
+
+    @property
+    def seconds_total(self) -> float:
+        return (self.seconds_regex + self.seconds_index + self.seconds_transitions
+                + self.seconds_minimize + self.seconds_classes)
+
+    @property
+    def minimization_state_ratio(self) -> float:
+        """SPEC §4.5: unpublished — nobody does the post-lift pass."""
+        return self.states_raw / max(1, self.states_minimized)
+
+    def summary(self) -> dict:
+        d = self.automaton.summary()
+        d.update({
+            "regex_len": self.regex_len,
+            "seconds_total": round(self.seconds_total, 3),
+            "seconds_regex": round(self.seconds_regex, 4),
+            "seconds_index": round(self.seconds_index, 3),
+            "seconds_transitions": round(self.seconds_transitions, 3),
+            "seconds_minimize": round(self.seconds_minimize, 3),
+            "seconds_classes": round(self.seconds_classes, 3),
+            "states_raw": self.states_raw,
+            "states_minimized": self.states_minimized,
+            "minimization_state_ratio": round(self.minimization_state_ratio, 3),
+            "transitions_raw": self.transitions_raw,
+            "transitions_minimized": self.transitions_minimized,
+        })
+        return d
+
+
+def compile_regex(
+    regex: str,
+    *,
+    name: str,
+    vocabulary: Any = None,
+    end_tokens: Sequence[int] = vocab_mod.END_TOKENS,
+    vocab_size: int | None = None,
+    do_minimize: bool = True,
+    ladder: Sequence[int] | None = None,
+    k_max: int | None = None,
+    schema_hash: str = "",
+    channel_header: bool = True,
+    fence: bool = False,
+    header_tokens: int = 8,
+) -> CompileReport:
+    """Compile an anchored byte-level regex into a `CompiledAutomaton`.
+
+    `channel_header` prefixes SPEC §3.6's `<|channel>NAME\n<channel|>` header.
+    **On by default**: Phase 0 measured that every generation from the released
+    model opens with it, and without it the grammar forbids the model's first
+    token outright.
+    """
+    vocabulary = vocabulary if vocabulary is not None else vocab_mod.build_vocabulary()
+    if vocab_size is None:
+        vocab_size = int(vocab_mod.gemma_tokenizer().vocab_size)
+
+    lifted = lift_regex(regex, vocabulary, do_minimize=do_minimize)
+
+    grammar = lifted.dfa
+    if fence:
+        # BEFORE the channel header (the fence is inside the channel body) and
+        # before stop augmentation, so `d(s)` sees it -- SPEC §3.5's ordering.
+        from local_astra.decoding._vendor.dgfa_compile.automaton import wrap_with_fence
+
+        grammar = wrap_with_fence(grammar)
+    if channel_header:
+        from local_astra.decoding._vendor.dgfa_compile.automaton import prepend_channel_header
+
+        grammar = prepend_channel_header(
+            grammar, vocab_size=vocab_size, max_name_tokens=header_tokens,
+            reserved=tuple(end_tokens) + (vocab_mod.PAD_TOKEN,))
+
+    t0 = time.perf_counter()
+    automaton = compile_automaton(
+        grammar,
+        name=name,
+        end_tokens=end_tokens,
+        vocab_size=vocab_size,
+        ladder=ladder,
+        k_max=k_max,
+        schema_hash=schema_hash,
+    )
+    seconds_classes = time.perf_counter() - t0
+
+    return CompileReport(
+        automaton=automaton,
+        regex_len=len(regex),
+        seconds_regex=0.0,
+        seconds_index=lifted.seconds_index,
+        seconds_transitions=lifted.seconds_transitions,
+        seconds_minimize=lifted.seconds_minimize,
+        seconds_classes=seconds_classes,
+        states_raw=lifted.states_raw,
+        states_minimized=lifted.states_minimized,
+        transitions_raw=lifted.transitions_raw,
+        transitions_minimized=lifted.transitions_minimized,
+    )
+
+
+def compile_json_schema(
+    json_schema: dict,
+    *,
+    name: str,
+    from_bfcl: bool = False,
+    allow: Sequence[str] = (),
+    allow_wildcard: bool = False,
+    expand_wildcard: bool = True,
+    whitespace_pattern: str | None = schema_mod.JSON_WS,
+    nonempty_required_strings: bool = False,
+    verify_renderings: dict | None = None,
+    verify_strict: bool = True,
+    channel_header: bool = True,
+    fence: bool = False,
+    **kwargs: Any,
+) -> CompileReport:
+    """Compile a JSON Schema (or BFCL parameter block) end to end.
+
+    `whitespace_pattern` defaults to `schema.JSON_WS`, RFC 8259's own whitespace
+    definition. (This docstring used to say "defaults to outlines' own", which
+    has been false since the default was repaired — and *was* still true of
+    `schema.build_regex`, whose `None` really does mean "let outlines choose".
+    `eval/run.py` passed that `None` through, so the repaired default was
+    unreachable from the CLI: see `WHITESPACE_PATTERNS` there.)
+
+    `verify_renderings` is the build gate — pass an instance the schema permits
+    and the compile fails unless the grammar accepts all five standard
+    renderings of it. `schema.synthesize_instance` produces one from the schema,
+    so there is no excuse for a call site not to gate.
+
+    `verify_strict=False` downgrades a rejection to a printed report **only when
+    the declared-narrow `whitespace_pattern` is the entire cause** — the same
+    schema is recompiled under `schema.JSON_WS` and must pass. Any other defect
+    still raises. The gate may be lenient about a narrowness the caller
+    declared; it may not be lenient about one nobody declared.
+
+    `expand_wildcard` (default `True`) rewrites typeless sub-schemas as an
+    explicit `anyOf`; see `schema.WILDCARD_ANYOF_TYPES` for the defect it
+    repairs. **`False` reproduces a grammar that is known to be wrong**, so it is
+    deliberately *not* wired into the gate's leniency: the recompile under
+    `JSON_WS` keeps the caller's `expand_wildcard`, so an unexpanded wildcard
+    still raises under `verify_strict=False`. `False` declares "give me the
+    unexpanded wildcard"; it does not declare "let through a grammar that
+    rejects its own instance and accepts a bare `1`". Same scoping lesson as the
+    whitespace hatch below, which was found in review to swallow
+    `live_simple_117-73-0` — this very defect.
+
+    **[V-P5] It used to default to `""` — forbidding whitespace — on the
+    reasoning that this "shrinks the automaton and costs nothing the benchmark
+    scores". That reasoning was wrong.** Gemma's natural tokenisation of JSON
+    puts the space *inside* the separator token (`": "`), so forbidding
+    whitespace makes the model's own rendering
+    `{"user_id": 7890, "special": "black"}` **unacceptable to the grammar**, and
+    it is forced onto an off-distribution path. The measured symptom was a
+    leading `:` on essentially every string value (`":Divinópolis, MG"` where
+    the ground truth is `Divinópolis, MG`) — a one-character defect that BFCL's
+    normalisation does not strip and that therefore failed every such argument.
+
+    The cost of allowing whitespace is 8 states on a representative BFCL schema
+    (43 -> 51), against ~20 GB of measured tree headroom. Not a trade worth
+    making.
+
+    `fence` (SPEC §3.6 extension, experiment E4/P2) wraps the object in an
+    **optional** ```` ```json ```` … ```` ``` ```` markdown fence. 126 of 130
+    unconstrained outputs are fenced, and with no slot for it the model writes
+    the fence into the channel-header name instead (measured: 82/130 junk
+    headers, all variants of ` ```json\n{ `) and its whole canvas plan is
+    shifted. Measured cost: +8 states. Whitespace and fence together take
+    verbatim acceptance of the unconstrained outputs from **0/130 to 74/130**;
+    neither does anything alone.
+    """
+    t0 = time.perf_counter()
+    prepared = json_schema
+    if nonempty_required_strings:
+        prepared = (schema_mod.normalize_bfcl_schema(
+            prepared, expand_wildcard=expand_wildcard)
+            if from_bfcl else prepared)
+        prepared = schema_mod.require_nonempty_strings(prepared)
+        from_bfcl = False
+    regex = schema_mod.build_regex(
+        prepared, from_bfcl=from_bfcl, allow=allow,
+        allow_wildcard=allow_wildcard, whitespace_pattern=whitespace_pattern,
+        expand_wildcard=expand_wildcard,
+    )
+    if verify_renderings is not None:
+        # THE GATE. Turns "the grammar must accept how the model writes" from
+        # advice into a build failure. Costs milliseconds and needs no model.
+        ok, bad = schema_mod.accepts_all_renderings(regex, verify_renderings)
+        # Key order is reported by the checker but is NOT a build failure on an
+        # ordered grammar: admitting it costs 2^k states, and the restriction
+        # was measured not to bind (190/190 unconstrained outputs used the
+        # declared order, with and without a prompt hint). Whitespace is a
+        # different matter -- free to admit, and it did bind.
+        bad = [b for b in bad if b != "reordered-keys"]
+        if bad and not verify_strict:
+            # The hatch exists so `eval/run.py`'s historical
+            # `--whitespace=stock|pretty` can reproduce arms already in
+            # docs/RESULTS.md. **It is scoped to the narrowness the caller
+            # DECLARED, and to nothing else.**
+            #
+            # Unscoped it was a hole, demonstrated in review: under
+            # `--whitespace=pretty` it also swallowed `live_simple_117-73-0`,
+            # whose grammar rejects ALL FIVE renderings because a BFCL `any`
+            # property compiles to an unparenthesised top-level alternation
+            # (the object regex becomes one branch of seven, so the grammar
+            # accepts a bare `null` as a whole answer). That has nothing to do
+            # with whitespace and nobody declared it.
+            #
+            # So: rebuild the SAME schema with `JSON_WS` and re-run the check.
+            # If the wide grammar passes, the only thing wrong was the declared
+            # whitespace policy -- downgrade to a report. If it still fails, the
+            # defect is something else and the gate raises as usual.
+            _, wide_bad = schema_mod.accepts_all_renderings(
+                schema_mod.build_regex(
+                    prepared, from_bfcl=from_bfcl, allow=allow,
+                    allow_wildcard=allow_wildcard,
+                    whitespace_pattern=schema_mod.JSON_WS,
+                    # NOT `expand_wildcard=True`: the hatch is scoped to the
+                    # whitespace narrowness the caller declared. Repairing the
+                    # wildcard here would make the wide grammar pass and
+                    # downgrade a wildcard defect to a printed line.
+                    expand_wildcard=expand_wildcard),
+                verify_renderings)
+            wide_bad = [b for b in wide_bad if b != "reordered-keys"]
+            if not wide_bad:
+                print(f"[gate] {name}: grammar rejects {bad} rendering(s) "
+                      f"(verify_strict=False; the declared-narrow whitespace "
+                      f"policy is the whole cause -- the same schema under "
+                      f"JSON_WS accepts all five)", flush=True)
+                bad = []
+            else:
+                # Report both sets, so the raise below cannot be mistaken for
+                # the whitespace policy the caller chose.
+                bad = wide_bad
+        if bad:
+            raise ValueError(
+                f"grammar rejects {bad} rendering(s) of an instance it should "
+                f"accept. A grammar that forbids a rendering the model may "
+                f"choose does not fail loudly -- it silently corrupts values, "
+                f"because the renormalised draw extends a value when the "
+                f"separator it wants is inadmissible (measured: 600 -> 6000, "
+                f"and 0/130 real outputs accepted). Widen whitespace_pattern; "
+                f"schema.JSON_WS accepts all five standard renderings."
+            )
+    seconds_regex = time.perf_counter() - t0
+
+    from local_astra.decoding._vendor.dgfa_compile.automaton import schema_fingerprint
+
+    report = compile_regex(
+        regex, name=name, channel_header=channel_header, fence=fence,
+        # Every option that can change the compiled language goes into the key.
+        # Hashing the schema alone made two materially different grammars share
+        # a cache entry -- see `schema_fingerprint`.
+        schema_hash=schema_fingerprint(
+            json_schema, whitespace_pattern=whitespace_pattern,
+            nonempty_required_strings=nonempty_required_strings,
+            channel_header=channel_header, allow=allow,
+            allow_wildcard=allow_wildcard, expand_wildcard=expand_wildcard,
+            from_bfcl=from_bfcl, fence=fence),
+        **kwargs)
+    return dataclasses.replace(report, seconds_regex=seconds_regex)

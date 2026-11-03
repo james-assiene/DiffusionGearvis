@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>t0210 body focus</title>
+<style>
+  body { margin: 0; font: 16px sans-serif; background: #f4f1ea; }
+  #field { position: absolute; left: 20px; top: 16px; width: 300px; height: 28px; font-size: 16px; }
+  #plain { position: absolute; left: 20px; top: 64px; width: 600px; height: 400px; display: block; }
+  #tab { position: absolute; left: 660px; top: 64px; width: 300px; height: 200px; display: block; }
+  #div { position: absolute; left: 660px; top: 284px; width: 300px; height: 180px; background: #c9d8e8; }
+  #rich { position: absolute; left: 20px; top: 488px; width: 600px; height: 200px; border: 2px solid #555; }
+</style>
+</head>
+<body>
+<input id="field" type="text" name="title" value="seed-value" autofocus>
+<canvas id="plain" width="600" height="400"></canvas>
+<canvas id="tab" width="300" height="200" tabindex="0"></canvas>
+<div id="div">plain div</div>
+<iframe id="rich" srcdoc="<!doctype html><html><body style='margin:8px;font:16px sans-serif'><p id='doc'>rich</p></body></html>"></iframe>
+<script>
+  window.__keys = [];
+  document.addEventListener("keydown", function (e) { window.__keys.push(e.key); });
+  function paint(id, a, b) {
+    var c = document.getElementById(id), g = c.getContext("2d");
+    for (var i = 0; i < 8; i++) {
+      g.fillStyle = i % 2 ? a : b;
+      g.fillRect(i * c.width / 8, 0, c.width / 8, c.height);
+    }
+    g.fillStyle = "#222";
+    g.fillRect(c.width / 3, c.height / 3, c.width / 3, c.height / 3);
+  }
+  paint("plain", "#3b6ea5", "#7fa7d1");
+  paint("tab", "#a5573b", "#d19a7f");
+  var rich = document.getElementById("rich");
+  rich.addEventListener("load", function () {
+    rich.contentDocument.designMode = "on";
+    window.__richReady = true;
+  });
+  document.getElementById("field").focus();
+</script>
+</body>
+</html>

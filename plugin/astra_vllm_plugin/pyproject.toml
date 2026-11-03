@@ -1,0 +1,17 @@
+[project]
+name = "astra-vllm-plugin"
+version = "0.0.1"
+description = "Out-of-tree vLLM plugin for DiffusionGemma: per-step canvas tap (milestone 0), constrained sampler (later)."
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26", "msgpack>=1.0", "pyzmq>=26"]
+# vllm itself is provided by the pinned container (services/versions.lock); never a dependency here.
+
+[project.entry-points."vllm.general_plugins"]
+astra = "astra_vllm_plugin:register"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["astra_vllm_plugin"]

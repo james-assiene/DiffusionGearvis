@@ -1,0 +1,29 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>t0204 noise</title>
+<style>
+html, body { margin: 0; padding: 0; overflow: hidden; background: rgb(0, 0, 0); }
+#n { position: absolute; left: 0; top: 0; width: 1280px; height: 800px; image-rendering: pixelated; }
+</style></head>
+<body>
+<canvas id="n" width="320" height="200"></canvas>
+<script>
+// T-0204 C6: a never-stable page. A 320x200 canvas shown at 1280x800 (4x4 px per noise sample) repainted with fresh
+// grey noise every 50 ms from a fixed LCG seed; its top 10 rows (40 CSS px) stay black.
+const c = document.getElementById("n");
+const ctx = c.getContext("2d");
+let seed = 20404;
+const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed >> 8; };
+const paint = () => {
+  const img = ctx.createImageData(320, 200);
+  for (let i = 0; i < img.data.length; i += 4) {
+    const v = i < 320 * 10 * 4 ? 0 : rnd() & 255;
+    img.data[i] = v; img.data[i + 1] = v; img.data[i + 2] = v; img.data[i + 3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+};
+paint();
+setInterval(paint, 50);
+window.__clicks = 0;
+addEventListener("click", () => { window.__clicks++; }, true);
+</script>
+</body></html>

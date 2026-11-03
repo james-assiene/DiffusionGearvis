@@ -1,0 +1,395 @@
+/* Astra start pages (T-0111g A5): system fonts only, no images, no animation, so a frame is deterministic. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  transition: none !important;
+  animation: none !important;
+}
+
+:root {
+  --ink: #1d2433;
+  --muted: #5d6677;
+  --line: #dfe3ea;
+  --paper: #ffffff;
+  --wash: #f5f6f8;
+  --accent: #2f5bd3;
+  --accent-ink: #ffffff;
+  --ok: #1f7a4d;
+  --radius: 10px;
+  color-scheme: light;
+}
+
+html {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--wash);
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* ------------------------------------------------------------------ the site bar */
+
+.bar {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+.brand:hover {
+  text-decoration: none;
+}
+
+.cart-badge {
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--wash);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.page {
+  width: 1040px;
+  margin: 0 auto;
+  padding: 32px 0 40px;
+}
+
+.lede {
+  color: var(--muted);
+  margin: 6px 0 24px;
+}
+
+/* ------------------------------------------------------------------ controls */
+
+button,
+.button {
+  font: inherit;
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 0;
+  border-radius: 8px;
+  padding: 9px 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.08);
+}
+
+input,
+textarea {
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid #c7cdd8;
+  border-radius: 8px;
+  padding: 10px 12px;
+  width: 100%;
+  caret-color: var(--ink);
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--accent);
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+/* ------------------------------------------------------------------ the start page */
+
+.home {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 120px;
+  background: var(--paper);
+}
+
+.home-title {
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin-bottom: 8px;
+}
+
+.home-sub {
+  color: var(--muted);
+  margin: 0 0 28px;
+}
+
+/* the button sits inside the box, so the box itself is centred on the page */
+.home-search {
+  position: relative;
+  width: 600px;
+}
+
+.home-search input {
+  border-radius: 999px;
+  padding: 14px 120px 14px 22px;
+  font-size: 18px;
+  box-shadow: 0 1px 4px rgba(29, 36, 51, 0.08);
+}
+
+.home-search button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  bottom: 6px;
+  border-radius: 999px;
+  padding: 0 22px;
+  font-size: 16px;
+}
+
+/* ------------------------------------------------------------------ search results */
+
+.search-row {
+  display: flex;
+  gap: 10px;
+  width: 640px;
+  margin-bottom: 8px;
+}
+
+.results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 720px;
+}
+
+.results li {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.results a {
+  display: block;
+}
+
+.result-title {
+  display: block;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.result-text {
+  display: block;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.empty {
+  color: var(--muted);
+  padding: 14px 0;
+}
+
+/* ------------------------------------------------------------------ product cards */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card .swatch {
+  height: 150px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.card .price {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.card .note {
+  color: var(--muted);
+  margin: 0;
+}
+
+.card button {
+  align-self: flex-start;
+  margin-top: 6px;
+}
+
+.mug {
+  position: relative;
+  width: 70px;
+  height: 80px;
+  border-radius: 6px 6px 14px 14px;
+}
+
+.mug::after {
+  content: "";
+  position: absolute;
+  right: -26px;
+  top: 16px;
+  width: 22px;
+  height: 36px;
+  border: 8px solid currentColor;
+  border-left: 0;
+  border-radius: 0 18px 18px 0;
+}
+
+.mug-red {
+  background: #c8372d;
+  color: #c8372d;
+}
+
+.mug-blue {
+  background: #2f5bd3;
+  color: #2f5bd3;
+}
+
+.mug-green {
+  background: #2f8a57;
+  color: #2f8a57;
+}
+
+.tint-red {
+  background: #fbeceb;
+}
+
+.tint-blue {
+  background: #ebf0fc;
+}
+
+.tint-green {
+  background: #e9f5ee;
+}
+
+/* ------------------------------------------------------------------ deals */
+
+.deals {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* 230 px rows at 1280x800: the third row's buttons sit wholly below the 800 px fold, none straddles it */
+  grid-auto-rows: 230px;
+  gap: 24px;
+}
+
+.deal {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr auto;
+  column-gap: 16px;
+}
+
+.deal h3 {
+  font-size: 20px;
+}
+
+.deal .note {
+  color: var(--muted);
+  margin: 6px 0 0;
+  grid-column: 1 / 3;
+}
+
+.deal .price {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.deal button {
+  grid-column: 1 / 2;
+  justify-self: start;
+  align-self: end;
+}
+
+/* ------------------------------------------------------------------ contact */
+
+.form {
+  width: 560px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.field {
+  margin-bottom: 18px;
+}
+
+.form textarea {
+  height: 140px;
+  resize: none;
+}
+
+.error {
+  color: #b42318;
+  margin: 0 0 14px;
+}
+
+.thanks {
+  width: 560px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--ok);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  font-size: 18px;
+}
+
+[hidden] {
+  display: none !important;
+}

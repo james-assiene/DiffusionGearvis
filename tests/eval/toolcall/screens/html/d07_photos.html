@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Photos</title><style>
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: "DejaVu Sans", "Liberation Sans", Arial, sans-serif; font-size: 15px; color: #1f2328;
+       background: #f6f7f9; width: 1280px; }
+.top { height: 56px; background: #24292f; color: #fff; display: flex; align-items: center; padding: 0 20px; gap: 18px; }
+.top .brand { font-weight: bold; font-size: 19px; }
+.top a, .top span { color: #d0d7de; text-decoration: none; }
+.side { position: absolute; left: 0; top: 56px; width: 220px; bottom: 0; background: #fff; border-right: 1px solid #d0d7de; padding: 14px; }
+.side div { padding: 9px 10px; border-radius: 6px; margin-bottom: 4px; }
+.side .on { background: #ddf4ff; font-weight: bold; }
+.main { position: absolute; left: 240px; top: 76px; right: 20px; }
+.card { background: #fff; border: 1px solid #d0d7de; border-radius: 8px; padding: 16px; }
+.row { display: flex; gap: 12px; align-items: center; }
+.btn { display: inline-block; padding: 8px 16px; border-radius: 6px; border: 1px solid #1f883d; background: #1f883d; color: #fff; font-weight: bold; }
+.btn.sec { background: #f6f8fa; color: #24292f; border-color: #d0d7de; }
+.btn.red { background: #cf222e; border-color: #cf222e; }
+.btn.blue { background: #0969da; border-color: #0969da; }
+input.f, .f { display: block; width: 100%; height: 38px; border: 1px solid #8c959f; border-radius: 6px; padding: 0 10px; font-size: 15px; background: #fff; font-family: inherit; }
+label { display: block; font-weight: bold; margin: 12px 0 6px; }
+.muted { color: #57606a; }
+.list > div { padding: 12px 14px; border-bottom: 1px solid #eaeef2; background: #fff; }
+.grid { display: grid; gap: 14px; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 10px; background: #eaeef2; font-size: 13px; }
+.toggle { display: inline-block; width: 44px; height: 24px; border-radius: 12px; background: #8c959f; position: relative; vertical-align: middle; }
+.toggle.on { background: #1f883d; }
+.toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 9px; background: #fff; }
+.toggle.on::after { left: 23px; }
+.box { display: inline-block; width: 18px; height: 18px; border: 2px solid #57606a; border-radius: 3px; vertical-align: middle; background: #fff; }
+.box.on { background: #0969da; border-color: #0969da; }
+.strip { display: flex; gap: 14px; overflow-x: auto; overflow-y: hidden; white-space: nowrap; }
+.strip::-webkit-scrollbar { display: none; }
+.thumb { flex: 0 0 auto; width: 220px; height: 150px; border-radius: 8px; color: #fff; font-weight: bold; display: flex; align-items: flex-end; padding: 10px; }
+.sel { background: #b6e3ff; }
+table { border-collapse: collapse; background: #fff; }
+td, th { border: 1px solid #d0d7de; padding: 6px 10px; text-align: left; }
+th { background: #f6f8fa; }
+p { line-height: 1.6; margin: 0 0 14px; }
+</style></head>
+<body>
+<div class="top"><span class="brand">Photos</span><span>Library</span><span>Albums</span><span>Shared</span></div>
+<div style="position:absolute;left:24px;top:80px;right:24px">
+  <h2>Summer trip &mdash; 24 photos</h2>
+  <div class="strip" data-t="strip" style="width:1232px">
+<div class="thumb" style="background:hsl(0,55%,45%)">Photo 1</div><div class="thumb" style="background:hsl(37,55%,45%)">Photo 2</div><div class="thumb" style="background:hsl(74,55%,45%)">Photo 3</div><div class="thumb" style="background:hsl(111,55%,45%)">Photo 4</div><div class="thumb" style="background:hsl(148,55%,45%)">Photo 5</div><div class="thumb" style="background:hsl(185,55%,45%)">Photo 6</div><div class="thumb" style="background:hsl(222,55%,45%)">Photo 7</div><div class="thumb" style="background:hsl(259,55%,45%)">Photo 8</div><div class="thumb" style="background:hsl(296,55%,45%)">Photo 9</div><div class="thumb" style="background:hsl(333,55%,45%)">Photo 10</div><div class="thumb" style="background:hsl(10,55%,45%)">Photo 11</div><div class="thumb" style="background:hsl(47,55%,45%)">Photo 12</div><div class="thumb" style="background:hsl(84,55%,45%)">Photo 13</div><div class="thumb" style="background:hsl(121,55%,45%)">Photo 14</div><div class="thumb" style="background:hsl(158,55%,45%)">Photo 15</div><div class="thumb" style="background:hsl(195,55%,45%)">Photo 16</div><div class="thumb" style="background:hsl(232,55%,45%)">Photo 17</div><div class="thumb" style="background:hsl(269,55%,45%)">Photo 18</div><div class="thumb" style="background:hsl(306,55%,45%)">Photo 19</div><div class="thumb" style="background:hsl(343,55%,45%)">Photo 20</div><div class="thumb" style="background:hsl(20,55%,45%)">Photo 21</div><div class="thumb" style="background:hsl(57,55%,45%)">Photo 22</div><div class="thumb" style="background:hsl(94,55%,45%)">Photo 23</div><div class="thumb" style="background:hsl(131,55%,45%)">Photo 24</div>
+  </div>
+  <div style="margin-top:24px;width:420px"><input class="f" data-t="search" placeholder="Search your photos"></div>
+  <h2 style="margin-top:24px">Albums</h2>
+  <div class="row"><span class="btn sec" data-t="album_family">Family</span><span class="btn sec" data-t="album_work">Work</span><span class="btn sec" data-t="album_pets">Pets</span><span class="btn sec" data-t="new_album">+ New album</span></div>
+</div>
+</body></html>

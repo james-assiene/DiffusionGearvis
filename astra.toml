@@ -1,0 +1,23 @@
+# local_astra profiles (docs/02 §7). Defaults live in local_astra/config.py; override here.
+profile = "lean"
+
+[profiles.lean]
+stt_backend = "kyutai-gpu"
+tts_backend = "pocket-cpu"
+aec = "none"            # headset first (docs/01 R4); "pipewire-echo-cancel" for speakers
+vram_budget_gib = 29.0
+tools = "off"           # "dry_run": native tool calls are requested, judged and described, never executed (T-0092b)
+
+[profiles.lean.diffusion]
+canvas_length = 256
+max_denoising_steps = 48
+thinking = true
+max_num_seqs = 3
+
+[profiles.cpu-stt]
+stt_backend = "nemotron-cpu"
+
+[profiles.talker]
+talker = true
+[profiles.talker.services]
+talker = "http://127.0.0.1:8003"

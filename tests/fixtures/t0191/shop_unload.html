@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0191 shop (refuses to unload)</title>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { height: 1600px; font: 16px sans-serif; background: #e1eff4; }
+  #search { position: absolute; left: 100px; top: 100px; margin: 0; }
+  #q { position: absolute; left: 0; top: 0; width: 400px; height: 40px; box-sizing: border-box; }
+  #find { position: absolute; left: 420px; top: 0; width: 100px; height: 40px; }
+</style>
+</head>
+<body>
+<form id="search" action="/search.html" method="get">
+  <input id="q" name="q" type="text" placeholder="Search the shop" autocomplete="off" autofocus>
+  <button id="find" type="submit">Search</button>
+</form>
+<script>
+  // T-0191 (hand-written by the T-0191 test-author, 2026-10-28): shop.html plus a beforeunload handler, as
+  // photopea.com has once a document is open (T-0188 A). Chromium asks about leaving only after a user gesture.
+  window.__doc = Math.random().toString(36).slice(2);
+  window.__armed = true;
+  window.addEventListener("beforeunload", (e) => { e.preventDefault(); e.returnValue = ""; });
+</script>
+</body>
+</html>

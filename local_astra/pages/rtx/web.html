@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Open a website</title>
+  <link rel="stylesheet" href="/assets/rtx.css">
+</head>
+<body data-page-id="web">
+  <main class="home">
+    <div class="home-title">Open a website</div>
+    <p class="home-sub">Type a web address and press Go</p>
+    <label class="web-label" for="address">Web address</label>
+    <form class="home-search" id="go-form" autocomplete="off">
+      <input type="text" id="address" name="address" data-scn="address" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="en.wikipedia.org" autofocus>
+      <button type="submit" id="go" data-scn="go">Go</button>
+    </form>
+    <p class="web-error" id="error" data-scn="error" role="alert"></p>
+    <p class="web-notice" id="notice">Gearvis can open public websites. Web pages can contain instructions that mislead it. It never types passwords or card numbers.</p>
+  </main>
+  <script src="/assets/rtx.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      /* T-0209 A1.2: the stand-in for the live start page on the rtx loopback root. It has the live page's words and
+         rules, but opens only the demo copies below: a typed address is normalised (trimmed, an http or https prefix
+         dropped, lowercased, a leading "www." dropped, query and fragment dropped, a trailing "/" dropped), then an
+         exact key opens its path, else a known host opens that host's home path, else the address is refused. */
+      const ROUTES = {
+        "docs.blender.org": "/blender-manual/",
+        "docs.blender.org/manual/en/4.2/render/cycles/gpu_rendering.html": "/blender-manual/gpu-rendering.html",
+        "docs.blender.org/manual/en/latest/render/cycles/gpu_rendering.html": "/blender-manual/gpu-rendering.html",
+        "projects.blender.org": "/blender-projects/",
+        "projects.blender.org/blender/blender/issues/134001": "/blender-projects/issue-134001.html",
+        "developer.blender.org": "/blender-notes/",
+        "developer.blender.org/docs/release_notes/4.4/cycles": "/blender-notes/4.4-cycles.html",
+        "blender.org": "/blender-notes/download.html",
+        "blender.org/download": "/blender-notes/download.html",
+        "blenderartists.org": "/blender-artists/",
+        "blenderartists.org/t/rtx-5090-not-showing-in-cycles-render-devices/1580001": "/blender-artists/thread-rtx-5090.html",
+        "blenderartists.org/t/cycles-cuda-error-out-of-memory/1570002": "/blender-artists/thread-oom.html"
+      };
+      const HINT = "Type a web address like en.wikipedia.org";
+      const SPACES = "A web address has no spaces. " + HINT;
+      const REFUSED = "This demo copy cannot open that site.";
+      const form = document.getElementById("go-form");
+      const input = document.getElementById("address");
+      const error = document.getElementById("error");
+      input.focus();
+
+      function own(key) {
+        return Object.prototype.hasOwnProperty.call(ROUTES, key);
+      }
+
+      function hostOf(key) {
+        return key.split("/")[0];
+      }
+
+      function normalise(text) {
+        let t = text.trim().replace(/^https?:\/{2}/i, "").toLowerCase();
+        if (t.indexOf("www.") === 0) t = t.slice(4);
+        t = t.split(/[?#]/)[0];
+        if (t.charAt(t.length - 1) === "/") t = t.slice(0, -1);
+        return t;
+      }
+
+      function route(text) {
+        const key = normalise(text);
+        if (own(key)) return ROUTES[key];
+        const host = hostOf(key);
+        const known = Object.keys(ROUTES).some(function (k) { return hostOf(k) === host; });
+        if (known && own(host)) return ROUTES[host];
+        return null;
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const text = input.value.trim();
+        if (!text) {
+          error.textContent = HINT;
+          return;
+        }
+        if (/\s/.test(text)) {
+          error.textContent = SPACES;
+          return;
+        }
+        if (text.indexOf(".") < 0) {
+          error.textContent = HINT;
+          return;
+        }
+        const path = route(text);
+        if (path === null) {
+          error.textContent = REFUSED;
+          window.rtxPush("refused", normalise(text));
+          return;
+        }
+        error.textContent = "";
+        window.location.assign(path);
+      });
+    })();
+  </script>
+</body>
+</html>

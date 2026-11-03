@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Subresources</title></head>
+<body>
+<p>T-0160 B-7 (e): a public-posing page reaching a second loopback port (?c=, standing in for vLLM and the HUD) by
+fetch, img, iframe, WebSocket and finally location=.</p>
+<script>
+const c = new URLSearchParams(location.search).get("c");
+const http = "http://127.0.0.1:" + c, https = "https://127.0.0.1:" + c;
+window.__done = false;
+for (const base of [http, https, "http://localhost:" + c]) {
+  fetch(base + "/v1/models").catch(() => {});
+  const img = new Image(); img.src = base + "/img.png"; document.body.appendChild(img);
+  const f = document.createElement("iframe"); f.src = base + "/"; document.body.appendChild(f);
+}
+for (const ws of ["ws://127.0.0.1:" + c + "/ws", "wss://127.0.0.1:" + c + "/ws"]) {
+  try { const s = new WebSocket(ws); s.onerror = () => {}; } catch (e) {}
+}
+setTimeout(() => { window.__done = true; location = http + "/hud"; }, 1500);
+</script>
+</body>
+</html>

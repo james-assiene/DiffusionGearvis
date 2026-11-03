@@ -1,0 +1,312 @@
+{"type":"astra.turn.state","state":"LISTENING","turn_id":"t3","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"ENDPOINTING","turn_id":"t3","thinking_ms":null,"replay":false}
+{"type":"astra.transcript","turn_id":"t3","text":"Show me a card with an omelette recipe","final":true,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":1,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":1,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":51,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":102,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":152,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":203,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":254,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":305,"replay":false}
+{"type":"astra.tool.call","turn_id":"t3","call_id":"t3-call","name":"google_search","arguments":{"query":"omelette recipe"},"status":"proposed","source":"draft","action":null,"reason":null,"query_problem":null,"replay":false}
+{"type":"astra.tool.call","turn_id":"t3","call_id":"t3-call","name":"google_search","arguments":{"query":"omelette recipe"},"status":"dry_run","source":"draft","action":"would search for: omelette recipe","reason":null,"query_problem":null,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":355,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":406,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":457,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":507,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":558,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":608,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":659,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":709,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":761,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":811,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":862,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t3","canvases":1,"close":"open","continued":false,"speech_refused":0}
+{"type":"astra.ui.surface","surface_id":"turn-t3","canvas_idx":0,"final":false,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t3","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t3","components":[{"id":"title","component":"Text","text":"Simple Omelette","variant":"h3"},{"id":"ingredients","component":"Column","children":[]}]}}],"repaired":17,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":918,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":968,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":1019,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":1070,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":1120,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":1170,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t3","thinking_ms":1221,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t3","canvases":2,"close":"written","continued":true,"speech_refused":0}
+{"type":"astra.ui.surface","surface_id":"turn-t3","canvas_idx":1,"final":false,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t3","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t3","components":[{"id":"title","component":"Text","text":"Simple Omelette","variant":"h3"},{"id":"ingredients","component":"Column","children":[]},{"id":"steps","component":"Column","children":[]}]}}],"repaired":0,"replay":false}
+{"type":"astra.spoken","turn_id":"t3","utterance_id":"t3-u1","text":"Here is a simple recipe for an omelette.","replay":false}
+{"type":"astra.turn.state","state":"SPEAKING","turn_id":"t3","thinking_ms":null,"replay":false}
+{"type":"astra.spoken.played","turn_id":"t3","played_ms":2040,"utterances":[{"utterance_id":"t3-u1","played_text":"Here is a simple recipe for an omelette.","played_words":8,"complete":true}],"replay":false}
+{"type":"astra.ui.surface","surface_id":"turn-t3","canvas_idx":1,"final":true,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t3","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t3","components":[{"id":"title","component":"Text","text":"Simple Omelette","variant":"h3"},{"id":"ingredients","component":"Column","children":[]},{"id":"steps","component":"Column","children":[]}]}}],"repaired":0,"replay":false}
+{"type":"astra.turn.state","state":"IDLE","turn_id":"t3","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"LISTENING","turn_id":"t4","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"ENDPOINTING","turn_id":"t4","thinking_ms":null,"replay":false}
+{"type":"astra.transcript","turn_id":"t4","text":"Show me a packing list for a weekend in the mountains.","final":true,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":0,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":0,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":51,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":101,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":152,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":203,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":253,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":303,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":354,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":404,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":455,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":505,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t4","canvases":1,"close":"open","continued":false,"speech_refused":0}
+{"type":"astra.ui.surface","surface_id":"turn-t4","canvas_idx":0,"final":false,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t4","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t4","components":[{"id":"root","component":"Column","children":["h","list"]},{"id":"h","component":"Text","text":"Mountain Weekend Packing List","variant":"h3"},{"id":"list","component":"List","children":["item1","item2"]},{"id":"item1","component":"Text","text":"Warm thermal layers"},{"id":"item2","component":"Text","text":"Hiking"}]}}],"repaired":4,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":556,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":607,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":657,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t4","canvases":2,"close":"written","continued":true,"speech_refused":0}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t4","thinking_ms":708,"replay":false}
+{"type":"astra.ui.surface","surface_id":"turn-t4","canvas_idx":1,"final":false,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t4","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t4","components":[{"id":"root","component":"Column","children":["h","list"]},{"id":"h","component":"Text","text":"Mountain Weekend Packing List","variant":"h3"},{"id":"list","component":"List","children":["item1","item2","item3","item4","item5"]},{"id":"item1","component":"Text","text":"Warm thermal layers"},{"id":"item2","component":"Text","text":"Hiking boots"},{"id":"item3","component":"Text","text":"Waterproof rain jacket"},{"id":"item4","component":"Text","text":"Sunscreen and hat"},{"id":"item5","component":"Text","text":"Reusable water bottle and snacks"}]}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t4","components":[{"id":"list","component":"List","children":["item1","item2","item3","item4","item5"]}]}}],"repaired":2,"replay":false}
+{"type":"astra.turn.state","state":"SPEAKING","turn_id":"t4","thinking_ms":null,"replay":false}
+{"type":"astra.spoken","turn_id":"t4","utterance_id":"t4-u1","text":"Here is a packing list for your weekend in the mountains.","replay":false}
+{"type":"astra.spoken.played","turn_id":"t4","played_ms":2760,"utterances":[{"utterance_id":"t4-u1","played_text":"Here is a packing list for your weekend in the mountains.","played_words":11,"complete":true}],"replay":false}
+{"type":"astra.ui.surface","surface_id":"turn-t4","canvas_idx":1,"final":true,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t4","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t4","components":[{"id":"root","component":"Column","children":["h","list"]},{"id":"h","component":"Text","text":"Mountain Weekend Packing List","variant":"h3"},{"id":"list","component":"List","children":["item1","item2","item3","item4","item5"]},{"id":"item1","component":"Text","text":"Warm thermal layers"},{"id":"item2","component":"Text","text":"Hiking boots"},{"id":"item3","component":"Text","text":"Waterproof rain jacket"},{"id":"item4","component":"Text","text":"Sunscreen and hat"},{"id":"item5","component":"Text","text":"Reusable water bottle and snacks"}]}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t4","components":[{"id":"list","component":"List","children":["item1","item2","item3","item4","item5"]}]}}],"repaired":2,"replay":false}
+{"type":"astra.turn.state","state":"IDLE","turn_id":"t4","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"LISTENING","turn_id":"t5","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"ENDPOINTING","turn_id":"t5","thinking_ms":null,"replay":false}
+{"type":"astra.transcript","turn_id":"t5","text":"Give me a card comparing the iPhone 16 and Pixel 9.","final":true,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":52,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":102,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":153,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":203,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":254,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":304,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":355,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":405,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":456,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":507,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":558,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":609,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":659,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t5","canvases":1,"close":"open","continued":false,"speech_refused":0}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":709,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":760,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":811,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":861,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":911,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":962,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1014,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1064,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1114,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t5","canvases":2,"close":"open","continued":true,"speech_refused":0}
+{"type":"astra.ui.surface","surface_id":"turn-t5","canvas_idx":1,"final":false,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t5","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t5","components":[{"id":"root","component":"Column","children":[]},{"id":"h","component":"Text","text":"iPhone 16 vs Pixel 9","variant":"h3"},{"id":"r1","component":"Row","children":["a1","b1"]},{"id":"a1","component":"Text","text":"Chip:"},{"id":"b1","component":"Text","text":"A18"},{"id":"r2","component":"Row","children":["a2","b2"]},{"id":"a2","component":"Text","text":"Display:"},{"id":"b2","component":"Text","text":"Super Retina X"},{"id":"r3","component":"Row","children":["a3","b3"]},{"id":"a3","component":"Text","text":"Camera:"},{"id":"b3","component":"Text","text":"Dual 48MP"},{"id":"r4","component":"Row","children":["a4","b4"]},{"id":"a4","component":"Text","text":"Port:"},{"id":"b4","component":"Text","text":"USB-C"}]}}],"repaired":5,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1165,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1216,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1267,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1317,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1368,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1418,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1469,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1519,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1570,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1621,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1671,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1722,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1772,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1822,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t5","thinking_ms":1873,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t5","canvases":3,"close":"written","continued":true,"speech_refused":0}
+{"type":"astra.ui.surface","surface_id":"turn-t5","canvas_idx":2,"final":false,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t5","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t5","components":[{"id":"root","component":"Column","children":[]},{"id":"h","component":"Text","text":"iPhone 16 vs Pixel 9","variant":"h3"},{"id":"r1","component":"Row","children":["a1","b1"]},{"id":"a1","component":"Text","text":"Chip:"},{"id":"b1","component":"Text","text":"A18"},{"id":"r2","component":"Row","children":["a2","b2"]},{"id":"a2","component":"Text","text":"Display:"},{"id":"b2","component":"Text","text":"Super Retina X"},{"id":"r3","component":"Row","children":["a3","b3"]},{"id":"a3","component":"Text","text":"Camera:"},{"id":"b3","component":"Text","text":"Dual 48MP"},{"id":"r4","component":"Row","children":["a4","b4"]},{"id":"a4","component":"Text","text":"Port:"},{"id":"b4","component":"Text","text":"USB-C"}]}}],"repaired":5,"replay":false}
+{"type":"astra.turn.state","state":"SPEAKING","turn_id":"t5","thinking_ms":null,"replay":false}
+{"type":"astra.spoken","turn_id":"t5","utterance_id":"t5-u1","text":"Here is a comparison of the i phone 16 and the Pixel 9.","replay":false}
+{"type":"astra.spoken.played","turn_id":"t5","played_ms":3320,"utterances":[{"utterance_id":"t5-u1","played_text":"Here is a comparison of the iPhone 16 and the Pixel 9.","played_words":12,"complete":true}],"replay":false}
+{"type":"astra.ui.surface","surface_id":"turn-t5","canvas_idx":2,"final":true,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t5","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t5","components":[{"id":"root","component":"Column","children":[]},{"id":"h","component":"Text","text":"iPhone 16 vs Pixel 9","variant":"h3"},{"id":"r1","component":"Row","children":["a1","b1"]},{"id":"a1","component":"Text","text":"Chip:"},{"id":"b1","component":"Text","text":"A18"},{"id":"r2","component":"Row","children":["a2","b2"]},{"id":"a2","component":"Text","text":"Display:"},{"id":"b2","component":"Text","text":"Super Retina X"},{"id":"r3","component":"Row","children":["a3","b3"]},{"id":"a3","component":"Text","text":"Camera:"},{"id":"b3","component":"Text","text":"Dual 48MP"},{"id":"r4","component":"Row","children":["a4","b4"]},{"id":"a4","component":"Text","text":"Port:"},{"id":"b4","component":"Text","text":"USB-C"}]}}],"repaired":5,"replay":false}
+{"type":"astra.turn.state","state":"IDLE","turn_id":"t5","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"LISTENING","turn_id":"t6","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"ENDPOINTING","turn_id":"t6","thinking_ms":null,"replay":false}
+{"type":"astra.transcript","turn_id":"t6","text":"Make a card with the steps to change a bike tyre.","final":true,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":0,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":0,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":51,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":101,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":152,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":203,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":253,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":303,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":353,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":404,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":455,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t6","canvases":1,"close":"open","continued":false,"speech_refused":0}
+{"type":"astra.ui.surface","surface_id":"turn-t6","canvas_idx":0,"final":false,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t6","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t6","components":[{"id":"root","component":"Column","children":["h"]},{"id":"h","component":"Text","text":"How to change a bike tyre","variant":"h3"}]}}],"repaired":6,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":506,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":556,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":607,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":657,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":708,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t6","thinking_ms":759,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t6","canvases":2,"close":"written","continued":true,"speech_refused":0}
+{"type":"astra.ui.surface","surface_id":"turn-t6","canvas_idx":1,"final":false,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t6","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t6","components":[{"id":"root","component":"Column","children":["h"]},{"id":"h","component":"Text","text":"How to change a bike tyre","variant":"h3"},{"id":"steps","component":"Column","children":["s1","s2","s3","s4","s5","s6"]},{"id":"s1","component":"Text","text":"1. Remove the wheel from the bike"},{"id":"s2","component":"Text","text":"2. Deflate and use tire levers to pry the edge off"},{"id":"s3","component":"Text","text":"3. Remove the old tube and check for debris"},{"id":"s4","component":"Text","text":"4. Insert a new partially inflated tube"},{"id":"s5","component":"Text","text":"5. Push the tire bead back onto the rim"},{"id":"s6","component":"Text","text":"6. Pump up the tire and reinstall the wheel"}]}}],"repaired":5,"replay":false}
+{"type":"astra.turn.state","state":"SPEAKING","turn_id":"t6","thinking_ms":null,"replay":false}
+{"type":"astra.spoken","turn_id":"t6","utterance_id":"t6-u1","text":"Here are the steps to change a bike tyre.","replay":false}
+{"type":"astra.spoken.played","turn_id":"t6","played_ms":2280,"utterances":[{"utterance_id":"t6-u1","played_text":"\nHere are the steps to change a bike tyre.","played_words":9,"complete":true}],"replay":false}
+{"type":"astra.ui.surface","surface_id":"turn-t6","canvas_idx":1,"final":true,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t6","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t6","components":[{"id":"root","component":"Column","children":["h"]},{"id":"h","component":"Text","text":"How to change a bike tyre","variant":"h3"},{"id":"steps","component":"Column","children":["s1","s2","s3","s4","s5","s6"]},{"id":"s1","component":"Text","text":"1. Remove the wheel from the bike"},{"id":"s2","component":"Text","text":"2. Deflate and use tire levers to pry the edge off"},{"id":"s3","component":"Text","text":"3. Remove the old tube and check for debris"},{"id":"s4","component":"Text","text":"4. Insert a new partially inflated tube"},{"id":"s5","component":"Text","text":"5. Push the tire bead back onto the rim"},{"id":"s6","component":"Text","text":"6. Pump up the tire and reinstall the wheel"}]}}],"repaired":5,"replay":false}
+{"type":"astra.turn.state","state":"IDLE","turn_id":"t6","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"LISTENING","turn_id":"t7","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"ENDPOINTING","turn_id":"t7","thinking_ms":null,"replay":false}
+{"type":"astra.transcript","turn_id":"t7","text":"Show my week as a schedule: gym Monday and Thursday, dentist Wednesday 3pm.\" Rows of days and times.","final":true,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":2,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":2,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":52,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":102,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":152,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":203,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":254,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":304,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":355,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":405,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":456,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":507,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t7","canvases":1,"close":"open","continued":false,"speech_refused":0}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":557,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":608,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":658,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":709,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":759,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t7","canvases":2,"close":"open","continued":true,"speech_refused":0}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":810,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":861,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t7","thinking_ms":911,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t7","canvases":3,"close":"written","continued":true,"speech_refused":0}
+{"type":"astra.turn.state","state":"SPEAKING","turn_id":"t7","thinking_ms":null,"replay":false}
+{"type":"astra.spoken","turn_id":"t7","utterance_id":"t7-u1","text":"Here is your schedule for the week.","replay":false}
+{"type":"astra.spoken.played","turn_id":"t7","played_ms":1640,"utterances":[{"utterance_id":"t7-u1","played_text":"Here is your schedule for the week.","played_words":7,"complete":true}],"replay":false}
+{"type":"astra.turn.state","state":"IDLE","turn_id":"t7","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"LISTENING","turn_id":"t8","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"ENDPOINTING","turn_id":"t8","thinking_ms":null,"replay":false}
+{"type":"astra.transcript","turn_id":"t8","text":"Summarise what's on my screen as a card.","final":true,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t8","thinking_ms":1,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t8","thinking_ms":1,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t8","thinking_ms":51,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t8","thinking_ms":102,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t8","thinking_ms":152,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t8","thinking_ms":203,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t8","thinking_ms":254,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t8","thinking_ms":304,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t8","thinking_ms":354,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t8","thinking_ms":405,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t8","thinking_ms":455,"replay":false}
+{"type":"astra.spoken","turn_id":"t8","utterance_id":"t8-u1","text":"Here is a summary of your expenses.","replay":false}
+{"type":"astra.turn.state","state":"SPEAKING","turn_id":"t8","thinking_ms":null,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t8","canvases":1,"close":"open","continued":false,"speech_refused":0}
+{"type":"astra.ui.surface","surface_id":"turn-t8","canvas_idx":1,"final":false,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t8","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t8","components":[{"id":"h","component":"Text","text":"Expense Summary","variant":"h3"},{"id":"r1","component":"Row","children":["a1","b1"]},{"id":"a1","component":"Text","text":"Rent:"},{"id":"b1","component":"Text","text":"1200"},{"id":"r2","component":"Row","children":["a2","b2"]},{"id":"a2","component":"Text","text":"Food:"},{"id":"b2","component":"Text","text":"420"},{"id":"r3","component":"Row","children":["a3"]},{"id":"a3","component":"Text","text":"Travel:"}]}}],"repaired":6,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t8","canvases":2,"close":"written","continued":true,"speech_refused":0}
+{"type":"astra.ui.surface","surface_id":"turn-t8","canvas_idx":2,"final":false,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t8","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t8","components":[{"id":"h","component":"Text","text":"Expense Summary","variant":"h3"},{"id":"r1","component":"Row","children":["a1","b1"]},{"id":"a1","component":"Text","text":"Rent:"},{"id":"b1","component":"Text","text":"1200"},{"id":"r2","component":"Row","children":["a2","b2"]},{"id":"a2","component":"Text","text":"Food:"},{"id":"b2","component":"Text","text":"420"},{"id":"r3","component":"Row","children":["a3","b3"]},{"id":"a3","component":"Text","text":"Travel:"},{"id":"b3","component":"Text","text":"180"},{"id":"r4","component":"Row","children":["a4","b4"]},{"id":"a4","component":"Text","text":"Energy:"},{"id":"b4","component":"Text","text":"95"},{"id":"r5","component":"Row","children":["a5","b5"]},{"id":"a5","component":"Text","text":"Phone:"},{"id":"b5","component":"Text","text":"30"},{"id":"d","component":"Divider"},{"id":"r7","component":"Row","children":["a7","b7"]},{"id":"a7","component":"Text","text":"Total:"},{"id":"b7","component":"Text","text":"1925"}]}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t8","components":[{"id":"r3","component":"Row","children":["a3","b3"]}]}}],"repaired":0,"replay":false}
+{"type":"astra.spoken.played","turn_id":"t8","played_ms":2040,"utterances":[{"utterance_id":"t8-u1","played_text":"Here is a summary of your expenses.\n\n","played_words":7,"complete":true}],"replay":false}
+{"type":"astra.ui.surface","surface_id":"turn-t8","canvas_idx":2,"final":true,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t8","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t8","components":[{"id":"h","component":"Text","text":"Expense Summary","variant":"h3"},{"id":"r1","component":"Row","children":["a1","b1"]},{"id":"a1","component":"Text","text":"Rent:"},{"id":"b1","component":"Text","text":"1200"},{"id":"r2","component":"Row","children":["a2","b2"]},{"id":"a2","component":"Text","text":"Food:"},{"id":"b2","component":"Text","text":"420"},{"id":"r3","component":"Row","children":["a3","b3"]},{"id":"a3","component":"Text","text":"Travel:"},{"id":"b3","component":"Text","text":"180"},{"id":"r4","component":"Row","children":["a4","b4"]},{"id":"a4","component":"Text","text":"Energy:"},{"id":"b4","component":"Text","text":"95"},{"id":"r5","component":"Row","children":["a5","b5"]},{"id":"a5","component":"Text","text":"Phone:"},{"id":"b5","component":"Text","text":"30"},{"id":"d","component":"Divider"},{"id":"r7","component":"Row","children":["a7","b7"]},{"id":"a7","component":"Text","text":"Total:"},{"id":"b7","component":"Text","text":"1925"}]}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t8","components":[{"id":"r3","component":"Row","children":["a3","b3"]}]}}],"repaired":0,"replay":false}
+{"type":"astra.turn.state","state":"IDLE","turn_id":"t8","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"LISTENING","turn_id":"t9","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"ENDPOINTING","turn_id":"t9","thinking_ms":null,"replay":false}
+{"type":"astra.transcript","turn_id":"t9","text":"Turn this recipe into a shopping list card.","final":true,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":1,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":1,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":51,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":102,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":153,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":203,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":254,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":305,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":356,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":406,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t9","canvases":1,"close":"open","continued":false,"speech_refused":0}
+{"type":"astra.ui.surface","surface_id":"turn-t9","canvas_idx":0,"final":false,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t9","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t9","components":[{"id":"root","component":"Column","children":[]}]}}],"repaired":15,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":457,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":508,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":559,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":610,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":660,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":710,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":761,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t9","thinking_ms":812,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t9","canvases":2,"close":"written","continued":true,"speech_refused":0}
+{"type":"astra.ui.surface","surface_id":"turn-t9","canvas_idx":1,"final":false,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t9","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t9","components":[{"id":"root","component":"Column","children":[]},{"id":"h","component":"Text","text":"Shopping List","variant":"h3"},{"id":"l","component":"List","children":["i1","i2","i3","i4","i5","i6","i7","i8","i9"]},{"id":"i1","component":"Text","text":"225g unsalted butter"},{"id":"i2","component":"Text","text":"225g caster sugar"},{"id":"i3","component":"Text","text":"4 large eggs"},{"id":"i4","component":"Text","text":"275g self-raising flour"},{"id":"i5","component":"Text","text":"2 tsp baking powder"},{"id":"i6","component":"Text","text":"4 tbsp milk"},{"id":"i7","component":"Text","text":"Finely grated zest of 2 lemons"},{"id":"i8","component":"Text","text":"Juice of 1.5 lemons"},{"id":"i9","component":"Text","text":"175g granulated sugar"}]}}],"repaired":0,"replay":false}
+{"type":"astra.turn.state","state":"SPEAKING","turn_id":"t9","thinking_ms":null,"replay":false}
+{"type":"astra.spoken","turn_id":"t9","utterance_id":"t9-u1","text":"Here is your shopping list for the recipe.","replay":false}
+{"type":"astra.spoken.played","turn_id":"t9","played_ms":2200,"utterances":[{"utterance_id":"t9-u1","played_text":"\nHere is your shopping list for the recipe.","played_words":8,"complete":true}],"replay":false}
+{"type":"astra.ui.surface","surface_id":"turn-t9","canvas_idx":1,"final":true,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t9","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t9","components":[{"id":"root","component":"Column","children":[]},{"id":"h","component":"Text","text":"Shopping List","variant":"h3"},{"id":"l","component":"List","children":["i1","i2","i3","i4","i5","i6","i7","i8","i9"]},{"id":"i1","component":"Text","text":"225g unsalted butter"},{"id":"i2","component":"Text","text":"225g caster sugar"},{"id":"i3","component":"Text","text":"4 large eggs"},{"id":"i4","component":"Text","text":"275g self-raising flour"},{"id":"i5","component":"Text","text":"2 tsp baking powder"},{"id":"i6","component":"Text","text":"4 tbsp milk"},{"id":"i7","component":"Text","text":"Finely grated zest of 2 lemons"},{"id":"i8","component":"Text","text":"Juice of 1.5 lemons"},{"id":"i9","component":"Text","text":"175g granulated sugar"}]}}],"repaired":0,"replay":false}
+{"type":"astra.turn.state","state":"IDLE","turn_id":"t9","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"LISTENING","turn_id":"t10","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"ENDPOINTING","turn_id":"t10","thinking_ms":null,"replay":false}
+{"type":"astra.transcript","turn_id":"t10","text":"Show me a card with the 10 largest countries by area and their populations.","final":true,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":51,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":102,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":153,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":204,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":254,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":305,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":356,"replay":false}
+{"type":"astra.tool.call","turn_id":"t10","call_id":"t10-call","name":"google_search","arguments":{"query":"10 largest countries by area and population"},"status":"proposed","source":"draft","action":null,"reason":null,"query_problem":null,"replay":false}
+{"type":"astra.tool.call","turn_id":"t10","call_id":"t10-call","name":"google_search","arguments":{"query":"10 largest countries by area and population"},"status":"dry_run","source":"draft","action":"would search for: 10 largest countries by area and population","reason":null,"query_problem":null,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":406,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":457,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":507,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":559,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":609,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":660,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":711,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":761,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":812,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":863,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":913,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":964,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1015,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1066,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1116,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1167,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1218,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1269,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1320,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1371,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1421,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1472,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1523,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1574,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t10","canvases":1,"close":"open","continued":false,"speech_refused":0}
+{"type":"astra.ui.surface","surface_id":"turn-t10","canvas_idx":1,"final":false,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t10","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t10","components":[{"id":"root","component":"Column","children":["h"]},{"id":"h","component":"Text","text":"10 Largest Countries by Area","variant":"h3"},{"id":"l","component":"List","children":["r1","r2"]},{"id":"r1","component":"Row","children":["t1"]},{"id":"t1","component":"Text","text":"Russia: 146m"},{"id":"r2","component":"Row","children":["t3"]},{"id":"t3","component":"Text","text":""}]}}],"repaired":4,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1625,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1675,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1727,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t10","canvases":2,"close":"open","continued":true,"speech_refused":0}
+{"type":"astra.ui.surface","surface_id":"turn-t10","canvas_idx":2,"final":false,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t10","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t10","components":[{"id":"root","component":"Column","children":["h"]},{"id":"h","component":"Text","text":"10 Largest Countries by Area","variant":"h3"},{"id":"l","component":"List","children":["r1","r2","r3","r4","r5","r6","r7","r8","r9"]},{"id":"r1","component":"Row","children":[]},{"id":"r2","component":"Row","children":["t3"]},{"id":"t3","component":"Text","text":"Canada: 38m"},{"id":"r3","component":"Row","children":["t5"]},{"id":"t5","component":"Text","text":"China: 1.4b"},{"id":"r4","component":"Row","children":["t7"]},{"id":"t7","component":"Text","text":"USA: 333m"},{"id":"r5","component":"Row","children":["t9"]},{"id":"t9","component":"Text","text":"Brazil: 214m"},{"id":"r6","component":"Row","children":["t11"]},{"id":"t11","component":"Text","text":"Australia: 26m"},{"id":"r7","component":"Row","children":["t13"]},{"id":"t13","component":"Text","text":"India: 1.4b"},{"id":"r8","component":"Row","children":["t15"]},{"id":"t15","component":"Text","text":"Kazakhstan: 19m"},{"id":"r9","component":"Row","children":[]}]}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t10","components":[{"id":"l","component":"List","children":["r1","r2","r3","r4","r5","r6","r7","r8","r9"]}]}}],"repaired":17,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1802,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1852,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1904,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t10","thinking_ms":1954,"replay":false}
+{"type":"astra.ui.fence","turn_id":"t10","canvases":3,"close":"written","continued":true,"speech_refused":0}
+{"type":"astra.ui.surface","surface_id":"turn-t10","canvas_idx":3,"final":false,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t10","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t10","components":[{"id":"root","component":"Column","children":["h"]},{"id":"h","component":"Text","text":"10 Largest Countries by Area","variant":"h3"},{"id":"l","component":"List","children":["r1","r2","r3","r4","r5","r6","r7","r8","r9","r10"]},{"id":"r1","component":"Row","children":["t1"]},{"id":"t1","component":"Text","text":"Russia: 146m"},{"id":"r2","component":"Row","children":["t3"]},{"id":"t3","component":"Text","text":"Canada: 38m"},{"id":"r3","component":"Row","children":["t5"]},{"id":"t5","component":"Text","text":"China: 1.4b"},{"id":"r4","component":"Row","children":["t7"]},{"id":"t7","component":"Text","text":"USA: 333m"},{"id":"r5","component":"Row","children":["t9"]},{"id":"t9","component":"Text","text":"Brazil: 214m"},{"id":"r6","component":"Row","children":["t11"]},{"id":"t11","component":"Text","text":"Australia: 26m"},{"id":"r7","component":"Row","children":["t13"]},{"id":"t13","component":"Text","text":"India: 1.4b"},{"id":"r8","component":"Row","children":["t15"]},{"id":"t15","component":"Text","text":"Kazakhstan: 19m"},{"id":"r9","component":"Row","children":["t17"]},{"id":"t17","component":"Text","text":"Algeria: 45m"},{"id":"r10","component":"Row","children":["t19"]},{"id":"t19","component":"Text","text":"DRC: 100m"}]}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t10","components":[{"id":"l","component":"List","children":["r1","r2","r3","r4","r5","r6","r7","r8","r9","r10"]},{"id":"r1","component":"Row","children":["t1"]},{"id":"r9","component":"Row","children":["t17"]}]}}],"repaired":0,"replay":false}
+{"type":"astra.spoken","turn_id":"t10","utterance_id":"t10-u1","text":"Here is the list of the ten largest countries by area and their approximate populations.","replay":false}
+{"type":"astra.turn.state","state":"SPEAKING","turn_id":"t10","thinking_ms":null,"replay":false}
+{"type":"astra.spoken.played","turn_id":"t10","played_ms":5000,"utterances":[{"utterance_id":"t10-u1","played_text":"Here is the list of the ten largest countries by area and their approximate populations.","played_words":15,"complete":true}],"replay":false}
+{"type":"astra.ui.surface","surface_id":"turn-t10","canvas_idx":3,"final":true,"messages":[{"version":"v0.9.1","createSurface":{"surfaceId":"turn-t10","catalogId":"https://a2ui.org/specification/v0_9_1/catalogs/basic/catalog.json"}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t10","components":[{"id":"root","component":"Column","children":["h"]},{"id":"h","component":"Text","text":"10 Largest Countries by Area","variant":"h3"},{"id":"l","component":"List","children":["r1","r2","r3","r4","r5","r6","r7","r8","r9","r10"]},{"id":"r1","component":"Row","children":["t1"]},{"id":"t1","component":"Text","text":"Russia: 146m"},{"id":"r2","component":"Row","children":["t3"]},{"id":"t3","component":"Text","text":"Canada: 38m"},{"id":"r3","component":"Row","children":["t5"]},{"id":"t5","component":"Text","text":"China: 1.4b"},{"id":"r4","component":"Row","children":["t7"]},{"id":"t7","component":"Text","text":"USA: 333m"},{"id":"r5","component":"Row","children":["t9"]},{"id":"t9","component":"Text","text":"Brazil: 214m"},{"id":"r6","component":"Row","children":["t11"]},{"id":"t11","component":"Text","text":"Australia: 26m"},{"id":"r7","component":"Row","children":["t13"]},{"id":"t13","component":"Text","text":"India: 1.4b"},{"id":"r8","component":"Row","children":["t15"]},{"id":"t15","component":"Text","text":"Kazakhstan: 19m"},{"id":"r9","component":"Row","children":["t17"]},{"id":"t17","component":"Text","text":"Algeria: 45m"},{"id":"r10","component":"Row","children":["t19"]},{"id":"t19","component":"Text","text":"DRC: 100m"}]}},{"version":"v0.9.1","updateComponents":{"surfaceId":"turn-t10","components":[{"id":"l","component":"List","children":["r1","r2","r3","r4","r5","r6","r7","r8","r9","r10"]},{"id":"r1","component":"Row","children":["t1"]},{"id":"r9","component":"Row","children":["t17"]}]}}],"repaired":0,"replay":false}
+{"type":"astra.turn.state","state":"IDLE","turn_id":"t10","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"LISTENING","turn_id":"t11","thinking_ms":null,"replay":false}
+{"type":"astra.turn.state","state":"ENDPOINTING","turn_id":"t11","thinking_ms":null,"replay":false}
+{"type":"astra.transcript","turn_id":"t11","text":"what do you see on the screen","final":true,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t11","thinking_ms":1,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t11","thinking_ms":1,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t11","thinking_ms":51,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t11","thinking_ms":102,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t11","thinking_ms":154,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t11","thinking_ms":204,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t11","thinking_ms":254,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t11","thinking_ms":305,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t11","thinking_ms":355,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t11","thinking_ms":406,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t11","thinking_ms":457,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t11","thinking_ms":507,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t11","thinking_ms":558,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t11","thinking_ms":609,"replay":false}
+{"type":"astra.turn.state","state":"THINKING","turn_id":"t11","thinking_ms":659,"replay":false}
+{"type":"astra.spoken","turn_id":"t11","utterance_id":"t11-u1","text":"I see a recipe for a lemon cake on a Kitchen Notes webpage.","replay":false}
+{"type":"astra.spoken","turn_id":"t11","utterance_id":"t11-u2","text":"It includes ingredients like butter, sugar, eggs, flour, and lemons, along with a seven-step method for baking and assembly.","replay":false}
+{"type":"astra.turn.state","state":"SPEAKING","turn_id":"t11","thinking_ms":null,"replay":false}
+{"type":"astra.spoken","turn_id":"t11","utterance_id":"t11-u3","text":"There is also some unrelated text about transport links and local councils at the top and bottom of the page.","replay":false}
+{"type":"astra.spoken.played","turn_id":"t11","played_ms":16360,"utterances":[{"utterance_id":"t11-u1","played_text":"I see a recipe for a lemon cake on a Kitchen Notes webpage. ","played_words":13,"complete":true},{"utterance_id":"t11-u2","played_text":"It includes ingredients like butter, sugar, eggs, flour, and lemons, along with a seven-step method for baking and assembly. ","played_words":19,"complete":true},{"utterance_id":"t11-u3","played_text":"There is also some unrelated text about transport links and local councils at the top and bottom of the page.","played_words":20,"complete":true}],"replay":false}
+{"type":"astra.turn.state","state":"IDLE","turn_id":"t11","thinking_ms":null,"replay":false}

@@ -1,0 +1,104 @@
+[
+  {
+    "name": "click_at",
+    "description": "Click at a point of the attached screen frame. Coordinates are normalised to the frame: 0 is the left/top edge, 999 the right/bottom edge.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 999,
+          "description": "Horizontal position, 0-999 across the frame."
+        },
+        "y": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 999,
+          "description": "Vertical position, 0-999 down the frame."
+        }
+      },
+      "required": ["x", "y"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "type_at",
+    "description": "Click the text field at a point of the attached frame (normalised 0-999), type text into it, and optionally press Enter.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 999,
+          "description": "Horizontal position, 0-999 across the frame."
+        },
+        "y": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 999,
+          "description": "Vertical position, 0-999 down the frame."
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The text to type."
+        },
+        "press_enter": {
+          "type": "boolean",
+          "description": "Whether to press Enter after typing."
+        }
+      },
+      "required": ["x", "y", "text", "press_enter"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "scroll",
+    "description": "Scroll the focused page or view by one screen in a direction.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "enum": ["up", "down", "left", "right"],
+          "description": "The direction to scroll."
+        }
+      },
+      "required": ["direction"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "press_key",
+    "description": "Press one key or one keyboard shortcut from a fixed list (for example Enter, Ctrl+C or Alt+Tab).",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "combo": {
+          "type": "string",
+          "enum": [
+            "Enter", "Escape", "Tab", "Backspace", "Delete", "Space",
+            "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight",
+            "Home", "End", "PageUp", "PageDown",
+            "Ctrl+A", "Ctrl+C", "Ctrl+V", "Ctrl+X", "Ctrl+Z",
+            "Ctrl+L", "Ctrl+T", "Ctrl+W", "Alt+Tab", "Ctrl+Enter"
+          ],
+          "description": "The key or shortcut; modifiers are held while the last key is pressed."
+        }
+      },
+      "required": ["combo"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "wait",
+    "description": "Wait about one second without touching the page, then take a new screenshot of the browser screen.",
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    }
+  }
+]

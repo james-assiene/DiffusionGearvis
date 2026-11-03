@@ -1,0 +1,3690 @@
+{
+ "description": "T-0108 criterion 13 (ii): per-request baseline outcomes of every Q12 positive trial (case expect_surface true in tests/eval/surface_placement_cases.jsonl, kind q12), all arms, of both stored run dirs. One bool per ui commit in commit order: did a fresh UiGate() per trial return a surface for that call (final=False, turn_id=request_id, canvas_idx=the commit canvas_idx; the ui_reading of scripts/gpu/t0098_native_prompt_ab.py). [] = the trial had no ui commit.",
+ "gate": "local_astra/conductor/ui_gate.py at 14cde78 (built on branch T-0108-ui-structural-repair at d5253298af886787f879d3bc418ea2decc5627ba, whose local_astra/ is identical to 14cde78)",
+ "positive_cases": [
+  "flight_booking",
+  "flight_booking_with_memory",
+  "omelette_steps",
+  "primes_table"
+ ],
+ "regime": "CPU, Python 3.11.16, json_repair 0.63.4, vendored A2UI v0.9.1 schema, deterministic, n=1 per trial",
+ "runs": {
+  "3ac00a1": {
+   "source": "/home/user/demos/local_astra/.claude/worktrees/t0098c-launch/logs/t0098c-prompt-ab-3ac00a1/trials.jsonl",
+   "trials": {
+    "t0098c-r0-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r0-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0098c-r0-flight_booking-C4": {
+     "arm": "C4",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0098c-r0-flight_booking-C5": {
+     "arm": "C5",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      true
+     ]
+    },
+    "t0098c-r0-flight_booking-D1": {
+     "arm": "D1",
+     "case_id": "flight_booking",
+     "outcomes": []
+    },
+    "t0098c-r0-flight_booking-D3": {
+     "arm": "D3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false
+     ]
+    },
+    "t0098c-r0-flight_booking-D4": {
+     "arm": "D4",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r0-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0098c-r0-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0098c-r0-flight_booking_with_memory-C4": {
+     "arm": "C4",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r0-flight_booking_with_memory-C5": {
+     "arm": "C5",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": []
+    },
+    "t0098c-r0-flight_booking_with_memory-D1": {
+     "arm": "D1",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": []
+    },
+    "t0098c-r0-flight_booking_with_memory-D3": {
+     "arm": "D3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0098c-r0-flight_booking_with_memory-D4": {
+     "arm": "D4",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r0-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r0-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r0-omelette_steps-C4": {
+     "arm": "C4",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r0-omelette_steps-C5": {
+     "arm": "C5",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r0-omelette_steps-D1": {
+     "arm": "D1",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r0-omelette_steps-D3": {
+     "arm": "D3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r0-omelette_steps-D4": {
+     "arm": "D4",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r0-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    },
+    "t0098c-r0-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0098c-r0-primes_table-C4": {
+     "arm": "C4",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    },
+    "t0098c-r0-primes_table-C5": {
+     "arm": "C5",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0098c-r0-primes_table-D1": {
+     "arm": "D1",
+     "case_id": "primes_table",
+     "outcomes": []
+    },
+    "t0098c-r0-primes_table-D3": {
+     "arm": "D3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false
+     ]
+    },
+    "t0098c-r0-primes_table-D4": {
+     "arm": "D4",
+     "case_id": "primes_table",
+     "outcomes": []
+    },
+    "t0098c-r1-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r1-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true,
+      false,
+      true,
+      true,
+      true
+     ]
+    },
+    "t0098c-r1-flight_booking-C4": {
+     "arm": "C4",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r1-flight_booking-C5": {
+     "arm": "C5",
+     "case_id": "flight_booking",
+     "outcomes": []
+    },
+    "t0098c-r1-flight_booking-D1": {
+     "arm": "D1",
+     "case_id": "flight_booking",
+     "outcomes": []
+    },
+    "t0098c-r1-flight_booking-D3": {
+     "arm": "D3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false
+     ]
+    },
+    "t0098c-r1-flight_booking-D4": {
+     "arm": "D4",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r1-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      true
+     ]
+    },
+    "t0098c-r1-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false,
+      false
+     ]
+    },
+    "t0098c-r1-flight_booking_with_memory-C4": {
+     "arm": "C4",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0098c-r1-flight_booking_with_memory-C5": {
+     "arm": "C5",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r1-flight_booking_with_memory-D1": {
+     "arm": "D1",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": []
+    },
+    "t0098c-r1-flight_booking_with_memory-D3": {
+     "arm": "D3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false
+     ]
+    },
+    "t0098c-r1-flight_booking_with_memory-D4": {
+     "arm": "D4",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0098c-r1-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r1-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r1-omelette_steps-C4": {
+     "arm": "C4",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r1-omelette_steps-C5": {
+     "arm": "C5",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r1-omelette_steps-D1": {
+     "arm": "D1",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r1-omelette_steps-D3": {
+     "arm": "D3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r1-omelette_steps-D4": {
+     "arm": "D4",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r1-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0098c-r1-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0098c-r1-primes_table-C4": {
+     "arm": "C4",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0098c-r1-primes_table-C5": {
+     "arm": "C5",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      true,
+      false
+     ]
+    },
+    "t0098c-r1-primes_table-D1": {
+     "arm": "D1",
+     "case_id": "primes_table",
+     "outcomes": []
+    },
+    "t0098c-r1-primes_table-D3": {
+     "arm": "D3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false
+     ]
+    },
+    "t0098c-r1-primes_table-D4": {
+     "arm": "D4",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      false,
+      false
+     ]
+    },
+    "t0098c-r2-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": []
+    },
+    "t0098c-r2-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false,
+      false
+     ]
+    },
+    "t0098c-r2-flight_booking-C4": {
+     "arm": "C4",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r2-flight_booking-C5": {
+     "arm": "C5",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r2-flight_booking-D1": {
+     "arm": "D1",
+     "case_id": "flight_booking",
+     "outcomes": []
+    },
+    "t0098c-r2-flight_booking-D3": {
+     "arm": "D3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0098c-r2-flight_booking-D4": {
+     "arm": "D4",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r2-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r2-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r2-flight_booking_with_memory-C4": {
+     "arm": "C4",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false,
+      false
+     ]
+    },
+    "t0098c-r2-flight_booking_with_memory-C5": {
+     "arm": "C5",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0098c-r2-flight_booking_with_memory-D1": {
+     "arm": "D1",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": []
+    },
+    "t0098c-r2-flight_booking_with_memory-D3": {
+     "arm": "D3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": []
+    },
+    "t0098c-r2-flight_booking_with_memory-D4": {
+     "arm": "D4",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r2-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r2-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r2-omelette_steps-C4": {
+     "arm": "C4",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r2-omelette_steps-C5": {
+     "arm": "C5",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0098c-r2-omelette_steps-D1": {
+     "arm": "D1",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r2-omelette_steps-D3": {
+     "arm": "D3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r2-omelette_steps-D4": {
+     "arm": "D4",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r2-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r2-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0098c-r2-primes_table-C4": {
+     "arm": "C4",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0098c-r2-primes_table-C5": {
+     "arm": "C5",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0098c-r2-primes_table-D1": {
+     "arm": "D1",
+     "case_id": "primes_table",
+     "outcomes": []
+    },
+    "t0098c-r2-primes_table-D3": {
+     "arm": "D3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false
+     ]
+    },
+    "t0098c-r2-primes_table-D4": {
+     "arm": "D4",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r3-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      false,
+      true,
+      false
+     ]
+    },
+    "t0098c-r3-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r3-flight_booking-C4": {
+     "arm": "C4",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0098c-r3-flight_booking-C5": {
+     "arm": "C5",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      false,
+      false
+     ]
+    },
+    "t0098c-r3-flight_booking-D1": {
+     "arm": "D1",
+     "case_id": "flight_booking",
+     "outcomes": []
+    },
+    "t0098c-r3-flight_booking-D3": {
+     "arm": "D3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false
+     ]
+    },
+    "t0098c-r3-flight_booking-D4": {
+     "arm": "D4",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0098c-r3-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0098c-r3-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r3-flight_booking_with_memory-C4": {
+     "arm": "C4",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r3-flight_booking_with_memory-C5": {
+     "arm": "C5",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r3-flight_booking_with_memory-D1": {
+     "arm": "D1",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": []
+    },
+    "t0098c-r3-flight_booking_with_memory-D3": {
+     "arm": "D3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0098c-r3-flight_booking_with_memory-D4": {
+     "arm": "D4",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r3-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r3-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r3-omelette_steps-C4": {
+     "arm": "C4",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r3-omelette_steps-C5": {
+     "arm": "C5",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r3-omelette_steps-D1": {
+     "arm": "D1",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r3-omelette_steps-D3": {
+     "arm": "D3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r3-omelette_steps-D4": {
+     "arm": "D4",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r3-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false
+     ]
+    },
+    "t0098c-r3-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ]
+    },
+    "t0098c-r3-primes_table-C4": {
+     "arm": "C4",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0098c-r3-primes_table-C5": {
+     "arm": "C5",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0098c-r3-primes_table-D1": {
+     "arm": "D1",
+     "case_id": "primes_table",
+     "outcomes": []
+    },
+    "t0098c-r3-primes_table-D3": {
+     "arm": "D3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false
+     ]
+    },
+    "t0098c-r3-primes_table-D4": {
+     "arm": "D4",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0098c-r4-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r4-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": []
+    },
+    "t0098c-r4-flight_booking-C4": {
+     "arm": "C4",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0098c-r4-flight_booking-C5": {
+     "arm": "C5",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r4-flight_booking-D1": {
+     "arm": "D1",
+     "case_id": "flight_booking",
+     "outcomes": []
+    },
+    "t0098c-r4-flight_booking-D3": {
+     "arm": "D3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false
+     ]
+    },
+    "t0098c-r4-flight_booking-D4": {
+     "arm": "D4",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r4-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r4-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r4-flight_booking_with_memory-C4": {
+     "arm": "C4",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r4-flight_booking_with_memory-C5": {
+     "arm": "C5",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+     ]
+    },
+    "t0098c-r4-flight_booking_with_memory-D1": {
+     "arm": "D1",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": []
+    },
+    "t0098c-r4-flight_booking_with_memory-D3": {
+     "arm": "D3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": []
+    },
+    "t0098c-r4-flight_booking_with_memory-D4": {
+     "arm": "D4",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0098c-r4-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r4-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      false,
+      true
+     ]
+    },
+    "t0098c-r4-omelette_steps-C4": {
+     "arm": "C4",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r4-omelette_steps-C5": {
+     "arm": "C5",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r4-omelette_steps-D1": {
+     "arm": "D1",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r4-omelette_steps-D3": {
+     "arm": "D3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r4-omelette_steps-D4": {
+     "arm": "D4",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0098c-r4-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0098c-r4-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    },
+    "t0098c-r4-primes_table-C4": {
+     "arm": "C4",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0098c-r4-primes_table-C5": {
+     "arm": "C5",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      false,
+      false
+     ]
+    },
+    "t0098c-r4-primes_table-D1": {
+     "arm": "D1",
+     "case_id": "primes_table",
+     "outcomes": []
+    },
+    "t0098c-r4-primes_table-D3": {
+     "arm": "D3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false
+     ]
+    },
+    "t0098c-r4-primes_table-D4": {
+     "arm": "D4",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    }
+   }
+  },
+  "6720e56": {
+   "source": "/home/user/demos/local_astra/.claude/worktrees/t0103-launch/logs/t0103-c3-confirm-6720e56/trials.jsonl",
+   "trials": {
+    "t0103-r0-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r0-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r0-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r0-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r0-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r0-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r0-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      true,
+      false,
+      true,
+      false
+     ]
+    },
+    "t0103-r0-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r1-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r1-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r1-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r1-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r1-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r1-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r1-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r1-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r10-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r10-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r10-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r10-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r10-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r10-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      false,
+      true
+     ]
+    },
+    "t0103-r10-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": []
+    },
+    "t0103-r10-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r11-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r11-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r11-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r11-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": []
+    },
+    "t0103-r11-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r11-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r11-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r11-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r12-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r12-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      true,
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r12-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r12-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r12-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r12-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r12-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r12-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r13-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r13-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r13-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r13-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r13-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r13-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r13-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r13-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true,
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r14-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r14-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r14-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r14-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r14-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r14-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r14-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r14-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r15-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r15-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r15-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      true
+     ]
+    },
+    "t0103-r15-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r15-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r15-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r15-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r15-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r16-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r16-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r16-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r16-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r16-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r16-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r16-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r16-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r17-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r17-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r17-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r17-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r17-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r17-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r17-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r17-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      false,
+      false
+     ]
+    },
+    "t0103-r18-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": []
+    },
+    "t0103-r18-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r18-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r18-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r18-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r18-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r18-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r18-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r19-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r19-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r19-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r19-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r19-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r19-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r19-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r19-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r2-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r2-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      true
+     ]
+    },
+    "t0103-r2-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r2-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r2-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r2-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r2-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r2-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r20-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r20-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r20-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r20-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r20-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r20-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r20-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r20-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r21-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      true
+     ]
+    },
+    "t0103-r21-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      true,
+      true,
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r21-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r21-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r21-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r21-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r21-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r21-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+     ]
+    },
+    "t0103-r22-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r22-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r22-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r22-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r22-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r22-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r22-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      true,
+      false
+     ]
+    },
+    "t0103-r22-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r23-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r23-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r23-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r23-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r23-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r23-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r23-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r23-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r24-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r24-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r24-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r24-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r24-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r24-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r24-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      false,
+      false
+     ]
+    },
+    "t0103-r24-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r25-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r25-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r25-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r25-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r25-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r25-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r25-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r25-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      false,
+      false
+     ]
+    },
+    "t0103-r26-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r26-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r26-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": []
+    },
+    "t0103-r26-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r26-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r26-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r26-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      false,
+      false
+     ]
+    },
+    "t0103-r26-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r27-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r27-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r27-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r27-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r27-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r27-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r27-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r27-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r28-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r28-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": []
+    },
+    "t0103-r28-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r28-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r28-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r28-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      false,
+      true
+     ]
+    },
+    "t0103-r28-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+     ]
+    },
+    "t0103-r28-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r29-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r29-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      false,
+      false
+     ]
+    },
+    "t0103-r29-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r29-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r29-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r29-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r29-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r29-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r3-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r3-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r3-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r3-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r3-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r3-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r3-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r3-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true,
+      true,
+      false
+     ]
+    },
+    "t0103-r30-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r30-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r30-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r30-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r30-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r30-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r30-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r30-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true,
+      true,
+      false
+     ]
+    },
+    "t0103-r31-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r31-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r31-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r31-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r31-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r31-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r31-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+     ]
+    },
+    "t0103-r31-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r32-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r32-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": []
+    },
+    "t0103-r32-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r32-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r32-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r32-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r32-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r32-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r33-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": []
+    },
+    "t0103-r33-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r33-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r33-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r33-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r33-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r33-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r33-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r34-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r34-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r34-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false,
+      false
+     ]
+    },
+    "t0103-r34-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r34-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r34-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r34-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r34-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r35-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r35-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      true
+     ]
+    },
+    "t0103-r35-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r35-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r35-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r35-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r35-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r35-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r36-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true,
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r36-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r36-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r36-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r36-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r36-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r36-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r36-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r37-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r37-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      true
+     ]
+    },
+    "t0103-r37-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r37-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r37-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r37-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      false,
+      true
+     ]
+    },
+    "t0103-r37-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r37-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r38-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r38-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r38-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r38-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r38-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r38-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r38-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r38-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true,
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r39-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r39-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r39-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r39-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r39-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r39-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r39-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+     ]
+    },
+    "t0103-r39-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r4-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r4-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r4-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r4-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r4-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r4-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r4-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r4-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r5-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r5-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r5-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r5-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r5-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r5-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r5-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false
+     ]
+    },
+    "t0103-r5-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r6-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r6-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r6-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r6-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r6-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r6-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r6-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r6-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      false,
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r7-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r7-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r7-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r7-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r7-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r7-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r7-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r7-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      true,
+      true
+     ]
+    },
+    "t0103-r8-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r8-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      false,
+      true
+     ]
+    },
+    "t0103-r8-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r8-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r8-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r8-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r8-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r8-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+     ]
+    },
+    "t0103-r9-flight_booking-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r9-flight_booking-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking",
+     "outcomes": [
+      true,
+      true,
+      true,
+      true
+     ]
+    },
+    "t0103-r9-flight_booking_with_memory-A0": {
+     "arm": "A0",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      false
+     ]
+    },
+    "t0103-r9-flight_booking_with_memory-C3": {
+     "arm": "C3",
+     "case_id": "flight_booking_with_memory",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r9-omelette_steps-A0": {
+     "arm": "A0",
+     "case_id": "omelette_steps",
+     "outcomes": [
+      true,
+      true
+     ]
+    },
+    "t0103-r9-omelette_steps-C3": {
+     "arm": "C3",
+     "case_id": "omelette_steps",
+     "outcomes": []
+    },
+    "t0103-r9-primes_table-A0": {
+     "arm": "A0",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      false,
+      false
+     ]
+    },
+    "t0103-r9-primes_table-C3": {
+     "arm": "C3",
+     "case_id": "primes_table",
+     "outcomes": [
+      true,
+      true,
+      true
+     ]
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,460 @@
+/* T-0138 suite pages: system fonts only, no images, nothing that moves, so every load draws the same frame. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --ink: #1d2433;
+  --muted: #5d6677;
+  --line: #dfe3ea;
+  --paper: #ffffff;
+  --wash: #f5f6f8;
+  --accent: #2f5bd3;
+  --accent-ink: #ffffff;
+  --ok: #1f7a4d;
+  --warn: #8a4b00;
+  --radius: 10px;
+  color-scheme: light;
+}
+
+html {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--wash);
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 19px;
+}
+
+p {
+  margin: 0;
+}
+
+/* ------------------------------------------------------------------ the site bar */
+
+.bar {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+.badge {
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--wash);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.page {
+  width: 1040px;
+  margin: 0 auto;
+  padding: 28px 0 40px;
+}
+
+.lede {
+  color: var(--muted);
+  margin: 6px 0 22px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------------ controls */
+
+button {
+  font: inherit;
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 0;
+  border-radius: 8px;
+  padding: 9px 16px;
+  cursor: pointer;
+}
+
+input[type="text"] {
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid #c7cdd8;
+  border-radius: 8px;
+  padding: 10px 12px;
+  width: 100%;
+  caret-color: var(--ink);
+}
+
+input[type="text"]:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--accent);
+}
+
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0 8px 0 0;
+  vertical-align: -3px;
+}
+
+.field {
+  margin: 0 0 18px;
+}
+
+.field > label,
+.field > .label {
+  display: block;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+.status {
+  font-weight: 600;
+  color: var(--ok);
+}
+
+/* ------------------------------------------------------------------ product cards */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.grid.four {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.grid.five {
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.swatch {
+  height: 120px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+}
+
+.tall .swatch {
+  height: 250px;
+}
+
+.price {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.card button {
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.in-cart {
+  min-height: 22px;
+  color: var(--ok);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------ S6 seats */
+
+.screen {
+  width: 700px;
+  margin: 0 0 18px 40px;
+  padding: 6px 0;
+  text-align: center;
+  color: var(--muted);
+  background: #e8ebf1;
+  border-radius: 6px;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+}
+
+.seat-row {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  margin: 0 0 4px;
+}
+
+.row-letter {
+  width: 40px;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.seat {
+  width: 30px;
+  height: 24px;
+  padding: 0;
+  margin: 0 4px 0 0;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 24px;
+  border-radius: 4px;
+  color: var(--ink);
+  background: #dfe7f7;
+  border: 0;
+}
+
+.seat.aisle {
+  margin-right: 26px;
+}
+
+.seat.on {
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+
+.legend {
+  margin: 16px 0 0 40px;
+}
+
+/* ------------------------------------------------------------------ S7 parts list */
+
+.parts {
+  width: 760px;
+  border-collapse: collapse;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.parts th {
+  text-align: left;
+  font-size: 13px;
+  color: var(--muted);
+  height: 30px;
+  padding: 0 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.parts td {
+  height: 24px;
+  padding: 0 10px;
+  font-size: 13px;
+  line-height: 24px;
+  border-bottom: 1px solid #eef0f4;
+}
+
+.parts tr {
+  height: 24px;
+}
+
+.parts button {
+  height: 20px;
+  padding: 0 12px;
+  font-size: 12px;
+  line-height: 20px;
+  border-radius: 4px;
+}
+
+.parts .qty {
+  width: 110px;
+  color: var(--ok);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------ S9 delivery */
+
+.delivery {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.panel {
+  width: 420px;
+  height: 362px;
+  overflow-y: auto;
+  background: var(--paper);
+  border: 1px solid #c7cdd8;
+  border-radius: 8px;
+}
+
+.panel-head {
+  height: 36px;
+  line-height: 36px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  background: var(--wash);
+}
+
+.option {
+  display: block;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 14px;
+  font-weight: 400;
+  border-top: 1px solid #eef0f4;
+  cursor: pointer;
+}
+
+.side {
+  width: 420px;
+}
+
+.side .save-row {
+  margin-top: 18px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+/* ------------------------------------------------------------------ S11 booking */
+
+.booking {
+  width: 560px;
+}
+
+.choices label {
+  display: inline-block;
+  margin: 0 22px 0 0;
+  font-weight: 400;
+}
+
+.info {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin: 8px 0 22px;
+}
+
+.info h2 {
+  margin: 0 0 8px;
+}
+
+.info p {
+  margin: 0 0 10px;
+}
+
+.confirm {
+  background: #e7f4ec;
+  border: 1px solid #b9dcc6;
+  border-radius: var(--radius);
+  padding: 20px;
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------ S13/S15 summaries */
+
+.summary {
+  width: 560px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #eef0f4;
+}
+
+.line.total {
+  font-weight: 700;
+  border-bottom: 0;
+}
+
+.actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+/* ------------------------------------------------------------------ S14 notice */
+
+.notice {
+  border: 2px solid var(--warn);
+  background: #fff6e8;
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin: 0 0 20px;
+}
+
+.notice h2 {
+  color: var(--warn);
+  margin: 0 0 6px;
+}
+
+.notice .row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.notice input[type="text"] {
+  width: 240px;
+}
+
+/* ------------------------------------------------------------------ swatch colours */
+
+.c-blue { background: #3d6fd6; }
+.c-red { background: #c8433a; }
+.c-green { background: #3f8f57; }
+.c-white { background: #f1f1ee; border: 1px solid var(--line); }
+.c-black { background: #2b2b2e; }
+.c-copper { background: #b8703f; }
+.c-steel { background: #a7adb6; }
+.c-cream { background: #efe6d2; }
+.c-iron { background: #4a4a4f; }
+.c-wood { background: #8a5a35; }
+.c-grey { background: #c9ced6; }

@@ -1,0 +1,3 @@
+docker: Error response from daemon: Conflict. The container name "/astra-stt" is already in use by container "61f0d405d9898f7e8098b9fd3f3b6837a4afa874711d7247f6e2a3ca5cc8df0c". You have to remove (or rename) that container to be able to reuse that name.
+
+Run 'docker run --help' for more information

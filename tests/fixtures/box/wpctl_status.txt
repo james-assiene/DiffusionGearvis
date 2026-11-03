@@ -1,0 +1,53 @@
+PipeWire 'pipewire-0' [1.0.5, user@gpu-box, cookie:1510567997]
+ └─ Clients:
+        32. pipewire                            [1.0.5, user@gpu-box, pid:3312]
+        34. WirePlumber                         [1.0.5, user@gpu-box, pid:3310]
+        35. WirePlumber [export]                [1.0.5, user@gpu-box, pid:3310]
+        39. GNOME Volume Control Media Keys     [1.0.5, user@gpu-box, pid:3808]
+        55. Terminal                            [1.0.5, user@gpu-box, pid:4812]
+        58. gnome-shell                         [1.0.5, user@gpu-box, pid:3653]
+        59. GNOME Shell Volume Control          [1.0.5, user@gpu-box, pid:3653]
+        60. xdg-desktop-portal                  [1.0.5, user@gpu-box, pid:4220]
+        62. Mutter                              [1.0.5, user@gpu-box, pid:3653]
+        73. Screenshot                          [1.0.5, user@gpu-box, pid:225532]
+        79. libcanberra                         [1.0.5, user@gpu-box, pid:3808]
+        80. Claude                              [1.0.5, user@gpu-box, pid:7958]
+       134. wpctl                               [1.0.5, user@gpu-box, pid:1626416]
+
+Audio
+ ├─ Devices:
+ │      40. Family 17h/19h HD Audio Controller  [alsa]
+ │      41. HDA NVidia                          [alsa]
+ │      42. Logitech Webcam C925e               [alsa]
+ │      49. Rembrandt Radeon High Definition Audio Controller [alsa]
+ │  
+ ├─ Sinks:
+ │  *  123. Dummy Output                        [vol: 1.00]
+ │  
+ ├─ Sink endpoints:
+ │  
+ ├─ Sources:
+ │  *   52. Logitech Webcam C925e Analog Stereo [vol: 1.00]
+ │  
+ ├─ Source endpoints:
+ │  
+ └─ Streams:
+
+Video
+ ├─ Devices:
+ │      43. Logitech Webcam C925e               [v4l2]
+ │      51. Logitech Webcam C925e               [v4l2]
+ │  
+ ├─ Sinks:
+ │  
+ ├─ Sink endpoints:
+ │  
+ ├─ Sources:
+ │  *   56. Logitech Webcam C925e (V4L2)       
+ │  
+ ├─ Source endpoints:
+ │  
+ └─ Streams:
+
+Settings
+ └─ Default Configured Node Names:

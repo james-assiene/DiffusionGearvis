@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0111c busy page</title>
+<style>
+  html, body { margin: 0; overflow: hidden; }
+  #busy { position: fixed; inset: 0; background: #888; }
+</style>
+<script src="recorder.js"></script>
+</head>
+<body>
+<div id="busy"></div>
+<script>
+  // A pointerdown blocks the renderer's main thread for ?ms= milliseconds (default 3000), so an
+  // input action that waits for its event to be handled is still in flight while the test closes
+  // the page or kills the browser (criterion 10).
+  const ms = Number(new URLSearchParams(location.search).get("ms") || "3000");
+  document.getElementById("busy").addEventListener("pointerdown", () => {
+    window.__log.push({ type: "busy-start" });
+    const end = performance.now() + ms;
+    while (performance.now() < end) { /* spin */ }
+  });
+</script>
+</body>
+</html>

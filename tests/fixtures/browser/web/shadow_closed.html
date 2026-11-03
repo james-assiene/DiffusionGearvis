@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Closed shadow</title>
+<style>body{margin:0;font:24px sans-serif}#host{position:absolute;left:100px;top:100px;width:600px;height:60px;display:block}</style></head>
+<body>
+<!-- a password field inside a CLOSED shadow root: from outside, document.activeElement is the host and its shadowRoot
+     is null, so the focused field cannot be read; in web mode that is "could not be checked" (FOCUS_UNKNOWN).
+     window.__closedInput is for the test's value check only. -->
+<div id="host"></div>
+<script>
+  const root = document.getElementById("host").attachShadow({ mode: "closed" });
+  root.innerHTML = '<style>input{width:600px;height:60px;font:24px sans-serif;box-sizing:border-box}</style>' +
+    '<input id="cpw" name="secret" type="password">';
+  window.__closedInput = root.getElementById("cpw");
+</script>
+</body>
+</html>

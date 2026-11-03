@@ -1,0 +1,883 @@
+/* T-0205 demo scenario copies: system fonts only, no images, nothing that moves, so every load draws the same frame.
+   Each site picks its colours through a class on <body>; nothing here is taken from a real site. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --ink: #1f2430;
+  --muted: #5e6675;
+  --line: #dde1e8;
+  --paper: #ffffff;
+  --wash: #f4f5f7;
+  --accent: #2d5bd0;
+  --accent-ink: #ffffff;
+  --ok: #1f7a4d;
+  --bad: #a3271d;
+  --radius: 10px;
+  color-scheme: light;
+}
+
+body.louvre { --accent: #7a5a1e; --wash: #f7f4ee; }
+body.ramen { --accent: #b23a28; --wash: #faf6f2; }
+body.recipes { --accent: #2f7a3e; --wash: #f6f8f3; }
+body.breville { --accent: #3b3b3b; --wash: #f2f2f0; }
+body.outdoor { --accent: #2f6b4f; --wash: #f2f5f2; }
+
+html {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--wash);
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: var(--accent);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+p {
+  margin: 0 0 12px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.gone {
+  display: none !important;
+}
+
+/* ------------------------------------------------------------------ the site bar */
+
+.bar {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.bar nav a {
+  margin-left: 22px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.page {
+  width: 1040px;
+  margin: 0 auto;
+  padding: 28px 0 40px;
+}
+
+.lede {
+  color: var(--muted);
+  margin: 8px 0 22px;
+}
+
+.demo-note {
+  width: 1040px;
+  margin: 0 auto;
+  padding: 18px 0 36px;
+  color: var(--muted);
+  font-size: 13px;
+  border-top: 1px solid var(--line);
+}
+
+/* ------------------------------------------------------------------ controls */
+
+button,
+.button {
+  display: inline-block;
+  font: inherit;
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 18px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+button.plain {
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid #c4cad5;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="search"] {
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid #c4cad5;
+  border-radius: 8px;
+  padding: 10px 12px;
+  caret-color: var(--ink);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="search"]:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  margin: 0 10px 0 0;
+  vertical-align: -5px;
+}
+
+.field {
+  margin: 0 0 16px;
+}
+
+.field label {
+  display: block;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+.field input {
+  width: 420px;
+}
+
+.status {
+  font-weight: 600;
+  color: var(--ok);
+  min-height: 1.45em;
+}
+
+/* ------------------------------------------------------------------ web.html: the start-page stand-in */
+
+.web {
+  width: 720px;
+  margin: 80px auto 0;
+}
+
+.web h1 {
+  text-align: center;
+  margin: 0 0 22px;
+}
+
+.web input {
+  width: 100%;
+  font-size: 18px;
+}
+
+.web ul {
+  list-style: none;
+  padding: 0;
+  margin: 26px 0 0;
+}
+
+.web li {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin: 0 0 12px;
+  padding: 14px 18px;
+}
+
+.web li a {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+/* ------------------------------------------------------------------ D1: museum hours */
+
+.hero {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px 30px;
+  margin: 0 0 24px;
+}
+
+.hero.tall {
+  min-height: 300px;
+}
+
+.headline {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 10px 0 0;
+}
+
+table.hours {
+  border-collapse: collapse;
+  width: 560px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+table.hours caption {
+  text-align: left;
+  font-weight: 700;
+  font-size: 18px;
+  padding: 0 0 10px;
+}
+
+table.hours th,
+table.hours td {
+  text-align: left;
+  height: 44px;
+  padding: 0 18px;
+  border-top: 1px solid var(--line);
+}
+
+.closed {
+  color: var(--bad);
+  font-weight: 600;
+}
+
+.banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 190px;
+  background: #23262d;
+  color: #ffffff;
+  padding: 26px 40px;
+  z-index: 50;
+}
+
+.banner p {
+  max-width: 900px;
+}
+
+.banner button {
+  margin-right: 14px;
+}
+
+.banner button.plain {
+  background: #ffffff;
+}
+
+/* ------------------------------------------------------------------ lists of cards */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+
+.card h2,
+.card h3 {
+  margin: 0 0 8px;
+}
+
+.stars {
+  font-weight: 600;
+  color: #8a5a00;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 8px 0 12px;
+}
+
+.swatch {
+  height: 120px;
+  border-radius: 8px;
+  margin: 0 0 14px;
+  background: #d9dde3;
+}
+
+.swatch.warm { background: #e8d5c2; }
+.swatch.cool { background: #c9d6e3; }
+.swatch.green { background: #cfe0cf; }
+
+/* ------------------------------------------------------------------ D3: the recipe page */
+
+.recipe {
+  width: 760px;
+  margin: 0 auto;
+  padding: 28px 0 40px;
+}
+
+.photo {
+  height: 680px;
+  border-radius: var(--radius);
+  background: #c98f6a;
+  margin: 18px 0 24px;
+}
+
+.story p {
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.ad {
+  background: #fff8df;
+  border: 1px solid #e6d79a;
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  margin: 26px 0;
+}
+
+.ad .tag {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #7a6420;
+}
+
+.ingredients {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 26px;
+  margin: 26px 0;
+}
+
+.ingredients li,
+.method li {
+  font-size: 18px;
+  margin: 0 0 6px;
+}
+
+.also {
+  background: var(--paper);
+  border: 1px dashed #b9c2b0;
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  margin: 26px 0;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 24, 30, 0.62);
+  z-index: 60;
+}
+
+.dialog {
+  width: 520px;
+  margin: 170px auto 0;
+  background: var(--paper);
+  border-radius: 14px;
+  padding: 30px 34px;
+}
+
+.dialog input {
+  width: 100%;
+  margin: 6px 0 14px;
+}
+
+.dialog .row {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ------------------------------------------------------------------ D4/D5: shops */
+
+.search-row {
+  display: flex;
+  gap: 12px;
+  margin: 0 0 22px;
+}
+
+.search-row input {
+  width: 520px;
+}
+
+.results {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.results li {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin: 0 0 12px;
+}
+
+.results a {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.parts .part {
+  display: grid;
+  grid-template-columns: 1fr 140px 160px;
+  align-items: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin: 0 0 12px;
+}
+
+.part .price {
+  margin: 0;
+}
+
+.added {
+  color: var(--ok);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 26px;
+}
+
+.filters {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  align-self: start;
+}
+
+.filters h3 {
+  margin: 14px 0 10px;
+}
+
+.filters label {
+  display: block;
+  margin: 0 0 12px;
+  cursor: pointer;
+}
+
+.lines {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+}
+
+.lines li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  margin: 0 0 10px;
+}
+
+.total {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 20px;
+}
+
+.checkout-form {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 26px;
+  margin: 0 0 20px;
+  width: 520px;
+}
+
+/* ------------------------------------------------------------------ group B sites (D6-D9) */
+
+body.pizza { --accent: #0b5aa2; --wash: #f3f6fa; }
+body.trees { --accent: #3d6b2a; --wash: #f4f7f1; }
+body.trips { --accent: #b0561e; --wash: #faf6f1; }
+body.flights { --accent: #1a5fb4; --wash: #f3f5f9; }
+
+input[type="tel"],
+textarea {
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid #c4cad5;
+  border-radius: 8px;
+  padding: 10px 12px;
+  caret-color: var(--ink);
+}
+
+input[type="tel"]:focus,
+textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0 8px 0 0;
+  vertical-align: -3px;
+}
+
+button.ghost {
+  color: var(--accent);
+  background: var(--paper);
+  border: 1px solid var(--accent);
+}
+
+.on {
+  box-shadow: 0 0 0 3px var(--accent);
+}
+
+/* D6: the pizza order */
+
+.toggle {
+  display: flex;
+  gap: 0;
+  margin: 18px 0 8px;
+}
+
+.toggle .seg {
+  color: var(--accent);
+  background: var(--paper);
+  border: 1px solid var(--accent);
+  border-radius: 0;
+  width: 150px;
+}
+
+.toggle .seg:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.toggle .seg:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.toggle .seg.on {
+  color: var(--accent-ink);
+  background: var(--accent);
+  box-shadow: none;
+}
+
+.stores {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  display: flex;
+  gap: 12px;
+}
+
+.stores button {
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  font-weight: 400;
+  text-align: left;
+}
+
+.menu {
+  margin: 8px 0 0;
+}
+
+.menu h2 {
+  margin: 0 0 12px;
+}
+
+.menu-item {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  align-items: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  margin: 0 0 10px;
+}
+
+.sizes {
+  margin: 10px 0 0;
+}
+
+.sizes label {
+  display: inline-block;
+  margin: 0 12px 0 0;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* D7: the quote form */
+
+.cards.three {
+  margin: 0 0 20px;
+}
+
+.quote-form {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 26px;
+  width: 900px;
+}
+
+.quote-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 26px;
+}
+
+.quote-grid .field input {
+  width: 100%;
+}
+
+.services {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 16px 10px;
+  margin: 0 0 14px;
+}
+
+.services legend {
+  font-weight: 600;
+  padding: 0 6px;
+}
+
+.services label {
+  display: inline-block;
+  margin: 0 22px 0 0;
+  padding: 6px 0;
+  cursor: pointer;
+}
+
+.quote-form textarea {
+  width: 100%;
+  resize: none;
+}
+
+.confirm {
+  background: var(--paper);
+  border: 1px solid var(--ok);
+  border-radius: var(--radius);
+  padding: 22px 26px;
+  font-weight: 600;
+  color: var(--ok);
+  width: 900px;
+}
+
+/* D8: day trips */
+
+.destinations .drive {
+  margin: 0 0 0 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.stops {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.stop {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+
+.stop h3 {
+  margin: 0 0 6px;
+}
+
+.stop p {
+  margin: 0 0 6px;
+}
+
+.open {
+  color: var(--ok);
+  font-weight: 600;
+}
+
+/* D9: the flight search */
+
+.flight-search {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin: 0 0 10px;
+}
+
+.pick {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.pick label,
+.pick .label {
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0 0 4px;
+}
+
+.pick input {
+  width: 230px;
+}
+
+button.date {
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid #c4cad5;
+  font-weight: 400;
+  width: 150px;
+  text-align: left;
+}
+
+.suggest {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 40;
+  width: 360px;
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 6px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(20, 24, 30, 0.18);
+}
+
+.suggest button {
+  display: block;
+  width: 100%;
+  color: var(--ink);
+  background: var(--paper);
+  font-weight: 400;
+  text-align: left;
+  padding: 8px 10px;
+}
+
+.calendar {
+  position: absolute;
+  top: 100%;
+  left: 520px;
+  z-index: 40;
+  width: 330px;
+  margin: 4px 0 0;
+  padding: 12px 14px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(20, 24, 30, 0.18);
+}
+
+.cal-head {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 8px;
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.day-name {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.cal-grid button.day {
+  color: var(--ink);
+  background: var(--wash);
+  font-weight: 400;
+  padding: 7px 0;
+  text-align: center;
+}
+
+.chosen {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--paper);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  margin: 0 0 10px;
+}
+
+.flight-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.flight-list li {
+  display: grid;
+  grid-template-columns: 140px 170px 1fr 110px 110px;
+  align-items: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 16px;
+  margin: 0 0 6px;
+}
+
+.flight-list .price {
+  margin: 0;
+  font-size: 18px;
+}
+
+.flight-list button {
+  padding: 7px 14px;
+}

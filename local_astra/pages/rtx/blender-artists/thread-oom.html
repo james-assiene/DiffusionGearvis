@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cycles CUDA error: out of memory - Technical Support - Blender Artists Community (demo copy)</title>
+  <link rel="stylesheet" href="/assets/rtx.css">
+</head>
+<body class="forum" data-page-id="forum-oom">
+  <header class="site-bar">
+    <span class="site-name">Blender Artists Community</span>
+    <a href="/blender-artists/">Latest</a>
+    <a href="/blender-artists/login.html">Log in</a>
+    <span class="host">blenderartists.org</span>
+  </header>
+  <main>
+    <p class="crumbs"><a href="/blender-artists/">Blender Artists</a> › Technical Support › Cycles</p>
+    <h1>Cycles CUDA error: out of memory</h1>
+
+    <div class="post" data-scn="oom-question">
+      <p class="who">rendergull</p>
+      <p>My forest scene renders fine on the CPU, but on the GPU Cycles stops after a few seconds with:</p>
+      <p class="message">CUDA error: out of memory</p>
+      <p>The card has 8 GB. Is there a setting for this?</p>
+      <p class="likes">2 likes</p>
+    </div>
+
+    <div class="post" data-scn="oom-answer">
+      <p class="who">nodewrangler</p>
+      <p>The scene does not fit in the card's memory. In Render Properties › Performance › Memory, enable Use Tiling
+        and lower Tile Size to 512. Shrinking large textures also helps.</p>
+      <p class="likes">11 likes</p>
+    </div>
+
+    <p><a class="button" href="/blender-artists/login.html" data-scn="oom-reply">Reply</a></p>
+  </main>
+  <footer>Demo copy for testing; not affiliated with Blender Artists or the Blender Foundation. Facts on this page are invented.</footer>
+  <script src="/assets/rtx.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0111c colour block</title>
+<style>
+  html, body { margin: 0; overflow: hidden; background: #fff; }
+  /* 400x400 at (440, 200): centre (640, 400) of the 1280x800 viewport */
+  #block { position: absolute; left: 440px; top: 200px; width: 400px; height: 400px; background: rgb(255, 0, 0); }
+</style>
+<script src="recorder.js"></script>
+</head>
+<body>
+<div id="block"></div>
+<script>
+  // The first click turns the block blue, the next red again, and so on. The change happens two
+  // animation frames after the click, not in the handler: a frame taken straight after dispatch,
+  // before the executor's settle, still shows the old colour in about 3 of 10 trials
+  // (MANIFEST.md, probe_sandbox.py "settle"), so the e2e row clicks several times.
+  let blue = false;
+  document.getElementById("block").addEventListener("click", (e) => {
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      blue = !blue;
+      e.target.style.background = blue ? "rgb(0, 0, 255)" : "rgb(255, 0, 0)";
+      window.__log.push({ type: blue ? "turned-blue" : "turned-red" });
+    }));
+  });
+</script>
+</body>
+</html>

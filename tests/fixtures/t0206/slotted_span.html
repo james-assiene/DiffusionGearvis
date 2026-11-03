@@ -1,0 +1,5 @@
+<!doctype html><html><head><meta charset="utf-8"><style>body{font:16px sans-serif;margin:24px} input,textarea,button,select{display:block;margin:8px 0;font-size:16px;padding:6px;width:320px} button{width:auto}</style><title>t0206 slotted web-component button, span-wrapped label (R-1 variant)</title></head><body><form action="/sent" method="post"><label>Email <input type="email" name="email" id="email"></label><label>Message <textarea name="message" id="message" rows="2"></textarea></label><x-btn id="go" type="submit"><span id="lbl">Send</span></x-btn></form><script>
+customElements.define("x-btn", class extends HTMLElement { constructor(){ super();
+ const r=this.attachShadow({mode:"open"}); r.innerHTML='<button part="b" id="inner" style="padding:24px 48px;font-size:16px"><slot></slot></button>';
+ r.querySelector("button").addEventListener("click",()=>{ this.closest("form").requestSubmit(); }); } });
+</script></body></html>

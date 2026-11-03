@@ -1,0 +1,2025 @@
+{
+  "provenance": {
+    "generator": "tests/fixtures/memory/make_recall_corpus.py",
+    "hand_written": 40,
+    "filler": 360,
+    "note": "captions invented for T-0053 criteria 13/14; no user data. The constraints they satisfy are asserted by the generator and listed in MANIFEST.md."
+  },
+  "queries": {
+    "rejected": "Make a flat looking UI.",
+    "flight": "what time was that flight",
+    "glasses": "where did I leave my glasses",
+    "universal_in_the_small_subset": "desk"
+  },
+  "small_subset": [
+    "c06",
+    "c07",
+    "c08"
+  ],
+  "flight_key": "c07",
+  "glasses_key": "c06",
+  "episodes": [
+    {
+      "key": "c00",
+      "ts_ms": 1768000000000,
+      "caption": "A terminal window running a package install, with a progress bar and green status lines."
+    },
+    {
+      "key": "c01",
+      "ts_ms": 1768000060000,
+      "caption": "A spreadsheet of monthly expenses, one column per category, totals at the bottom."
+    },
+    {
+      "key": "c02",
+      "ts_ms": 1768000120000,
+      "caption": "A code editor showing a Python file with a function and its docstring."
+    },
+    {
+      "key": "c03",
+      "ts_ms": 1768000180000,
+      "caption": "A browser on a news article about a harbour redevelopment, with a large photograph."
+    },
+    {
+      "key": "c04",
+      "ts_ms": 1768000240000,
+      "caption": "A chat window with a short conversation and an unread badge on the sidebar."
+    },
+    {
+      "key": "c05",
+      "ts_ms": 1768000300000,
+      "caption": "A map application centred on a coastal town, with a route drawn in blue."
+    },
+    {
+      "key": "c06",
+      "ts_ms": 1768000360000,
+      "caption": "A pair of reading glasses resting on a desk beside a closed paperback."
+    },
+    {
+      "key": "c07",
+      "ts_ms": 1768000420000,
+      "caption": "A flight confirmation on the screen of a laptop on a desk, seat fourteen C, boarding at six forty in the evening."
+    },
+    {
+      "key": "c08",
+      "ts_ms": 1768000480000,
+      "caption": "A mug of coffee on a desk next to a stack of unopened envelopes."
+    },
+    {
+      "key": "c09",
+      "ts_ms": 1768000540000,
+      "caption": "A photograph of a kitchen counter with a chopping board, onions and a knife."
+    },
+    {
+      "key": "c10",
+      "ts_ms": 1768000600000,
+      "caption": "A recipe for lentil soup, ingredients on the left and steps on the right."
+    },
+    {
+      "key": "c11",
+      "ts_ms": 1768000660000,
+      "caption": "A calendar month view with three coloured events on consecutive days."
+    },
+    {
+      "key": "c12",
+      "ts_ms": 1768000720000,
+      "caption": "A PDF of a rental agreement, clause four highlighted in yellow."
+    },
+    {
+      "key": "c13",
+      "ts_ms": 1768000780000,
+      "caption": "A music player with an album cover and a progress slider near the end."
+    },
+    {
+      "key": "c14",
+      "ts_ms": 1768000840000,
+      "caption": "A video call with four participants and a shared presentation slide."
+    },
+    {
+      "key": "c15",
+      "ts_ms": 1768000900000,
+      "caption": "A settings panel with toggles for notifications and a search box at the top."
+    },
+    {
+      "key": "c16",
+      "ts_ms": 1768000960000,
+      "caption": "A photograph of a bicycle leaning against a brick wall."
+    },
+    {
+      "key": "c17",
+      "ts_ms": 1768001020000,
+      "caption": "A dashboard of server graphs, one line spiking around midnight."
+    },
+    {
+      "key": "c18",
+      "ts_ms": 1768001080000,
+      "caption": "A page of a calculus textbook with exercises on parametrized curves."
+    },
+    {
+      "key": "c19",
+      "ts_ms": 1768001140000,
+      "caption": "A page of a chemistry textbook with a diagram of an atom."
+    },
+    {
+      "key": "c20",
+      "ts_ms": 1768001200000,
+      "caption": "A shopping cart with three items and an estimated delivery date."
+    },
+    {
+      "key": "c21",
+      "ts_ms": 1768001260000,
+      "caption": "A photograph of a dog asleep on a sofa in the afternoon sun."
+    },
+    {
+      "key": "c22",
+      "ts_ms": 1768001320000,
+      "caption": "A bank statement with a list of card payments and a closing balance."
+    },
+    {
+      "key": "c23",
+      "ts_ms": 1768001380000,
+      "caption": "A drawing application with a half finished sketch of a house."
+    },
+    {
+      "key": "c24",
+      "ts_ms": 1768001440000,
+      "caption": "A weather forecast for the week with rain on Thursday and Friday."
+    },
+    {
+      "key": "c25",
+      "ts_ms": 1768001500000,
+      "caption": "A train ticket with a platform number and a seat reservation."
+    },
+    {
+      "key": "c26",
+      "ts_ms": 1768001560000,
+      "caption": "A podcast episode page with a description and a subscribe button."
+    },
+    {
+      "key": "c27",
+      "ts_ms": 1768001620000,
+      "caption": "A photograph of a bookshelf, spines in many colours, one shelf empty."
+    },
+    {
+      "key": "c28",
+      "ts_ms": 1768001680000,
+      "caption": "A git history graph with several branches and a merge commit."
+    },
+    {
+      "key": "c29",
+      "ts_ms": 1768001740000,
+      "caption": "A note application with a bulleted shopping list and two checked items."
+    },
+    {
+      "key": "c30",
+      "ts_ms": 1768001800000,
+      "caption": "A crossword puzzle half completed, a pencil resting on the page."
+    },
+    {
+      "key": "c31",
+      "ts_ms": 1768001860000,
+      "caption": "A photograph of a park bench under a large chestnut tree."
+    },
+    {
+      "key": "c32",
+      "ts_ms": 1768001920000,
+      "caption": "A spreadsheet of a football league table sorted by points."
+    },
+    {
+      "key": "c33",
+      "ts_ms": 1768001980000,
+      "caption": "A slide deck title page with a company logo and a date."
+    },
+    {
+      "key": "c34",
+      "ts_ms": 1768002040000,
+      "caption": "A photograph of a bowl of ramen with an egg and spring onions."
+    },
+    {
+      "key": "c35",
+      "ts_ms": 1768002100000,
+      "caption": "A support ticket thread with a reply from an engineer and a status of open."
+    },
+    {
+      "key": "c36",
+      "ts_ms": 1768002160000,
+      "caption": "A photograph of a whiteboard covered in boxes and arrows."
+    },
+    {
+      "key": "c37",
+      "ts_ms": 1768002220000,
+      "caption": "A language learning app with a vocabulary card and an audio button."
+    },
+    {
+      "key": "c38",
+      "ts_ms": 1768002280000,
+      "caption": "A photograph of a rain streaked window with a city blurred behind it."
+    },
+    {
+      "key": "c39",
+      "ts_ms": 1768002340000,
+      "caption": "A printer dialog with a page range and a two sided printing option."
+    }
+  ],
+  "filler": [
+    {
+      "key": "f000",
+      "ts_ms": 1767999940000,
+      "caption": "A report number 0 on a tablet, with a blue header."
+    },
+    {
+      "key": "f001",
+      "ts_ms": 1767999880000,
+      "caption": "A invoice number 1 on a tablet, with a blue header."
+    },
+    {
+      "key": "f002",
+      "ts_ms": 1767999820000,
+      "caption": "A diagram number 2 on a tablet, with a blue header."
+    },
+    {
+      "key": "f003",
+      "ts_ms": 1767999760000,
+      "caption": "A photograph number 3 on a tablet, with a blue header."
+    },
+    {
+      "key": "f004",
+      "ts_ms": 1767999700000,
+      "caption": "A form number 4 on a tablet, with a blue header."
+    },
+    {
+      "key": "f005",
+      "ts_ms": 1767999640000,
+      "caption": "A receipt number 5 on a tablet, with a blue header."
+    },
+    {
+      "key": "f006",
+      "ts_ms": 1767999580000,
+      "caption": "A poster number 6 on a tablet, with a blue header."
+    },
+    {
+      "key": "f007",
+      "ts_ms": 1767999520000,
+      "caption": "A chart number 7 on a tablet, with a blue header."
+    },
+    {
+      "key": "f008",
+      "ts_ms": 1767999460000,
+      "caption": "A report number 8 in a browser tab, with a blue header."
+    },
+    {
+      "key": "f009",
+      "ts_ms": 1767999400000,
+      "caption": "A invoice number 9 in a browser tab, with a blue header."
+    },
+    {
+      "key": "f010",
+      "ts_ms": 1767999340000,
+      "caption": "A diagram number 10 in a browser tab, with a blue header."
+    },
+    {
+      "key": "f011",
+      "ts_ms": 1767999280000,
+      "caption": "A photograph number 11 in a browser tab, with a blue header."
+    },
+    {
+      "key": "f012",
+      "ts_ms": 1767999220000,
+      "caption": "A form number 12 in a browser tab, with a blue header."
+    },
+    {
+      "key": "f013",
+      "ts_ms": 1767999160000,
+      "caption": "A receipt number 13 in a browser tab, with a blue header."
+    },
+    {
+      "key": "f014",
+      "ts_ms": 1767999100000,
+      "caption": "A poster number 14 in a browser tab, with a blue header."
+    },
+    {
+      "key": "f015",
+      "ts_ms": 1767999040000,
+      "caption": "A chart number 15 in a browser tab, with a blue header."
+    },
+    {
+      "key": "f016",
+      "ts_ms": 1767998980000,
+      "caption": "A report number 16 on a projector, with a blue header."
+    },
+    {
+      "key": "f017",
+      "ts_ms": 1767998920000,
+      "caption": "A invoice number 17 on a projector, with a blue header."
+    },
+    {
+      "key": "f018",
+      "ts_ms": 1767998860000,
+      "caption": "A diagram number 18 on a projector, with a blue header."
+    },
+    {
+      "key": "f019",
+      "ts_ms": 1767998800000,
+      "caption": "A photograph number 19 on a projector, with a blue header."
+    },
+    {
+      "key": "f020",
+      "ts_ms": 1767998740000,
+      "caption": "A form number 20 on a projector, with a blue header."
+    },
+    {
+      "key": "f021",
+      "ts_ms": 1767998680000,
+      "caption": "A receipt number 21 on a projector, with a blue header."
+    },
+    {
+      "key": "f022",
+      "ts_ms": 1767998620000,
+      "caption": "A poster number 22 on a projector, with a blue header."
+    },
+    {
+      "key": "f023",
+      "ts_ms": 1767998560000,
+      "caption": "A chart number 23 on a projector, with a blue header."
+    },
+    {
+      "key": "f024",
+      "ts_ms": 1767998500000,
+      "caption": "A report number 24 in a print preview, with a blue header."
+    },
+    {
+      "key": "f025",
+      "ts_ms": 1767998440000,
+      "caption": "A invoice number 25 in a print preview, with a blue header."
+    },
+    {
+      "key": "f026",
+      "ts_ms": 1767998380000,
+      "caption": "A diagram number 26 in a print preview, with a blue header."
+    },
+    {
+      "key": "f027",
+      "ts_ms": 1767998320000,
+      "caption": "A photograph number 27 in a print preview, with a blue header."
+    },
+    {
+      "key": "f028",
+      "ts_ms": 1767998260000,
+      "caption": "A form number 28 in a print preview, with a blue header."
+    },
+    {
+      "key": "f029",
+      "ts_ms": 1767998200000,
+      "caption": "A receipt number 29 in a print preview, with a blue header."
+    },
+    {
+      "key": "f030",
+      "ts_ms": 1767998140000,
+      "caption": "A poster number 30 in a print preview, with a blue header."
+    },
+    {
+      "key": "f031",
+      "ts_ms": 1767998080000,
+      "caption": "A chart number 31 in a print preview, with a blue header."
+    },
+    {
+      "key": "f032",
+      "ts_ms": 1767998020000,
+      "caption": "A report number 32 on a phone, with a blue header."
+    },
+    {
+      "key": "f033",
+      "ts_ms": 1767997960000,
+      "caption": "A invoice number 33 on a phone, with a blue header."
+    },
+    {
+      "key": "f034",
+      "ts_ms": 1767997900000,
+      "caption": "A diagram number 34 on a phone, with a blue header."
+    },
+    {
+      "key": "f035",
+      "ts_ms": 1767997840000,
+      "caption": "A photograph number 35 on a phone, with a blue header."
+    },
+    {
+      "key": "f036",
+      "ts_ms": 1767997780000,
+      "caption": "A form number 36 on a phone, with a blue header."
+    },
+    {
+      "key": "f037",
+      "ts_ms": 1767997720000,
+      "caption": "A receipt number 37 on a phone, with a blue header."
+    },
+    {
+      "key": "f038",
+      "ts_ms": 1767997660000,
+      "caption": "A poster number 38 on a phone, with a blue header."
+    },
+    {
+      "key": "f039",
+      "ts_ms": 1767997600000,
+      "caption": "A chart number 39 on a phone, with a blue header."
+    },
+    {
+      "key": "f040",
+      "ts_ms": 1767997540000,
+      "caption": "A report number 40 on a tablet, with a narrow margin."
+    },
+    {
+      "key": "f041",
+      "ts_ms": 1767997480000,
+      "caption": "A invoice number 41 on a tablet, with a narrow margin."
+    },
+    {
+      "key": "f042",
+      "ts_ms": 1767997420000,
+      "caption": "A diagram number 42 on a tablet, with a narrow margin."
+    },
+    {
+      "key": "f043",
+      "ts_ms": 1767997360000,
+      "caption": "A photograph number 43 on a tablet, with a narrow margin."
+    },
+    {
+      "key": "f044",
+      "ts_ms": 1767997300000,
+      "caption": "A form number 44 on a tablet, with a narrow margin."
+    },
+    {
+      "key": "f045",
+      "ts_ms": 1767997240000,
+      "caption": "A receipt number 45 on a tablet, with a narrow margin."
+    },
+    {
+      "key": "f046",
+      "ts_ms": 1767997180000,
+      "caption": "A poster number 46 on a tablet, with a narrow margin."
+    },
+    {
+      "key": "f047",
+      "ts_ms": 1767997120000,
+      "caption": "A chart number 47 on a tablet, with a narrow margin."
+    },
+    {
+      "key": "f048",
+      "ts_ms": 1767997060000,
+      "caption": "A report number 48 in a browser tab, with a narrow margin."
+    },
+    {
+      "key": "f049",
+      "ts_ms": 1767997000000,
+      "caption": "A invoice number 49 in a browser tab, with a narrow margin."
+    },
+    {
+      "key": "f050",
+      "ts_ms": 1767996940000,
+      "caption": "A diagram number 50 in a browser tab, with a narrow margin."
+    },
+    {
+      "key": "f051",
+      "ts_ms": 1767996880000,
+      "caption": "A photograph number 51 in a browser tab, with a narrow margin."
+    },
+    {
+      "key": "f052",
+      "ts_ms": 1767996820000,
+      "caption": "A form number 52 in a browser tab, with a narrow margin."
+    },
+    {
+      "key": "f053",
+      "ts_ms": 1767996760000,
+      "caption": "A receipt number 53 in a browser tab, with a narrow margin."
+    },
+    {
+      "key": "f054",
+      "ts_ms": 1767996700000,
+      "caption": "A poster number 54 in a browser tab, with a narrow margin."
+    },
+    {
+      "key": "f055",
+      "ts_ms": 1767996640000,
+      "caption": "A chart number 55 in a browser tab, with a narrow margin."
+    },
+    {
+      "key": "f056",
+      "ts_ms": 1767996580000,
+      "caption": "A report number 56 on a projector, with a narrow margin."
+    },
+    {
+      "key": "f057",
+      "ts_ms": 1767996520000,
+      "caption": "A invoice number 57 on a projector, with a narrow margin."
+    },
+    {
+      "key": "f058",
+      "ts_ms": 1767996460000,
+      "caption": "A diagram number 58 on a projector, with a narrow margin."
+    },
+    {
+      "key": "f059",
+      "ts_ms": 1767996400000,
+      "caption": "A photograph number 59 on a projector, with a narrow margin."
+    },
+    {
+      "key": "f060",
+      "ts_ms": 1767996340000,
+      "caption": "A form number 60 on a projector, with a narrow margin."
+    },
+    {
+      "key": "f061",
+      "ts_ms": 1767996280000,
+      "caption": "A receipt number 61 on a projector, with a narrow margin."
+    },
+    {
+      "key": "f062",
+      "ts_ms": 1767996220000,
+      "caption": "A poster number 62 on a projector, with a narrow margin."
+    },
+    {
+      "key": "f063",
+      "ts_ms": 1767996160000,
+      "caption": "A chart number 63 on a projector, with a narrow margin."
+    },
+    {
+      "key": "f064",
+      "ts_ms": 1767996100000,
+      "caption": "A report number 64 in a print preview, with a narrow margin."
+    },
+    {
+      "key": "f065",
+      "ts_ms": 1767996040000,
+      "caption": "A invoice number 65 in a print preview, with a narrow margin."
+    },
+    {
+      "key": "f066",
+      "ts_ms": 1767995980000,
+      "caption": "A diagram number 66 in a print preview, with a narrow margin."
+    },
+    {
+      "key": "f067",
+      "ts_ms": 1767995920000,
+      "caption": "A photograph number 67 in a print preview, with a narrow margin."
+    },
+    {
+      "key": "f068",
+      "ts_ms": 1767995860000,
+      "caption": "A form number 68 in a print preview, with a narrow margin."
+    },
+    {
+      "key": "f069",
+      "ts_ms": 1767995800000,
+      "caption": "A receipt number 69 in a print preview, with a narrow margin."
+    },
+    {
+      "key": "f070",
+      "ts_ms": 1767995740000,
+      "caption": "A poster number 70 in a print preview, with a narrow margin."
+    },
+    {
+      "key": "f071",
+      "ts_ms": 1767995680000,
+      "caption": "A chart number 71 in a print preview, with a narrow margin."
+    },
+    {
+      "key": "f072",
+      "ts_ms": 1767995620000,
+      "caption": "A report number 72 on a phone, with a narrow margin."
+    },
+    {
+      "key": "f073",
+      "ts_ms": 1767995560000,
+      "caption": "A invoice number 73 on a phone, with a narrow margin."
+    },
+    {
+      "key": "f074",
+      "ts_ms": 1767995500000,
+      "caption": "A diagram number 74 on a phone, with a narrow margin."
+    },
+    {
+      "key": "f075",
+      "ts_ms": 1767995440000,
+      "caption": "A photograph number 75 on a phone, with a narrow margin."
+    },
+    {
+      "key": "f076",
+      "ts_ms": 1767995380000,
+      "caption": "A form number 76 on a phone, with a narrow margin."
+    },
+    {
+      "key": "f077",
+      "ts_ms": 1767995320000,
+      "caption": "A receipt number 77 on a phone, with a narrow margin."
+    },
+    {
+      "key": "f078",
+      "ts_ms": 1767995260000,
+      "caption": "A poster number 78 on a phone, with a narrow margin."
+    },
+    {
+      "key": "f079",
+      "ts_ms": 1767995200000,
+      "caption": "A chart number 79 on a phone, with a narrow margin."
+    },
+    {
+      "key": "f080",
+      "ts_ms": 1767995140000,
+      "caption": "A report number 80 on a tablet, with a serif heading."
+    },
+    {
+      "key": "f081",
+      "ts_ms": 1767995080000,
+      "caption": "A invoice number 81 on a tablet, with a serif heading."
+    },
+    {
+      "key": "f082",
+      "ts_ms": 1767995020000,
+      "caption": "A diagram number 82 on a tablet, with a serif heading."
+    },
+    {
+      "key": "f083",
+      "ts_ms": 1767994960000,
+      "caption": "A photograph number 83 on a tablet, with a serif heading."
+    },
+    {
+      "key": "f084",
+      "ts_ms": 1767994900000,
+      "caption": "A form number 84 on a tablet, with a serif heading."
+    },
+    {
+      "key": "f085",
+      "ts_ms": 1767994840000,
+      "caption": "A receipt number 85 on a tablet, with a serif heading."
+    },
+    {
+      "key": "f086",
+      "ts_ms": 1767994780000,
+      "caption": "A poster number 86 on a tablet, with a serif heading."
+    },
+    {
+      "key": "f087",
+      "ts_ms": 1767994720000,
+      "caption": "A chart number 87 on a tablet, with a serif heading."
+    },
+    {
+      "key": "f088",
+      "ts_ms": 1767994660000,
+      "caption": "A report number 88 in a browser tab, with a serif heading."
+    },
+    {
+      "key": "f089",
+      "ts_ms": 1767994600000,
+      "caption": "A invoice number 89 in a browser tab, with a serif heading."
+    },
+    {
+      "key": "f090",
+      "ts_ms": 1767994540000,
+      "caption": "A diagram number 90 in a browser tab, with a serif heading."
+    },
+    {
+      "key": "f091",
+      "ts_ms": 1767994480000,
+      "caption": "A photograph number 91 in a browser tab, with a serif heading."
+    },
+    {
+      "key": "f092",
+      "ts_ms": 1767994420000,
+      "caption": "A form number 92 in a browser tab, with a serif heading."
+    },
+    {
+      "key": "f093",
+      "ts_ms": 1767994360000,
+      "caption": "A receipt number 93 in a browser tab, with a serif heading."
+    },
+    {
+      "key": "f094",
+      "ts_ms": 1767994300000,
+      "caption": "A poster number 94 in a browser tab, with a serif heading."
+    },
+    {
+      "key": "f095",
+      "ts_ms": 1767994240000,
+      "caption": "A chart number 95 in a browser tab, with a serif heading."
+    },
+    {
+      "key": "f096",
+      "ts_ms": 1767994180000,
+      "caption": "A report number 96 on a projector, with a serif heading."
+    },
+    {
+      "key": "f097",
+      "ts_ms": 1767994120000,
+      "caption": "A invoice number 97 on a projector, with a serif heading."
+    },
+    {
+      "key": "f098",
+      "ts_ms": 1767994060000,
+      "caption": "A diagram number 98 on a projector, with a serif heading."
+    },
+    {
+      "key": "f099",
+      "ts_ms": 1767994000000,
+      "caption": "A photograph number 99 on a projector, with a serif heading."
+    },
+    {
+      "key": "f100",
+      "ts_ms": 1767993940000,
+      "caption": "A form number 100 on a projector, with a serif heading."
+    },
+    {
+      "key": "f101",
+      "ts_ms": 1767993880000,
+      "caption": "A receipt number 101 on a projector, with a serif heading."
+    },
+    {
+      "key": "f102",
+      "ts_ms": 1767993820000,
+      "caption": "A poster number 102 on a projector, with a serif heading."
+    },
+    {
+      "key": "f103",
+      "ts_ms": 1767993760000,
+      "caption": "A chart number 103 on a projector, with a serif heading."
+    },
+    {
+      "key": "f104",
+      "ts_ms": 1767993700000,
+      "caption": "A report number 104 in a print preview, with a serif heading."
+    },
+    {
+      "key": "f105",
+      "ts_ms": 1767993640000,
+      "caption": "A invoice number 105 in a print preview, with a serif heading."
+    },
+    {
+      "key": "f106",
+      "ts_ms": 1767993580000,
+      "caption": "A diagram number 106 in a print preview, with a serif heading."
+    },
+    {
+      "key": "f107",
+      "ts_ms": 1767993520000,
+      "caption": "A photograph number 107 in a print preview, with a serif heading."
+    },
+    {
+      "key": "f108",
+      "ts_ms": 1767993460000,
+      "caption": "A form number 108 in a print preview, with a serif heading."
+    },
+    {
+      "key": "f109",
+      "ts_ms": 1767993400000,
+      "caption": "A receipt number 109 in a print preview, with a serif heading."
+    },
+    {
+      "key": "f110",
+      "ts_ms": 1767993340000,
+      "caption": "A poster number 110 in a print preview, with a serif heading."
+    },
+    {
+      "key": "f111",
+      "ts_ms": 1767993280000,
+      "caption": "A chart number 111 in a print preview, with a serif heading."
+    },
+    {
+      "key": "f112",
+      "ts_ms": 1767993220000,
+      "caption": "A report number 112 on a phone, with a serif heading."
+    },
+    {
+      "key": "f113",
+      "ts_ms": 1767993160000,
+      "caption": "A invoice number 113 on a phone, with a serif heading."
+    },
+    {
+      "key": "f114",
+      "ts_ms": 1767993100000,
+      "caption": "A diagram number 114 on a phone, with a serif heading."
+    },
+    {
+      "key": "f115",
+      "ts_ms": 1767993040000,
+      "caption": "A photograph number 115 on a phone, with a serif heading."
+    },
+    {
+      "key": "f116",
+      "ts_ms": 1767992980000,
+      "caption": "A form number 116 on a phone, with a serif heading."
+    },
+    {
+      "key": "f117",
+      "ts_ms": 1767992920000,
+      "caption": "A receipt number 117 on a phone, with a serif heading."
+    },
+    {
+      "key": "f118",
+      "ts_ms": 1767992860000,
+      "caption": "A poster number 118 on a phone, with a serif heading."
+    },
+    {
+      "key": "f119",
+      "ts_ms": 1767992800000,
+      "caption": "A chart number 119 on a phone, with a serif heading."
+    },
+    {
+      "key": "f120",
+      "ts_ms": 1767992740000,
+      "caption": "A report number 120 on a tablet, with a small footer."
+    },
+    {
+      "key": "f121",
+      "ts_ms": 1767992680000,
+      "caption": "A invoice number 121 on a tablet, with a small footer."
+    },
+    {
+      "key": "f122",
+      "ts_ms": 1767992620000,
+      "caption": "A diagram number 122 on a tablet, with a small footer."
+    },
+    {
+      "key": "f123",
+      "ts_ms": 1767992560000,
+      "caption": "A photograph number 123 on a tablet, with a small footer."
+    },
+    {
+      "key": "f124",
+      "ts_ms": 1767992500000,
+      "caption": "A form number 124 on a tablet, with a small footer."
+    },
+    {
+      "key": "f125",
+      "ts_ms": 1767992440000,
+      "caption": "A receipt number 125 on a tablet, with a small footer."
+    },
+    {
+      "key": "f126",
+      "ts_ms": 1767992380000,
+      "caption": "A poster number 126 on a tablet, with a small footer."
+    },
+    {
+      "key": "f127",
+      "ts_ms": 1767992320000,
+      "caption": "A chart number 127 on a tablet, with a small footer."
+    },
+    {
+      "key": "f128",
+      "ts_ms": 1767992260000,
+      "caption": "A report number 128 in a browser tab, with a small footer."
+    },
+    {
+      "key": "f129",
+      "ts_ms": 1767992200000,
+      "caption": "A invoice number 129 in a browser tab, with a small footer."
+    },
+    {
+      "key": "f130",
+      "ts_ms": 1767992140000,
+      "caption": "A diagram number 130 in a browser tab, with a small footer."
+    },
+    {
+      "key": "f131",
+      "ts_ms": 1767992080000,
+      "caption": "A photograph number 131 in a browser tab, with a small footer."
+    },
+    {
+      "key": "f132",
+      "ts_ms": 1767992020000,
+      "caption": "A form number 132 in a browser tab, with a small footer."
+    },
+    {
+      "key": "f133",
+      "ts_ms": 1767991960000,
+      "caption": "A receipt number 133 in a browser tab, with a small footer."
+    },
+    {
+      "key": "f134",
+      "ts_ms": 1767991900000,
+      "caption": "A poster number 134 in a browser tab, with a small footer."
+    },
+    {
+      "key": "f135",
+      "ts_ms": 1767991840000,
+      "caption": "A chart number 135 in a browser tab, with a small footer."
+    },
+    {
+      "key": "f136",
+      "ts_ms": 1767991780000,
+      "caption": "A report number 136 on a projector, with a small footer."
+    },
+    {
+      "key": "f137",
+      "ts_ms": 1767991720000,
+      "caption": "A invoice number 137 on a projector, with a small footer."
+    },
+    {
+      "key": "f138",
+      "ts_ms": 1767991660000,
+      "caption": "A diagram number 138 on a projector, with a small footer."
+    },
+    {
+      "key": "f139",
+      "ts_ms": 1767991600000,
+      "caption": "A photograph number 139 on a projector, with a small footer."
+    },
+    {
+      "key": "f140",
+      "ts_ms": 1767991540000,
+      "caption": "A form number 140 on a projector, with a small footer."
+    },
+    {
+      "key": "f141",
+      "ts_ms": 1767991480000,
+      "caption": "A receipt number 141 on a projector, with a small footer."
+    },
+    {
+      "key": "f142",
+      "ts_ms": 1767991420000,
+      "caption": "A poster number 142 on a projector, with a small footer."
+    },
+    {
+      "key": "f143",
+      "ts_ms": 1767991360000,
+      "caption": "A chart number 143 on a projector, with a small footer."
+    },
+    {
+      "key": "f144",
+      "ts_ms": 1767991300000,
+      "caption": "A report number 144 in a print preview, with a small footer."
+    },
+    {
+      "key": "f145",
+      "ts_ms": 1767991240000,
+      "caption": "A invoice number 145 in a print preview, with a small footer."
+    },
+    {
+      "key": "f146",
+      "ts_ms": 1767991180000,
+      "caption": "A diagram number 146 in a print preview, with a small footer."
+    },
+    {
+      "key": "f147",
+      "ts_ms": 1767991120000,
+      "caption": "A photograph number 147 in a print preview, with a small footer."
+    },
+    {
+      "key": "f148",
+      "ts_ms": 1767991060000,
+      "caption": "A form number 148 in a print preview, with a small footer."
+    },
+    {
+      "key": "f149",
+      "ts_ms": 1767991000000,
+      "caption": "A receipt number 149 in a print preview, with a small footer."
+    },
+    {
+      "key": "f150",
+      "ts_ms": 1767990940000,
+      "caption": "A poster number 150 in a print preview, with a small footer."
+    },
+    {
+      "key": "f151",
+      "ts_ms": 1767990880000,
+      "caption": "A chart number 151 in a print preview, with a small footer."
+    },
+    {
+      "key": "f152",
+      "ts_ms": 1767990820000,
+      "caption": "A report number 152 on a phone, with a small footer."
+    },
+    {
+      "key": "f153",
+      "ts_ms": 1767990760000,
+      "caption": "A invoice number 153 on a phone, with a small footer."
+    },
+    {
+      "key": "f154",
+      "ts_ms": 1767990700000,
+      "caption": "A diagram number 154 on a phone, with a small footer."
+    },
+    {
+      "key": "f155",
+      "ts_ms": 1767990640000,
+      "caption": "A photograph number 155 on a phone, with a small footer."
+    },
+    {
+      "key": "f156",
+      "ts_ms": 1767990580000,
+      "caption": "A form number 156 on a phone, with a small footer."
+    },
+    {
+      "key": "f157",
+      "ts_ms": 1767990520000,
+      "caption": "A receipt number 157 on a phone, with a small footer."
+    },
+    {
+      "key": "f158",
+      "ts_ms": 1767990460000,
+      "caption": "A poster number 158 on a phone, with a small footer."
+    },
+    {
+      "key": "f159",
+      "ts_ms": 1767990400000,
+      "caption": "A chart number 159 on a phone, with a small footer."
+    },
+    {
+      "key": "f160",
+      "ts_ms": 1767990340000,
+      "caption": "A report number 160 on a tablet, with a numbered caption."
+    },
+    {
+      "key": "f161",
+      "ts_ms": 1767990280000,
+      "caption": "A invoice number 161 on a tablet, with a numbered caption."
+    },
+    {
+      "key": "f162",
+      "ts_ms": 1767990220000,
+      "caption": "A diagram number 162 on a tablet, with a numbered caption."
+    },
+    {
+      "key": "f163",
+      "ts_ms": 1767990160000,
+      "caption": "A photograph number 163 on a tablet, with a numbered caption."
+    },
+    {
+      "key": "f164",
+      "ts_ms": 1767990100000,
+      "caption": "A form number 164 on a tablet, with a numbered caption."
+    },
+    {
+      "key": "f165",
+      "ts_ms": 1767990040000,
+      "caption": "A receipt number 165 on a tablet, with a numbered caption."
+    },
+    {
+      "key": "f166",
+      "ts_ms": 1767989980000,
+      "caption": "A poster number 166 on a tablet, with a numbered caption."
+    },
+    {
+      "key": "f167",
+      "ts_ms": 1767989920000,
+      "caption": "A chart number 167 on a tablet, with a numbered caption."
+    },
+    {
+      "key": "f168",
+      "ts_ms": 1767989860000,
+      "caption": "A report number 168 in a browser tab, with a numbered caption."
+    },
+    {
+      "key": "f169",
+      "ts_ms": 1767989800000,
+      "caption": "A invoice number 169 in a browser tab, with a numbered caption."
+    },
+    {
+      "key": "f170",
+      "ts_ms": 1767989740000,
+      "caption": "A diagram number 170 in a browser tab, with a numbered caption."
+    },
+    {
+      "key": "f171",
+      "ts_ms": 1767989680000,
+      "caption": "A photograph number 171 in a browser tab, with a numbered caption."
+    },
+    {
+      "key": "f172",
+      "ts_ms": 1767989620000,
+      "caption": "A form number 172 in a browser tab, with a numbered caption."
+    },
+    {
+      "key": "f173",
+      "ts_ms": 1767989560000,
+      "caption": "A receipt number 173 in a browser tab, with a numbered caption."
+    },
+    {
+      "key": "f174",
+      "ts_ms": 1767989500000,
+      "caption": "A poster number 174 in a browser tab, with a numbered caption."
+    },
+    {
+      "key": "f175",
+      "ts_ms": 1767989440000,
+      "caption": "A chart number 175 in a browser tab, with a numbered caption."
+    },
+    {
+      "key": "f176",
+      "ts_ms": 1767989380000,
+      "caption": "A report number 176 on a projector, with a numbered caption."
+    },
+    {
+      "key": "f177",
+      "ts_ms": 1767989320000,
+      "caption": "A invoice number 177 on a projector, with a numbered caption."
+    },
+    {
+      "key": "f178",
+      "ts_ms": 1767989260000,
+      "caption": "A diagram number 178 on a projector, with a numbered caption."
+    },
+    {
+      "key": "f179",
+      "ts_ms": 1767989200000,
+      "caption": "A photograph number 179 on a projector, with a numbered caption."
+    },
+    {
+      "key": "f180",
+      "ts_ms": 1767989140000,
+      "caption": "A form number 180 on a projector, with a numbered caption."
+    },
+    {
+      "key": "f181",
+      "ts_ms": 1767989080000,
+      "caption": "A receipt number 181 on a projector, with a numbered caption."
+    },
+    {
+      "key": "f182",
+      "ts_ms": 1767989020000,
+      "caption": "A poster number 182 on a projector, with a numbered caption."
+    },
+    {
+      "key": "f183",
+      "ts_ms": 1767988960000,
+      "caption": "A chart number 183 on a projector, with a numbered caption."
+    },
+    {
+      "key": "f184",
+      "ts_ms": 1767988900000,
+      "caption": "A report number 184 in a print preview, with a numbered caption."
+    },
+    {
+      "key": "f185",
+      "ts_ms": 1767988840000,
+      "caption": "A invoice number 185 in a print preview, with a numbered caption."
+    },
+    {
+      "key": "f186",
+      "ts_ms": 1767988780000,
+      "caption": "A diagram number 186 in a print preview, with a numbered caption."
+    },
+    {
+      "key": "f187",
+      "ts_ms": 1767988720000,
+      "caption": "A photograph number 187 in a print preview, with a numbered caption."
+    },
+    {
+      "key": "f188",
+      "ts_ms": 1767988660000,
+      "caption": "A form number 188 in a print preview, with a numbered caption."
+    },
+    {
+      "key": "f189",
+      "ts_ms": 1767988600000,
+      "caption": "A receipt number 189 in a print preview, with a numbered caption."
+    },
+    {
+      "key": "f190",
+      "ts_ms": 1767988540000,
+      "caption": "A poster number 190 in a print preview, with a numbered caption."
+    },
+    {
+      "key": "f191",
+      "ts_ms": 1767988480000,
+      "caption": "A chart number 191 in a print preview, with a numbered caption."
+    },
+    {
+      "key": "f192",
+      "ts_ms": 1767988420000,
+      "caption": "A report number 192 on a phone, with a numbered caption."
+    },
+    {
+      "key": "f193",
+      "ts_ms": 1767988360000,
+      "caption": "A invoice number 193 on a phone, with a numbered caption."
+    },
+    {
+      "key": "f194",
+      "ts_ms": 1767988300000,
+      "caption": "A diagram number 194 on a phone, with a numbered caption."
+    },
+    {
+      "key": "f195",
+      "ts_ms": 1767988240000,
+      "caption": "A photograph number 195 on a phone, with a numbered caption."
+    },
+    {
+      "key": "f196",
+      "ts_ms": 1767988180000,
+      "caption": "A form number 196 on a phone, with a numbered caption."
+    },
+    {
+      "key": "f197",
+      "ts_ms": 1767988120000,
+      "caption": "A receipt number 197 on a phone, with a numbered caption."
+    },
+    {
+      "key": "f198",
+      "ts_ms": 1767988060000,
+      "caption": "A poster number 198 on a phone, with a numbered caption."
+    },
+    {
+      "key": "f199",
+      "ts_ms": 1767988000000,
+      "caption": "A chart number 199 on a phone, with a numbered caption."
+    },
+    {
+      "key": "f200",
+      "ts_ms": 1767987940000,
+      "caption": "A report number 200 on a tablet, with a dotted border."
+    },
+    {
+      "key": "f201",
+      "ts_ms": 1767987880000,
+      "caption": "A invoice number 201 on a tablet, with a dotted border."
+    },
+    {
+      "key": "f202",
+      "ts_ms": 1767987820000,
+      "caption": "A diagram number 202 on a tablet, with a dotted border."
+    },
+    {
+      "key": "f203",
+      "ts_ms": 1767987760000,
+      "caption": "A photograph number 203 on a tablet, with a dotted border."
+    },
+    {
+      "key": "f204",
+      "ts_ms": 1767987700000,
+      "caption": "A form number 204 on a tablet, with a dotted border."
+    },
+    {
+      "key": "f205",
+      "ts_ms": 1767987640000,
+      "caption": "A receipt number 205 on a tablet, with a dotted border."
+    },
+    {
+      "key": "f206",
+      "ts_ms": 1767987580000,
+      "caption": "A poster number 206 on a tablet, with a dotted border."
+    },
+    {
+      "key": "f207",
+      "ts_ms": 1767987520000,
+      "caption": "A chart number 207 on a tablet, with a dotted border."
+    },
+    {
+      "key": "f208",
+      "ts_ms": 1767987460000,
+      "caption": "A report number 208 in a browser tab, with a dotted border."
+    },
+    {
+      "key": "f209",
+      "ts_ms": 1767987400000,
+      "caption": "A invoice number 209 in a browser tab, with a dotted border."
+    },
+    {
+      "key": "f210",
+      "ts_ms": 1767987340000,
+      "caption": "A diagram number 210 in a browser tab, with a dotted border."
+    },
+    {
+      "key": "f211",
+      "ts_ms": 1767987280000,
+      "caption": "A photograph number 211 in a browser tab, with a dotted border."
+    },
+    {
+      "key": "f212",
+      "ts_ms": 1767987220000,
+      "caption": "A form number 212 in a browser tab, with a dotted border."
+    },
+    {
+      "key": "f213",
+      "ts_ms": 1767987160000,
+      "caption": "A receipt number 213 in a browser tab, with a dotted border."
+    },
+    {
+      "key": "f214",
+      "ts_ms": 1767987100000,
+      "caption": "A poster number 214 in a browser tab, with a dotted border."
+    },
+    {
+      "key": "f215",
+      "ts_ms": 1767987040000,
+      "caption": "A chart number 215 in a browser tab, with a dotted border."
+    },
+    {
+      "key": "f216",
+      "ts_ms": 1767986980000,
+      "caption": "A report number 216 on a projector, with a dotted border."
+    },
+    {
+      "key": "f217",
+      "ts_ms": 1767986920000,
+      "caption": "A invoice number 217 on a projector, with a dotted border."
+    },
+    {
+      "key": "f218",
+      "ts_ms": 1767986860000,
+      "caption": "A diagram number 218 on a projector, with a dotted border."
+    },
+    {
+      "key": "f219",
+      "ts_ms": 1767986800000,
+      "caption": "A photograph number 219 on a projector, with a dotted border."
+    },
+    {
+      "key": "f220",
+      "ts_ms": 1767986740000,
+      "caption": "A form number 220 on a projector, with a dotted border."
+    },
+    {
+      "key": "f221",
+      "ts_ms": 1767986680000,
+      "caption": "A receipt number 221 on a projector, with a dotted border."
+    },
+    {
+      "key": "f222",
+      "ts_ms": 1767986620000,
+      "caption": "A poster number 222 on a projector, with a dotted border."
+    },
+    {
+      "key": "f223",
+      "ts_ms": 1767986560000,
+      "caption": "A chart number 223 on a projector, with a dotted border."
+    },
+    {
+      "key": "f224",
+      "ts_ms": 1767986500000,
+      "caption": "A report number 224 in a print preview, with a dotted border."
+    },
+    {
+      "key": "f225",
+      "ts_ms": 1767986440000,
+      "caption": "A invoice number 225 in a print preview, with a dotted border."
+    },
+    {
+      "key": "f226",
+      "ts_ms": 1767986380000,
+      "caption": "A diagram number 226 in a print preview, with a dotted border."
+    },
+    {
+      "key": "f227",
+      "ts_ms": 1767986320000,
+      "caption": "A photograph number 227 in a print preview, with a dotted border."
+    },
+    {
+      "key": "f228",
+      "ts_ms": 1767986260000,
+      "caption": "A form number 228 in a print preview, with a dotted border."
+    },
+    {
+      "key": "f229",
+      "ts_ms": 1767986200000,
+      "caption": "A receipt number 229 in a print preview, with a dotted border."
+    },
+    {
+      "key": "f230",
+      "ts_ms": 1767986140000,
+      "caption": "A poster number 230 in a print preview, with a dotted border."
+    },
+    {
+      "key": "f231",
+      "ts_ms": 1767986080000,
+      "caption": "A chart number 231 in a print preview, with a dotted border."
+    },
+    {
+      "key": "f232",
+      "ts_ms": 1767986020000,
+      "caption": "A report number 232 on a phone, with a dotted border."
+    },
+    {
+      "key": "f233",
+      "ts_ms": 1767985960000,
+      "caption": "A invoice number 233 on a phone, with a dotted border."
+    },
+    {
+      "key": "f234",
+      "ts_ms": 1767985900000,
+      "caption": "A diagram number 234 on a phone, with a dotted border."
+    },
+    {
+      "key": "f235",
+      "ts_ms": 1767985840000,
+      "caption": "A photograph number 235 on a phone, with a dotted border."
+    },
+    {
+      "key": "f236",
+      "ts_ms": 1767985780000,
+      "caption": "A form number 236 on a phone, with a dotted border."
+    },
+    {
+      "key": "f237",
+      "ts_ms": 1767985720000,
+      "caption": "A receipt number 237 on a phone, with a dotted border."
+    },
+    {
+      "key": "f238",
+      "ts_ms": 1767985660000,
+      "caption": "A poster number 238 on a phone, with a dotted border."
+    },
+    {
+      "key": "f239",
+      "ts_ms": 1767985600000,
+      "caption": "A chart number 239 on a phone, with a dotted border."
+    },
+    {
+      "key": "f240",
+      "ts_ms": 1767985540000,
+      "caption": "A report number 240 on a tablet, with a shaded row."
+    },
+    {
+      "key": "f241",
+      "ts_ms": 1767985480000,
+      "caption": "A invoice number 241 on a tablet, with a shaded row."
+    },
+    {
+      "key": "f242",
+      "ts_ms": 1767985420000,
+      "caption": "A diagram number 242 on a tablet, with a shaded row."
+    },
+    {
+      "key": "f243",
+      "ts_ms": 1767985360000,
+      "caption": "A photograph number 243 on a tablet, with a shaded row."
+    },
+    {
+      "key": "f244",
+      "ts_ms": 1767985300000,
+      "caption": "A form number 244 on a tablet, with a shaded row."
+    },
+    {
+      "key": "f245",
+      "ts_ms": 1767985240000,
+      "caption": "A receipt number 245 on a tablet, with a shaded row."
+    },
+    {
+      "key": "f246",
+      "ts_ms": 1767985180000,
+      "caption": "A poster number 246 on a tablet, with a shaded row."
+    },
+    {
+      "key": "f247",
+      "ts_ms": 1767985120000,
+      "caption": "A chart number 247 on a tablet, with a shaded row."
+    },
+    {
+      "key": "f248",
+      "ts_ms": 1767985060000,
+      "caption": "A report number 248 in a browser tab, with a shaded row."
+    },
+    {
+      "key": "f249",
+      "ts_ms": 1767985000000,
+      "caption": "A invoice number 249 in a browser tab, with a shaded row."
+    },
+    {
+      "key": "f250",
+      "ts_ms": 1767984940000,
+      "caption": "A diagram number 250 in a browser tab, with a shaded row."
+    },
+    {
+      "key": "f251",
+      "ts_ms": 1767984880000,
+      "caption": "A photograph number 251 in a browser tab, with a shaded row."
+    },
+    {
+      "key": "f252",
+      "ts_ms": 1767984820000,
+      "caption": "A form number 252 in a browser tab, with a shaded row."
+    },
+    {
+      "key": "f253",
+      "ts_ms": 1767984760000,
+      "caption": "A receipt number 253 in a browser tab, with a shaded row."
+    },
+    {
+      "key": "f254",
+      "ts_ms": 1767984700000,
+      "caption": "A poster number 254 in a browser tab, with a shaded row."
+    },
+    {
+      "key": "f255",
+      "ts_ms": 1767984640000,
+      "caption": "A chart number 255 in a browser tab, with a shaded row."
+    },
+    {
+      "key": "f256",
+      "ts_ms": 1767984580000,
+      "caption": "A report number 256 on a projector, with a shaded row."
+    },
+    {
+      "key": "f257",
+      "ts_ms": 1767984520000,
+      "caption": "A invoice number 257 on a projector, with a shaded row."
+    },
+    {
+      "key": "f258",
+      "ts_ms": 1767984460000,
+      "caption": "A diagram number 258 on a projector, with a shaded row."
+    },
+    {
+      "key": "f259",
+      "ts_ms": 1767984400000,
+      "caption": "A photograph number 259 on a projector, with a shaded row."
+    },
+    {
+      "key": "f260",
+      "ts_ms": 1767984340000,
+      "caption": "A form number 260 on a projector, with a shaded row."
+    },
+    {
+      "key": "f261",
+      "ts_ms": 1767984280000,
+      "caption": "A receipt number 261 on a projector, with a shaded row."
+    },
+    {
+      "key": "f262",
+      "ts_ms": 1767984220000,
+      "caption": "A poster number 262 on a projector, with a shaded row."
+    },
+    {
+      "key": "f263",
+      "ts_ms": 1767984160000,
+      "caption": "A chart number 263 on a projector, with a shaded row."
+    },
+    {
+      "key": "f264",
+      "ts_ms": 1767984100000,
+      "caption": "A report number 264 in a print preview, with a shaded row."
+    },
+    {
+      "key": "f265",
+      "ts_ms": 1767984040000,
+      "caption": "A invoice number 265 in a print preview, with a shaded row."
+    },
+    {
+      "key": "f266",
+      "ts_ms": 1767983980000,
+      "caption": "A diagram number 266 in a print preview, with a shaded row."
+    },
+    {
+      "key": "f267",
+      "ts_ms": 1767983920000,
+      "caption": "A photograph number 267 in a print preview, with a shaded row."
+    },
+    {
+      "key": "f268",
+      "ts_ms": 1767983860000,
+      "caption": "A form number 268 in a print preview, with a shaded row."
+    },
+    {
+      "key": "f269",
+      "ts_ms": 1767983800000,
+      "caption": "A receipt number 269 in a print preview, with a shaded row."
+    },
+    {
+      "key": "f270",
+      "ts_ms": 1767983740000,
+      "caption": "A poster number 270 in a print preview, with a shaded row."
+    },
+    {
+      "key": "f271",
+      "ts_ms": 1767983680000,
+      "caption": "A chart number 271 in a print preview, with a shaded row."
+    },
+    {
+      "key": "f272",
+      "ts_ms": 1767983620000,
+      "caption": "A report number 272 on a phone, with a shaded row."
+    },
+    {
+      "key": "f273",
+      "ts_ms": 1767983560000,
+      "caption": "A invoice number 273 on a phone, with a shaded row."
+    },
+    {
+      "key": "f274",
+      "ts_ms": 1767983500000,
+      "caption": "A diagram number 274 on a phone, with a shaded row."
+    },
+    {
+      "key": "f275",
+      "ts_ms": 1767983440000,
+      "caption": "A photograph number 275 on a phone, with a shaded row."
+    },
+    {
+      "key": "f276",
+      "ts_ms": 1767983380000,
+      "caption": "A form number 276 on a phone, with a shaded row."
+    },
+    {
+      "key": "f277",
+      "ts_ms": 1767983320000,
+      "caption": "A receipt number 277 on a phone, with a shaded row."
+    },
+    {
+      "key": "f278",
+      "ts_ms": 1767983260000,
+      "caption": "A poster number 278 on a phone, with a shaded row."
+    },
+    {
+      "key": "f279",
+      "ts_ms": 1767983200000,
+      "caption": "A chart number 279 on a phone, with a shaded row."
+    },
+    {
+      "key": "f280",
+      "ts_ms": 1767983140000,
+      "caption": "A report number 280 on a tablet, with a rounded corner."
+    },
+    {
+      "key": "f281",
+      "ts_ms": 1767983080000,
+      "caption": "A invoice number 281 on a tablet, with a rounded corner."
+    },
+    {
+      "key": "f282",
+      "ts_ms": 1767983020000,
+      "caption": "A diagram number 282 on a tablet, with a rounded corner."
+    },
+    {
+      "key": "f283",
+      "ts_ms": 1767982960000,
+      "caption": "A photograph number 283 on a tablet, with a rounded corner."
+    },
+    {
+      "key": "f284",
+      "ts_ms": 1767982900000,
+      "caption": "A form number 284 on a tablet, with a rounded corner."
+    },
+    {
+      "key": "f285",
+      "ts_ms": 1767982840000,
+      "caption": "A receipt number 285 on a tablet, with a rounded corner."
+    },
+    {
+      "key": "f286",
+      "ts_ms": 1767982780000,
+      "caption": "A poster number 286 on a tablet, with a rounded corner."
+    },
+    {
+      "key": "f287",
+      "ts_ms": 1767982720000,
+      "caption": "A chart number 287 on a tablet, with a rounded corner."
+    },
+    {
+      "key": "f288",
+      "ts_ms": 1767982660000,
+      "caption": "A report number 288 in a browser tab, with a rounded corner."
+    },
+    {
+      "key": "f289",
+      "ts_ms": 1767982600000,
+      "caption": "A invoice number 289 in a browser tab, with a rounded corner."
+    },
+    {
+      "key": "f290",
+      "ts_ms": 1767982540000,
+      "caption": "A diagram number 290 in a browser tab, with a rounded corner."
+    },
+    {
+      "key": "f291",
+      "ts_ms": 1767982480000,
+      "caption": "A photograph number 291 in a browser tab, with a rounded corner."
+    },
+    {
+      "key": "f292",
+      "ts_ms": 1767982420000,
+      "caption": "A form number 292 in a browser tab, with a rounded corner."
+    },
+    {
+      "key": "f293",
+      "ts_ms": 1767982360000,
+      "caption": "A receipt number 293 in a browser tab, with a rounded corner."
+    },
+    {
+      "key": "f294",
+      "ts_ms": 1767982300000,
+      "caption": "A poster number 294 in a browser tab, with a rounded corner."
+    },
+    {
+      "key": "f295",
+      "ts_ms": 1767982240000,
+      "caption": "A chart number 295 in a browser tab, with a rounded corner."
+    },
+    {
+      "key": "f296",
+      "ts_ms": 1767982180000,
+      "caption": "A report number 296 on a projector, with a rounded corner."
+    },
+    {
+      "key": "f297",
+      "ts_ms": 1767982120000,
+      "caption": "A invoice number 297 on a projector, with a rounded corner."
+    },
+    {
+      "key": "f298",
+      "ts_ms": 1767982060000,
+      "caption": "A diagram number 298 on a projector, with a rounded corner."
+    },
+    {
+      "key": "f299",
+      "ts_ms": 1767982000000,
+      "caption": "A photograph number 299 on a projector, with a rounded corner."
+    },
+    {
+      "key": "f300",
+      "ts_ms": 1767981940000,
+      "caption": "A form number 300 on a projector, with a rounded corner."
+    },
+    {
+      "key": "f301",
+      "ts_ms": 1767981880000,
+      "caption": "A receipt number 301 on a projector, with a rounded corner."
+    },
+    {
+      "key": "f302",
+      "ts_ms": 1767981820000,
+      "caption": "A poster number 302 on a projector, with a rounded corner."
+    },
+    {
+      "key": "f303",
+      "ts_ms": 1767981760000,
+      "caption": "A chart number 303 on a projector, with a rounded corner."
+    },
+    {
+      "key": "f304",
+      "ts_ms": 1767981700000,
+      "caption": "A report number 304 in a print preview, with a rounded corner."
+    },
+    {
+      "key": "f305",
+      "ts_ms": 1767981640000,
+      "caption": "A invoice number 305 in a print preview, with a rounded corner."
+    },
+    {
+      "key": "f306",
+      "ts_ms": 1767981580000,
+      "caption": "A diagram number 306 in a print preview, with a rounded corner."
+    },
+    {
+      "key": "f307",
+      "ts_ms": 1767981520000,
+      "caption": "A photograph number 307 in a print preview, with a rounded corner."
+    },
+    {
+      "key": "f308",
+      "ts_ms": 1767981460000,
+      "caption": "A form number 308 in a print preview, with a rounded corner."
+    },
+    {
+      "key": "f309",
+      "ts_ms": 1767981400000,
+      "caption": "A receipt number 309 in a print preview, with a rounded corner."
+    },
+    {
+      "key": "f310",
+      "ts_ms": 1767981340000,
+      "caption": "A poster number 310 in a print preview, with a rounded corner."
+    },
+    {
+      "key": "f311",
+      "ts_ms": 1767981280000,
+      "caption": "A chart number 311 in a print preview, with a rounded corner."
+    },
+    {
+      "key": "f312",
+      "ts_ms": 1767981220000,
+      "caption": "A report number 312 on a phone, with a rounded corner."
+    },
+    {
+      "key": "f313",
+      "ts_ms": 1767981160000,
+      "caption": "A invoice number 313 on a phone, with a rounded corner."
+    },
+    {
+      "key": "f314",
+      "ts_ms": 1767981100000,
+      "caption": "A diagram number 314 on a phone, with a rounded corner."
+    },
+    {
+      "key": "f315",
+      "ts_ms": 1767981040000,
+      "caption": "A photograph number 315 on a phone, with a rounded corner."
+    },
+    {
+      "key": "f316",
+      "ts_ms": 1767980980000,
+      "caption": "A form number 316 on a phone, with a rounded corner."
+    },
+    {
+      "key": "f317",
+      "ts_ms": 1767980920000,
+      "caption": "A receipt number 317 on a phone, with a rounded corner."
+    },
+    {
+      "key": "f318",
+      "ts_ms": 1767980860000,
+      "caption": "A poster number 318 on a phone, with a rounded corner."
+    },
+    {
+      "key": "f319",
+      "ts_ms": 1767980800000,
+      "caption": "A chart number 319 on a phone, with a rounded corner."
+    },
+    {
+      "key": "f320",
+      "ts_ms": 1767980740000,
+      "caption": "A report number 320 on a tablet, with a thin rule."
+    },
+    {
+      "key": "f321",
+      "ts_ms": 1767980680000,
+      "caption": "A invoice number 321 on a tablet, with a thin rule."
+    },
+    {
+      "key": "f322",
+      "ts_ms": 1767980620000,
+      "caption": "A diagram number 322 on a tablet, with a thin rule."
+    },
+    {
+      "key": "f323",
+      "ts_ms": 1767980560000,
+      "caption": "A photograph number 323 on a tablet, with a thin rule."
+    },
+    {
+      "key": "f324",
+      "ts_ms": 1767980500000,
+      "caption": "A form number 324 on a tablet, with a thin rule."
+    },
+    {
+      "key": "f325",
+      "ts_ms": 1767980440000,
+      "caption": "A receipt number 325 on a tablet, with a thin rule."
+    },
+    {
+      "key": "f326",
+      "ts_ms": 1767980380000,
+      "caption": "A poster number 326 on a tablet, with a thin rule."
+    },
+    {
+      "key": "f327",
+      "ts_ms": 1767980320000,
+      "caption": "A chart number 327 on a tablet, with a thin rule."
+    },
+    {
+      "key": "f328",
+      "ts_ms": 1767980260000,
+      "caption": "A report number 328 in a browser tab, with a thin rule."
+    },
+    {
+      "key": "f329",
+      "ts_ms": 1767980200000,
+      "caption": "A invoice number 329 in a browser tab, with a thin rule."
+    },
+    {
+      "key": "f330",
+      "ts_ms": 1767980140000,
+      "caption": "A diagram number 330 in a browser tab, with a thin rule."
+    },
+    {
+      "key": "f331",
+      "ts_ms": 1767980080000,
+      "caption": "A photograph number 331 in a browser tab, with a thin rule."
+    },
+    {
+      "key": "f332",
+      "ts_ms": 1767980020000,
+      "caption": "A form number 332 in a browser tab, with a thin rule."
+    },
+    {
+      "key": "f333",
+      "ts_ms": 1767979960000,
+      "caption": "A receipt number 333 in a browser tab, with a thin rule."
+    },
+    {
+      "key": "f334",
+      "ts_ms": 1767979900000,
+      "caption": "A poster number 334 in a browser tab, with a thin rule."
+    },
+    {
+      "key": "f335",
+      "ts_ms": 1767979840000,
+      "caption": "A chart number 335 in a browser tab, with a thin rule."
+    },
+    {
+      "key": "f336",
+      "ts_ms": 1767979780000,
+      "caption": "A report number 336 on a projector, with a thin rule."
+    },
+    {
+      "key": "f337",
+      "ts_ms": 1767979720000,
+      "caption": "A invoice number 337 on a projector, with a thin rule."
+    },
+    {
+      "key": "f338",
+      "ts_ms": 1767979660000,
+      "caption": "A diagram number 338 on a projector, with a thin rule."
+    },
+    {
+      "key": "f339",
+      "ts_ms": 1767979600000,
+      "caption": "A photograph number 339 on a projector, with a thin rule."
+    },
+    {
+      "key": "f340",
+      "ts_ms": 1767979540000,
+      "caption": "A form number 340 on a projector, with a thin rule."
+    },
+    {
+      "key": "f341",
+      "ts_ms": 1767979480000,
+      "caption": "A receipt number 341 on a projector, with a thin rule."
+    },
+    {
+      "key": "f342",
+      "ts_ms": 1767979420000,
+      "caption": "A poster number 342 on a projector, with a thin rule."
+    },
+    {
+      "key": "f343",
+      "ts_ms": 1767979360000,
+      "caption": "A chart number 343 on a projector, with a thin rule."
+    },
+    {
+      "key": "f344",
+      "ts_ms": 1767979300000,
+      "caption": "A report number 344 in a print preview, with a thin rule."
+    },
+    {
+      "key": "f345",
+      "ts_ms": 1767979240000,
+      "caption": "A invoice number 345 in a print preview, with a thin rule."
+    },
+    {
+      "key": "f346",
+      "ts_ms": 1767979180000,
+      "caption": "A diagram number 346 in a print preview, with a thin rule."
+    },
+    {
+      "key": "f347",
+      "ts_ms": 1767979120000,
+      "caption": "A photograph number 347 in a print preview, with a thin rule."
+    },
+    {
+      "key": "f348",
+      "ts_ms": 1767979060000,
+      "caption": "A form number 348 in a print preview, with a thin rule."
+    },
+    {
+      "key": "f349",
+      "ts_ms": 1767979000000,
+      "caption": "A receipt number 349 in a print preview, with a thin rule."
+    },
+    {
+      "key": "f350",
+      "ts_ms": 1767978940000,
+      "caption": "A poster number 350 in a print preview, with a thin rule."
+    },
+    {
+      "key": "f351",
+      "ts_ms": 1767978880000,
+      "caption": "A chart number 351 in a print preview, with a thin rule."
+    },
+    {
+      "key": "f352",
+      "ts_ms": 1767978820000,
+      "caption": "A report number 352 on a phone, with a thin rule."
+    },
+    {
+      "key": "f353",
+      "ts_ms": 1767978760000,
+      "caption": "A invoice number 353 on a phone, with a thin rule."
+    },
+    {
+      "key": "f354",
+      "ts_ms": 1767978700000,
+      "caption": "A diagram number 354 on a phone, with a thin rule."
+    },
+    {
+      "key": "f355",
+      "ts_ms": 1767978640000,
+      "caption": "A photograph number 355 on a phone, with a thin rule."
+    },
+    {
+      "key": "f356",
+      "ts_ms": 1767978580000,
+      "caption": "A form number 356 on a phone, with a thin rule."
+    },
+    {
+      "key": "f357",
+      "ts_ms": 1767978520000,
+      "caption": "A receipt number 357 on a phone, with a thin rule."
+    },
+    {
+      "key": "f358",
+      "ts_ms": 1767978460000,
+      "caption": "A poster number 358 on a phone, with a thin rule."
+    },
+    {
+      "key": "f359",
+      "ts_ms": 1767978400000,
+      "caption": "A chart number 359 on a phone, with a thin rule."
+    }
+  ]
+}

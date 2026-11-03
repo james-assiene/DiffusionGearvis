@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Get a free quote | Austin Tree Pros</title>
+  <link rel="stylesheet" href="/assets/scenarios.css">
+</head>
+<body class="trees" data-page="quote" data-scenario="d7">
+  <header class="bar">
+    <a class="brand" href="/trees/">Austin Tree Pros</a>
+    <nav><a href="/trees/">Home</a></nav>
+  </header>
+  <main class="page">
+    <h1>Get a free quote</h1>
+    <p class="lede">Tell us about the job. An arborist will call you back with a price.</p>
+    <form class="quote-form" id="quote-form" autocomplete="off">
+      <div class="quote-grid">
+        <div class="field"><label for="q-name">Name</label><input type="text" id="q-name" name="name" autocomplete="name" data-scn="name"></div>
+        <div class="field"><label for="q-phone">Phone</label><input type="tel" id="q-phone" name="phone" data-scn="phone"></div>
+        <div class="field"><label for="q-email">Email</label><input type="email" id="q-email" name="email" data-scn="email"></div>
+        <div class="field"><label for="q-address">Address</label><input type="text" id="q-address" name="address" autocomplete="street-address" data-scn="address"></div>
+      </div>
+      <fieldset class="services">
+        <legend>Service</legend>
+        <label data-scn="service-tree-removal"><input type="radio" name="service" value="tree">Tree removal</label>
+        <label data-scn="service-branch-removal"><input type="radio" name="service" value="branch">Branch removal</label>
+        <label data-scn="service-stump-grinding"><input type="radio" name="service" value="stump">Stump grinding</label>
+        <label data-scn="service-trimming"><input type="radio" name="service" value="trimming">Trimming</label>
+      </fieldset>
+      <div class="field"><label for="q-description">Description</label><textarea id="q-description" name="description" rows="3" data-scn="description"></textarea></div>
+      <button type="submit" data-scn="request-quote">Request quote</button>
+    </form>
+    <div class="confirm gone" id="confirmation" data-scn="confirmation"></div>
+  </main>
+  <footer class="demo-note">Demo copy for testing; not affiliated with Austin Tree Pros or any tree service. Names and prices are made up.</footer>
+  <script src="/assets/scenarios.js"></script>
+</body>
+</html>

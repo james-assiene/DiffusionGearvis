@@ -1,0 +1,48 @@
+{
+  "provenance": {
+    "log": "logs/sessions/20260916-202852-987340.jsonl",
+    "seq": 697,
+    "turn_id": "t1",
+    "wall": "2026-09-16T20:29:42.231230+01:00",
+    "generator": "tests/fixtures/memory/make_calculus_session.py",
+    "store": "~/.local/share/local_astra/memory.sqlite"
+  },
+  "turn": {
+    "transcript": "Make a flat looking UI.",
+    "history": [],
+    "frame": null,
+    "assists": {
+      "page_text": false,
+      "pdf_text": false,
+      "cells": false,
+      "at_spi": false
+    },
+    "rendered_memory_block": "[memory]\n- A screenshot of a digital page from a textbook titled \"Exercises and Problems in Calculus,\" specifically showing a section on \"32.3. Problems.\"\n\nCalculus, Exercises, Problems, unit, normal, vector, tangent, curvature.\n- A screenshot of a page from a calculus textbook titled \"Exercises and Problems in Calculus,\" showing section 32.3 Problems.\n\nExercises, Problems, Calculus, unit, normal, vector, velocity, acceleration.\n- A screenshot of a page from a textbook titled \"Exercises and Problems in Calculus,\" specifically showing section 32.3 Problems.\n\nCalculus, Exercises, Problems, unit, normal, vector, velocity, acceleration.\n"
+  },
+  "episodes": [
+    {
+      "db_id": 7,
+      "ts_ms": 57858,
+      "source": "screen",
+      "thumbnail_name": "4040544048404840.jpg",
+      "phash": "4040544048404840",
+      "caption": "A screenshot of a digital page from a textbook titled \"Exercises and Problems in Calculus,\" specifically showing a section on \"32.3. Problems.\"\n\nCalculus, Exercises, Problems, unit, normal, vector, tangent, curvature."
+    },
+    {
+      "db_id": 4,
+      "ts_ms": 1233272,
+      "source": "screen",
+      "thumbnail_name": "4040544048404840.jpg",
+      "phash": "4040544048404840",
+      "caption": "A screenshot of a page from a calculus textbook titled \"Exercises and Problems in Calculus,\" showing section 32.3 Problems.\n\nExercises, Problems, Calculus, unit, normal, vector, velocity, acceleration."
+    },
+    {
+      "db_id": 11,
+      "ts_ms": 13903,
+      "source": "screen",
+      "thumbnail_name": "4040544048404840.jpg",
+      "phash": "4040544048404840",
+      "caption": "A screenshot of a page from a textbook titled \"Exercises and Problems in Calculus,\" specifically showing section 32.3 Problems.\n\nCalculus, Exercises, Problems, unit, normal, vector, velocity, acceleration."
+    }
+  ]
+}

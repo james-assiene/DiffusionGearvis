@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0111c popup</title>
+<style>
+  html, body { margin: 0; overflow: hidden; }
+  /* the whole viewport is one target=_blank link to the next page in the chain */
+  #next { position: fixed; inset: 0; display: block; }
+</style>
+<script src="recorder.js"></script>
+</head>
+<body>
+<a id="next" target="_blank" href="popup.html">next</a>
+<script>
+  // Page n of the chain has the colour PALETTE[n] (tests/integration/test_computer_browser_e2e.py
+  // keeps the same table) and links to page n + 1.
+  const PALETTE = [[255, 0, 0], [0, 160, 0], [0, 0, 255], [255, 200, 0], [160, 0, 160], [0, 200, 200]];
+  const n = Number(new URLSearchParams(location.search).get("n") || "0");
+  const [r, g, b] = PALETTE[n % PALETTE.length];
+  document.body.style.background = `rgb(${r}, ${g}, ${b})`;
+  document.getElementById("next").href = `popup.html?n=${n + 1}`;
+  window.__n = n;
+</script>
+</body>
+</html>

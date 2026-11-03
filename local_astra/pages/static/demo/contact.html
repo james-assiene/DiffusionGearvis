@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact us</title>
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body data-page="contact">
+  <header class="bar">
+    <a class="brand" href="/">Astra</a>
+  </header>
+  <main class="page">
+    <h1>Contact us</h1>
+    <p class="lede">Questions about an order? Write to us and we will reply within a day.</p>
+    <form class="form" id="contact" novalidate>
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" spellcheck="false"></textarea>
+      </div>
+      <p class="error" id="error" hidden>Please fill in all three fields.</p>
+      <button type="submit">Send</button>
+    </form>
+    <div class="thanks" id="thanks" hidden></div>
+  </main>
+  <script>
+    (function () {
+      "use strict";
+      // Sending stays in the page: nothing leaves it (T-0111g A5). __state.sent holds the submitted values.
+      window.__state = { page: "contact", sent: null };
+      const form = document.getElementById("contact");
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const value = function (id) { return document.getElementById(id).value.trim(); };
+        const sent = { name: value("name"), email: value("email"), message: value("message") };
+        if (!sent.name || !sent.email || !sent.message) {
+          document.getElementById("error").hidden = false;
+          return;
+        }
+        window.__state.sent = sent;
+        const thanks = document.getElementById("thanks");
+        thanks.textContent = "Thanks, " + sent.name + ". We will be in touch at " + sent.email + ".";
+        form.hidden = true;
+        thanks.hidden = false;
+      });
+    })();
+  </script>
+</body>
+</html>

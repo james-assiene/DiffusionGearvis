@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GPU Rendering - Blender Manual (demo copy)</title>
+  <link rel="stylesheet" href="/assets/rtx.css">
+</head>
+<body class="manual" data-page-id="manual-gpu">
+  <header class="site-bar">
+    <span class="site-name">Blender Manual</span>
+    <a href="/blender-manual/">Contents</a>
+    <a href="/blender-manual/gpu-rendering.html">GPU Rendering</a>
+    <span class="host">docs.blender.org</span>
+  </header>
+  <main>
+    <p class="crumbs"><a href="/blender-manual/">Manual</a> › Rendering › Cycles › GPU Rendering</p>
+    <h1>GPU Rendering</h1>
+    <p>Cycles can render on a graphics card instead of the processor. A scene renders the same either way; on a
+      supported card it usually renders much faster.</p>
+
+    <h2 id="supported-hardware">Supported hardware</h2>
+    <p>Cycles runs on NVIDIA cards through CUDA or OptiX, on AMD cards through HIP and on Intel cards through oneAPI.
+      Each Blender build carries kernels for a fixed list of card generations.</p>
+    <ul>
+      <li>NVIDIA cards from compute capability 5.0 up are supported through CUDA, and through OptiX with a recent
+        driver, as long as the Blender build has kernels for the card's generation (see below).</li>
+      <li data-scn="manual-blackwell">NVIDIA Blackwell (RTX 50 series, compute capability 12.0) needs Blender 4.4 or later.
+        Earlier builds do not include kernels for these cards.</li>
+      <li>AMD and Intel cards are covered in their own sections (not part of this demo copy).</li>
+    </ul>
+
+    <h2 id="configuring">Configuring</h2>
+    <ol data-scn="manual-configuring">
+      <li>Open <span class="path">Edit › Preferences › System</span>.</li>
+      <li>Under <span class="path">Cycles Render Devices</span>, choose <strong>CUDA</strong> or <strong>OptiX</strong>.</li>
+      <li>Tick the GPU you want to render with.</li>
+      <li>In the scene, set <span class="path">Render Properties › Device</span> to <strong>GPU Compute</strong>.</li>
+    </ol>
+    <p>If the list under Cycles Render Devices is empty, Blender found no card it has kernels for. See the error
+      messages below.</p>
+
+    <h2 id="error-messages">Error messages</h2>
+    <h3>Kernel not found</h3>
+    <p class="message" data-scn="manual-error">CUDA binary kernel for this graphics card compute capability (X.Y) not found.</p>
+    <p>This Blender build has no kernel for your card's compute capability. The driver is not the cause, and changing
+      it does not help. Install a Blender version that supports the card (see Supported hardware above).</p>
+    <h3>Out of memory</h3>
+    <p class="message">CUDA error: out of memory</p>
+    <p>The scene does not fit in the card's memory. Simplify the scene or render with tiling enabled.</p>
+  </main>
+  <footer>Demo copy for testing; not affiliated with the Blender Foundation. Facts on this page are invented.</footer>
+  <script src="/assets/rtx.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "approval": "H-T99a (human, 2026-10-14)",
+  "cases_sha256": "dea52a3763419d00f8d03cffd36c90dc7b3f4353203ee0d6e4cbd296228c79eb",
+  "counts": {
+    "C-pixel": 4,
+    "K-in": 6,
+    "K-out": 6,
+    "S-extra": 4,
+    "T-hard": 6,
+    "U-under": 4
+  },
+  "generator": {
+    "cases_src.py": "68ffb6c0eafbad8dc6eb9a66834383a15ed63597f35161a33c4cf50897f01303"
+  },
+  "n_cases": 30,
+  "normalisation": "pixel p lies in cell n = floor(p*1000/W); n stands for pixel n*W/1000 (v1 set rule)",
+  "set": "toolcall-stress-v1",
+  "source_set_sha256": "460cd1c337dddf0cacc64cca149ec6af21a90899c42450ea5791fc3409afef85",
+  "split": "dev",
+  "task": "T-0099"
+}

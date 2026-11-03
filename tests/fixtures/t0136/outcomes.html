@@ -1,0 +1,361 @@
+<!doctype html>
+<!--
+  T-0136 A1-5: the outcome-label probe page (test-author fixture; docs/tasks/T-0136.md, group A1).
+
+  Provenance: hand-written for T-0136 group A1 on 2026-10-25; no generator. Licence: same as the repository.
+
+  What it is. One 1280x800 page (no scrolling: the body is exactly the viewport) holding a target for every probe in
+  the table below (`<script type="application/json" id="probes">`, also exposed as `window.__probes`). Each probe has
+  an intended class from A2-3's geometry: `none` (a blank area, static text, a hover-only control), `near` (a
+  checkbox, a button that changes its own label, a text input that is typed into), `elsewhere` (a toast at the
+  bottom, a badge at the top right, a status chip on the right; every trigger sits in the left column, so the change
+  is outside the +-320 x +-80 px near box with a margin of at least 89 px), `page` (a link that navigates to this file
+  with `?page=k`, which renders a full-viewport destination instead of the probes).
+
+  A1 follow-up (T-0136 O-A2 / Q-1, branch T-0136-a1b): 84 more `none` probes (ids `n2-*`: 54 blank areas, 3 on the
+  heading, 15 on static text including the badge and the status chip, 12 on the hover-only controls), spread over
+  all nine ninths, added to the table only. The page's pixels are unchanged (the heading gained an `id`, which no rule
+  styles), so the first 37 probes' frames and pair ids are unchanged. Each was checked in Chromium through the real
+  executor: 0 pixels with gray |d| > 24 outside the hovered control's box (blank/heading/text: max |d| 0 anywhere).
+  The ruling's other kinds (disabled controls, images, an already-checked state) need new visible elements, which
+  would change every existing frame; they are not added (reported with this change).
+
+  The probe contract (the builder's `--probes` script follows it; the rows in tests/integration/
+  test_t0136_corpus_browser.py check it):
+  - every probe starts from a fresh load of this page (no state carries over from another probe), nothing focused,
+    scrollY 0, no previous pointer point (`prev_point` null);
+  - `tool` is `click_at` or `type_at`: one call through the executor in model units (`x`, `y` in 0..999, echo model;
+    `type_at` also gets `text` and `press_enter`). `x_px`/`y_px` are `to_pixels(x, 1280)`/`to_pixels(y, 800)`, by
+    hand, the `resolved` point the pair must carry. `target` is the element under that point (null for blank);
+    `changes` is the element an `elsewhere` probe changes;
+  - `tool == "caret"` is the caret-blink pair: `click_at` the empty input (which focuses it), then the pair is
+    (the executor's frame after that click, a fresh frame taken `wait_ms` = 530 ms later), point = the click point.
+
+  Determinism. There are no timers (`setTimeout`/`setInterval`/`requestAnimationFrame`), no CSS transitions or
+  animations, no images, no web fonts, no network APIs (no fetch/XHR/WebSocket/beacon) and no absolute URLs; the
+  only navigation is the relative `?page=k` link. Every change happens synchronously in a click/input handler. The
+  caret case needs no page code at all: the blinking caret is Chromium's own (it blinks while an input is focused);
+  the page only provides an empty input, and the 530 ms wait belongs to the probe script. Whether the executor's
+  capture shows the caret at all is what that pair measures (T-0136 implementation notes, "Caret").
+
+  Oracle, for the record only (never model-facing): `window.__state` = {cart, toasts, status, checked, labels,
+  typed, page}. Badge probes push an item to `cart` (so `cart_after` grows by one); page probes change the URL
+  (`url_changed`); nothing scrolls.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0136 outcome probes</title>
+<script>
+  (function () {
+    var m = /[?&]page=([1-8])(?:&|$)/.exec(location.search);
+    if (m) document.documentElement.className = "dest dest-" + m[1];
+  })();
+</script>
+<style>
+  *, *::before, *::after { transition-property: none !important; transition-duration: 0s !important; animation: none !important; }
+  html, body { margin: 0; padding: 0; width: 1280px; height: 800px; overflow: hidden; background: #ffffff; }
+  body { font: 18px/24px sans-serif; color: #1a1a1a; }
+  #probe-page, #dest { position: absolute; left: 0; top: 0; width: 1280px; height: 800px; }
+  #dest { display: none; }
+  html.dest #probe-page { display: none; }
+  html.dest #dest { display: block; }
+  .abs { position: absolute; }
+  h1 { position: absolute; left: 30px; top: 12px; margin: 0; font: bold 24px/32px sans-serif; }
+  .plain {
+    position: absolute; appearance: none; -webkit-appearance: none; margin: 0; padding: 0; box-sizing: border-box;
+    background: #e6e6e6; border: 1px solid #8a8a8a; border-radius: 4px; color: #111111; font: 16px/34px sans-serif;
+    text-align: center; cursor: default;
+  }
+  .plain:focus, .plain:focus-visible, .plain:active { outline: none; background: #e6e6e6; }
+  .left { left: 30px; width: 200px; height: 36px; }
+  .hover-only { left: 460px; width: 200px; height: 36px; background: #eef2f8; }
+  .hover-only:focus, .hover-only:active { background: #eef2f8; }
+  .hover-only:hover { background: #d3e0f3; }
+  #hover3 { left: 460px; top: 400px; height: 24px; white-space: nowrap; color: #1d4ed8; text-decoration: none; }
+  #hover3:hover { text-decoration: underline; }
+  .text { left: 460px; height: 24px; white-space: nowrap; }
+  .check { left: 900px; width: 18px; height: 18px; margin: 0; }
+  .check-label { left: 930px; height: 24px; white-space: nowrap; }
+  .label { left: 900px; width: 220px; height: 36px; }
+  .typed { left: 460px; width: 560px; height: 36px; }
+  input[type="text"] {
+    position: absolute; margin: 0; padding: 0 8px; box-sizing: border-box; border: 1px solid #888888;
+    border-radius: 3px; background: #ffffff; color: #111111; font: 16px/34px sans-serif;
+  }
+  #caret-input { left: 1060px; top: 520px; width: 200px; height: 36px; }
+  #badge {
+    left: 1060px; top: 16px; width: 200px; height: 40px; box-sizing: border-box; border: 1px solid #555555;
+    border-radius: 6px; background: #fafafa; font: 16px/38px sans-serif; text-align: center;
+  }
+  #toast, #toast-br {
+    display: none; top: 730px; height: 44px; box-sizing: border-box; border-radius: 6px; background: #1f2937;
+    color: #ffffff; font: 16px/44px sans-serif; text-align: center;
+  }
+  #toast { left: 540px; width: 300px; }
+  #toast-br { left: 1000px; width: 260px; }
+  #toast.shown, #toast-br.shown { display: block; }
+  #status {
+    left: 1080px; top: 450px; width: 180px; height: 40px; box-sizing: border-box; border: 1px solid #555555;
+    border-radius: 20px; background: #f3f4f6; font: 16px/38px sans-serif; text-align: center;
+  }
+  .link { top: 650px; width: 90px; height: 30px; font: 16px/30px sans-serif; color: #1d4ed8; text-decoration: none; text-align: center; }
+  .link:hover, .link:focus, .link:active, .link:visited { color: #1d4ed8; text-decoration: none; outline: none; }
+  #dest h2 { position: absolute; left: 0; top: 300px; width: 1280px; margin: 0; text-align: center; color: #ffffff; font: bold 72px/96px sans-serif; }
+  #dest p { position: absolute; left: 0; top: 420px; width: 1280px; margin: 0; text-align: center; color: #ffffff; font: 28px/40px sans-serif; }
+  .dest-1 #dest { background: #1f3b73; }
+  .dest-2 #dest { background: #7a1f1f; }
+  .dest-3 #dest { background: #1f6b3a; }
+  .dest-4 #dest { background: #5b2a86; }
+  .dest-5 #dest { background: #8a5a00; }
+  .dest-6 #dest { background: #0f5f66; }
+  .dest-7 #dest { background: #333333; }
+  .dest-8 #dest { background: #7a2357; }
+</style>
+<script type="application/json" id="probes">
+[
+  {"id": "n-blank-1", "intended": "none", "kind": "blank", "tool": "click_at", "x": 297, "y": 75, "x_px": 380, "y_px": 60, "target": null},
+  {"id": "n-blank-2", "intended": "none", "kind": "blank", "tool": "click_at", "x": 672, "y": 300, "x_px": 860, "y_px": 240, "target": null},
+  {"id": "n-blank-3", "intended": "none", "kind": "blank", "tool": "click_at", "x": 297, "y": 900, "x_px": 380, "y_px": 720, "target": null},
+  {"id": "n-text-1", "intended": "none", "kind": "text", "tool": "click_at", "x": 406, "y": 128, "x_px": 520, "y_px": 102, "target": "#text1"},
+  {"id": "n-text-2", "intended": "none", "kind": "text", "tool": "click_at", "x": 469, "y": 203, "x_px": 600, "y_px": 162, "target": "#text2"},
+  {"id": "n-text-3", "intended": "none", "kind": "text", "tool": "click_at", "x": 531, "y": 278, "x_px": 680, "y_px": 222, "target": "#text3"},
+  {"id": "n-hover-1", "intended": "none", "kind": "hover", "tool": "click_at", "x": 438, "y": 373, "x_px": 561, "y_px": 298, "target": "#hover1"},
+  {"id": "n-hover-2", "intended": "none", "kind": "hover", "tool": "click_at", "x": 438, "y": 448, "x_px": 561, "y_px": 358, "target": "#hover2"},
+  {"id": "n-hover-3", "intended": "none", "kind": "hover", "tool": "click_at", "x": 422, "y": 515, "x_px": 540, "y_px": 412, "target": "#hover3"},
+  {"id": "c-check-1", "intended": "near", "kind": "checkbox", "tool": "click_at", "x": 710, "y": 136, "x_px": 909, "y_px": 109, "target": "#check1"},
+  {"id": "c-check-2", "intended": "near", "kind": "checkbox", "tool": "click_at", "x": 710, "y": 199, "x_px": 909, "y_px": 159, "target": "#check2"},
+  {"id": "c-check-3", "intended": "near", "kind": "checkbox", "tool": "click_at", "x": 710, "y": 261, "x_px": 909, "y_px": 209, "target": "#check3"},
+  {"id": "c-label-1", "intended": "near", "kind": "label", "tool": "click_at", "x": 789, "y": 348, "x_px": 1010, "y_px": 278, "target": "#label1"},
+  {"id": "c-label-2", "intended": "near", "kind": "label", "tool": "click_at", "x": 789, "y": 423, "x_px": 1010, "y_px": 338, "target": "#label2"},
+  {"id": "c-label-3", "intended": "near", "kind": "label", "tool": "click_at", "x": 789, "y": 498, "x_px": 1010, "y_px": 398, "target": "#label3"},
+  {"id": "c-typed-1", "intended": "near", "kind": "typed", "tool": "type_at", "x": 578, "y": 598, "x_px": 740, "y_px": 478, "target": "#in1", "text": "hello outcome", "press_enter": false},
+  {"id": "c-typed-2", "intended": "near", "kind": "typed", "tool": "type_at", "x": 578, "y": 673, "x_px": 740, "y_px": 538, "target": "#in2", "text": "Ada", "press_enter": false},
+  {"id": "c-typed-3", "intended": "near", "kind": "typed", "tool": "type_at", "x": 578, "y": 748, "x_px": 740, "y_px": 598, "target": "#in3", "text": "a much longer line of typed text", "press_enter": false},
+  {"id": "e-toast-1", "intended": "elsewhere", "kind": "toast", "tool": "click_at", "x": 102, "y": 148, "x_px": 131, "y_px": 118, "target": "#toast1", "changes": "#toast"},
+  {"id": "e-toast-2", "intended": "elsewhere", "kind": "toast", "tool": "click_at", "x": 102, "y": 223, "x_px": 131, "y_px": 178, "target": "#toast2", "changes": "#toast"},
+  {"id": "e-toast-3", "intended": "elsewhere", "kind": "toast", "tool": "click_at", "x": 102, "y": 298, "x_px": 131, "y_px": 238, "target": "#toast3", "changes": "#toast"},
+  {"id": "e-toast-4", "intended": "elsewhere", "kind": "toast", "tool": "click_at", "x": 102, "y": 373, "x_px": 131, "y_px": 298, "target": "#toast4", "changes": "#toast-br"},
+  {"id": "e-badge-1", "intended": "elsewhere", "kind": "badge", "tool": "click_at", "x": 102, "y": 448, "x_px": 131, "y_px": 358, "target": "#add1", "changes": "#badge"},
+  {"id": "e-badge-2", "intended": "elsewhere", "kind": "badge", "tool": "click_at", "x": 102, "y": 523, "x_px": 131, "y_px": 418, "target": "#add2", "changes": "#badge"},
+  {"id": "e-badge-3", "intended": "elsewhere", "kind": "badge", "tool": "click_at", "x": 102, "y": 598, "x_px": 131, "y_px": 478, "target": "#add3", "changes": "#badge"},
+  {"id": "e-badge-4", "intended": "elsewhere", "kind": "badge", "tool": "click_at", "x": 102, "y": 673, "x_px": 131, "y_px": 538, "target": "#add4", "changes": "#badge"},
+  {"id": "e-status", "intended": "elsewhere", "kind": "status", "tool": "click_at", "x": 102, "y": 748, "x_px": 131, "y_px": 598, "target": "#sync", "changes": "#status"},
+  {"id": "p-link-1", "intended": "page", "kind": "link", "tool": "click_at", "x": 395, "y": 831, "x_px": 506, "y_px": 665, "target": "#link1"},
+  {"id": "p-link-2", "intended": "page", "kind": "link", "tool": "click_at", "x": 473, "y": 831, "x_px": 606, "y_px": 665, "target": "#link2"},
+  {"id": "p-link-3", "intended": "page", "kind": "link", "tool": "click_at", "x": 551, "y": 831, "x_px": 705, "y_px": 665, "target": "#link3"},
+  {"id": "p-link-4", "intended": "page", "kind": "link", "tool": "click_at", "x": 629, "y": 831, "x_px": 805, "y_px": 665, "target": "#link4"},
+  {"id": "p-link-5", "intended": "page", "kind": "link", "tool": "click_at", "x": 707, "y": 831, "x_px": 905, "y_px": 665, "target": "#link5"},
+  {"id": "p-link-6", "intended": "page", "kind": "link", "tool": "click_at", "x": 785, "y": 831, "x_px": 1005, "y_px": 665, "target": "#link6"},
+  {"id": "p-link-7", "intended": "page", "kind": "link", "tool": "click_at", "x": 863, "y": 831, "x_px": 1105, "y_px": 665, "target": "#link7"},
+  {"id": "p-link-8", "intended": "page", "kind": "link", "tool": "click_at", "x": 941, "y": 831, "x_px": 1205, "y_px": 665, "target": "#link8"},
+  {"id": "caret", "intended": "none", "kind": "caret", "tool": "caret", "x": 906, "y": 673, "x_px": 1160, "y_px": 538, "target": "#caret-input", "wait_ms": 530},
+  {"id": "n2-blank-01", "intended": "none", "kind": "blank", "tool": "click_at", "x": 264, "y": 25, "x_px": 338, "y_px": 20, "target": null},
+  {"id": "n2-blank-02", "intended": "none", "kind": "blank", "tool": "click_at", "x": 264, "y": 71, "x_px": 338, "y_px": 57, "target": null},
+  {"id": "n2-blank-03", "intended": "none", "kind": "blank", "tool": "click_at", "x": 264, "y": 118, "x_px": 338, "y_px": 94, "target": null},
+  {"id": "n2-blank-04", "intended": "none", "kind": "blank", "tool": "click_at", "x": 264, "y": 164, "x_px": 338, "y_px": 131, "target": null},
+  {"id": "n2-blank-05", "intended": "none", "kind": "blank", "tool": "click_at", "x": 264, "y": 210, "x_px": 338, "y_px": 168, "target": null},
+  {"id": "n2-blank-06", "intended": "none", "kind": "blank", "tool": "click_at", "x": 264, "y": 256, "x_px": 338, "y_px": 205, "target": null},
+  {"id": "n2-blank-07", "intended": "none", "kind": "blank", "tool": "click_at", "x": 347, "y": 25, "x_px": 444, "y_px": 20, "target": null},
+  {"id": "n2-blank-08", "intended": "none", "kind": "blank", "tool": "click_at", "x": 471, "y": 25, "x_px": 603, "y_px": 20, "target": null},
+  {"id": "n2-blank-09", "intended": "none", "kind": "blank", "tool": "click_at", "x": 554, "y": 25, "x_px": 709, "y_px": 20, "target": null},
+  {"id": "n2-blank-10", "intended": "none", "kind": "blank", "tool": "click_at", "x": 347, "y": 71, "x_px": 444, "y_px": 57, "target": null},
+  {"id": "n2-blank-11", "intended": "none", "kind": "blank", "tool": "click_at", "x": 471, "y": 71, "x_px": 603, "y_px": 57, "target": null},
+  {"id": "n2-blank-12", "intended": "none", "kind": "blank", "tool": "click_at", "x": 554, "y": 71, "x_px": 709, "y_px": 57, "target": null},
+  {"id": "n2-blank-13", "intended": "none", "kind": "blank", "tool": "click_at", "x": 678, "y": 25, "x_px": 868, "y_px": 20, "target": null},
+  {"id": "n2-blank-14", "intended": "none", "kind": "blank", "tool": "click_at", "x": 678, "y": 71, "x_px": 868, "y_px": 57, "target": null},
+  {"id": "n2-blank-15", "intended": "none", "kind": "blank", "tool": "click_at", "x": 678, "y": 118, "x_px": 868, "y_px": 94, "target": null},
+  {"id": "n2-blank-16", "intended": "none", "kind": "blank", "tool": "click_at", "x": 678, "y": 164, "x_px": 868, "y_px": 131, "target": null},
+  {"id": "n2-blank-17", "intended": "none", "kind": "blank", "tool": "click_at", "x": 678, "y": 210, "x_px": 868, "y_px": 168, "target": null},
+  {"id": "n2-blank-18", "intended": "none", "kind": "blank", "tool": "click_at", "x": 678, "y": 256, "x_px": 868, "y_px": 205, "target": null},
+  {"id": "n2-blank-19", "intended": "none", "kind": "blank", "tool": "click_at", "x": 264, "y": 349, "x_px": 338, "y_px": 279, "target": null},
+  {"id": "n2-blank-20", "intended": "none", "kind": "blank", "tool": "click_at", "x": 264, "y": 395, "x_px": 338, "y_px": 316, "target": null},
+  {"id": "n2-blank-21", "intended": "none", "kind": "blank", "tool": "click_at", "x": 264, "y": 441, "x_px": 338, "y_px": 353, "target": null},
+  {"id": "n2-blank-22", "intended": "none", "kind": "blank", "tool": "click_at", "x": 264, "y": 488, "x_px": 338, "y_px": 390, "target": null},
+  {"id": "n2-blank-23", "intended": "none", "kind": "blank", "tool": "click_at", "x": 264, "y": 534, "x_px": 338, "y_px": 427, "target": null},
+  {"id": "n2-blank-24", "intended": "none", "kind": "blank", "tool": "click_at", "x": 264, "y": 580, "x_px": 338, "y_px": 464, "target": null},
+  {"id": "n2-blank-25", "intended": "none", "kind": "blank", "tool": "click_at", "x": 554, "y": 349, "x_px": 709, "y_px": 279, "target": null},
+  {"id": "n2-blank-26", "intended": "none", "kind": "blank", "tool": "click_at", "x": 595, "y": 349, "x_px": 762, "y_px": 279, "target": null},
+  {"id": "n2-blank-27", "intended": "none", "kind": "blank", "tool": "click_at", "x": 554, "y": 395, "x_px": 709, "y_px": 316, "target": null},
+  {"id": "n2-blank-28", "intended": "none", "kind": "blank", "tool": "click_at", "x": 595, "y": 395, "x_px": 762, "y_px": 316, "target": null},
+  {"id": "n2-blank-29", "intended": "none", "kind": "blank", "tool": "click_at", "x": 554, "y": 441, "x_px": 709, "y_px": 353, "target": null},
+  {"id": "n2-blank-30", "intended": "none", "kind": "blank", "tool": "click_at", "x": 595, "y": 441, "x_px": 762, "y_px": 353, "target": null},
+  {"id": "n2-blank-31", "intended": "none", "kind": "blank", "tool": "click_at", "x": 678, "y": 349, "x_px": 868, "y_px": 279, "target": null},
+  {"id": "n2-blank-32", "intended": "none", "kind": "blank", "tool": "click_at", "x": 968, "y": 349, "x_px": 1239, "y_px": 279, "target": null},
+  {"id": "n2-blank-33", "intended": "none", "kind": "blank", "tool": "click_at", "x": 926, "y": 395, "x_px": 1186, "y_px": 316, "target": null},
+  {"id": "n2-blank-34", "intended": "none", "kind": "blank", "tool": "click_at", "x": 678, "y": 441, "x_px": 868, "y_px": 353, "target": null},
+  {"id": "n2-blank-35", "intended": "none", "kind": "blank", "tool": "click_at", "x": 968, "y": 441, "x_px": 1239, "y_px": 353, "target": null},
+  {"id": "n2-blank-36", "intended": "none", "kind": "blank", "tool": "click_at", "x": 926, "y": 488, "x_px": 1186, "y_px": 390, "target": null},
+  {"id": "n2-blank-37", "intended": "none", "kind": "blank", "tool": "click_at", "x": 264, "y": 673, "x_px": 338, "y_px": 538, "target": null},
+  {"id": "n2-blank-38", "intended": "none", "kind": "blank", "tool": "click_at", "x": 16, "y": 812, "x_px": 20, "y_px": 649, "target": null},
+  {"id": "n2-blank-39", "intended": "none", "kind": "blank", "tool": "click_at", "x": 181, "y": 812, "x_px": 232, "y_px": 649, "target": null},
+  {"id": "n2-blank-40", "intended": "none", "kind": "blank", "tool": "click_at", "x": 57, "y": 858, "x_px": 73, "y_px": 686, "target": null},
+  {"id": "n2-blank-41", "intended": "none", "kind": "blank", "tool": "click_at", "x": 264, "y": 858, "x_px": 338, "y_px": 686, "target": null},
+  {"id": "n2-blank-42", "intended": "none", "kind": "blank", "tool": "click_at", "x": 140, "y": 904, "x_px": 179, "y_px": 723, "target": null},
+  {"id": "n2-blank-43", "intended": "none", "kind": "blank", "tool": "click_at", "x": 347, "y": 904, "x_px": 444, "y_px": 723, "target": null},
+  {"id": "n2-blank-44", "intended": "none", "kind": "blank", "tool": "click_at", "x": 471, "y": 904, "x_px": 603, "y_px": 723, "target": null},
+  {"id": "n2-blank-45", "intended": "none", "kind": "blank", "tool": "click_at", "x": 554, "y": 904, "x_px": 709, "y_px": 723, "target": null},
+  {"id": "n2-blank-46", "intended": "none", "kind": "blank", "tool": "click_at", "x": 347, "y": 950, "x_px": 444, "y_px": 760, "target": null},
+  {"id": "n2-blank-47", "intended": "none", "kind": "blank", "tool": "click_at", "x": 471, "y": 950, "x_px": 603, "y_px": 760, "target": null},
+  {"id": "n2-blank-48", "intended": "none", "kind": "blank", "tool": "click_at", "x": 554, "y": 950, "x_px": 709, "y_px": 760, "target": null},
+  {"id": "n2-blank-49", "intended": "none", "kind": "blank", "tool": "click_at", "x": 885, "y": 765, "x_px": 1133, "y_px": 612, "target": null},
+  {"id": "n2-blank-50", "intended": "none", "kind": "blank", "tool": "click_at", "x": 968, "y": 765, "x_px": 1239, "y_px": 612, "target": null},
+  {"id": "n2-blank-51", "intended": "none", "kind": "blank", "tool": "click_at", "x": 719, "y": 904, "x_px": 921, "y_px": 723, "target": null},
+  {"id": "n2-blank-52", "intended": "none", "kind": "blank", "tool": "click_at", "x": 802, "y": 904, "x_px": 1027, "y_px": 723, "target": null},
+  {"id": "n2-blank-53", "intended": "none", "kind": "blank", "tool": "click_at", "x": 926, "y": 904, "x_px": 1186, "y_px": 723, "target": null},
+  {"id": "n2-blank-54", "intended": "none", "kind": "blank", "tool": "click_at", "x": 678, "y": 950, "x_px": 868, "y_px": 760, "target": null},
+  {"id": "n2-heading-01", "intended": "none", "kind": "heading", "tool": "click_at", "x": 49, "y": 35, "x_px": 63, "y_px": 28, "target": "#title"},
+  {"id": "n2-heading-02", "intended": "none", "kind": "heading", "tool": "click_at", "x": 98, "y": 35, "x_px": 125, "y_px": 28, "target": "#title"},
+  {"id": "n2-heading-03", "intended": "none", "kind": "heading", "tool": "click_at", "x": 146, "y": 35, "x_px": 187, "y_px": 28, "target": "#title"},
+  {"id": "n2-text-01", "intended": "none", "kind": "text", "tool": "click_at", "x": 855, "y": 45, "x_px": 1095, "y_px": 36, "target": "#badge"},
+  {"id": "n2-text-02", "intended": "none", "kind": "text", "tool": "click_at", "x": 906, "y": 45, "x_px": 1160, "y_px": 36, "target": "#badge"},
+  {"id": "n2-text-03", "intended": "none", "kind": "text", "tool": "click_at", "x": 957, "y": 45, "x_px": 1225, "y_px": 36, "target": "#badge"},
+  {"id": "n2-text-04", "intended": "none", "kind": "text", "tool": "click_at", "x": 402, "y": 128, "x_px": 515, "y_px": 102, "target": "#text1"},
+  {"id": "n2-text-05", "intended": "none", "kind": "text", "tool": "click_at", "x": 491, "y": 128, "x_px": 629, "y_px": 102, "target": "#text1"},
+  {"id": "n2-text-06", "intended": "none", "kind": "text", "tool": "click_at", "x": 580, "y": 128, "x_px": 743, "y_px": 102, "target": "#text1"},
+  {"id": "n2-text-07", "intended": "none", "kind": "text", "tool": "click_at", "x": 402, "y": 203, "x_px": 515, "y_px": 162, "target": "#text2"},
+  {"id": "n2-text-08", "intended": "none", "kind": "text", "tool": "click_at", "x": 491, "y": 203, "x_px": 629, "y_px": 162, "target": "#text2"},
+  {"id": "n2-text-09", "intended": "none", "kind": "text", "tool": "click_at", "x": 579, "y": 203, "x_px": 741, "y_px": 162, "target": "#text2"},
+  {"id": "n2-text-10", "intended": "none", "kind": "text", "tool": "click_at", "x": 395, "y": 278, "x_px": 506, "y_px": 222, "target": "#text3"},
+  {"id": "n2-text-11", "intended": "none", "kind": "text", "tool": "click_at", "x": 470, "y": 278, "x_px": 602, "y_px": 222, "target": "#text3"},
+  {"id": "n2-text-12", "intended": "none", "kind": "text", "tool": "click_at", "x": 545, "y": 278, "x_px": 698, "y_px": 222, "target": "#text3"},
+  {"id": "n2-text-13", "intended": "none", "kind": "text", "tool": "click_at", "x": 868, "y": 588, "x_px": 1111, "y_px": 470, "target": "#status"},
+  {"id": "n2-text-14", "intended": "none", "kind": "text", "tool": "click_at", "x": 914, "y": 588, "x_px": 1170, "y_px": 470, "target": "#status"},
+  {"id": "n2-text-15", "intended": "none", "kind": "text", "tool": "click_at", "x": 959, "y": 588, "x_px": 1228, "y_px": 470, "target": "#status"},
+  {"id": "n2-hover-01", "intended": "none", "kind": "hover", "tool": "click_at", "x": 380, "y": 373, "x_px": 487, "y_px": 298, "target": "#hover1"},
+  {"id": "n2-hover-02", "intended": "none", "kind": "hover", "tool": "click_at", "x": 409, "y": 373, "x_px": 524, "y_px": 298, "target": "#hover1"},
+  {"id": "n2-hover-03", "intended": "none", "kind": "hover", "tool": "click_at", "x": 466, "y": 373, "x_px": 597, "y_px": 298, "target": "#hover1"},
+  {"id": "n2-hover-04", "intended": "none", "kind": "hover", "tool": "click_at", "x": 495, "y": 373, "x_px": 634, "y_px": 298, "target": "#hover1"},
+  {"id": "n2-hover-05", "intended": "none", "kind": "hover", "tool": "click_at", "x": 380, "y": 448, "x_px": 487, "y_px": 358, "target": "#hover2"},
+  {"id": "n2-hover-06", "intended": "none", "kind": "hover", "tool": "click_at", "x": 409, "y": 448, "x_px": 524, "y_px": 358, "target": "#hover2"},
+  {"id": "n2-hover-07", "intended": "none", "kind": "hover", "tool": "click_at", "x": 466, "y": 448, "x_px": 597, "y_px": 358, "target": "#hover2"},
+  {"id": "n2-hover-08", "intended": "none", "kind": "hover", "tool": "click_at", "x": 495, "y": 448, "x_px": 634, "y_px": 358, "target": "#hover2"},
+  {"id": "n2-hover-09", "intended": "none", "kind": "hover", "tool": "click_at", "x": 383, "y": 515, "x_px": 490, "y_px": 412, "target": "#hover3"},
+  {"id": "n2-hover-10", "intended": "none", "kind": "hover", "tool": "click_at", "x": 417, "y": 515, "x_px": 534, "y_px": 412, "target": "#hover3"},
+  {"id": "n2-hover-11", "intended": "none", "kind": "hover", "tool": "click_at", "x": 486, "y": 515, "x_px": 622, "y_px": 412, "target": "#hover3"},
+  {"id": "n2-hover-12", "intended": "none", "kind": "hover", "tool": "click_at", "x": 520, "y": 515, "x_px": 666, "y_px": 412, "target": "#hover3"}
+]
+</script>
+</head>
+<body>
+<div id="probe-page">
+  <h1 id="title">Outcome probes</h1>
+  <div id="badge" class="abs">Cart: 0 items</div>
+
+  <!-- none: static text (clicking it changes nothing) -->
+  <span id="text1" class="abs text" style="top: 90px">Static text: the quick brown fox jumps over</span>
+  <span id="text2" class="abs text" style="top: 150px">More static text that never reacts to a click</span>
+  <span id="text3" class="abs text" style="top: 210px">A third line of plain words to click on</span>
+
+  <!-- none: hover-only controls (styling under the pointer only, no click handler) -->
+  <button id="hover1" class="plain hover-only" style="top: 280px" type="button">Hover only</button>
+  <button id="hover2" class="plain hover-only" style="top: 340px" type="button">Also hover only</button>
+  <span id="hover3" class="abs">Hover to underline (not a link)</span>
+
+  <!-- near: checkboxes -->
+  <input id="check1" class="abs check" style="top: 100px" type="checkbox" data-key="check1">
+  <span class="abs check-label" style="top: 97px">Option one</span>
+  <input id="check2" class="abs check" style="top: 150px" type="checkbox" data-key="check2">
+  <span class="abs check-label" style="top: 147px">Option two</span>
+  <input id="check3" class="abs check" style="top: 200px" type="checkbox" data-key="check3">
+  <span class="abs check-label" style="top: 197px">Option three</span>
+
+  <!-- near: buttons that change their own label -->
+  <button id="label1" class="plain label" style="top: 260px" type="button" data-other="Hide details">Show details</button>
+  <button id="label2" class="plain label" style="top: 320px" type="button" data-other="Following">Follow</button>
+  <button id="label3" class="plain label" style="top: 380px" type="button" data-other="Stop timer">Start timer</button>
+
+  <!-- near: text inputs that are typed into (560 px wide, clicked at the centre) -->
+  <input id="in1" class="typed" style="top: 460px" type="text" autocomplete="off" spellcheck="false">
+  <input id="in2" class="typed" style="top: 520px" type="text" autocomplete="off" spellcheck="false">
+  <input id="in3" class="typed" style="top: 580px" type="text" autocomplete="off" spellcheck="false">
+
+  <!-- the caret-blink pair: an empty input, focused by the probe's click -->
+  <input id="caret-input" type="text" autocomplete="off" spellcheck="false">
+
+  <!-- elsewhere: triggers in the left column -->
+  <button id="toast1" class="plain left" style="top: 100px" type="button" data-toast="#toast" data-msg="Draft saved">Save draft</button>
+  <button id="toast2" class="plain left" style="top: 160px" type="button" data-toast="#toast" data-msg="Settings updated">Update settings</button>
+  <button id="toast3" class="plain left" style="top: 220px" type="button" data-toast="#toast" data-msg="Message queued">Queue message</button>
+  <button id="toast4" class="plain left" style="top: 280px" type="button" data-toast="#toast-br" data-msg="Link copied">Copy link</button>
+  <button id="add1" class="plain left" style="top: 340px" type="button" data-item="red mug">Add red mug</button>
+  <button id="add2" class="plain left" style="top: 400px" type="button" data-item="blue mug">Add blue mug</button>
+  <button id="add3" class="plain left" style="top: 460px" type="button" data-item="green mug">Add green mug</button>
+  <button id="add4" class="plain left" style="top: 520px" type="button" data-item="glass carafe">Add glass carafe</button>
+  <button id="sync" class="plain left" style="top: 580px" type="button">Sync now</button>
+
+  <div id="toast" class="abs"></div>
+  <div id="toast-br" class="abs"></div>
+  <div id="status" class="abs">Status: idle</div>
+
+  <!-- page: links that navigate to a full-viewport destination -->
+  <a id="link1" class="abs link" style="left: 460px" href="?page=1">Page 1</a>
+  <a id="link2" class="abs link" style="left: 560px" href="?page=2">Page 2</a>
+  <a id="link3" class="abs link" style="left: 660px" href="?page=3">Page 3</a>
+  <a id="link4" class="abs link" style="left: 760px" href="?page=4">Page 4</a>
+  <a id="link5" class="abs link" style="left: 860px" href="?page=5">Page 5</a>
+  <a id="link6" class="abs link" style="left: 960px" href="?page=6">Page 6</a>
+  <a id="link7" class="abs link" style="left: 1060px" href="?page=7">Page 7</a>
+  <a id="link8" class="abs link" style="left: 1160px" href="?page=8">Page 8</a>
+</div>
+<div id="dest">
+  <h2 id="dest-title"></h2>
+  <p>A different page: everything on the screen changed.</p>
+</div>
+<script>
+  (function () {
+    "use strict";
+    var m = /[?&]page=([1-8])(?:&|$)/.exec(location.search);
+    var state = {
+      cart: [], toasts: [], status: "idle", checked: {check1: false, check2: false, check3: false},
+      labels: {}, typed: {}, page: m ? Number(m[1]) : null
+    };
+    window.__state = state;
+    window.__probes = JSON.parse(document.getElementById("probes").textContent);
+    if (m) {
+      document.getElementById("dest-title").textContent = "Destination " + m[1];
+      return;
+    }
+    function badgeText(n) { return "Cart: " + n + (n === 1 ? " item" : " items"); }
+    ["check1", "check2", "check3"].forEach(function (id) {
+      var el = document.getElementById(id);
+      el.addEventListener("change", function () { state.checked[id] = el.checked; });
+    });
+    ["label1", "label2", "label3"].forEach(function (id) {
+      var el = document.getElementById(id);
+      state.labels[id] = el.textContent;
+      el.addEventListener("click", function () {
+        var other = el.getAttribute("data-other");
+        el.setAttribute("data-other", el.textContent);
+        el.textContent = other;
+        state.labels[id] = other;
+      });
+    });
+    ["in1", "in2", "in3", "caret-input"].forEach(function (id) {
+      var el = document.getElementById(id);
+      el.addEventListener("input", function () { state.typed[id] = el.value; });
+    });
+    ["toast1", "toast2", "toast3", "toast4"].forEach(function (id) {
+      var el = document.getElementById(id);
+      el.addEventListener("click", function () {
+        var t = document.querySelector(el.getAttribute("data-toast"));
+        t.textContent = el.getAttribute("data-msg");
+        t.className = "abs shown";
+        state.toasts.push(el.getAttribute("data-msg"));
+      });
+    });
+    ["add1", "add2", "add3", "add4"].forEach(function (id) {
+      var el = document.getElementById(id);
+      el.addEventListener("click", function () {
+        state.cart.push(el.getAttribute("data-item"));
+        document.getElementById("badge").textContent = badgeText(state.cart.length);
+      });
+    });
+    document.getElementById("sync").addEventListener("click", function () {
+      state.status = "synced";
+      document.getElementById("status").textContent = "Status: synced";
+    });
+  })();
+</script>
+</body>
+</html>

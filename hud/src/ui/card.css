@@ -1,0 +1,377 @@
+/* The page's card sheet (T-0164 B5; docs/02 §2.1): the look of the GenUI cards that
+   hud/src/ui/render.js draws.
+
+   hud/src/ui/index.js links this file into the document once per page, from the page's own
+   loopback origin (T-0024 criterion 3). The cards are light DOM inside the thread's card slots
+   (no shadow root exists), so this one page sheet reaches every card. Its selectors name only the
+   renderer's own classes (ga-*).
+
+   Baseline: the approved option-A sheet of the GenUI mock (T-0164 Goal, H-T164-1), ported as is;
+   group C tunes it to the C1 role table and the C2 contrast floors.
+
+   Rules of this sheet:
+   - Colours are the page's tokens (hud/styles.css) and nothing else: no literal, no fallback.
+     The theme reaches the card through those tokens only: no theme-keyed rule (T-0128
+     criterion 9, T-0154 C1). The mock's three light fill swaps (card, tile, input) are left out,
+     so in light the card is --surface-2, the tile --surface-3 and an input --bg; group C rules
+     on them (T-0164 implementation note 8).
+   - Style only (H-T154-6): no generated content, no text transform, no list markers, no images.
+     The model's words render as the model wrote them. */
+
+/* the card frame (the renderer's [data-a2ui-root]): one frame for every card, v1 included
+   (T-0184 B3, H-T184-5). The approved v2 board draws a vertical gradient #1b2030 -> #171a22 in
+   dark; it is derived from tokens (the accent-tinted surface at the top, the pane surface at the
+   bottom, both deepened towards --bg), so light gets its own equivalent from the same rule. The
+   background-color under the image is a plain token, so a reader of the computed fill gets an
+   rgb() and the frame's colour, not a color(srgb ...) mix (Status note, group B). */
+.ga-card {
+  background-color: var(--surface);
+  background-image: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-soft) 80%, var(--bg)),
+    color-mix(in srgb, var(--surface) 85%, var(--bg))
+  );
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--card-shadow);
+  padding: 22px 24px;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  max-width: 488px;
+}
+.ga-col { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.ga-row { display: flex; flex-direction: row; gap: 12px; align-items: center; min-width: 0; }
+.ga-row > * { min-width: 0; }
+
+/* the model's own align / justify on a Column, Row or List */
+.ga-align-start { align-items: flex-start; }
+.ga-align-center { align-items: center; }
+.ga-align-end { align-items: flex-end; }
+.ga-align-stretch { align-items: stretch; }
+.ga-justify-start { justify-content: flex-start; }
+.ga-justify-center { justify-content: center; }
+.ga-justify-end { justify-content: flex-end; }
+.ga-justify-stretch { justify-content: stretch; }
+.ga-justify-spaceBetween { justify-content: space-between; }
+.ga-justify-spaceAround { justify-content: space-around; }
+.ga-justify-spaceEvenly { justify-content: space-evenly; }
+
+/* text */
+.ga-t { margin: 0; overflow-wrap: anywhere; }
+.ga-h1 { font-size: 22px; font-weight: 650; line-height: 1.25; letter-spacing: -0.015em; }
+.ga-h2 { font-size: 19px; font-weight: 650; line-height: 1.3; letter-spacing: -0.01em; }
+.ga-h3 { font-size: 17px; font-weight: 650; line-height: 1.3; letter-spacing: -0.01em; }
+.ga-h4, .ga-h5 { font-size: 15px; font-weight: 600; line-height: 1.35; }
+.ga-body { font-size: var(--text-base); color: var(--ink); }
+.ga-caption { font-size: 12.5px; color: var(--muted); }
+/* the card's first heading is its title: a little more air under it */
+.ga-card > .ga-col > .ga-t:first-child:is(.ga-h1, .ga-h2, .ga-h3) { margin-bottom: 2px; }
+
+/* key / value rows (a Row of exactly two Texts the model did not justify) */
+.ga-kv { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: baseline; padding: 7px 0; }
+.ga-kv .ga-k { color: var(--muted); }
+.ga-kv .ga-v { color: var(--ink); font-weight: 550; text-align: right; font-variant-numeric: tabular-nums; }
+.ga-col > .ga-kv + .ga-kv { border-top: 1px solid var(--line); margin-top: -12px; }
+.ga-col > .ga-kv:has(+ .ga-kv) { margin-bottom: 0; }
+/* the row after a Divider is emphasised (H-T164-7) */
+.ga-hr + .ga-kv .ga-k { color: var(--ink); font-weight: 600; }
+.ga-hr + .ga-kv .ga-v { font-weight: 700; }
+
+/* divider */
+.ga-hr { border: 0; border-top: 1px solid var(--line-strong); margin: -4px 0; align-self: stretch; }
+.ga-hr.v { border-top: 0; border-left: 1px solid var(--line-strong); margin: 0; align-self: stretch; }
+
+/* list: abutting rows, a hairline between */
+.ga-list { display: flex; flex-direction: column; margin: 0; padding: 0; }
+.ga-list > .ga-li { padding: 9px 0; }
+.ga-list > .ga-li + .ga-li { border-top: 1px solid var(--line); }
+.ga-list.h { flex-direction: row; gap: 8px; overflow-x: auto; }
+.ga-list.h > .ga-li { padding: 0; border: 0; flex: none; }
+
+/* a Card inside the card: a quiet tonal tile, never a second floating card */
+.ga-tile { background: var(--surface-3); border-radius: var(--radius-btn); padding: 11px 14px; }
+.ga-tile > .ga-col { gap: 6px; }
+.ga-col:has(> .ga-tile) { gap: 8px; }
+.ga-col:has(> .ga-tile) > .ga-t:first-child { margin-bottom: 4px; }
+
+/* form fields: label above control */
+.ga-field { display: flex; flex-direction: column; gap: 6px; }
+.ga-control { display: flex; flex-direction: column; min-width: 0; }
+.ga-field > .ga-flabel, .ga-flabel { font-size: var(--text-sm); font-weight: 550; color: var(--dim); }
+.ga-flabel[hidden] { display: none; }
+.ga-input {
+  font: inherit; font-size: 14.5px; color: var(--ink);
+  background: var(--bg); border: 1px solid var(--edge-strong); border-radius: var(--radius-btn);
+  padding: 9px 12px; width: 100%; min-width: 0;
+}
+textarea.ga-input { resize: vertical; }
+.ga-input::placeholder { color: var(--faint); }
+.ga-input:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; border-color: transparent; }
+.ga-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+/* choice picker: chips (aria-pressed for a multiple selection, aria-checked for one of many) */
+.ga-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.ga-chip {
+  font: inherit; font-size: 13.5px; font-weight: 550; color: var(--dim); cursor: pointer;
+  background: transparent; border: 1px solid var(--edge-strong); border-radius: var(--radius-pill);
+  padding: 5px 13px; min-width: 38px;
+}
+.ga-chip[aria-pressed="true"],
+.ga-chip[aria-checked="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.ga-chip:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+/* checkbox */
+.ga-check { display: flex; gap: 10px; align-items: center; color: var(--ink); }
+.ga-check input { appearance: none; width: 18px; height: 18px; margin: 0; flex: none; border: 1.5px solid var(--edge-strong); border-radius: 6px; }
+.ga-check input:checked { background: var(--accent); border-color: var(--accent); }
+.ga-check input:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+/* slider */
+/* Deviation from the mock (a native range with accent-color: Chrome paints its unfilled track a
+   fixed grey, 1.35:1 on the dark card and 1.06:1 on the light one): the track is drawn in the
+   control-edge token along its whole length and the thumb in the accent, so both clear 3:1
+   against the card in either theme (T-0164 C2). The value reads from the thumb's position. */
+.ga-range {
+  appearance: none; width: 100%; height: 18px; margin: 0; background: transparent; cursor: pointer;
+}
+.ga-range::-webkit-slider-runnable-track {
+  height: 4px; border-radius: var(--radius-pill); background: var(--edge-strong);
+}
+.ga-range::-moz-range-track {
+  height: 4px; border-radius: var(--radius-pill); background: var(--edge-strong);
+}
+.ga-range::-webkit-slider-thumb {
+  appearance: none; width: 16px; height: 16px; margin-top: -6px; border: 0;
+  border-radius: var(--radius-pill); background: var(--accent);
+}
+.ga-range::-moz-range-thumb {
+  width: 16px; height: 16px; border: 0; border-radius: var(--radius-pill); background: var(--accent);
+}
+.ga-range:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+/* buttons */
+.ga-btn {
+  font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; align-self: flex-start;
+  border-radius: var(--radius-pill); padding: 9px 18px; border: 1px solid var(--edge-strong);
+  background: transparent; color: var(--ink);
+}
+/* Deviation from the mock (its default Button is a --surface-3 pill on the card, 1.1:1): a
+   default-variant Button is outlined like a chip, so its edge clears 3:1 against the card in both
+   themes (T-0164 C2). The primary and borderless variants keep the mock's look. */
+.ga-btn.primary, .ga-btn.borderless { border-color: transparent; }
+.ga-btn.primary { background: var(--tonal); color: var(--tonal-ink); }
+.ga-btn.borderless { background: transparent; color: var(--accent); padding-inline: 4px; }
+.ga-btn .ga-t { color: inherit; font: inherit; }
+.ga-btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.ga-col > .ga-btn:last-child { margin-top: 4px; }
+
+/* tabs: a row of pills. Deviation from the mock's segmented control (a --surface tab on a
+   --surface-3 bar, 1.26:1): every tab must read as a control at 3.0:1 against the card
+   (T-0128 criterion 10), so an unselected tab is the page's --control pair and the selected one
+   the tonal pair, on no bar of their own. */
+.ga-tabs-bar { display: inline-flex; flex-wrap: wrap; gap: 6px; align-self: flex-start; }
+.ga-tab { font: inherit; font-size: 13px; font-weight: 600; border: 0; background: var(--control); color: var(--on-control); border-radius: var(--radius-pill); padding: 5px 12px; cursor: pointer; }
+.ga-tab[aria-selected="true"] { background: var(--tonal); color: var(--tonal-ink); }
+.ga-tab:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+.ga-tabpanel { min-width: 0; }
+
+/* The page's own `button` rule (hud/styles.css) gives every button a 36 px minimum height and a
+   tonal fill on hover. Inside a card the mock's sizes hold (a chip is 32 px, not 36), and hover
+   keeps each control's own pair instead of turning a chip or an outlined button tonal blue under
+   --dim or --ink text. The :not([disabled]) matches the page rule's weight so these win. */
+.ga-chip, .ga-btn, .ga-tab, .ga-disclose { min-height: 0; }
+.ga-chip:hover:not([disabled]),
+.ga-btn:hover:not([disabled]),
+.ga-disclose:hover:not([disabled]) { background: var(--surface-3); }
+.ga-chip[aria-pressed="true"]:hover:not([disabled]),
+.ga-chip[aria-checked="true"]:hover:not([disabled]) { background: var(--accent-soft); }
+.ga-btn.primary:hover:not([disabled]) { background: var(--tonal-hover); }
+.ga-btn.borderless:hover:not([disabled]) { background: transparent; }
+.ga-tab:hover:not([disabled]) { background: var(--control); }
+.ga-tab[aria-selected="true"]:hover:not([disabled]) { background: var(--tonal); }
+
+/* modal (H-T164-5): a disclosure, the content inline below its trigger */
+.ga-modal { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+/* the trigger is a control, so it is drawn as one: the default Button's outlined pill (C2: an
+   edge at 3:1 against the card), never bare text that reads as a caption */
+.ga-disclose {
+  font: inherit; font-size: 14px; font-weight: 600; color: var(--ink); cursor: pointer;
+  background: transparent; border: 1px solid var(--edge-strong); border-radius: var(--radius-pill);
+  padding: 7px 16px; text-align: start; align-self: flex-start;
+}
+.ga-disclose .ga-t { color: inherit; font: inherit; }
+.ga-disclose:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.ga-modal-content { min-width: 0; }
+
+/* icon */
+.ga-icon { width: 18px; height: 18px; color: var(--dim); flex: none; }
+
+/* ---- T-0184 B: the v2 cards (hud/src/ui/cards_v2.js), the approved Main, Compare and Chart
+   boards of the 2026-10-28 mockup in tokens. The same rules as above: tokens only,
+   color-mix() of tokens for tints and fills, never for a text colour or a border (Status note,
+   group B); no generated content, no text transform: every word shows as the model wrote it.
+   A model string may be one 10,000-character word, so every text wraps anywhere and every flex
+   or grid child may shrink (B9). ---- */
+.ga-stat-label, .ga-stat-value, .ga-stat-detail, .ga-tile-title, .ga-tile-value,
+.ga-tile-secondary, .ga-cmp-title, .ga-bars-title, .ga-bar-label, .ga-step-title,
+.ga-step-detail, .ga-source-text {
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+/* Stat: the label, the 56 px value and its condition line; the glyph on the right */
+.ga-stat { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; min-width: 0; }
+.ga-stat-main { display: flex; flex-direction: column; gap: 4px; flex: 1 1 auto; min-width: 0; }
+.ga-stat-label { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; line-height: 1.4; color: var(--muted); }
+.ga-stat-line { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 10px; row-gap: 4px; min-width: 0; }
+.ga-stat-value {
+  font-size: 56px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.05;
+  font-variant-numeric: tabular-nums; color: var(--ink);
+}
+.ga-stat-detail { font-size: 15px; color: var(--dim); }
+.ga-stat-glyph { width: 72px; height: 72px; flex: none; }
+.ga-g-sun, .ga-g-moon { fill: var(--warn); }
+.ga-g-cloud { fill: var(--dim); }
+.ga-g-flake { fill: var(--ink); }
+.ga-g-ray, .ga-g-bolt, .ga-g-drop, .ga-g-mist, .ga-g-line {
+  fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;
+}
+.ga-g-ray, .ga-g-bolt { stroke: var(--warn); }
+.ga-g-drop { stroke: var(--accent); }
+.ga-g-mist { stroke: var(--muted); }
+
+/* StatTiles: an equal-width row that wraps in a narrow slot */
+.ga-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 12px; min-width: 0; }
+.ga-stile {
+  display: flex; flex-direction: column; gap: 10px; min-width: 0;
+  padding: 14px; border-radius: 14px; border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--ink) 4%, transparent);
+}
+.ga-stile.hl { background: color-mix(in srgb, var(--accent) 12%, transparent); border-color: var(--line-strong); }
+.ga-tile-title { font-size: 13px; font-weight: 500; color: var(--dim); }
+.ga-stile.hl .ga-tile-title { font-weight: 600; color: var(--ink); }
+.ga-tile-line { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 6px; min-width: 0; }
+.ga-tile-value { font-size: 22px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; color: var(--ink); }
+.ga-tile-secondary { font-size: 15px; font-weight: 500; color: var(--dim); }
+.ga-tile-pct { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.ga-track { flex: 1 1 auto; min-width: 0; height: 6px; border-radius: 3px; background: var(--track); }
+.ga-track-fill { height: 6px; max-width: 100%; border-radius: 3px; background: var(--accent); }
+.ga-tile-plabel { flex: none; white-space: nowrap; font-size: 12px; font-variant-numeric: tabular-nums; color: var(--dim); }
+
+/* Comparison: a label column and one column per entry; only this may scroll, inside the card */
+.ga-cmp { overflow-x: auto; min-width: 0; }
+.ga-cmp-grid { display: grid; min-width: 0; }
+.ga-cmp-head {
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start;
+  gap: 6px; min-width: 0; padding: 4px 14px 12px;
+}
+.ga-cmp-cell {
+  min-width: 0; padding: 11px 14px; border-top: 1px solid var(--line);
+  font-size: 15px; color: var(--ink); overflow-wrap: anywhere;
+}
+.ga-cmp-c { border-left: 1px solid var(--line); }
+.ga-cmp-label { font-size: 13px; color: var(--muted); }
+.ga-cmp-head.hl, .ga-cmp-cell.hl { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.ga-cmp-title { max-width: 100%; font-size: 17px; font-weight: 600; line-height: 1.3; color: var(--ink); }
+.ga-badge {
+  max-width: 100%; overflow-wrap: anywhere; padding: 3px 8px; border-radius: var(--radius-pill);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+  background: var(--accent); color: var(--on-accent);
+}
+.ga-pill {
+  display: inline-block; max-width: 100%; overflow-wrap: anywhere; padding: 4px 10px;
+  border-radius: var(--radius-pill); font-size: 12px;
+}
+.ga-pill.ok { background: var(--ok-soft); color: var(--ok); }
+.ga-pill.warn { background: var(--warn-soft); color: var(--warn); }
+
+/* Bars: labels in one column, one scale from 0 for every fill, the value and unit at each end,
+   the tick numbers under the bar column. The fill width and the room for the value are the
+   renderer's inline style (one scale per Bars). The value's font sizes the room (ch). */
+.ga-bars { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.ga-bars-title { font-size: 15px; font-weight: 600; color: var(--ink); }
+.ga-bars-rows { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.ga-bar-row { display: grid; grid-template-columns: minmax(0, min(140px, 35%)) minmax(0, 1fr); column-gap: 14px; align-items: center; min-width: 0; }
+.ga-bar-label { font-size: 14px; color: var(--dim); }
+.ga-bar-row.max .ga-bar-label { font-weight: 600; color: var(--ink); }
+/* The value wraps under its bar when the renderer's inline flex-basis says so (B9a) */
+.ga-bar-cell { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; min-width: 0; font-size: 13px; }
+.ga-bar-fill { flex: none; height: 22px; border-radius: 6px; background: var(--edge-strong); }
+.ga-bar-fill.max { background: var(--spark); }
+.ga-bar-val {
+  display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.3em; flex: 1 1 0; min-width: 0;
+  overflow-wrap: anywhere; font-variant-numeric: tabular-nums; color: var(--dim);
+}
+.ga-bar-row.max .ga-bar-val { font-weight: 600; color: var(--ink); }
+.ga-bar-num, .ga-bar-unit { min-width: 0; }
+/* B9a: a derived number never splits across lines (the unit is the model's and may wrap) */
+.ga-bar-num { white-space: nowrap; }
+.ga-bars-axis { margin-top: -6px; }
+.ga-bars-axis-cell { min-width: 0; font-size: 13px; }
+/* The scale's box (its width is the renderer's: the bar column less the value's room); it clips,
+   so the labels tried while fitting (B7a) never reach the page's overflow */
+.ga-ticks { position: relative; height: 22px; overflow: hidden; border-top: 1px solid var(--line-strong); }
+.ga-tick {
+  position: absolute; top: 5px; transform: translateX(-50%); white-space: nowrap;
+  font-size: 11px; line-height: 1.3; font-variant-numeric: tabular-nums; color: var(--dim);
+}
+.ga-tick.first { transform: none; }
+.ga-tick.last { transform: translateX(-100%); }
+/* B9a: in a narrow slot the label yields first: it stacks above its bar, and the value with its
+   unit takes its own line under the bar, so the bar and the scale keep the whole width (the
+   renderer's room is 0 at this width: cards_v2.js NARROW_BARS) and the number never wraps */
+.ga-bars { container-type: inline-size; }
+/* B9b: a size container does not size itself from its content, so it gets a definite share:
+   the whole width of a column or a block; in a Row, what its siblings leave, never under 220 px
+   (or the whole Row when narrower), the siblings wrapping under it when they do not fit */
+/* B9e: and an intrinsic width floor, so a parent that shrink-wraps its children (a centred
+   Column, a Card in one, a horizontal List) sizes it as if it had content; never wider than its
+   parent, and a Column child that holds one never wider than the Column */
+.ga-bars { width: 100%; max-width: 100%; contain-intrinsic-inline-size: 320px; }
+.ga-col > :has(.ga-bars) { max-width: 100%; }
+/* (:has() does not nest, so "a child that holds a Bars" is written as any descendant Bars) */
+:is(.ga-row, .ga-list.h):has(.ga-bars) { flex-wrap: wrap; row-gap: 14px; }
+:is(.ga-row, .ga-list.h) > :is(.ga-bars, :has(.ga-bars)) { flex: 1 1 0; min-width: min(100%, 220px); }
+/* B9b': a Bars nested in a Row child (a Column, a Card) takes that child's whole width */
+.ga-col > .ga-bars { align-self: stretch; }
+@container (max-width: 340px) {
+  .ga-bar-row { grid-template-columns: minmax(0, 1fr); row-gap: 6px; }
+  .ga-bars-axis > :first-child { display: none; }
+}
+
+/* Steps: an ordered list, the ordinal a text node in its own marker (no list marker drawn) */
+.ga-steps { display: flex; flex-direction: column; gap: 14px; min-width: 0; margin: 0; padding: 0; list-style: none; }
+.ga-step { display: flex; align-items: flex-start; gap: 12px; min-width: 0; }
+.ga-step-num {
+  flex: none; display: flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: var(--radius-pill);
+  font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap;
+  background: var(--accent-soft); color: var(--accent);
+}
+.ga-step-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding-top: 2px; }
+.ga-step-title { font-size: 15px; font-weight: 600; color: var(--ink); }
+.ga-step-detail { font-size: 14px; color: var(--dim); }
+
+/* Source: a chip, a glyph then the model's text */
+.ga-source {
+  display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; max-width: 100%;
+  min-width: 0; padding: 4px 10px; border-radius: var(--radius-pill); font-size: 12px;
+  background: color-mix(in srgb, var(--ink) 6%, transparent); color: var(--dim);
+}
+.ga-source-glyph { flex: none; width: 12px; height: 12px; }
+.ga-g-line { stroke: currentColor; stroke-width: 2; }
+
+/* Actions: label-only buttons, 44 px tall; the first primary, the rest outlined (the edge clears
+   3:1 against the card, T-0164 C2) */
+.ga-actions { display: flex; flex-wrap: wrap; gap: 10px; min-width: 0; }
+.ga-act {
+  font: inherit; font-size: 14px; font-weight: 500; min-height: 44px; max-width: 100%;
+  padding: 11px 16px; border-radius: var(--radius-btn); border: 1px solid var(--edge-strong);
+  background: transparent; color: var(--ink); cursor: pointer; text-align: start; overflow-wrap: anywhere;
+}
+.ga-act.primary { border-color: transparent; background: var(--tonal); color: var(--tonal-ink); }
+.ga-act:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.ga-act:hover:not([disabled]) { background: var(--surface-3); }
+.ga-act.primary:hover:not([disabled]) { background: var(--tonal-hover); }

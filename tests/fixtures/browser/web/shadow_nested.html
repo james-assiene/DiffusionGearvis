@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Nested shadow</title>
+<style>body{margin:0;font:24px sans-serif}#outer{position:absolute;left:100px;top:100px;width:600px;height:60px;display:block}</style></head>
+<body>
+<!-- a card field (autocomplete=cc-number) two OPEN shadow roots deep: the walk must go host -> host -> input -->
+<div id="outer"></div>
+<script>
+  const r1 = document.getElementById("outer").attachShadow({ mode: "open" });
+  r1.innerHTML = '<div id="inner" style="display:block;width:600px;height:60px"></div>';
+  const r2 = r1.getElementById("inner").attachShadow({ mode: "open" });
+  r2.innerHTML = '<style>input{width:600px;height:60px;font:24px sans-serif;box-sizing:border-box}</style>' +
+    '<input id="ncc" type="text" autocomplete="cc-number">';
+</script>
+</body>
+</html>

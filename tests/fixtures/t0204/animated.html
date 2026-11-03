@@ -1,0 +1,69 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>t0204 animated</title>
+<style>
+html, body { margin: 0; padding: 0; background: rgb(245, 245, 245); }
+.s { position: absolute; }
+#a { left: 100px; top: 100px; width: 200px; height: 150px; background: rgb(40, 70, 200); }
+#b { left: 980px; top: 550px; width: 200px; height: 150px; background: rgb(240, 120, 20); }
+#spin { position: absolute; left: 810px; top: 394px; width: 60px; height: 12px; background: rgb(20, 20, 20);
+        animation: spin 0.6s linear infinite; display: none; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+#steps { position: absolute; left: 480px; top: 280px; width: 300px; height: 250px; display: none; }
+#car { position: absolute; left: 480px; top: 280px; width: 300px; height: 250px; overflow: hidden; display: none; }
+#strip { display: flex; width: 2400px; height: 250px; }
+#strip > div { width: 300px; height: 250px; flex: none; }
+#noise { position: absolute; left: 490px; top: 275px; width: 300px; height: 250px; display: none; }
+</style></head>
+<body>
+<div class="s" id="a"></div>
+<div class="s" id="b"></div>
+<div id="spin"></div>
+<div id="steps"></div>
+<div id="car"><div id="strip"></div></div>
+<canvas id="noise" width="300" height="250"></canvas>
+<script>
+window.__clicks = 0;
+addEventListener("click", () => { window.__clicks++; }, true);
+const q = new URLSearchParams(location.search);
+if (q.get("spinner")) document.getElementById("spin").style.display = "block";
+if (q.get("steps")) {
+  // T-0204 C5: a 300x250 block whose grey steps through 30, 60, ..., 240 every 100 ms (any two states differ by >= 30)
+  const s = document.getElementById("steps");
+  s.style.display = "block";
+  let k = 0;
+  const step = () => { k = k % 8 + 1; s.style.background = "rgb(" + 30 * k + ", " + 30 * k + ", " + 30 * k + ")"; };
+  step();
+  setInterval(step, 100);
+}
+if (q.get("carousel")) {
+  // T-0204 C-R1: a carousel moved by CSS ``transform`` (no layout-shift entry): eight 300x250 slides, greys 30..240,
+  // the strip jumping one slide to the left every 100 ms (no transition)
+  document.getElementById("car").style.display = "block";
+  const strip = document.getElementById("strip");
+  for (let k = 1; k <= 8; k++) {
+    const d = document.createElement("div");
+    d.style.background = "rgb(" + 30 * k + ", " + 30 * k + ", " + 30 * k + ")";
+    strip.appendChild(d);
+  }
+  let i = 0;
+  setInterval(() => { i = (i + 1) % 8; strip.style.transform = "translateX(" + (-300 * i) + "px)"; }, 100);
+}
+if (q.get("block")) {
+  const c = document.getElementById("noise");
+  c.style.display = "block";
+  const ctx = c.getContext("2d");
+  let seed = 12345;
+  const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed; };
+  const paint = () => {
+    const img = ctx.createImageData(300, 250);
+    for (let i = 0; i < img.data.length; i += 4) {
+      const v = rnd() & 255;
+      img.data[i] = v; img.data[i + 1] = v; img.data[i + 2] = v; img.data[i + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+  };
+  paint();
+  setInterval(paint, 100);
+}
+</script>
+</body></html>

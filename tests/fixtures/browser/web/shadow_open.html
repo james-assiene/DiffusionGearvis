@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Open shadow</title>
+<style>body{margin:0;font:24px sans-serif}#host{position:absolute;left:100px;top:100px;width:600px;height:60px;display:block}</style></head>
+<body>
+<!-- a password field inside an OPEN shadow root: document.activeElement is the host; the guard must walk into it -->
+<div id="host"></div>
+<script>
+  const root = document.getElementById("host").attachShadow({ mode: "open" });
+  root.innerHTML = '<style>input{width:600px;height:60px;font:24px sans-serif;box-sizing:border-box}</style>' +
+    '<input id="spw" name="secret" type="password">';
+</script>
+</body>
+</html>

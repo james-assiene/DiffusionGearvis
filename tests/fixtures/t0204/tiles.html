@@ -1,0 +1,80 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>t0204 tiles</title>
+<style>
+html, body { margin: 0; padding: 0; overflow-anchor: none; background: rgb(250, 250, 250); }
+#head { height: 100px; background: rgb(40, 40, 40); }
+#grid { margin-left: 40px; width: 1200px; display: grid; grid-template-columns: repeat(6, 200px); grid-auto-rows: 150px; }
+.t { font: bold 48px/150px sans-serif; color: #fff; text-align: center; }
+#tail { height: 600px; background: rgb(250, 250, 250); }
+</style></head>
+<body>
+<div id="head"></div>
+<div id="grid">
+<div class="t" data-n="1" style="background:rgb(200, 40, 40)">1</div>
+<div class="t" data-n="2" style="background:rgb(40, 160, 60)">2</div>
+<div class="t" data-n="3" style="background:rgb(40, 70, 200)">3</div>
+<div class="t" data-n="4" style="background:rgb(220, 180, 30)">4</div>
+<div class="t" data-n="5" style="background:rgb(150, 50, 170)">5</div>
+<div class="t" data-n="6" style="background:rgb(30, 170, 170)">6</div>
+<div class="t" data-n="7" style="background:rgb(240, 120, 20)">7</div>
+<div class="t" data-n="8" style="background:rgb(90, 90, 90)">8</div>
+<div class="t" data-n="9" style="background:rgb(120, 200, 60)">9</div>
+<div class="t" data-n="10" style="background:rgb(200, 60, 140)">10</div>
+<div class="t" data-n="11" style="background:rgb(60, 120, 160)">11</div>
+<div class="t" data-n="12" style="background:rgb(170, 140, 90)">12</div>
+<div class="t" data-n="13" style="background:rgb(100, 30, 30)">13</div>
+<div class="t" data-n="14" style="background:rgb(30, 100, 40)">14</div>
+<div class="t" data-n="15" style="background:rgb(30, 40, 110)">15</div>
+<div class="t" data-n="16" style="background:rgb(160, 160, 40)">16</div>
+<div class="t" data-n="17" style="background:rgb(90, 30, 110)">17</div>
+<div class="t" data-n="18" style="background:rgb(20, 110, 110)">18</div>
+<div class="t" data-n="19" style="background:rgb(250, 170, 120)">19</div>
+<div class="t" data-n="20" style="background:rgb(170, 170, 170)">20</div>
+<div class="t" data-n="21" style="background:rgb(180, 240, 140)">21</div>
+<div class="t" data-n="22" style="background:rgb(240, 150, 200)">22</div>
+<div class="t" data-n="23" style="background:rgb(140, 190, 230)">23</div>
+<div class="t" data-n="24" style="background:rgb(220, 210, 170)">24</div>
+<div class="t" data-n="25" style="background:rgb(130, 70, 20)">25</div>
+<div class="t" data-n="26" style="background:rgb(70, 130, 20)">26</div>
+<div class="t" data-n="27" style="background:rgb(20, 70, 130)">27</div>
+<div class="t" data-n="28" style="background:rgb(230, 90, 90)">28</div>
+<div class="t" data-n="29" style="background:rgb(90, 230, 90)">29</div>
+<div class="t" data-n="30" style="background:rgb(90, 90, 230)">30</div>
+<div class="t" data-n="31" style="background:rgb(60, 60, 20)">31</div>
+<div class="t" data-n="32" style="background:rgb(20, 60, 60)">32</div>
+<div class="t" data-n="33" style="background:rgb(60, 20, 60)">33</div>
+<div class="t" data-n="34" style="background:rgb(250, 230, 60)">34</div>
+<div class="t" data-n="35" style="background:rgb(60, 230, 250)">35</div>
+<div class="t" data-n="36" style="background:rgb(250, 60, 230)">36</div>
+</div>
+<div id="tail"></div>
+<script>
+window.__clicked = [];
+window.__input = 0;
+for (const ev of ["pointerdown", "mousedown", "keydown", "wheel", "touchstart"]) {
+  addEventListener(ev, () => { window.__input++; }, true);
+}
+document.querySelectorAll(".t").forEach((t) => t.addEventListener("click", () => window.__clicked.push(+t.dataset.n)));
+function block(px, color, id) {
+  const d = document.createElement("div");
+  d.id = id;
+  d.style.cssText = "height:" + px + "px;background:" + color;
+  return d;
+}
+window.t0204 = {
+  insertAbove(px) { document.getElementById("grid").before(block(px, "rgb(200, 30, 30)", "above")); },
+  insertBelow(px) { document.getElementById("tail").after(block(px, "rgb(30, 200, 30)", "below")); },
+  insertBelowGrid(px) { document.getElementById("grid").after(block(px, "rgb(30, 200, 30)", "below")); },
+  transformGrid(px) { document.getElementById("grid").style.transform = "translateY(" + px + "px)"; },
+};
+const lazy = Number(new URLSearchParams(location.search).get("lazy")) || 0;
+if (lazy) {
+  let done = false;
+  addEventListener("scroll", () => {
+    if (done) return;
+    done = true;
+    setTimeout(() => window.t0204.insertAbove(lazy), 50);
+  }, { passive: true });
+}
+</script>
+</body></html>

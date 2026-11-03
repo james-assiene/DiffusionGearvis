@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0174 B1 steer</title>
+<style>
+  html, body { margin: 0; overflow: hidden; }
+  /* the whole viewport navigates the *opener* (a background page), never this page */
+  #steer { position: fixed; inset: 0; background: rgb(0, 160, 120); }
+</style>
+</head>
+<body>
+<div id="steer"></div>
+<script>
+  "use strict";
+  window.__doc = Math.random().toString(36).slice(2);
+  document.getElementById("steer").addEventListener("click", () => {
+    if (window.opener) window.opener.location.assign("target.html?from=steered");
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+{
+  "task": "T-0223",
+  "notes": "Ten student attempts, each with exactly one line flagged mistake=true; every later line follows from that mistake. Line text uses matplotlib mathtext between $...$. judge_keywords: every entry must appear in a diagnosis (case-insensitive); an entry with '|' is satisfied by any one of its alternatives. false_blame_keywords: any one appearing means the answer blamed a correct line. P5 uses 45 degrees, not the 60 of the first plan, because at 60 degrees L cos(theta) = L(1 - cos(theta)) and the mistake would not change the answer.",
+  "attempts": [
+    {
+      "id": "M1",
+      "course": "MATH 101 Calculus I",
+      "title": "Integration by parts",
+      "problem": "Evaluate the indefinite integral $\\int x\\,e^{2x}\\,dx$ using integration by parts.",
+      "lines": [
+        {"text": "By parts:  $\\int u\\,dv = uv - \\int v\\,du$", "mistake": false},
+        {"text": "Let  $u = x$,   $dv = e^{2x}\\,dx$", "mistake": false},
+        {"text": "$du = dx$,   $v = 2e^{2x}$", "mistake": true},
+        {"text": "$\\int x\\,e^{2x}\\,dx = x \\cdot 2e^{2x} - \\int 2e^{2x}\\,dx$", "mistake": false},
+        {"text": "$= 2x\\,e^{2x} - 2 \\cdot \\frac{1}{2}e^{2x} + C$", "mistake": false},
+        {"text": "$= 2x\\,e^{2x} - e^{2x} + C$", "mistake": false},
+        {"text": "Answer:  $(2x - 1)\\,e^{2x} + C$", "mistake": false}
+      ],
+      "mistake": "Line 3 takes v = 2e^{2x}, differentiating dv = e^{2x} dx instead of integrating it; v should be (1/2)e^{2x}.",
+      "correct_result": "(x/2)e^{2x} - (1/4)e^{2x} + C",
+      "judge_keywords": ["antiderivative|instead of integrating|derivative instead|took the derivative|rather than integrat|instead of the integral|rather than its integral|integrate dv|integrating dv|integrate e^|integrating e^|integral of e^", "v = 1/2|v = ½|v = (1/2)|v should be|v = e^{2x}/2|v = e^(2x)/2|half e|half of e|½e|½ e|1/2 e|(1/2)e|(1/2) e|e^{2x}/2|e^(2x)/2|over 2|over two|divided by 2|divided by two|one half|a half"],
+      "false_blame_keywords": ["u should be e", "du is wrong", "du should", "formula for integration by parts is wrong", "should be uv + "],
+      "diagram": null
+    },
+    {
+      "id": "M2",
+      "course": "MATH 101 Calculus I",
+      "title": "Tangent line",
+      "problem": "Find the equation of the tangent line to the curve $y = \\sin(x^2)$ at the point where $x = \\sqrt{\\pi}$.",
+      "lines": [
+        {"text": "$y = \\sin(x^2)$,  point at  $x = \\sqrt{\\pi}$", "mistake": false},
+        {"text": "$y(\\sqrt{\\pi}) = \\sin(\\pi) = 0$,  so the point is $(\\sqrt{\\pi},\\ 0)$", "mistake": false},
+        {"text": "$\\frac{dy}{dx} = \\cos(x^2)$", "mistake": true},
+        {"text": "slope at $x = \\sqrt{\\pi}$:   $m = \\cos(\\pi) = -1$", "mistake": false},
+        {"text": "tangent:  $y - 0 = -1\\,(x - \\sqrt{\\pi})$", "mistake": false},
+        {"text": "Answer:  $y = -x + \\sqrt{\\pi}$", "mistake": false}
+      ],
+      "mistake": "Line 3 writes dy/dx = cos(x^2), dropping the chain-rule factor 2x; dy/dx = 2x cos(x^2), so the slope at sqrt(pi) is -2 sqrt(pi).",
+      "correct_result": "slope -2 sqrt(pi); tangent y = -2 sqrt(pi) x + 2 pi",
+      "judge_keywords": ["chain rule|chain-rule", "2x|two x|2√π|2√(π)|2\\sqrt{\\pi}|2 sqrt(pi)|2 root pi|two root pi|2 times the square root of pi|two times the square root of pi"],
+      "false_blame_keywords": ["sin(π) is not 0", "sin(pi) is not 0", "sin of pi is not", "cos(π) = 1", "cos(pi) = 1", "point is wrong"],
+      "diagram": null
+    },
+    {
+      "id": "M3",
+      "course": "MATH 101 Calculus I",
+      "title": "Area between curves",
+      "problem": "Find the area of the region enclosed by $y = x$ and $y = x^2$ for $0 \\leq x \\leq 1$. Sketch the region.",
+      "lines": [
+        {"text": "Curves meet where  $x^2 = x$:   $x = 0$  and  $x = 1$", "mistake": false},
+        {"text": "Area  $A = \\int_0^1 (x^2 - x)\\,dx$", "mistake": true},
+        {"text": "$= \\left[\\frac{x^3}{3} - \\frac{x^2}{2}\\right]_0^1$", "mistake": false},
+        {"text": "$= \\frac{1}{3} - \\frac{1}{2} - 0$", "mistake": false},
+        {"text": "$= -\\frac{1}{6}$", "mistake": false},
+        {"text": "Answer:  area $= -1/6$", "mistake": false}
+      ],
+      "mistake": "Line 2 integrates x^2 - x (lower minus upper); on [0, 1] the line y = x is above y = x^2, so the integrand is x - x^2 and the area is +1/6 (an area cannot be negative).",
+      "correct_result": "1/6",
+      "judge_keywords": ["x - x^2|x − x²|x - x²|x − x^2|x minus x squared|x minus x^2|x minus x²|upper minus lower|top minus bottom|upper curve|top curve|upper function|top function|y = x is above|line is above|x is above|above the parabola|above y = x²|above y = x^2", "positive|cannot be negative|can't be negative|never negative|not be negative|absolute value"],
+      "false_blame_keywords": ["limits are wrong", "should intersect", "x^3/3 is wrong", "antiderivative is wrong", "1/3 - 1/2 is not"],
+      "diagram": "sketch of y = x and y = x^2 on [0, 1] with the region between them shaded, intersection points (0, 0) and (1, 1) marked"
+    },
+    {
+      "id": "M4",
+      "course": "MATH 201 Linear Algebra",
+      "title": "Eigenvalues of a 2x2 matrix",
+      "problem": "Find the eigenvalues of the $2 \\times 2$ matrix $A$ with rows $(2,\\ 1)$ and $(1,\\ 2)$.",
+      "lines": [
+        {"text": "Eigenvalues:  $\\det(A - \\lambda I) = 0$", "mistake": false},
+        {"text": "$A - \\lambda I$  has rows  $(2 - \\lambda,\\ 1)$  and  $(1,\\ 2 - \\lambda)$", "mistake": false},
+        {"text": "$\\det = (2 - \\lambda)(2 - \\lambda) + (1)(1)$", "mistake": true},
+        {"text": "$= \\lambda^2 - 4\\lambda + 4 + 1 = \\lambda^2 - 4\\lambda + 5$", "mistake": false},
+        {"text": "$\\lambda = \\frac{4 \\pm \\sqrt{16 - 20}}{2} = \\frac{4 \\pm \\sqrt{-4}}{2}$", "mistake": false},
+        {"text": "$= \\frac{4 \\pm 2i}{2}$", "mistake": false},
+        {"text": "Answer:  $\\lambda = 2 \\pm i$   (complex eigenvalues)", "mistake": false}
+      ],
+      "mistake": "Line 3 adds the off-diagonal product: det(A - λI) = (2 - λ)^2 - (1)(1), not + (1)(1); with the minus sign λ^2 - 4λ + 3 = 0 gives λ = 1 and 3 (a symmetric matrix has real eigenvalues).",
+      "correct_result": "λ = 1 and λ = 3",
+      "judge_keywords": ["ad - bc|ad − bc|ad minus bc|subtract the product|subtract the off-diagonal|minus the product|off-diagonal product|product of the off-diagonal|minus (1)(1)|− (1)(1)|- (1)(1)|minus 1 times 1|minus one times one|sign error|wrong sign|should be a minus|should be minus|should subtract|not plus|instead of plus|instead of adding|squared minus 1|squared minus one","1 and 3|3 and 1|1 or 3|3 or 1|one and three|three and one|λ = 3|lambda = 3|lambda equals 3|λ² − 4λ + 3|λ^2 - 4λ + 3|lambda squared minus 4 lambda plus 3"],
+      "false_blame_keywords": ["quadratic formula is wrong", "should be 16 - 4", "expansion is wrong", "sqrt(-4) is not 2i"],
+      "diagram": null
+    },
+    {
+      "id": "M5",
+      "course": "MATH 202 Differential Equations",
+      "title": "Separable initial value problem",
+      "problem": "Solve the initial value problem $y' = 2y$, $y(0) = 3$, and sketch the solution for $0 \\leq x \\leq 1$.",
+      "lines": [
+        {"text": "$\\frac{dy}{dx} = 2y$", "mistake": false},
+        {"text": "separate:  $\\frac{dy}{y} = 2\\,dx$", "mistake": false},
+        {"text": "$\\int \\frac{dy}{y} = \\int 2\\,dx$", "mistake": false},
+        {"text": "$\\ln y = 2x + C$", "mistake": false},
+        {"text": "$y = e^{2x} + C$", "mistake": true},
+        {"text": "$y(0) = 3$:   $e^0 + C = 3$,  so  $C = 2$", "mistake": false},
+        {"text": "Answer:  $y = e^{2x} + 2$", "mistake": false}
+      ],
+      "mistake": "Line 5 exponentiates ln y = 2x + C as y = e^{2x} + C; it is y = e^{C} e^{2x} = A e^{2x}, a multiplicative constant, so y(0) = 3 gives y = 3e^{2x}.",
+      "correct_result": "y = 3e^{2x}",
+      "judge_keywords": ["multiplicative|multiplies|multiply|multiplied|constant factor|a factor|factor|times e^|e^c|e^{c}|e^(c)|e to the c|ae^{2x}|ae^(2x)|a e^{2x}|ce^{2x}|ce^(2x)|c e^{2x}", "3e^|3e^{2x}|3e^(2x)|3 e^{2x}|3 e^|3·e|3 times e|three e|three times e|3 e to the|3e to the|three e to the"],
+      "false_blame_keywords": ["separation is wrong", "should not separate", "ln y should be", "integral of 1/y is not", "integral of dy/y is not", "should be 2x^2"],
+      "diagram": "sketch of the student's own answer y = e^{2x} + 2 for 0 <= x <= 1, starting at the marked point (0, 3)"
+    },
+    {
+      "id": "P1",
+      "course": "PHYS 101 Mechanics",
+      "title": "Block on a rough incline",
+      "problem": "A 2 kg block slides down a rough incline at $\\theta = 30°$ to the horizontal. The coefficient of kinetic friction is $\\mu_k = 0.2$. Draw a free-body diagram and find the acceleration of the block. Take $g = 9.8$ m/s$^2$.",
+      "lines": [
+        {"text": "Forces: weight $mg$, normal $N$, friction $f$ up the slope", "mistake": false},
+        {"text": "Along the slope:  $ma = mg\\,\\sin\\theta - f$", "mistake": false},
+        {"text": "$N = mg = 2(9.8) = 19.6$ N", "mistake": true},
+        {"text": "$f = \\mu_k N = 0.2(19.6) = 3.92$ N", "mistake": false},
+        {"text": "$mg\\,\\sin 30° =19.6(0.5) = 9.8$ N", "mistake": false},
+        {"text": "$2a = 9.8 - 3.92 = 5.88$", "mistake": false},
+        {"text": "Answer:  $a = 2.94$ m/s$^2$ down the slope", "mistake": false}
+      ],
+      "mistake": "Line 3 takes the normal force as N = mg; on the incline N = mg cos θ = 16.97 N, so f = 3.39 N and a = g(sin θ - μ cos θ) ≈ 3.2 m/s^2.",
+      "correct_result": "a = g(sin θ - μ_k cos θ) ≈ 3.20 m/s^2",
+      "judge_keywords": ["mg cos|mgcos|mg\\cos|mg \\cos|cos θ|cos(θ)|cos theta|cos 30|cos(30|cosine", "normal|n = mg cos|n = mg\\cos|n=mg cos|n = m g cos"],
+      "false_blame_keywords": ["mg sin θ is wrong", "mg sin(theta) is wrong", "not mg sin", "normal force line is fine", "normal force is fine", "n = mg is fine", "n = mg is correct", "friction should point down","sin 30 is not 0.5", "sin(30) is not 0.5", "sin 30° is not"],
+      "diagram": "free-body diagram: block on a 30° incline with mg straight down, N perpendicular to the slope and f up the slope"
+    },
+    {
+      "id": "P2",
+      "course": "PHYS 101 Mechanics",
+      "title": "Ball thrown horizontally from a cliff",
+      "problem": "A ball is thrown horizontally at 5 m/s from the top of a 20 m high cliff. How long does it take to reach the ground, and how far from the base of the cliff does it land? Ignore air resistance; take $g = 9.8$ m/s$^2$.",
+      "lines": [
+        {"text": "Vertical, down $= +$:   $y = v_0 t + \\frac{1}{2}g t^2$", "mistake": false},
+        {"text": "$20 = 5t + 4.9t^2$", "mistake": true},
+        {"text": "$4.9t^2 + 5t - 20 = 0$", "mistake": false},
+        {"text": "$t = \\frac{-5 + \\sqrt{25 + 392}}{9.8} = \\frac{-5 + 20.42}{9.8}$", "mistake": false},
+        {"text": "$t \\approx 1.57$ s", "mistake": false},
+        {"text": "Horizontal:  $x = v_x t = 5(1.57) \\approx 7.9$ m", "mistake": false},
+        {"text": "Answer:  lands after 1.57 s, 7.9 m from the cliff", "mistake": false}
+      ],
+      "mistake": "Line 2 puts the horizontal 5 m/s into the vertical equation; the initial vertical velocity is zero, so 20 = 4.9t^2, t ≈ 2.02 s and x = 5t ≈ 10.1 m.",
+      "correct_result": "t ≈ 2.02 s, x ≈ 10.1 m",
+      "judge_keywords": ["horizontal", "vertical", "vertical velocity is zero|vertical velocity is 0|vertical speed is zero|vertical speed is 0|zero initial vertical|zero vertical|starts with zero vertical|initial vertical velocity of zero|initial vertical velocity of 0|no initial vertical|no vertical velocity|no vertical speed|0 m/s vertically|zero m/s vertically|v_0 = 0|v₀ = 0|v0 = 0|v_y = 0|vy = 0|20 = 4.9t|20 = 4.9 t|20 = ½gt|20 = 1/2 g t"],
+      "false_blame_keywords": ["4.9 is wrong", "should be 9.8t^2", "quadratic formula is wrong", "x = v t is wrong", "x = vt is wrong", "sqrt(417)"],
+      "diagram": "cliff 20 m high with the ball leaving the top horizontally at 5 m/s and a parabolic path down to the ground, landing distance x marked"
+    },
+    {
+      "id": "P3",
+      "course": "PHYS 102 Electricity and Magnetism",
+      "title": "Series-parallel resistors",
+      "problem": "A resistor $R_1 = 6\\ \\Omega$ is in series with a parallel pair $R_2 = 3\\ \\Omega$ and $R_3 = 6\\ \\Omega$, across a 12 V battery. Draw the circuit, then find the equivalent resistance and the current drawn from the battery.",
+      "lines": [
+        {"text": "$R_2 \\parallel R_3$, then in series with $R_1$", "mistake": false},
+        {"text": "$R_{23} = R_2 + R_3 = 3 + 6 = 9\\ \\Omega$", "mistake": true},
+        {"text": "$R_{eq} = R_1 + R_{23} = 6 + 9 = 15\\ \\Omega$", "mistake": false},
+        {"text": "$I = V / R_{eq}$", "mistake": false},
+        {"text": "$I = 12 / 15 = 0.8$ A", "mistake": false},
+        {"text": "check: $V_1 = I R_1 = 0.8(6) = 4.8$ V", "mistake": false},
+        {"text": "Answer:  $R_{eq} = 15\\ \\Omega$,   $I = 0.8$ A", "mistake": false}
+      ],
+      "mistake": "Line 2 adds the parallel pair like series resistors; 1/R23 = 1/3 + 1/6 gives R23 = 2 Ω, so R_eq = 8 Ω and I = 1.5 A.",
+      "correct_result": "R_eq = 8 Ω, I = 1.5 A",
+      "judge_keywords": ["parallel", "1/r|reciprocal|product over sum|product over the sum|product divided by the sum|2 ω|2ω|2 ohm|two ohm|8 ω|8ω|8 ohm|eight ohm|1.5 a|1.5a|1.5 amp|one and a half amp"],
+      "false_blame_keywords": ["r1 is in parallel", "r1 should be in parallel", "ohm's law is wrong", "i = v/r is wrong"],
+      "diagram": "circuit: 12 V battery, R1 = 6 Ω in series, then R2 = 3 Ω and R3 = 6 Ω in parallel"
+    },
+    {
+      "id": "P4",
+      "course": "PHYS 101 Mechanics",
+      "title": "Atwood machine",
+      "problem": "Two masses, $m_1 = 3$ kg and $m_2 = 5$ kg, hang on either side of a light frictionless pulley (an Atwood machine). Find the acceleration of the masses and the tension in the string. Take $g = 9.8$ m/s$^2$.",
+      "lines": [
+        {"text": "$m_2 = 5$ kg goes down,  $m_1 = 3$ kg goes up", "mistake": false},
+        {"text": "net force:  $(m_2 - m_1)g = 2(9.8) = 19.6$ N", "mistake": false},
+        {"text": "$a = \\frac{(m_2 - m_1)g}{m_2} = \\frac{19.6}{5}$", "mistake": true},
+        {"text": "$a = 3.92$ m/s$^2$", "mistake": false},
+        {"text": "for $m_1$:   $T - m_1 g = m_1 a$", "mistake": false},
+        {"text": "$T = 3(9.8 + 3.92) = 3(13.72) = 41.16$ N", "mistake": false},
+        {"text": "Answer:  $a \\approx 3.92$ m/s$^2$,   $T \\approx 41.2$ N", "mistake": false}
+      ],
+      "mistake": "Line 3 divides the net force by m2 only; the whole system accelerates, so a = (m2 - m1)g/(m1 + m2) = 19.6/8 = 2.45 m/s^2 and T = 3(9.8 + 2.45) ≈ 36.8 N.",
+      "correct_result": "a = g/4 ≈ 2.45 m/s^2, T ≈ 36.8 N",
+      "judge_keywords": ["m1 + m2|m₁ + m₂|m_1 + m_2|total mass|both masses|8 kg|8kg|8 kilo|eight kilo|whole system|combined mass|sum of the masses|total of 8|divide by 8|divided by 8", "2.45|g/4|g over 4|19.6/8|19.6 / 8|19.6 divided by 8"],
+      "false_blame_keywords": ["net force is wrong", "net force should be 3", "net force should be 29", "net force should be 78", "t - m1 g is wrong", "tension equation is wrong", "should be t + m1 g"],
+      "diagram": "pulley at the top, string over it, m1 = 3 kg on the left and m2 = 5 kg on the right, tension T and weights drawn"
+    },
+    {
+      "id": "P5",
+      "course": "PHYS 101 Mechanics",
+      "title": "Pendulum speed at the bottom",
+      "problem": "A pendulum of length $L = 1$ m is released from rest at $45°$ from the vertical. Find the speed of the bob at the lowest point. Ignore air resistance; take $g = 9.8$ m/s$^2$.",
+      "lines": [
+        {"text": "released from rest, no friction: energy conserved", "mistake": false},
+        {"text": "$mgh = \\frac{1}{2}mv^2$,  so  $v = \\sqrt{2gh}$", "mistake": false},
+        {"text": "height drop  $h = L\\cos 45° = 1(0.707) = 0.707$ m", "mistake": true},
+        {"text": "$v = \\sqrt{2(9.8)(0.707)}$", "mistake": false},
+        {"text": "$= \\sqrt{13.86}$", "mistake": false},
+        {"text": "Answer:  $v \\approx 3.72$ m/s", "mistake": false}
+      ],
+      "mistake": "Line 3 takes the height drop as L cos θ; the bob drops h = L(1 - cos θ) = 0.293 m, so v = sqrt(2gL(1 - cos 45°)) ≈ 2.40 m/s.",
+      "correct_result": "v = sqrt(2gL(1 - cos 45°)) ≈ 2.40 m/s",
+      "judge_keywords": ["1 - cos|1 − cos|1 minus cos|one minus cos|1-cos|1−cos|l - l cos|l − l cos|l minus l cos|l minus l times cos", "0.29|0.3 m|2.4 m|2.40|2.4 metres|2.4 meters|2.39|≈ 2.4|about 2.4"],
+      "false_blame_keywords": ["energy is not conserved", "should be mgh = mv^2", "v = √(2gh) is wrong", "v = sqrt(2gh) is wrong"],
+      "diagram": "pivot with a dashed vertical, string of length L = 1 m at 45°, the bob at release and at the bottom, the angle marked"
+    }
+  ]
+}

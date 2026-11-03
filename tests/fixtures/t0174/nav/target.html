@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0174 B1 target</title>
+<style>
+  html, body { margin: 0; overflow: hidden; background: rgb(0, 120, 200); font: 28px sans-serif; }
+  /* #back: x 440..839, y 300..499 (centre 640, 400); the rest of the page is inert */
+  #back { position: absolute; left: 440px; top: 300px; width: 400px; height: 200px; margin: 0;
+          background: rgb(255, 255, 255); font: 28px sans-serif; border: 2px solid rgb(0, 0, 0); }
+</style>
+</head>
+<body>
+<button id="back" type="button">back</button>
+<script>
+  "use strict";
+  window.__doc = Math.random().toString(36).slice(2);
+  window.__from = new URLSearchParams(location.search).get("from") || "";
+  document.getElementById("back").addEventListener("click", () => { history.back(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+pid, process_name, used_gpu_memory [MiB]
+11419, /opt/google/chrome/chrome --type=gpu-process --ozone-platform=x11 --crashpad-handler-pid=11382 --enable-crash-reporter=98503121-d0f4-4e4b-8321-5a1ddcf0174a? --change-stack-guard-on-fork=enable --gpu-preferences=UAAAAAAAAAAgAQAEAAAAAAAAAAAAAGAAAQAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAAQAAAAAAAAAIAAAAAAAAAAgAAAAAAAAA --shared-files --metrics-shmem-handle=4?i?252503700439854615?797398213966679629?262144 --field-trial-handle=3?i?7957495180808391832?16091525365259608426?262144 --variations-seed-version=20260913-030038.827000-production --pseudonymization-salt-handle=7?i?7445872934335259190?17618064332599097782?4 --trace-process-track-uuid=3190708988185955192, 50 MiB
+3380309, moshi-server, 3180 MiB

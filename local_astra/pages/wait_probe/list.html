@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ashbury Station</title>
+  <style>
+    body { margin: 0; font-family: sans-serif; background: #ffffff; color: #111111; }
+    .bar { padding: 14px 24px; background: #1d3557; color: #ffffff; font-size: 26px; font-weight: bold; }
+    .page { padding: 24px; font-size: 18px; }
+    a { font-size: 22px; color: #1d4ed8; }
+    table { border-collapse: collapse; min-width: 640px; margin-top: 12px; }
+    th, td { text-align: left; padding: 10px 18px; border-bottom: 1px solid #d0d7de; }
+  </style>
+</head>
+<body>
+  <header class="bar">Ashbury Station</header>
+  <main class="page" id="page">
+    <p><a id="board-link" href="/list.html?view=departures">Live departures</a></p>
+    <p>Ticket office open daily. Step-free access to every platform.</p>
+  </main>
+  <script>
+    // T-0202 C3 (W2): /list.html is the station page; its only link opens /list.html?view=departures, whose header
+    // paints at once and whose departures board paints BOARD_DELAY_MS after DOMContentLoaded, with nothing changing
+    // on the page in between (no spinner). Deterministic: no clock read, no randomness.
+    var BOARD_DELAY_MS = 1500;
+    var DEPARTURES = [
+      ["10:31", "Calder Bridge", "Platform 3"],
+      ["10:42", "Hollins Cross", "Platform 7"],
+      ["10:48", "Marlow Heath", "Platform 12"],
+      ["10:55", "Wexley Junction", "Platform 17"]
+    ];
+    function paintBoard() {
+      var table = document.createElement("table");
+      var head = document.createElement("tr");
+      ["Time", "Destination", "Platform"].forEach(function (label) {
+        var th = document.createElement("th");
+        th.textContent = label;
+        head.appendChild(th);
+      });
+      table.appendChild(head);
+      DEPARTURES.forEach(function (row) {
+        var tr = document.createElement("tr");
+        row.forEach(function (cell) {
+          var td = document.createElement("td");
+          td.textContent = cell;
+          tr.appendChild(td);
+        });
+        table.appendChild(tr);
+      });
+      document.getElementById("page").appendChild(table);
+    }
+    if (window.location.search === "?view=departures") {
+      document.title = "Departures - Ashbury Station";
+      var page = document.getElementById("page");
+      page.textContent = "";
+      var h1 = document.createElement("h1");
+      h1.textContent = "Departures";
+      page.appendChild(h1);
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(paintBoard, BOARD_DELAY_MS);
+      });
+    }
+  </script>
+</body>
+</html>

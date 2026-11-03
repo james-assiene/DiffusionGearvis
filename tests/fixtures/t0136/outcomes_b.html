@@ -1,0 +1,821 @@
+<!doctype html>
+<!--
+  T-0136 A1c-1: the second outcome-label probe page (test-author fixture; docs/tasks/T-0136.md, "Amendment A1c/A2b").
+
+  Provenance: designed for T-0136 group A1c on 2026-10-25 by the A1c test-author. The layout constants were laid out
+  by hand; the markup and the probe table were written out from them by a throwaway scratchpad script, which is not
+  kept (the rows in tests/unit/test_t0136_corpus.py re-check everything it asserted). Licence: same as the repository.
+  tests/fixtures/t0136/outcomes.html (page a) is frozen (A1c-N) and is not touched by this page.
+
+  What it is. One 1280x800 page (no scrolling: every scene is exactly the viewport) that renders one scene chosen by
+  its query string, `?scene=<name>`; with no or an unknown scene it renders the index. The choice depends on the query
+  alone. Scenes:
+  - ul1, ul2: N-UL, 26 links that only underline on hover (no href, so no navigation and no focus). Each is a fixed
+    box with overflow hidden and text longer than the box, so the text (and its underline) fills the box whatever the
+    font metrics: the link's width is its box width. The `ul-wrap` links show exactly two lines.
+  - btn: N-BTN, 9 accent buttons with no handler (site.css `button:hover`, brightness 1.08); N-TINT, 7 chips whose
+    hover tint differs from their background by 8..30 in gray (BT.601, as PIL's `L`).
+  - pre: N-PRE, 15 hover-only links (the `pre` clicks) and, as targets, disabled controls, inline SVG pictures,
+    already-selected segmented options and blank space; the trivial `none` probes click the same targets on a fresh
+    load.
+  - small1, small2: C-SMALL, 30 cards (qty stepper 1 to 2 at 14 px, "3 items" to "4 items" at 12 px #666, "Saved",
+    "Copied" or "Added" appearing at 13 px, a red "Required" or "Invalid" hint at 12 px, a price digit, a one-glyph
+    toggle), each change next to its control.
+  - icons: C-COLOUR (9 icons recoloured; the two colours differ by at least 30 in gray), C-RELABEL (9 accent buttons
+    that relabel themselves), C-FOCUS (7 empty inputs; a click shows site.css's 2 px focus outline).
+  - far1 .. far6: elsewhere, 22 small text changes far from the clicked button, in all nine ninths.
+  - nav: page, 18 links under a site-like 64 px bar; d01 .. d12 keep that bar and replace the body, f1 .. f6 replace
+    everything.
+  - stress (report-only): card box-shadow hover, card translateY lift hover, ghost-button border and text colour
+    hover, strikethrough-only toggle, equal-luma dot colour swap (gray difference at most 24), full-width row tint.
+
+  Styles. Links, buttons and inputs use site.css's own rules, copied inline below (the comment in the style element
+  cites the lines); the page does not link local_astra/pages. Fonts are the browser's sans-serif.
+
+  The probe contract (A1c-1; the builder's `--probes` runs this table after page a's, A1c-3):
+  - every probe starts from a fresh load of `outcomes_b.html` + `query`: nothing focused, scrollY 0, no previous
+    pointer point unless the probe has a `pre`;
+  - `pre` (N-PRE only): one executed `click_at` at `pre.x`, `pre.y` (model units, echo model) on the hover-only link
+    `pre.target` (its pixel point `pre.x_px`, `pre.y_px` by hand); the pair's `before` is the executor's frame after
+    that click and `prev_point` its resolved point;
+  - then one `click_at` at `x`, `y` in model units (0..999, echo model). `x_px`/`y_px` are `to_pixels(x, 1280)` and
+    `to_pixels(y, 800)` by hand (round(v * (n - 1) / 999), halves up), the `resolved` point the pair must carry.
+    `target` is a selector of an element containing the element under that point (null for blank space). `changes`
+    (near and elsewhere probes) is the changed rect [left, top, right, bottom] in full-frame px, and `changes_el` the
+    element whose box it is (a focus probe's rect is the input's box grown by 3 px: outline 2 px plus offset 1 px).
+  - `kind` names the A1c-2 family: n-ul, n-btn, n-tint, n-pre (gated none); t-disabled, t-image, t-selected (trivial
+    none, report-only); c-small-qty, c-small-count, c-small-flash, c-small-hint, c-small-price, c-small-glyph,
+    c-colour, c-relabel, c-focus (gated near); e-small (gated elsewhere); p-bar, p-full (gated page); s-shadow,
+    s-lift, s-ghost, s-strike, s-luma, s-row (stress, `stress: true`, report-only).
+  - extra fields, for the rows only: n-ul `font_px`, `width_px`, `lines`, `quarter` (first: the pointer in the first
+    quarter of the link's width; middle: within 3/8..5/8; last: in the last quarter); n-tint `tint` [background,
+    hover]; c-colour and s-luma `colours` [before, after]; n-pre `target_kind` (disabled, image, selected, blank);
+    page `dest` (the link's href).
+
+  Determinism. There are no timers (setTimeout, setInterval, requestAnimationFrame), no CSS transitions or animations
+  (the first style rule neutralises them, the way .claude/rules/tests.md asks), no web fonts, no images other than
+  inline SVG, no network APIs and no absolute URLs (inline SVG needs no namespace URL in HTML); the only navigation is
+  the relative `?scene=` links of the nav scene. The scene is chosen by a synchronous script at the end of the body,
+  before the first paint, and every change happens synchronously in the one click handler.
+
+  Oracle, for the record only (never model-facing): `window.__state` = {scene, cart, events}. The count changes push
+  an item to `cart` (so `cart_after` grows by one); every handled click appends to `events`; the nav links change the
+  URL (`url_changed`); nothing scrolls.
+
+  Chromium capture (Q-A1c-1): not yet checked through the real executor when this page was written (the browser rows
+  were held back during a demo); tests/integration/test_t0136_corpus_browser.py's page-b premise rows check it.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0136 outcome probes, page b</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; transition-property: none !important; transition-duration: 0s !important; animation: none !important; }
+  html, body { margin: 0; padding: 0; width: 1280px; height: 800px; overflow: hidden; background: #ffffff; }
+  html { font-family: sans-serif; font-size: 16px; line-height: 1.45; color: #1d2433; }
+  .scene { position: absolute; left: 0; top: 0; width: 1280px; height: 800px; background: #ffffff; }
+  .abs { position: absolute; margin: 0; }
+
+  /* Copied from local_astra/pages/static/assets/site.css as of d4adf4f, with its :root colours (lines 11-22)
+     written in: a and a:hover (lines 37-44), button and button:hover (lines 98-112, the .button selector left out),
+     input and input:focus (lines 114-131, textarea left out), [hidden] (lines 393-395). */
+  a {
+    color: #2f5bd3;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  button {
+    font: inherit;
+    font-weight: 600;
+    color: #ffffff;
+    background: #2f5bd3;
+    border: 0;
+    border-radius: 8px;
+    padding: 9px 16px;
+    cursor: pointer;
+  }
+  button:hover {
+    filter: brightness(1.08);
+  }
+  input {
+    font: inherit;
+    color: #1d2433;
+    background: #ffffff;
+    border: 1px solid #c7cdd8;
+    border-radius: 8px;
+    padding: 10px 12px;
+    width: 100%;
+    caret-color: #1d2433;
+  }
+  input:focus {
+    outline: 2px solid #2f5bd3;
+    outline-offset: 1px;
+    border-color: #2f5bd3;
+  }
+  [hidden] {
+    display: none !important;
+  }
+
+  /* The page's own rules (not in site.css): fixed boxes, disabled controls, chips, segments, stress kinds. */
+  button:disabled { opacity: 0.55; cursor: default; }
+  button:disabled:hover { filter: none; }
+  input:disabled { background: #f5f6f8; color: #5d6677; }
+  .fixed { padding: 0 8px; }
+  .ul, .pre-link, .nav-link { display: block; overflow: hidden; white-space: nowrap; }
+  .ul-wrap { white-space: normal; }
+  .pre-link { font-size: 16px; line-height: 23px; }
+  .nav-link { font-size: 16px; line-height: 28px; }
+  .index-h { font-size: 32px; line-height: 40px; }
+  .lede, .label { font-size: 14px; line-height: 22px; color: #5d6677; }
+  .title { font-size: 14px; line-height: 22px; font-weight: 600; color: #1d2433; }
+  .chip { border: 1px solid #dfe3ea; border-radius: 999px; font-size: 15px; line-height: 38px; text-align: center; color: #1d2433; }
+  .seg { border: 1px solid #c7cdd8; font-size: 15px; line-height: 38px; text-align: center; background: #ffffff; color: #1d2433; }
+  .seg:hover { background: #eef2fb; }
+  .seg.on, .seg.on:hover { background: #2f5bd3; color: #ffffff; border-color: #2f5bd3; }
+  .card { background: #ffffff; border: 1px solid #dfe3ea; border-radius: 10px; }
+  .step { font-size: 18px; }
+  .qty { font-size: 14px; line-height: 20px; text-align: center; }
+  .count { font-size: 12px; line-height: 16px; color: #666666; }
+  .flash { font-size: 13px; line-height: 20px; color: #1f7a4d; }
+  .hint { font-size: 12px; line-height: 16px; color: #b42318; }
+  .price { font-size: 16px; line-height: 24px; font-weight: 700; }
+  .toggle { cursor: pointer; }
+  .glyph { font-size: 16px; line-height: 20px; text-align: center; }
+  .glyph-label { font-size: 14px; line-height: 20px; }
+  .icon { padding: 10px; background: transparent; border-radius: 8px; }
+  .ico { display: block; }
+  .far { font-size: 13px; line-height: 20px; color: #1d2433; }
+  .bar { background: #ffffff; border-bottom: 1px solid #dfe3ea; }
+  .brand { font-size: 20px; line-height: 28px; font-weight: 700; }
+  .bar-item { font-size: 15px; line-height: 24px; color: #5d6677; }
+  #s-nav { background: #f5f6f8; }
+  .nav-title { font-size: 28px; line-height: 36px; }
+  .dest-h { left: 80px; width: 1120px; height: 80px; color: #ffffff; font-size: 56px; line-height: 80px; font-weight: 700; }
+  .dest-p { left: 80px; width: 1120px; height: 40px; color: #ffffff; font-size: 24px; line-height: 40px; }
+  .card-s, .card-l { background: #ffffff; border: 1px solid #dfe3ea; border-radius: 10px; padding: 16px; }
+  .card-s:hover { box-shadow: 0 6px 16px rgba(29, 36, 51, 0.18); }
+  .card-l:hover { transform: translateY(-2px); }
+  .card-t { display: block; font-size: 16px; line-height: 24px; font-weight: 600; }
+  .card-n { display: block; font-size: 13px; line-height: 20px; color: #5d6677; }
+  .ghost { background: transparent; color: #2f5bd3; border: 1px solid #c7cdd8; }
+  .ghost:hover { filter: none; border-color: #2f5bd3; color: #1d4ed8; }
+  .todo { font-size: 15px; line-height: 24px; }
+  .todo.done { text-decoration: line-through; }
+  .dot { border-radius: 50%; }
+  .dot-l { font-size: 15px; line-height: 24px; }
+  .row { border-bottom: 1px solid #dfe3ea; background: #ffffff; }
+  .row:hover { background: #f5f6f8; }
+  .row-t { position: absolute; left: 40px; top: 12px; font-size: 15px; line-height: 24px; }
+  #chip-1 { background: #ffffff; }
+  #chip-1:hover { background: #eeeeee; }
+  #chip-2 { background: #f8f8f8; }
+  #chip-2:hover { background: #e8e8e8; }
+  #chip-3 { background: #f4f4f4; }
+  #chip-3:hover { background: #e0e0e0; }
+  #chip-4 { background: #ffffff; }
+  #chip-4:hover { background: #e6e6e6; }
+  #chip-5 { background: #fafafa; }
+  #chip-5:hover { background: #ebebeb; }
+  #chip-6 { background: #f0f0f0; }
+  #chip-6:hover { background: #dcdcdc; }
+  #chip-7 { background: #ffffff; }
+  #chip-7:hover { background: #e2e2e2; }
+  #ic-1-s { fill: #9ca3af; stroke: none; }
+  #ic-1-s.on { fill: #dc2626; }
+  #ic-2-s { fill: #ffffff; stroke: #9ca3af; }
+  #ic-2-s.on { fill: #f59e0b; stroke: #f59e0b; }
+  #ic-3-s { fill: #9ca3af; stroke: none; }
+  #ic-3-s.on { fill: #2f5bd3; }
+  #ic-4-s { fill: #9ca3af; stroke: none; }
+  #ic-4-s.on { fill: #e11d48; }
+  #ic-5-s { fill: #ffffff; stroke: #9ca3af; }
+  #ic-5-s.on { fill: #eab308; stroke: #eab308; }
+  #ic-6-s { fill: #9ca3af; stroke: none; }
+  #ic-6-s.on { fill: #1f7a4d; }
+  #ic-7-s { fill: #9ca3af; stroke: none; }
+  #ic-7-s.on { fill: #b91c1c; }
+  #ic-8-s { fill: #ffffff; stroke: #9ca3af; }
+  #ic-8-s.on { fill: #d97706; stroke: #d97706; }
+  #ic-9-s { fill: #9ca3af; stroke: none; }
+  #ic-9-s.on { fill: #7c3aed; }
+  #dot-1 { background: #2e8b57; }
+  #dot-1.on { background: #d0453a; }
+  #dot-2 { background: #3a7ca5; }
+  #dot-2.on { background: #b0563f; }
+  #dot-3 { background: #7a6a00; }
+  #dot-3.on { background: #a03f7a; }
+</style>
+<script type="application/json" id="probes">
+[
+  {"id": "b-ul-01", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 64, "y": 61, "x_px": 82, "y_px": 49, "query": "?scene=ul1", "target": "#ul1-l01", "font_px": 13, "width_px": 420, "lines": 1, "quarter": "first"},
+  {"id": "b-ul-02", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 148, "y": 199, "x_px": 189, "y_px": 159, "query": "?scene=ul1", "target": "#ul1-l02", "font_px": 16, "width_px": 300, "lines": 2, "quarter": "middle"},
+  {"id": "b-ul-03", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 130, "y": 338, "x_px": 166, "y_px": 270, "query": "?scene=ul1", "target": "#ul1-l03", "font_px": 20, "width_px": 140, "lines": 1, "quarter": "last"},
+  {"id": "b-ul-04", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 67, "y": 476, "x_px": 86, "y_px": 381, "query": "?scene=ul1", "target": "#ul1-l04", "font_px": 24, "width_px": 460, "lines": 1, "quarter": "first"},
+  {"id": "b-ul-05", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 102, "y": 601, "x_px": 131, "y_px": 481, "query": "?scene=ul1", "target": "#ul1-l05", "font_px": 13, "width_px": 180, "lines": 1, "quarter": "middle"},
+  {"id": "b-ul-06", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 270, "y": 739, "x_px": 346, "y_px": 591, "query": "?scene=ul1", "target": "#ul1-l06", "font_px": 16, "width_px": 340, "lines": 2, "quarter": "last"},
+  {"id": "b-ul-07", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 70, "y": 878, "x_px": 90, "y_px": 702, "query": "?scene=ul1", "target": "#ul1-l07", "font_px": 20, "width_px": 500, "lines": 1, "quarter": "first"},
+  {"id": "b-ul-08", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 601, "y": 71, "x_px": 769, "y_px": 57, "query": "?scene=ul1", "target": "#ul1-l08", "font_px": 24, "width_px": 220, "lines": 1, "quarter": "middle"},
+  {"id": "b-ul-09", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 895, "y": 196, "x_px": 1146, "y_px": 157, "query": "?scene=ul1", "target": "#ul1-l09", "font_px": 13, "width_px": 540, "lines": 1, "quarter": "last"},
+  {"id": "b-ul-10", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 541, "y": 334, "x_px": 693, "y_px": 267, "query": "?scene=ul1", "target": "#ul1-l10", "font_px": 16, "width_px": 320, "lines": 2, "quarter": "first"},
+  {"id": "b-ul-11", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 617, "y": 473, "x_px": 790, "y_px": 378, "query": "?scene=ul1", "target": "#ul1-l11", "font_px": 20, "width_px": 260, "lines": 1, "quarter": "middle"},
+  {"id": "b-ul-12", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 909, "y": 611, "x_px": 1164, "y_px": 489, "query": "?scene=ul1", "target": "#ul1-l12", "font_px": 24, "width_px": 560, "lines": 1, "quarter": "last"},
+  {"id": "b-ul-13", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 539, "y": 736, "x_px": 690, "y_px": 589, "query": "?scene=ul1", "target": "#ul1-l13", "font_px": 13, "width_px": 300, "lines": 1, "quarter": "first"},
+  {"id": "b-ul-14", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 250, "y": 64, "x_px": 320, "y_px": 51, "query": "?scene=ul2", "target": "#ul2-l01", "font_px": 16, "width_px": 560, "lines": 1, "quarter": "middle"},
+  {"id": "b-ul-15", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 284, "y": 203, "x_px": 364, "y_px": 162, "query": "?scene=ul2", "target": "#ul2-l02", "font_px": 20, "width_px": 360, "lines": 2, "quarter": "last"},
+  {"id": "b-ul-16", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 58, "y": 341, "x_px": 74, "y_px": 273, "query": "?scene=ul2", "target": "#ul2-l03", "font_px": 24, "width_px": 340, "lines": 1, "quarter": "first"},
+  {"id": "b-ul-17", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 203, "y": 466, "x_px": 260, "y_px": 373, "query": "?scene=ul2", "target": "#ul2-l04", "font_px": 13, "width_px": 440, "lines": 1, "quarter": "middle"},
+  {"id": "b-ul-18", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 298, "y": 604, "x_px": 382, "y_px": 483, "query": "?scene=ul2", "target": "#ul2-l05", "font_px": 16, "width_px": 380, "lines": 1, "quarter": "last"},
+  {"id": "b-ul-19", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 69, "y": 743, "x_px": 88, "y_px": 594, "query": "?scene=ul2", "target": "#ul2-l06", "font_px": 20, "width_px": 480, "lines": 1, "quarter": "first"},
+  {"id": "b-ul-20", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 109, "y": 881, "x_px": 140, "y_px": 705, "query": "?scene=ul2", "target": "#ul2-l07", "font_px": 24, "width_px": 200, "lines": 1, "quarter": "middle"},
+  {"id": "b-ul-21", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 881, "y": 61, "x_px": 1128, "y_px": 49, "query": "?scene=ul2", "target": "#ul2-l08", "font_px": 13, "width_px": 520, "lines": 1, "quarter": "last"},
+  {"id": "b-ul-22", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 534, "y": 199, "x_px": 684, "y_px": 159, "query": "?scene=ul2", "target": "#ul2-l09", "font_px": 16, "width_px": 240, "lines": 1, "quarter": "first"},
+  {"id": "b-ul-23", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 734, "y": 338, "x_px": 940, "y_px": 270, "query": "?scene=ul2", "target": "#ul2-l10", "font_px": 20, "width_px": 560, "lines": 1, "quarter": "middle"},
+  {"id": "b-ul-24", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 712, "y": 476, "x_px": 912, "y_px": 381, "query": "?scene=ul2", "target": "#ul2-l11", "font_px": 24, "width_px": 280, "lines": 1, "quarter": "last"},
+  {"id": "b-ul-25", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 548, "y": 601, "x_px": 702, "y_px": 481, "query": "?scene=ul2", "target": "#ul2-l12", "font_px": 13, "width_px": 420, "lines": 1, "quarter": "first"},
+  {"id": "b-ul-26", "intended": "none", "kind": "n-ul", "stress": false, "tool": "click_at", "x": 711, "y": 739, "x_px": 910, "y_px": 591, "query": "?scene=ul2", "target": "#ul2-l13", "font_px": 16, "width_px": 500, "lines": 1, "quarter": "middle"},
+  {"id": "b-btn-01", "intended": "none", "kind": "n-btn", "stress": false, "tool": "click_at", "x": 133, "y": 113, "x_px": 170, "y_px": 90, "query": "?scene=btn", "target": "#btn-1"},
+  {"id": "b-btn-02", "intended": "none", "kind": "n-btn", "stress": false, "tool": "click_at", "x": 351, "y": 113, "x_px": 449, "y_px": 90, "query": "?scene=btn", "target": "#btn-2"},
+  {"id": "b-btn-03", "intended": "none", "kind": "n-btn", "stress": false, "tool": "click_at", "x": 570, "y": 113, "x_px": 730, "y_px": 90, "query": "?scene=btn", "target": "#btn-3"},
+  {"id": "b-btn-04", "intended": "none", "kind": "n-btn", "stress": false, "tool": "click_at", "x": 133, "y": 250, "x_px": 170, "y_px": 200, "query": "?scene=btn", "target": "#btn-4"},
+  {"id": "b-btn-05", "intended": "none", "kind": "n-btn", "stress": false, "tool": "click_at", "x": 351, "y": 250, "x_px": 449, "y_px": 200, "query": "?scene=btn", "target": "#btn-5"},
+  {"id": "b-btn-06", "intended": "none", "kind": "n-btn", "stress": false, "tool": "click_at", "x": 570, "y": 250, "x_px": 730, "y_px": 200, "query": "?scene=btn", "target": "#btn-6"},
+  {"id": "b-btn-07", "intended": "none", "kind": "n-btn", "stress": false, "tool": "click_at", "x": 133, "y": 388, "x_px": 170, "y_px": 310, "query": "?scene=btn", "target": "#btn-7"},
+  {"id": "b-btn-08", "intended": "none", "kind": "n-btn", "stress": false, "tool": "click_at", "x": 351, "y": 388, "x_px": 449, "y_px": 310, "query": "?scene=btn", "target": "#btn-8"},
+  {"id": "b-btn-09", "intended": "none", "kind": "n-btn", "stress": false, "tool": "click_at", "x": 570, "y": 388, "x_px": 730, "y_px": 310, "query": "?scene=btn", "target": "#btn-9"},
+  {"id": "b-tint-01", "intended": "none", "kind": "n-tint", "stress": false, "tool": "click_at", "x": 851, "y": 100, "x_px": 1090, "y_px": 80, "query": "?scene=btn", "target": "#chip-1", "tint": ["#ffffff", "#eeeeee"]},
+  {"id": "b-tint-02", "intended": "none", "kind": "n-tint", "stress": false, "tool": "click_at", "x": 851, "y": 180, "x_px": 1090, "y_px": 144, "query": "?scene=btn", "target": "#chip-2", "tint": ["#f8f8f8", "#e8e8e8"]},
+  {"id": "b-tint-03", "intended": "none", "kind": "n-tint", "stress": false, "tool": "click_at", "x": 851, "y": 260, "x_px": 1090, "y_px": 208, "query": "?scene=btn", "target": "#chip-3", "tint": ["#f4f4f4", "#e0e0e0"]},
+  {"id": "b-tint-04", "intended": "none", "kind": "n-tint", "stress": false, "tool": "click_at", "x": 851, "y": 340, "x_px": 1090, "y_px": 272, "query": "?scene=btn", "target": "#chip-4", "tint": ["#ffffff", "#e6e6e6"]},
+  {"id": "b-tint-05", "intended": "none", "kind": "n-tint", "stress": false, "tool": "click_at", "x": 851, "y": 420, "x_px": 1090, "y_px": 336, "query": "?scene=btn", "target": "#chip-5", "tint": ["#fafafa", "#ebebeb"]},
+  {"id": "b-tint-06", "intended": "none", "kind": "n-tint", "stress": false, "tool": "click_at", "x": 851, "y": 500, "x_px": 1090, "y_px": 400, "query": "?scene=btn", "target": "#chip-6", "tint": ["#f0f0f0", "#dcdcdc"]},
+  {"id": "b-tint-07", "intended": "none", "kind": "n-tint", "stress": false, "tool": "click_at", "x": 851, "y": 580, "x_px": 1090, "y_px": 464, "query": "?scene=btn", "target": "#chip-7", "tint": ["#ffffff", "#e2e2e2"]},
+  {"id": "b-pre-01", "intended": "none", "kind": "n-pre", "stress": false, "tool": "click_at", "x": 656, "y": 101, "x_px": 840, "y_px": 81, "query": "?scene=pre", "target": "#dis-in-1", "target_kind": "disabled", "pre": {"x": 62, "y": 64, "x_px": 79, "y_px": 51, "target": "#pre-01"}},
+  {"id": "b-pre-02", "intended": "none", "kind": "n-pre", "stress": false, "tool": "click_at", "x": 656, "y": 189, "x_px": 840, "y_px": 151, "query": "?scene=pre", "target": "#dis-in-2", "target_kind": "disabled", "pre": {"x": 102, "y": 124, "x_px": 131, "y_px": 99, "target": "#pre-02"}},
+  {"id": "b-pre-03", "intended": "none", "kind": "n-pre", "stress": false, "tool": "click_at", "x": 875, "y": 100, "x_px": 1120, "y_px": 80, "query": "?scene=pre", "target": "#dis-btn-1", "target_kind": "disabled", "pre": {"x": 141, "y": 184, "x_px": 181, "y_px": 147, "target": "#pre-03"}},
+  {"id": "b-pre-04", "intended": "none", "kind": "n-pre", "stress": false, "tool": "click_at", "x": 875, "y": 188, "x_px": 1120, "y_px": 150, "query": "?scene=pre", "target": "#dis-btn-2", "target_kind": "disabled", "pre": {"x": 180, "y": 244, "x_px": 230, "y_px": 195, "target": "#pre-04"}},
+  {"id": "b-pre-05", "intended": "none", "kind": "n-pre", "stress": false, "tool": "click_at", "x": 578, "y": 338, "x_px": 740, "y_px": 270, "query": "?scene=pre", "target": "#img-1", "target_kind": "image", "pre": {"x": 219, "y": 304, "x_px": 280, "y_px": 243, "target": "#pre-05"}},
+  {"id": "b-pre-06", "intended": "none", "kind": "n-pre", "stress": false, "tool": "click_at", "x": 680, "y": 338, "x_px": 871, "y_px": 270, "query": "?scene=pre", "target": "#img-2", "target_kind": "image", "pre": {"x": 62, "y": 364, "x_px": 79, "y_px": 291, "target": "#pre-06"}},
+  {"id": "b-pre-07", "intended": "none", "kind": "n-pre", "stress": false, "tool": "click_at", "x": 781, "y": 338, "x_px": 1000, "y_px": 270, "query": "?scene=pre", "target": "#img-3", "target_kind": "image", "pre": {"x": 102, "y": 424, "x_px": 131, "y_px": 339, "target": "#pre-07"}},
+  {"id": "b-pre-08", "intended": "none", "kind": "n-pre", "stress": false, "tool": "click_at", "x": 883, "y": 338, "x_px": 1130, "y_px": 270, "query": "?scene=pre", "target": "#img-4", "target_kind": "image", "pre": {"x": 141, "y": 484, "x_px": 181, "y_px": 387, "target": "#pre-08"}},
+  {"id": "b-pre-09", "intended": "none", "kind": "n-pre", "stress": false, "tool": "click_at", "x": 594, "y": 500, "x_px": 760, "y_px": 400, "query": "?scene=pre", "target": "#seg-1-1", "target_kind": "selected", "pre": {"x": 180, "y": 544, "x_px": 230, "y_px": 435, "target": "#pre-09"}},
+  {"id": "b-pre-10", "intended": "none", "kind": "n-pre", "stress": false, "tool": "click_at", "x": 695, "y": 588, "x_px": 890, "y_px": 470, "query": "?scene=pre", "target": "#seg-2-2", "target_kind": "selected", "pre": {"x": 219, "y": 604, "x_px": 280, "y_px": 483, "target": "#pre-10"}},
+  {"id": "b-pre-11", "intended": "none", "kind": "n-pre", "stress": false, "tool": "click_at", "x": 797, "y": 675, "x_px": 1020, "y_px": 540, "query": "?scene=pre", "target": "#seg-3-3", "target_kind": "selected", "pre": {"x": 62, "y": 664, "x_px": 79, "y_px": 531, "target": "#pre-11"}},
+  {"id": "b-pre-12", "intended": "none", "kind": "n-pre", "stress": false, "tool": "click_at", "x": 594, "y": 763, "x_px": 760, "y_px": 610, "query": "?scene=pre", "target": "#seg-4-1", "target_kind": "selected", "pre": {"x": 102, "y": 724, "x_px": 131, "y_px": 579, "target": "#pre-12"}},
+  {"id": "b-pre-13", "intended": "none", "kind": "n-pre", "stress": false, "tool": "click_at", "x": 898, "y": 875, "x_px": 1150, "y_px": 700, "query": "?scene=pre", "target": null, "target_kind": "blank", "pre": {"x": 141, "y": 784, "x_px": 181, "y_px": 627, "target": "#pre-13"}},
+  {"id": "b-pre-14", "intended": "none", "kind": "n-pre", "stress": false, "tool": "click_at", "x": 656, "y": 925, "x_px": 840, "y_px": 740, "query": "?scene=pre", "target": null, "target_kind": "blank", "pre": {"x": 180, "y": 844, "x_px": 230, "y_px": 675, "target": "#pre-14"}},
+  {"id": "b-pre-15", "intended": "none", "kind": "n-pre", "stress": false, "tool": "click_at", "x": 945, "y": 400, "x_px": 1210, "y_px": 320, "query": "?scene=pre", "target": null, "target_kind": "blank", "pre": {"x": 219, "y": 904, "x_px": 280, "y_px": 723, "target": "#pre-15"}},
+  {"id": "b-triv-01", "intended": "none", "kind": "t-disabled", "stress": false, "tool": "click_at", "x": 656, "y": 101, "x_px": 840, "y_px": 81, "query": "?scene=pre", "target": "#dis-in-1"},
+  {"id": "b-triv-02", "intended": "none", "kind": "t-disabled", "stress": false, "tool": "click_at", "x": 875, "y": 100, "x_px": 1120, "y_px": 80, "query": "?scene=pre", "target": "#dis-btn-1"},
+  {"id": "b-triv-03", "intended": "none", "kind": "t-image", "stress": false, "tool": "click_at", "x": 578, "y": 338, "x_px": 740, "y_px": 270, "query": "?scene=pre", "target": "#img-1"},
+  {"id": "b-triv-04", "intended": "none", "kind": "t-image", "stress": false, "tool": "click_at", "x": 680, "y": 338, "x_px": 871, "y_px": 270, "query": "?scene=pre", "target": "#img-2"},
+  {"id": "b-triv-05", "intended": "none", "kind": "t-selected", "stress": false, "tool": "click_at", "x": 594, "y": 500, "x_px": 760, "y_px": 400, "query": "?scene=pre", "target": "#seg-1-1"},
+  {"id": "b-triv-06", "intended": "none", "kind": "t-selected", "stress": false, "tool": "click_at", "x": 695, "y": 588, "x_px": 890, "y_px": 470, "query": "?scene=pre", "target": "#seg-2-2"},
+  {"id": "b-small-01", "intended": "near", "kind": "c-small-qty", "stress": false, "tool": "click_at", "x": 122, "y": 125, "x_px": 156, "y_px": 100, "query": "?scene=small1", "target": "#w01-plus", "changes": [100, 90, 130, 110], "changes_el": "#w01-n"},
+  {"id": "b-small-02", "intended": "near", "kind": "c-small-count", "stress": false, "tool": "click_at", "x": 419, "y": 125, "x_px": 536, "y_px": 100, "query": "?scene=small1", "target": "#w02-add", "changes": [610, 92, 690, 108], "changes_el": "#w02-c"},
+  {"id": "b-small-03", "intended": "near", "kind": "c-small-flash", "stress": false, "tool": "click_at", "x": 747, "y": 125, "x_px": 956, "y_px": 100, "query": "?scene=small1", "target": "#w03-do", "changes": [1030, 90, 1110, 110], "changes_el": "#w03-f"},
+  {"id": "b-small-04", "intended": "near", "kind": "c-small-hint", "stress": false, "tool": "click_at", "x": 269, "y": 308, "x_px": 344, "y_px": 246, "query": "?scene=small1", "target": "#w04-go", "changes": [56, 270, 176, 286], "changes_el": "#w04-h"},
+  {"id": "b-small-05", "intended": "near", "kind": "c-small-price", "stress": false, "tool": "click_at", "x": 419, "y": 318, "x_px": 536, "y_px": 254, "query": "?scene=small1", "target": "#w05-up", "changes": [610, 242, 680, 266], "changes_el": "#w05-p"},
+  {"id": "b-small-06", "intended": "near", "kind": "c-small-glyph", "stress": false, "tool": "click_at", "x": 709, "y": 313, "x_px": 908, "y_px": 250, "query": "?scene=small1", "target": "#w06-g", "changes": [900, 240, 916, 260], "changes_el": "#w06-g"},
+  {"id": "b-small-07", "intended": "near", "kind": "c-small-qty", "stress": false, "tool": "click_at", "x": 122, "y": 510, "x_px": 156, "y_px": 408, "query": "?scene=small1", "target": "#w07-plus", "changes": [100, 398, 130, 418], "changes_el": "#w07-n"},
+  {"id": "b-small-08", "intended": "near", "kind": "c-small-count", "stress": false, "tool": "click_at", "x": 419, "y": 510, "x_px": 536, "y_px": 408, "query": "?scene=small1", "target": "#w08-add", "changes": [610, 400, 690, 416], "changes_el": "#w08-c"},
+  {"id": "b-small-09", "intended": "near", "kind": "c-small-flash", "stress": false, "tool": "click_at", "x": 747, "y": 510, "x_px": 956, "y_px": 408, "query": "?scene=small1", "target": "#w09-do", "changes": [1030, 398, 1110, 418], "changes_el": "#w09-f"},
+  {"id": "b-small-10", "intended": "near", "kind": "c-small-hint", "stress": false, "tool": "click_at", "x": 269, "y": 693, "x_px": 344, "y_px": 554, "query": "?scene=small1", "target": "#w10-go", "changes": [56, 578, 176, 594], "changes_el": "#w10-h"},
+  {"id": "b-small-11", "intended": "near", "kind": "c-small-price", "stress": false, "tool": "click_at", "x": 419, "y": 703, "x_px": 536, "y_px": 562, "query": "?scene=small1", "target": "#w11-up", "changes": [610, 550, 680, 574], "changes_el": "#w11-p"},
+  {"id": "b-small-12", "intended": "near", "kind": "c-small-glyph", "stress": false, "tool": "click_at", "x": 709, "y": 698, "x_px": 908, "y_px": 558, "query": "?scene=small1", "target": "#w12-g", "changes": [900, 548, 916, 568], "changes_el": "#w12-g"},
+  {"id": "b-small-13", "intended": "near", "kind": "c-small-qty", "stress": false, "tool": "click_at", "x": 122, "y": 895, "x_px": 156, "y_px": 716, "query": "?scene=small1", "target": "#w13-plus", "changes": [100, 706, 130, 726], "changes_el": "#w13-n"},
+  {"id": "b-small-14", "intended": "near", "kind": "c-small-count", "stress": false, "tool": "click_at", "x": 419, "y": 895, "x_px": 536, "y_px": 716, "query": "?scene=small1", "target": "#w14-add", "changes": [610, 708, 690, 724], "changes_el": "#w14-c"},
+  {"id": "b-small-15", "intended": "near", "kind": "c-small-flash", "stress": false, "tool": "click_at", "x": 747, "y": 895, "x_px": 956, "y_px": 716, "query": "?scene=small1", "target": "#w15-do", "changes": [1030, 706, 1110, 726], "changes_el": "#w15-f"},
+  {"id": "b-small-16", "intended": "near", "kind": "c-small-hint", "stress": false, "tool": "click_at", "x": 269, "y": 115, "x_px": 344, "y_px": 92, "query": "?scene=small2", "target": "#w16-go", "changes": [56, 116, 176, 132], "changes_el": "#w16-h"},
+  {"id": "b-small-17", "intended": "near", "kind": "c-small-price", "stress": false, "tool": "click_at", "x": 419, "y": 125, "x_px": 536, "y_px": 100, "query": "?scene=small2", "target": "#w17-up", "changes": [610, 88, 680, 112], "changes_el": "#w17-p"},
+  {"id": "b-small-18", "intended": "near", "kind": "c-small-glyph", "stress": false, "tool": "click_at", "x": 709, "y": 120, "x_px": 908, "y_px": 96, "query": "?scene=small2", "target": "#w18-g", "changes": [900, 86, 916, 106], "changes_el": "#w18-g"},
+  {"id": "b-small-19", "intended": "near", "kind": "c-small-qty", "stress": false, "tool": "click_at", "x": 122, "y": 318, "x_px": 156, "y_px": 254, "query": "?scene=small2", "target": "#w19-plus", "changes": [100, 244, 130, 264], "changes_el": "#w19-n"},
+  {"id": "b-small-20", "intended": "near", "kind": "c-small-count", "stress": false, "tool": "click_at", "x": 419, "y": 318, "x_px": 536, "y_px": 254, "query": "?scene=small2", "target": "#w20-add", "changes": [610, 246, 690, 262], "changes_el": "#w20-c"},
+  {"id": "b-small-21", "intended": "near", "kind": "c-small-flash", "stress": false, "tool": "click_at", "x": 747, "y": 318, "x_px": 956, "y_px": 254, "query": "?scene=small2", "target": "#w21-do", "changes": [1030, 244, 1110, 264], "changes_el": "#w21-f"},
+  {"id": "b-small-22", "intended": "near", "kind": "c-small-hint", "stress": false, "tool": "click_at", "x": 269, "y": 500, "x_px": 344, "y_px": 400, "query": "?scene=small2", "target": "#w22-go", "changes": [56, 424, 176, 440], "changes_el": "#w22-h"},
+  {"id": "b-small-23", "intended": "near", "kind": "c-small-price", "stress": false, "tool": "click_at", "x": 419, "y": 510, "x_px": 536, "y_px": 408, "query": "?scene=small2", "target": "#w23-up", "changes": [610, 396, 680, 420], "changes_el": "#w23-p"},
+  {"id": "b-small-24", "intended": "near", "kind": "c-small-glyph", "stress": false, "tool": "click_at", "x": 709, "y": 505, "x_px": 908, "y_px": 404, "query": "?scene=small2", "target": "#w24-g", "changes": [900, 394, 916, 414], "changes_el": "#w24-g"},
+  {"id": "b-small-25", "intended": "near", "kind": "c-small-qty", "stress": false, "tool": "click_at", "x": 122, "y": 703, "x_px": 156, "y_px": 562, "query": "?scene=small2", "target": "#w25-plus", "changes": [100, 552, 130, 572], "changes_el": "#w25-n"},
+  {"id": "b-small-26", "intended": "near", "kind": "c-small-count", "stress": false, "tool": "click_at", "x": 419, "y": 703, "x_px": 536, "y_px": 562, "query": "?scene=small2", "target": "#w26-add", "changes": [610, 554, 690, 570], "changes_el": "#w26-c"},
+  {"id": "b-small-27", "intended": "near", "kind": "c-small-flash", "stress": false, "tool": "click_at", "x": 747, "y": 703, "x_px": 956, "y_px": 562, "query": "?scene=small2", "target": "#w27-do", "changes": [1030, 552, 1110, 572], "changes_el": "#w27-f"},
+  {"id": "b-small-28", "intended": "near", "kind": "c-small-hint", "stress": false, "tool": "click_at", "x": 269, "y": 885, "x_px": 344, "y_px": 708, "query": "?scene=small2", "target": "#w28-go", "changes": [56, 732, 176, 748], "changes_el": "#w28-h"},
+  {"id": "b-small-29", "intended": "near", "kind": "c-small-price", "stress": false, "tool": "click_at", "x": 419, "y": 895, "x_px": 536, "y_px": 716, "query": "?scene=small2", "target": "#w29-up", "changes": [610, 704, 680, 728], "changes_el": "#w29-p"},
+  {"id": "b-small-30", "intended": "near", "kind": "c-small-glyph", "stress": false, "tool": "click_at", "x": 709, "y": 890, "x_px": 908, "y_px": 712, "query": "?scene=small2", "target": "#w30-g", "changes": [900, 702, 916, 722], "changes_el": "#w30-g"},
+  {"id": "b-colour-01", "intended": "near", "kind": "c-colour", "stress": false, "tool": "click_at", "x": 66, "y": 105, "x_px": 84, "y_px": 84, "query": "?scene=icons", "target": "#ic-1", "changes": [70, 70, 98, 98], "changes_el": "#ic-1-s", "colours": ["#9ca3af", "#dc2626"]},
+  {"id": "b-colour-02", "intended": "near", "kind": "c-colour", "stress": false, "tool": "click_at", "x": 167, "y": 105, "x_px": 214, "y_px": 84, "query": "?scene=icons", "target": "#ic-2", "changes": [200, 70, 228, 98], "changes_el": "#ic-2-s", "colours": ["#ffffff", "#f59e0b"]},
+  {"id": "b-colour-03", "intended": "near", "kind": "c-colour", "stress": false, "tool": "click_at", "x": 269, "y": 105, "x_px": 344, "y_px": 84, "query": "?scene=icons", "target": "#ic-3", "changes": [330, 70, 358, 98], "changes_el": "#ic-3-s", "colours": ["#9ca3af", "#2f5bd3"]},
+  {"id": "b-colour-04", "intended": "near", "kind": "c-colour", "stress": false, "tool": "click_at", "x": 370, "y": 105, "x_px": 474, "y_px": 84, "query": "?scene=icons", "target": "#ic-4", "changes": [460, 70, 488, 98], "changes_el": "#ic-4-s", "colours": ["#9ca3af", "#e11d48"]},
+  {"id": "b-colour-05", "intended": "near", "kind": "c-colour", "stress": false, "tool": "click_at", "x": 472, "y": 105, "x_px": 604, "y_px": 84, "query": "?scene=icons", "target": "#ic-5", "changes": [590, 70, 618, 98], "changes_el": "#ic-5-s", "colours": ["#ffffff", "#eab308"]},
+  {"id": "b-colour-06", "intended": "near", "kind": "c-colour", "stress": false, "tool": "click_at", "x": 573, "y": 105, "x_px": 734, "y_px": 84, "query": "?scene=icons", "target": "#ic-6", "changes": [720, 70, 748, 98], "changes_el": "#ic-6-s", "colours": ["#9ca3af", "#1f7a4d"]},
+  {"id": "b-colour-07", "intended": "near", "kind": "c-colour", "stress": false, "tool": "click_at", "x": 675, "y": 105, "x_px": 864, "y_px": 84, "query": "?scene=icons", "target": "#ic-7", "changes": [850, 70, 878, 98], "changes_el": "#ic-7-s", "colours": ["#9ca3af", "#b91c1c"]},
+  {"id": "b-colour-08", "intended": "near", "kind": "c-colour", "stress": false, "tool": "click_at", "x": 776, "y": 105, "x_px": 993, "y_px": 84, "query": "?scene=icons", "target": "#ic-8", "changes": [980, 70, 1008, 98], "changes_el": "#ic-8-s", "colours": ["#ffffff", "#d97706"]},
+  {"id": "b-colour-09", "intended": "near", "kind": "c-colour", "stress": false, "tool": "click_at", "x": 878, "y": 105, "x_px": 1124, "y_px": 84, "query": "?scene=icons", "target": "#ic-9", "changes": [1110, 70, 1138, 98], "changes_el": "#ic-9-s", "colours": ["#9ca3af", "#7c3aed"]},
+  {"id": "b-relabel-01", "intended": "near", "kind": "c-relabel", "stress": false, "tool": "click_at", "x": 80, "y": 238, "x_px": 102, "y_px": 190, "query": "?scene=icons", "target": "#rl-1", "changes": [40, 170, 166, 210], "changes_el": "#rl-1"},
+  {"id": "b-relabel-02", "intended": "near", "kind": "c-relabel", "stress": false, "tool": "click_at", "x": 187, "y": 238, "x_px": 239, "y_px": 190, "query": "?scene=icons", "target": "#rl-2", "changes": [176, 170, 302, 210], "changes_el": "#rl-2"},
+  {"id": "b-relabel-03", "intended": "near", "kind": "c-relabel", "stress": false, "tool": "click_at", "x": 293, "y": 238, "x_px": 375, "y_px": 190, "query": "?scene=icons", "target": "#rl-3", "changes": [312, 170, 438, 210], "changes_el": "#rl-3"},
+  {"id": "b-relabel-04", "intended": "near", "kind": "c-relabel", "stress": false, "tool": "click_at", "x": 399, "y": 238, "x_px": 511, "y_px": 190, "query": "?scene=icons", "target": "#rl-4", "changes": [448, 170, 574, 210], "changes_el": "#rl-4"},
+  {"id": "b-relabel-05", "intended": "near", "kind": "c-relabel", "stress": false, "tool": "click_at", "x": 505, "y": 238, "x_px": 647, "y_px": 190, "query": "?scene=icons", "target": "#rl-5", "changes": [584, 170, 710, 210], "changes_el": "#rl-5"},
+  {"id": "b-relabel-06", "intended": "near", "kind": "c-relabel", "stress": false, "tool": "click_at", "x": 612, "y": 238, "x_px": 784, "y_px": 190, "query": "?scene=icons", "target": "#rl-6", "changes": [720, 170, 846, 210], "changes_el": "#rl-6"},
+  {"id": "b-relabel-07", "intended": "near", "kind": "c-relabel", "stress": false, "tool": "click_at", "x": 718, "y": 238, "x_px": 919, "y_px": 190, "query": "?scene=icons", "target": "#rl-7", "changes": [856, 170, 982, 210], "changes_el": "#rl-7"},
+  {"id": "b-relabel-08", "intended": "near", "kind": "c-relabel", "stress": false, "tool": "click_at", "x": 824, "y": 238, "x_px": 1055, "y_px": 190, "query": "?scene=icons", "target": "#rl-8", "changes": [992, 170, 1118, 210], "changes_el": "#rl-8"},
+  {"id": "b-relabel-09", "intended": "near", "kind": "c-relabel", "stress": false, "tool": "click_at", "x": 930, "y": 238, "x_px": 1191, "y_px": 190, "query": "?scene=icons", "target": "#rl-9", "changes": [1128, 170, 1254, 210], "changes_el": "#rl-9"},
+  {"id": "b-focus-01", "intended": "near", "kind": "c-focus", "stress": false, "tool": "click_at", "x": 203, "y": 401, "x_px": 260, "y_px": 321, "query": "?scene=icons", "target": "#fo-1", "changes": [57, 297, 463, 345], "changes_el": "#fo-1"},
+  {"id": "b-focus-02", "intended": "near", "kind": "c-focus", "stress": false, "tool": "click_at", "x": 672, "y": 401, "x_px": 860, "y_px": 321, "query": "?scene=icons", "target": "#fo-2", "changes": [657, 297, 1063, 345], "changes_el": "#fo-2"},
+  {"id": "b-focus-03", "intended": "near", "kind": "c-focus", "stress": false, "tool": "click_at", "x": 203, "y": 526, "x_px": 260, "y_px": 421, "query": "?scene=icons", "target": "#fo-3", "changes": [57, 397, 463, 445], "changes_el": "#fo-3"},
+  {"id": "b-focus-04", "intended": "near", "kind": "c-focus", "stress": false, "tool": "click_at", "x": 672, "y": 526, "x_px": 860, "y_px": 421, "query": "?scene=icons", "target": "#fo-4", "changes": [657, 397, 1063, 445], "changes_el": "#fo-4"},
+  {"id": "b-focus-05", "intended": "near", "kind": "c-focus", "stress": false, "tool": "click_at", "x": 203, "y": 651, "x_px": 260, "y_px": 521, "query": "?scene=icons", "target": "#fo-5", "changes": [57, 497, 463, 545], "changes_el": "#fo-5"},
+  {"id": "b-focus-06", "intended": "near", "kind": "c-focus", "stress": false, "tool": "click_at", "x": 672, "y": 651, "x_px": 860, "y_px": 521, "query": "?scene=icons", "target": "#fo-6", "changes": [657, 497, 1063, 545], "changes_el": "#fo-6"},
+  {"id": "b-focus-07", "intended": "near", "kind": "c-focus", "stress": false, "tool": "click_at", "x": 203, "y": 776, "x_px": 260, "y_px": 621, "query": "?scene=icons", "target": "#fo-7", "changes": [57, 597, 463, 645], "changes_el": "#fo-7"},
+  {"id": "b-far-01", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 375, "x_px": 640, "y_px": 300, "query": "?scene=far1", "target": "#far1-t1", "changes": [60, 60, 200, 80], "changes_el": "#far1-c1"},
+  {"id": "b-far-02", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 450, "x_px": 640, "y_px": 360, "query": "?scene=far1", "target": "#far1-t2", "changes": [580, 60, 720, 80], "changes_el": "#far1-c2"},
+  {"id": "b-far-03", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 525, "x_px": 640, "y_px": 420, "query": "?scene=far1", "target": "#far1-t3", "changes": [1080, 60, 1220, 80], "changes_el": "#far1-c3"},
+  {"id": "b-far-04", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 600, "x_px": 640, "y_px": 480, "query": "?scene=far1", "target": "#far1-t4", "changes": [60, 400, 200, 420], "changes_el": "#far1-c4"},
+  {"id": "b-far-05", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 375, "x_px": 640, "y_px": 300, "query": "?scene=far2", "target": "#far2-t1", "changes": [1080, 400, 1220, 420], "changes_el": "#far2-c1"},
+  {"id": "b-far-06", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 450, "x_px": 640, "y_px": 360, "query": "?scene=far2", "target": "#far2-t2", "changes": [60, 700, 200, 720], "changes_el": "#far2-c2"},
+  {"id": "b-far-07", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 525, "x_px": 640, "y_px": 420, "query": "?scene=far2", "target": "#far2-t3", "changes": [580, 700, 720, 720], "changes_el": "#far2-c3"},
+  {"id": "b-far-08", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 600, "x_px": 640, "y_px": 480, "query": "?scene=far2", "target": "#far2-t4", "changes": [1080, 700, 1220, 720], "changes_el": "#far2-c4"},
+  {"id": "b-far-09", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 375, "x_px": 640, "y_px": 300, "query": "?scene=far3", "target": "#far3-t1", "changes": [580, 60, 720, 80], "changes_el": "#far3-c1"},
+  {"id": "b-far-10", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 450, "x_px": 640, "y_px": 360, "query": "?scene=far3", "target": "#far3-t2", "changes": [1080, 60, 1220, 80], "changes_el": "#far3-c2"},
+  {"id": "b-far-11", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 525, "x_px": 640, "y_px": 420, "query": "?scene=far3", "target": "#far3-t3", "changes": [1080, 400, 1220, 420], "changes_el": "#far3-c3"},
+  {"id": "b-far-12", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 600, "x_px": 640, "y_px": 480, "query": "?scene=far3", "target": "#far3-t4", "changes": [1080, 700, 1220, 720], "changes_el": "#far3-c4"},
+  {"id": "b-far-13", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 375, "x_px": 640, "y_px": 300, "query": "?scene=far4", "target": "#far4-t1", "changes": [60, 60, 200, 80], "changes_el": "#far4-c1"},
+  {"id": "b-far-14", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 450, "x_px": 640, "y_px": 360, "query": "?scene=far4", "target": "#far4-t2", "changes": [60, 400, 200, 420], "changes_el": "#far4-c2"},
+  {"id": "b-far-15", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 525, "x_px": 640, "y_px": 420, "query": "?scene=far4", "target": "#far4-t3", "changes": [60, 700, 200, 720], "changes_el": "#far4-c3"},
+  {"id": "b-far-16", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 600, "x_px": 640, "y_px": 480, "query": "?scene=far4", "target": "#far4-t4", "changes": [580, 700, 720, 720], "changes_el": "#far4-c4"},
+  {"id": "b-far-17", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 90, "y": 75, "x_px": 115, "y_px": 60, "query": "?scene=far5", "target": "#far5-t1", "changes": [580, 330, 720, 350], "changes_el": "#far5-c1"},
+  {"id": "b-far-18", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 910, "y": 75, "x_px": 1165, "y_px": 60, "query": "?scene=far5", "target": "#far5-t2", "changes": [580, 380, 720, 400], "changes_el": "#far5-c2"},
+  {"id": "b-far-19", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 90, "y": 925, "x_px": 115, "y_px": 740, "query": "?scene=far5", "target": "#far5-t3", "changes": [580, 430, 720, 450], "changes_el": "#far5-c3"},
+  {"id": "b-far-20", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 910, "y": 925, "x_px": 1165, "y_px": 740, "query": "?scene=far5", "target": "#far5-t4", "changes": [580, 480, 720, 500], "changes_el": "#far5-c4"},
+  {"id": "b-far-21", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 413, "x_px": 640, "y_px": 330, "query": "?scene=far6", "target": "#far6-t1", "changes": [580, 60, 720, 80], "changes_el": "#far6-c1"},
+  {"id": "b-far-22", "intended": "elsewhere", "kind": "e-small", "stress": false, "tool": "click_at", "x": 500, "y": 563, "x_px": 640, "y_px": 450, "query": "?scene=far6", "target": "#far6-t2", "changes": [580, 700, 720, 720], "changes_el": "#far6-c2"},
+  {"id": "b-page-01", "intended": "page", "kind": "p-bar", "stress": false, "tool": "click_at", "x": 55, "y": 218, "x_px": 70, "y_px": 174, "query": "?scene=nav", "target": "#nav-01", "dest": "?scene=d01"},
+  {"id": "b-page-02", "intended": "page", "kind": "p-bar", "stress": false, "tool": "click_at", "x": 383, "y": 218, "x_px": 490, "y_px": 174, "query": "?scene=nav", "target": "#nav-02", "dest": "?scene=d02"},
+  {"id": "b-page-03", "intended": "page", "kind": "p-bar", "stress": false, "tool": "click_at", "x": 711, "y": 218, "x_px": 910, "y_px": 174, "query": "?scene=nav", "target": "#nav-03", "dest": "?scene=d03"},
+  {"id": "b-page-04", "intended": "page", "kind": "p-bar", "stress": false, "tool": "click_at", "x": 55, "y": 338, "x_px": 70, "y_px": 270, "query": "?scene=nav", "target": "#nav-04", "dest": "?scene=d04"},
+  {"id": "b-page-05", "intended": "page", "kind": "p-bar", "stress": false, "tool": "click_at", "x": 383, "y": 338, "x_px": 490, "y_px": 270, "query": "?scene=nav", "target": "#nav-05", "dest": "?scene=d05"},
+  {"id": "b-page-06", "intended": "page", "kind": "p-bar", "stress": false, "tool": "click_at", "x": 711, "y": 338, "x_px": 910, "y_px": 270, "query": "?scene=nav", "target": "#nav-06", "dest": "?scene=d06"},
+  {"id": "b-page-07", "intended": "page", "kind": "p-bar", "stress": false, "tool": "click_at", "x": 55, "y": 458, "x_px": 70, "y_px": 366, "query": "?scene=nav", "target": "#nav-07", "dest": "?scene=d07"},
+  {"id": "b-page-08", "intended": "page", "kind": "p-bar", "stress": false, "tool": "click_at", "x": 383, "y": 458, "x_px": 490, "y_px": 366, "query": "?scene=nav", "target": "#nav-08", "dest": "?scene=d08"},
+  {"id": "b-page-09", "intended": "page", "kind": "p-bar", "stress": false, "tool": "click_at", "x": 711, "y": 458, "x_px": 910, "y_px": 366, "query": "?scene=nav", "target": "#nav-09", "dest": "?scene=d09"},
+  {"id": "b-page-10", "intended": "page", "kind": "p-bar", "stress": false, "tool": "click_at", "x": 55, "y": 578, "x_px": 70, "y_px": 462, "query": "?scene=nav", "target": "#nav-10", "dest": "?scene=d10"},
+  {"id": "b-page-11", "intended": "page", "kind": "p-bar", "stress": false, "tool": "click_at", "x": 383, "y": 578, "x_px": 490, "y_px": 462, "query": "?scene=nav", "target": "#nav-11", "dest": "?scene=d11"},
+  {"id": "b-page-12", "intended": "page", "kind": "p-bar", "stress": false, "tool": "click_at", "x": 711, "y": 578, "x_px": 910, "y_px": 462, "query": "?scene=nav", "target": "#nav-12", "dest": "?scene=d12"},
+  {"id": "b-page-13", "intended": "page", "kind": "p-full", "stress": false, "tool": "click_at", "x": 55, "y": 698, "x_px": 70, "y_px": 558, "query": "?scene=nav", "target": "#nav-13", "dest": "?scene=f1"},
+  {"id": "b-page-14", "intended": "page", "kind": "p-full", "stress": false, "tool": "click_at", "x": 383, "y": 698, "x_px": 490, "y_px": 558, "query": "?scene=nav", "target": "#nav-14", "dest": "?scene=f2"},
+  {"id": "b-page-15", "intended": "page", "kind": "p-full", "stress": false, "tool": "click_at", "x": 711, "y": 698, "x_px": 910, "y_px": 558, "query": "?scene=nav", "target": "#nav-15", "dest": "?scene=f3"},
+  {"id": "b-page-16", "intended": "page", "kind": "p-full", "stress": false, "tool": "click_at", "x": 55, "y": 818, "x_px": 70, "y_px": 654, "query": "?scene=nav", "target": "#nav-16", "dest": "?scene=f4"},
+  {"id": "b-page-17", "intended": "page", "kind": "p-full", "stress": false, "tool": "click_at", "x": 383, "y": 818, "x_px": 490, "y_px": 654, "query": "?scene=nav", "target": "#nav-17", "dest": "?scene=f5"},
+  {"id": "b-page-18", "intended": "page", "kind": "p-full", "stress": false, "tool": "click_at", "x": 711, "y": 818, "x_px": 910, "y_px": 654, "query": "?scene=nav", "target": "#nav-18", "dest": "?scene=f6"},
+  {"id": "b-stress-shadow-1", "intended": "none", "kind": "s-shadow", "stress": true, "tool": "click_at", "x": 105, "y": 125, "x_px": 134, "y_px": 100, "query": "?scene=stress", "target": "#card-1"},
+  {"id": "b-stress-shadow-2", "intended": "none", "kind": "s-shadow", "stress": true, "tool": "click_at", "x": 266, "y": 125, "x_px": 341, "y_px": 100, "query": "?scene=stress", "target": "#card-2"},
+  {"id": "b-stress-shadow-3", "intended": "none", "kind": "s-shadow", "stress": true, "tool": "click_at", "x": 426, "y": 125, "x_px": 545, "y_px": 100, "query": "?scene=stress", "target": "#card-3"},
+  {"id": "b-stress-lift-1", "intended": "none", "kind": "s-lift", "stress": true, "tool": "click_at", "x": 586, "y": 125, "x_px": 750, "y_px": 100, "query": "?scene=stress", "target": "#card-4"},
+  {"id": "b-stress-lift-2", "intended": "none", "kind": "s-lift", "stress": true, "tool": "click_at", "x": 746, "y": 125, "x_px": 955, "y_px": 100, "query": "?scene=stress", "target": "#card-5"},
+  {"id": "b-stress-lift-3", "intended": "none", "kind": "s-lift", "stress": true, "tool": "click_at", "x": 906, "y": 125, "x_px": 1160, "y_px": 100, "query": "?scene=stress", "target": "#card-6"},
+  {"id": "b-stress-ghost-1", "intended": "none", "kind": "s-ghost", "stress": true, "tool": "click_at", "x": 102, "y": 275, "x_px": 131, "y_px": 220, "query": "?scene=stress", "target": "#ghost-1"},
+  {"id": "b-stress-ghost-2", "intended": "none", "kind": "s-ghost", "stress": true, "tool": "click_at", "x": 262, "y": 275, "x_px": 335, "y_px": 220, "query": "?scene=stress", "target": "#ghost-2"},
+  {"id": "b-stress-ghost-3", "intended": "none", "kind": "s-ghost", "stress": true, "tool": "click_at", "x": 422, "y": 275, "x_px": 540, "y_px": 220, "query": "?scene=stress", "target": "#ghost-3"},
+  {"id": "b-stress-strike-1", "intended": "near", "kind": "s-strike", "stress": true, "tool": "click_at", "x": 578, "y": 265, "x_px": 740, "y_px": 212, "query": "?scene=stress", "target": "#todo-1", "changes": [700, 200, 920, 224], "changes_el": "#todo-1"},
+  {"id": "b-stress-strike-2", "intended": "near", "kind": "s-strike", "stress": true, "tool": "click_at", "x": 578, "y": 315, "x_px": 740, "y_px": 252, "query": "?scene=stress", "target": "#todo-2", "changes": [700, 240, 920, 264], "changes_el": "#todo-2"},
+  {"id": "b-stress-strike-3", "intended": "near", "kind": "s-strike", "stress": true, "tool": "click_at", "x": 578, "y": 365, "x_px": 740, "y_px": 292, "query": "?scene=stress", "target": "#todo-3", "changes": [700, 280, 920, 304], "changes_el": "#todo-3"},
+  {"id": "b-stress-luma-1", "intended": "near", "kind": "s-luma", "stress": true, "tool": "click_at", "x": 790, "y": 265, "x_px": 1011, "y_px": 212, "query": "?scene=stress", "target": "#dot-1", "changes": [1000, 200, 1024, 224], "changes_el": "#dot-1", "colours": ["#2e8b57", "#d0453a"]},
+  {"id": "b-stress-luma-2", "intended": "near", "kind": "s-luma", "stress": true, "tool": "click_at", "x": 790, "y": 315, "x_px": 1011, "y_px": 252, "query": "?scene=stress", "target": "#dot-2", "changes": [1000, 240, 1024, 264], "changes_el": "#dot-2", "colours": ["#3a7ca5", "#b0563f"]},
+  {"id": "b-stress-luma-3", "intended": "near", "kind": "s-luma", "stress": true, "tool": "click_at", "x": 790, "y": 365, "x_px": 1011, "y_px": 292, "query": "?scene=stress", "target": "#dot-3", "changes": [1000, 280, 1024, 304], "changes_el": "#dot-3", "colours": ["#7a6a00", "#a03f7a"]},
+  {"id": "b-stress-row-1", "intended": "none", "kind": "s-row", "stress": true, "tool": "click_at", "x": 234, "y": 730, "x_px": 300, "y_px": 584, "query": "?scene=stress", "target": "#row-1"},
+  {"id": "b-stress-row-2", "intended": "none", "kind": "s-row", "stress": true, "tool": "click_at", "x": 469, "y": 805, "x_px": 600, "y_px": 644, "query": "?scene=stress", "target": "#row-2"},
+  {"id": "b-stress-row-3", "intended": "none", "kind": "s-row", "stress": true, "tool": "click_at", "x": 703, "y": 880, "x_px": 900, "y_px": 704, "query": "?scene=stress", "target": "#row-3"}
+]
+</script>
+</head>
+<body>
+  <section id="s-index" class="scene" hidden>
+    <h1 class="abs index-h" style="left: 40px; top: 40px; width: 900px; height: 40px;">Outcome probes, page b</h1>
+    <p class="abs lede" style="left: 40px; top: 96px; width: 900px; height: 22px;">Open a scene with ?scene=&lt;name&gt;.</p>
+  </section>
+  <section id="s-ul1" class="scene" hidden>
+    <!-- N-UL: links that only underline on hover (no href: no navigation, no focus) -->
+    <a id="ul1-l01" class="abs ul" style="left: 40px; top: 40px; width: 420px; height: 19px; font-size: 13px; line-height: 19px;">How to choose a ceramic mug that keeps coffee warm through a long morning. What the weather station on the hill recorded during the longest night of the year</a>
+    <a id="ul1-l02" class="abs ul ul-wrap" style="left: 40px; top: 148px; width: 300px; height: 46px; font-size: 16px; line-height: 23px;">A field guide to the quiet corners of the city library and its reading rooms. Notes from a weekend workshop on repairing old bicycles with simple hand tools</a>
+    <a id="ul1-l03" class="abs ul" style="left: 40px; top: 256px; width: 140px; height: 29px; font-size: 20px; line-height: 29px;">Ten small habits that make a shared kitchen easier for everyone who uses it</a>
+    <a id="ul1-l04" class="abs ul" style="left: 40px; top: 364px; width: 460px; height: 35px; font-size: 24px; line-height: 35px;">What the weather station on the hill recorded during the longest night of the year</a>
+    <a id="ul1-l05" class="abs ul" style="left: 40px; top: 472px; width: 180px; height: 19px; font-size: 13px; line-height: 19px;">Notes from a weekend workshop on repairing old bicycles with simple hand tools</a>
+    <a id="ul1-l06" class="abs ul ul-wrap" style="left: 40px; top: 580px; width: 340px; height: 46px; font-size: 16px; line-height: 23px;">The complete list of trains that still stop at the little station by the river. How to choose a ceramic mug that keeps coffee warm through a long morning. What the weather station on the hill recorded during the longest night of the year</a>
+    <a id="ul1-l07" class="abs ul" style="left: 40px; top: 688px; width: 500px; height: 29px; font-size: 20px; line-height: 29px;">Why the bakery on the corner sells out of rye bread before nine every Saturday</a>
+    <a id="ul1-l08" class="abs ul" style="left: 660px; top: 40px; width: 220px; height: 35px; font-size: 24px; line-height: 35px;">A beginner's walk through the botanical garden in early spring with a sketchbook</a>
+    <a id="ul1-l09" class="abs ul" style="left: 660px; top: 148px; width: 540px; height: 19px; font-size: 13px; line-height: 19px;">How to choose a ceramic mug that keeps coffee warm through a long morning. What the weather station on the hill recorded during the longest night of the year</a>
+    <a id="ul1-l10" class="abs ul ul-wrap" style="left: 660px; top: 256px; width: 320px; height: 46px; font-size: 16px; line-height: 23px;">A field guide to the quiet corners of the city library and its reading rooms. Notes from a weekend workshop on repairing old bicycles with simple hand tools. A beginner's walk through the botanical garden in early spring with a sketchbook</a>
+    <a id="ul1-l11" class="abs ul" style="left: 660px; top: 364px; width: 260px; height: 29px; font-size: 20px; line-height: 29px;">Ten small habits that make a shared kitchen easier for everyone who uses it</a>
+    <a id="ul1-l12" class="abs ul" style="left: 660px; top: 472px; width: 560px; height: 35px; font-size: 24px; line-height: 35px;">What the weather station on the hill recorded during the longest night of the year</a>
+    <a id="ul1-l13" class="abs ul" style="left: 660px; top: 580px; width: 300px; height: 19px; font-size: 13px; line-height: 19px;">Notes from a weekend workshop on repairing old bicycles with simple hand tools</a>
+  </section>
+  <section id="s-ul2" class="scene" hidden>
+    <!-- N-UL: links that only underline on hover (no href: no navigation, no focus) -->
+    <a id="ul2-l01" class="abs ul" style="left: 40px; top: 40px; width: 560px; height: 23px; font-size: 16px; line-height: 23px;">The complete list of trains that still stop at the little station by the river. How to choose a ceramic mug that keeps coffee warm through a long morning</a>
+    <a id="ul2-l02" class="abs ul ul-wrap" style="left: 40px; top: 148px; width: 360px; height: 58px; font-size: 20px; line-height: 29px;">Why the bakery on the corner sells out of rye bread before nine every Saturday. A field guide to the quiet corners of the city library and its reading rooms</a>
+    <a id="ul2-l03" class="abs ul" style="left: 40px; top: 256px; width: 340px; height: 35px; font-size: 24px; line-height: 35px;">A beginner's walk through the botanical garden in early spring with a sketchbook</a>
+    <a id="ul2-l04" class="abs ul" style="left: 40px; top: 364px; width: 440px; height: 19px; font-size: 13px; line-height: 19px;">How to choose a ceramic mug that keeps coffee warm through a long morning. What the weather station on the hill recorded during the longest night of the year</a>
+    <a id="ul2-l05" class="abs ul" style="left: 40px; top: 472px; width: 380px; height: 23px; font-size: 16px; line-height: 23px;">A field guide to the quiet corners of the city library and its reading rooms</a>
+    <a id="ul2-l06" class="abs ul" style="left: 40px; top: 580px; width: 480px; height: 29px; font-size: 20px; line-height: 29px;">Ten small habits that make a shared kitchen easier for everyone who uses it</a>
+    <a id="ul2-l07" class="abs ul" style="left: 40px; top: 688px; width: 200px; height: 35px; font-size: 24px; line-height: 35px;">What the weather station on the hill recorded during the longest night of the year</a>
+    <a id="ul2-l08" class="abs ul" style="left: 660px; top: 40px; width: 520px; height: 19px; font-size: 13px; line-height: 19px;">Notes from a weekend workshop on repairing old bicycles with simple hand tools. A beginner's walk through the botanical garden in early spring with a sketchbook</a>
+    <a id="ul2-l09" class="abs ul" style="left: 660px; top: 148px; width: 240px; height: 23px; font-size: 16px; line-height: 23px;">The complete list of trains that still stop at the little station by the river</a>
+    <a id="ul2-l10" class="abs ul" style="left: 660px; top: 256px; width: 560px; height: 29px; font-size: 20px; line-height: 29px;">Why the bakery on the corner sells out of rye bread before nine every Saturday. A field guide to the quiet corners of the city library and its reading rooms</a>
+    <a id="ul2-l11" class="abs ul" style="left: 660px; top: 364px; width: 280px; height: 35px; font-size: 24px; line-height: 35px;">A beginner's walk through the botanical garden in early spring with a sketchbook</a>
+    <a id="ul2-l12" class="abs ul" style="left: 660px; top: 472px; width: 420px; height: 19px; font-size: 13px; line-height: 19px;">How to choose a ceramic mug that keeps coffee warm through a long morning. What the weather station on the hill recorded during the longest night of the year</a>
+    <a id="ul2-l13" class="abs ul" style="left: 660px; top: 580px; width: 500px; height: 23px; font-size: 16px; line-height: 23px;">A field guide to the quiet corners of the city library and its reading rooms. Notes from a weekend workshop on repairing old bicycles with simple hand tools</a>
+  </section>
+  <section id="s-btn" class="scene" hidden>
+    <!-- N-BTN: accent buttons (brightness 1.08 on hover, no handler); N-TINT: chips with a background tint on hover -->
+    <button id="btn-1" class="abs fixed" style="left: 60px; top: 70px; width: 220px; height: 40px;" type="button">View details</button>
+    <button id="btn-2" class="abs fixed" style="left: 340px; top: 70px; width: 220px; height: 40px;" type="button">Compare plans</button>
+    <button id="btn-3" class="abs fixed" style="left: 620px; top: 70px; width: 220px; height: 40px;" type="button">Open settings</button>
+    <button id="btn-4" class="abs fixed" style="left: 60px; top: 180px; width: 220px; height: 40px;" type="button">See reviews</button>
+    <button id="btn-5" class="abs fixed" style="left: 340px; top: 180px; width: 220px; height: 40px;" type="button">Show sizes</button>
+    <button id="btn-6" class="abs fixed" style="left: 620px; top: 180px; width: 220px; height: 40px;" type="button">Read more</button>
+    <button id="btn-7" class="abs fixed" style="left: 60px; top: 290px; width: 220px; height: 40px;" type="button">Track order</button>
+    <button id="btn-8" class="abs fixed" style="left: 340px; top: 290px; width: 220px; height: 40px;" type="button">Find a store</button>
+    <button id="btn-9" class="abs fixed" style="left: 620px; top: 290px; width: 220px; height: 40px;" type="button">Ask a question</button>
+    <span id="chip-1" class="abs chip" style="left: 960px; top: 60px; width: 260px; height: 40px;">Ceramic</span>
+    <span id="chip-2" class="abs chip" style="left: 960px; top: 124px; width: 260px; height: 40px;">Glass</span>
+    <span id="chip-3" class="abs chip" style="left: 960px; top: 188px; width: 260px; height: 40px;">Enamel</span>
+    <span id="chip-4" class="abs chip" style="left: 960px; top: 252px; width: 260px; height: 40px;">Steel</span>
+    <span id="chip-5" class="abs chip" style="left: 960px; top: 316px; width: 260px; height: 40px;">Bamboo</span>
+    <span id="chip-6" class="abs chip" style="left: 960px; top: 380px; width: 260px; height: 40px;">Stoneware</span>
+    <span id="chip-7" class="abs chip" style="left: 960px; top: 444px; width: 260px; height: 40px;">Porcelain</span>
+    <p class="abs lede" style="left: 60px; top: 400px; width: 600px; height: 30px;">Buttons and chips that only change on hover.</p>
+  </section>
+  <section id="s-pre" class="scene" hidden>
+    <!-- N-PRE: hover-only links (the pre click) on the left; disabled controls, pictures, already-selected options and blank space on the right -->
+    <a id="pre-01" class="abs pre-link" style="left: 40px; top: 40px; width: 320px; height: 23px;">Shipping and returns: How to choose a ceramic mug that keeps coffee warm through a long morning</a>
+    <a id="pre-02" class="abs pre-link" style="left: 40px; top: 88px; width: 320px; height: 23px;">Gift cards: A field guide to the quiet corners of the city library and its reading rooms</a>
+    <a id="pre-03" class="abs pre-link" style="left: 40px; top: 136px; width: 320px; height: 23px;">Store locations: Ten small habits that make a shared kitchen easier for everyone who uses it</a>
+    <a id="pre-04" class="abs pre-link" style="left: 40px; top: 184px; width: 320px; height: 23px;">Care instructions: What the weather station on the hill recorded during the longest night of the year</a>
+    <a id="pre-05" class="abs pre-link" style="left: 40px; top: 232px; width: 320px; height: 23px;">Size guide: Notes from a weekend workshop on repairing old bicycles with simple hand tools</a>
+    <a id="pre-06" class="abs pre-link" style="left: 40px; top: 280px; width: 320px; height: 23px;">Our materials: The complete list of trains that still stop at the little station by the river</a>
+    <a id="pre-07" class="abs pre-link" style="left: 40px; top: 328px; width: 320px; height: 23px;">Wholesale: Why the bakery on the corner sells out of rye bread before nine every Saturday</a>
+    <a id="pre-08" class="abs pre-link" style="left: 40px; top: 376px; width: 320px; height: 23px;">Press and media: A beginner's walk through the botanical garden in early spring with a sketchbook</a>
+    <a id="pre-09" class="abs pre-link" style="left: 40px; top: 424px; width: 320px; height: 23px;">Careers at the shop: How to choose a ceramic mug that keeps coffee warm through a long morning</a>
+    <a id="pre-10" class="abs pre-link" style="left: 40px; top: 472px; width: 320px; height: 23px;">Accessibility: A field guide to the quiet corners of the city library and its reading rooms</a>
+    <a id="pre-11" class="abs pre-link" style="left: 40px; top: 520px; width: 320px; height: 23px;">Privacy notice: Ten small habits that make a shared kitchen easier for everyone who uses it</a>
+    <a id="pre-12" class="abs pre-link" style="left: 40px; top: 568px; width: 320px; height: 23px;">Terms of sale: What the weather station on the hill recorded during the longest night of the year</a>
+    <a id="pre-13" class="abs pre-link" style="left: 40px; top: 616px; width: 320px; height: 23px;">Contact support: Notes from a weekend workshop on repairing old bicycles with simple hand tools</a>
+    <a id="pre-14" class="abs pre-link" style="left: 40px; top: 664px; width: 320px; height: 23px;">Newsletter archive: The complete list of trains that still stop at the little station by the river</a>
+    <a id="pre-15" class="abs pre-link" style="left: 40px; top: 712px; width: 320px; height: 23px;">Loyalty points: Why the bakery on the corner sells out of rye bread before nine every Saturday</a>
+    <input id="dis-in-1" class="abs fixed" style="left: 700px; top: 60px; width: 280px; height: 42px;" type="text" value="Locked value 1" disabled>
+    <input id="dis-in-2" class="abs fixed" style="left: 700px; top: 130px; width: 280px; height: 42px;" type="text" value="Locked value 2" disabled>
+    <button id="dis-btn-1" class="abs fixed" style="left: 1020px; top: 60px; width: 200px; height: 40px;" type="button" disabled>Sold out 1</button>
+    <button id="dis-btn-2" class="abs fixed" style="left: 1020px; top: 130px; width: 200px; height: 40px;" type="button" disabled>Sold out 2</button>
+    <svg id="img-1" class="abs" style="left: 700px; top: 230px; width: 80px; height: 80px;" viewBox="0 0 80 80" role="img" aria-label="picture 1"><rect x="8" y="8" width="64" height="64" rx="10" fill="#c8372d"></rect></svg>
+    <svg id="img-2" class="abs" style="left: 830px; top: 230px; width: 80px; height: 80px;" viewBox="0 0 80 80" role="img" aria-label="picture 2"><circle cx="40" cy="40" r="32" fill="#2f8a57"></circle></svg>
+    <svg id="img-3" class="abs" style="left: 960px; top: 230px; width: 80px; height: 80px;" viewBox="0 0 80 80" role="img" aria-label="picture 3"><polygon points="40,6 74,74 6,74" fill="#2f5bd3"></polygon></svg>
+    <svg id="img-4" class="abs" style="left: 1090px; top: 230px; width: 80px; height: 80px;" viewBox="0 0 80 80" role="img" aria-label="picture 4"><rect x="6" y="20" width="68" height="40" rx="6" fill="#8a5a00"></rect><circle cx="40" cy="40" r="12" fill="#ffffff"></circle></svg>
+    <span id="seg-1-1" class="abs seg on" data-group="g1" style="left: 700px; top: 380px; width: 120px; height: 40px;">Small</span>
+    <span id="seg-1-2" class="abs seg" data-group="g1" style="left: 830px; top: 380px; width: 120px; height: 40px;">Medium</span>
+    <span id="seg-1-3" class="abs seg" data-group="g1" style="left: 960px; top: 380px; width: 120px; height: 40px;">Large</span>
+    <span id="seg-2-1" class="abs seg" data-group="g2" style="left: 700px; top: 450px; width: 120px; height: 40px;">Daily</span>
+    <span id="seg-2-2" class="abs seg on" data-group="g2" style="left: 830px; top: 450px; width: 120px; height: 40px;">Weekly</span>
+    <span id="seg-2-3" class="abs seg" data-group="g2" style="left: 960px; top: 450px; width: 120px; height: 40px;">Monthly</span>
+    <span id="seg-3-1" class="abs seg" data-group="g3" style="left: 700px; top: 520px; width: 120px; height: 40px;">Light</span>
+    <span id="seg-3-2" class="abs seg" data-group="g3" style="left: 830px; top: 520px; width: 120px; height: 40px;">Dark</span>
+    <span id="seg-3-3" class="abs seg on" data-group="g3" style="left: 960px; top: 520px; width: 120px; height: 40px;">Auto</span>
+    <span id="seg-4-1" class="abs seg on" data-group="g4" style="left: 700px; top: 590px; width: 120px; height: 40px;">List</span>
+    <span id="seg-4-2" class="abs seg" data-group="g4" style="left: 830px; top: 590px; width: 120px; height: 40px;">Grid</span>
+    <span id="seg-4-3" class="abs seg" data-group="g4" style="left: 960px; top: 590px; width: 120px; height: 40px;">Map</span>
+  </section>
+  <section id="s-small1" class="scene" hidden>
+    <!-- C-SMALL: small changes next to the clicked control -->
+    <div id="w01" class="abs card" style="left: 40px; top: 30px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 56px; top: 42px; width: 340px; height: 22px;">Blue mug</span>
+    <button id="w01-minus" class="abs fixed step" style="left: 56px; top: 82px; width: 36px; height: 36px;" type="button">−</button>
+    <span id="w01-n" class="abs qty" style="left: 100px; top: 90px; width: 30px; height: 20px;">1</span>
+    <button id="w01-plus" class="abs fixed step" style="left: 138px; top: 82px; width: 36px; height: 36px;" type="button" data-set="#w01-n" data-text="2">+</button>
+    <div id="w02" class="abs card" style="left: 460px; top: 30px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 476px; top: 42px; width: 340px; height: 22px;">Tea towel</span>
+    <button id="w02-add" class="abs fixed" style="left: 476px; top: 80px; width: 120px; height: 40px;" type="button" data-set="#w02-c" data-text="4 items" data-cart="tea towel">Add one</button>
+    <span id="w02-c" class="abs count" style="left: 610px; top: 92px; width: 80px; height: 16px;">3 items</span>
+    <div id="w03" class="abs card" style="left: 880px; top: 30px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 896px; top: 42px; width: 340px; height: 22px;">Notebook</span>
+    <button id="w03-do" class="abs fixed" style="left: 896px; top: 80px; width: 120px; height: 40px;" type="button" data-set="#w03-f" data-text="Saved">Save</button>
+    <span id="w03-f" class="abs flash" style="left: 1030px; top: 90px; width: 80px; height: 20px;"></span>
+    <div id="w04" class="abs card" style="left: 40px; top: 184px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 56px; top: 196px; width: 340px; height: 22px;">Water bottle</span>
+    <input id="w04-in" class="abs fixed" style="left: 56px; top: 228px; width: 220px; height: 36px;" type="text" autocomplete="off" spellcheck="false">
+    <button id="w04-go" class="abs fixed" style="left: 290px; top: 226px; width: 110px; height: 40px;" type="button" data-set="#w04-h" data-text="Required">Submit</button>
+    <span id="w04-h" class="abs hint" style="left: 56px; top: 270px; width: 120px; height: 16px;"></span>
+    <div id="w05" class="abs card" style="left: 460px; top: 184px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 476px; top: 196px; width: 340px; height: 22px;">Desk lamp</span>
+    <button id="w05-up" class="abs fixed" style="left: 476px; top: 234px; width: 120px; height: 40px;" type="button" data-set="#w05-p" data-text="$13">Upgrade</button>
+    <span id="w05-p" class="abs price" style="left: 610px; top: 242px; width: 70px; height: 24px;">$12</span>
+    <div id="w06" class="abs card" style="left: 880px; top: 184px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 896px; top: 196px; width: 340px; height: 22px;">Coffee beans</span>
+    <div id="w06-t" class="abs toggle" style="left: 896px; top: 236px; width: 160px; height: 28px;" data-set="#w06-g" data-text="▾"><span id="w06-g" class="abs glyph" style="left: 4px; top: 4px; width: 16px; height: 20px;">▸</span><span class="abs glyph-label" style="left: 28px; top: 4px; width: 120px; height: 20px;">Details</span></div>
+    <div id="w07" class="abs card" style="left: 40px; top: 338px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 56px; top: 350px; width: 340px; height: 22px;">Plant pot</span>
+    <button id="w07-minus" class="abs fixed step" style="left: 56px; top: 390px; width: 36px; height: 36px;" type="button">−</button>
+    <span id="w07-n" class="abs qty" style="left: 100px; top: 398px; width: 30px; height: 20px;">1</span>
+    <button id="w07-plus" class="abs fixed step" style="left: 138px; top: 390px; width: 36px; height: 36px;" type="button" data-set="#w07-n" data-text="2">+</button>
+    <div id="w08" class="abs card" style="left: 460px; top: 338px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 476px; top: 350px; width: 340px; height: 22px;">Candle</span>
+    <button id="w08-add" class="abs fixed" style="left: 476px; top: 388px; width: 120px; height: 40px;" type="button" data-set="#w08-c" data-text="6 items" data-cart="candle">Add one</button>
+    <span id="w08-c" class="abs count" style="left: 610px; top: 400px; width: 80px; height: 16px;">5 items</span>
+    <div id="w09" class="abs card" style="left: 880px; top: 338px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 896px; top: 350px; width: 340px; height: 22px;">Chopping board</span>
+    <button id="w09-do" class="abs fixed" style="left: 896px; top: 388px; width: 120px; height: 40px;" type="button" data-set="#w09-f" data-text="Copied">Copy</button>
+    <span id="w09-f" class="abs flash" style="left: 1030px; top: 398px; width: 80px; height: 20px;"></span>
+    <div id="w10" class="abs card" style="left: 40px; top: 492px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 56px; top: 504px; width: 340px; height: 22px;">Teapot</span>
+    <input id="w10-in" class="abs fixed" style="left: 56px; top: 536px; width: 220px; height: 36px;" type="text" autocomplete="off" spellcheck="false">
+    <button id="w10-go" class="abs fixed" style="left: 290px; top: 534px; width: 110px; height: 40px;" type="button" data-set="#w10-h" data-text="Invalid">Submit</button>
+    <span id="w10-h" class="abs hint" style="left: 56px; top: 578px; width: 120px; height: 16px;"></span>
+    <div id="w11" class="abs card" style="left: 460px; top: 492px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 476px; top: 504px; width: 340px; height: 22px;">Lunch box</span>
+    <button id="w11-up" class="abs fixed" style="left: 476px; top: 542px; width: 120px; height: 40px;" type="button" data-set="#w11-p" data-text="$25">Upgrade</button>
+    <span id="w11-p" class="abs price" style="left: 610px; top: 550px; width: 70px; height: 24px;">$24</span>
+    <div id="w12" class="abs card" style="left: 880px; top: 492px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 896px; top: 504px; width: 340px; height: 22px;">Scarf</span>
+    <div id="w12-t" class="abs toggle" style="left: 896px; top: 544px; width: 160px; height: 28px;" data-set="#w12-g" data-text="−"><span id="w12-g" class="abs glyph" style="left: 4px; top: 4px; width: 16px; height: 20px;">+</span><span class="abs glyph-label" style="left: 28px; top: 4px; width: 120px; height: 20px;">Details</span></div>
+    <div id="w13" class="abs card" style="left: 40px; top: 646px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 56px; top: 658px; width: 340px; height: 22px;">Umbrella</span>
+    <button id="w13-minus" class="abs fixed step" style="left: 56px; top: 698px; width: 36px; height: 36px;" type="button">−</button>
+    <span id="w13-n" class="abs qty" style="left: 100px; top: 706px; width: 30px; height: 20px;">1</span>
+    <button id="w13-plus" class="abs fixed step" style="left: 138px; top: 698px; width: 36px; height: 36px;" type="button" data-set="#w13-n" data-text="2">+</button>
+    <div id="w14" class="abs card" style="left: 460px; top: 646px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 476px; top: 658px; width: 340px; height: 22px;">Pencil set</span>
+    <button id="w14-add" class="abs fixed" style="left: 476px; top: 696px; width: 120px; height: 40px;" type="button" data-set="#w14-c" data-text="2 items" data-cart="pencil set">Add one</button>
+    <span id="w14-c" class="abs count" style="left: 610px; top: 708px; width: 80px; height: 16px;">1 item</span>
+    <div id="w15" class="abs card" style="left: 880px; top: 646px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 896px; top: 658px; width: 340px; height: 22px;">Picture frame</span>
+    <button id="w15-do" class="abs fixed" style="left: 896px; top: 696px; width: 120px; height: 40px;" type="button" data-set="#w15-f" data-text="Added">Add</button>
+    <span id="w15-f" class="abs flash" style="left: 1030px; top: 706px; width: 80px; height: 20px;"></span>
+  </section>
+  <section id="s-small2" class="scene" hidden>
+    <!-- C-SMALL: small changes next to the clicked control -->
+    <div id="w16" class="abs card" style="left: 40px; top: 30px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 56px; top: 42px; width: 340px; height: 22px;">Bread tin</span>
+    <input id="w16-in" class="abs fixed" style="left: 56px; top: 74px; width: 220px; height: 36px;" type="text" autocomplete="off" spellcheck="false">
+    <button id="w16-go" class="abs fixed" style="left: 290px; top: 72px; width: 110px; height: 40px;" type="button" data-set="#w16-h" data-text="Required">Submit</button>
+    <span id="w16-h" class="abs hint" style="left: 56px; top: 116px; width: 120px; height: 16px;"></span>
+    <div id="w17" class="abs card" style="left: 460px; top: 30px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 476px; top: 42px; width: 340px; height: 22px;">Apron</span>
+    <button id="w17-up" class="abs fixed" style="left: 476px; top: 80px; width: 120px; height: 40px;" type="button" data-set="#w17-p" data-text="$38">Upgrade</button>
+    <span id="w17-p" class="abs price" style="left: 610px; top: 88px; width: 70px; height: 24px;">$37</span>
+    <div id="w18" class="abs card" style="left: 880px; top: 30px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 896px; top: 42px; width: 340px; height: 22px;">Salad bowl</span>
+    <div id="w18-t" class="abs toggle" style="left: 896px; top: 82px; width: 160px; height: 28px;" data-set="#w18-g" data-text="▾"><span id="w18-g" class="abs glyph" style="left: 4px; top: 4px; width: 16px; height: 20px;">▸</span><span class="abs glyph-label" style="left: 28px; top: 4px; width: 120px; height: 20px;">Details</span></div>
+    <div id="w19" class="abs card" style="left: 40px; top: 184px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 56px; top: 196px; width: 340px; height: 22px;">Wall clock</span>
+    <button id="w19-minus" class="abs fixed step" style="left: 56px; top: 236px; width: 36px; height: 36px;" type="button">−</button>
+    <span id="w19-n" class="abs qty" style="left: 100px; top: 244px; width: 30px; height: 20px;">1</span>
+    <button id="w19-plus" class="abs fixed step" style="left: 138px; top: 236px; width: 36px; height: 36px;" type="button" data-set="#w19-n" data-text="2">+</button>
+    <div id="w20" class="abs card" style="left: 460px; top: 184px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 476px; top: 196px; width: 340px; height: 22px;">Doormat</span>
+    <button id="w20-add" class="abs fixed" style="left: 476px; top: 234px; width: 120px; height: 40px;" type="button" data-set="#w20-c" data-text="8 items" data-cart="doormat">Add one</button>
+    <span id="w20-c" class="abs count" style="left: 610px; top: 246px; width: 80px; height: 16px;">7 items</span>
+    <div id="w21" class="abs card" style="left: 880px; top: 184px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 896px; top: 196px; width: 340px; height: 22px;">Cushion</span>
+    <button id="w21-do" class="abs fixed" style="left: 896px; top: 234px; width: 120px; height: 40px;" type="button" data-set="#w21-f" data-text="Saved">Save</button>
+    <span id="w21-f" class="abs flash" style="left: 1030px; top: 244px; width: 80px; height: 20px;"></span>
+    <div id="w22" class="abs card" style="left: 40px; top: 338px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 56px; top: 350px; width: 340px; height: 22px;">Thermos</span>
+    <input id="w22-in" class="abs fixed" style="left: 56px; top: 382px; width: 220px; height: 36px;" type="text" autocomplete="off" spellcheck="false">
+    <button id="w22-go" class="abs fixed" style="left: 290px; top: 380px; width: 110px; height: 40px;" type="button" data-set="#w22-h" data-text="Invalid">Submit</button>
+    <span id="w22-h" class="abs hint" style="left: 56px; top: 424px; width: 120px; height: 16px;"></span>
+    <div id="w23" class="abs card" style="left: 460px; top: 338px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 476px; top: 350px; width: 340px; height: 22px;">Jar set</span>
+    <button id="w23-up" class="abs fixed" style="left: 476px; top: 388px; width: 120px; height: 40px;" type="button" data-set="#w23-p" data-text="$42">Upgrade</button>
+    <span id="w23-p" class="abs price" style="left: 610px; top: 396px; width: 70px; height: 24px;">$41</span>
+    <div id="w24" class="abs card" style="left: 880px; top: 338px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 896px; top: 350px; width: 340px; height: 22px;">Tray</span>
+    <div id="w24-t" class="abs toggle" style="left: 896px; top: 390px; width: 160px; height: 28px;" data-set="#w24-g" data-text="−"><span id="w24-g" class="abs glyph" style="left: 4px; top: 4px; width: 16px; height: 20px;">+</span><span class="abs glyph-label" style="left: 28px; top: 4px; width: 120px; height: 20px;">Details</span></div>
+    <div id="w25" class="abs card" style="left: 40px; top: 492px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 56px; top: 504px; width: 340px; height: 22px;">Placemats</span>
+    <button id="w25-minus" class="abs fixed step" style="left: 56px; top: 544px; width: 36px; height: 36px;" type="button">−</button>
+    <span id="w25-n" class="abs qty" style="left: 100px; top: 552px; width: 30px; height: 20px;">1</span>
+    <button id="w25-plus" class="abs fixed step" style="left: 138px; top: 544px; width: 36px; height: 36px;" type="button" data-set="#w25-n" data-text="2">+</button>
+    <div id="w26" class="abs card" style="left: 460px; top: 492px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 476px; top: 504px; width: 340px; height: 22px;">Coasters</span>
+    <button id="w26-add" class="abs fixed" style="left: 476px; top: 542px; width: 120px; height: 40px;" type="button" data-set="#w26-c" data-text="3 items" data-cart="coasters">Add one</button>
+    <span id="w26-c" class="abs count" style="left: 610px; top: 554px; width: 80px; height: 16px;">2 items</span>
+    <div id="w27" class="abs card" style="left: 880px; top: 492px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 896px; top: 504px; width: 340px; height: 22px;">Kettle</span>
+    <button id="w27-do" class="abs fixed" style="left: 896px; top: 542px; width: 120px; height: 40px;" type="button" data-set="#w27-f" data-text="Copied">Copy</button>
+    <span id="w27-f" class="abs flash" style="left: 1030px; top: 552px; width: 80px; height: 20px;"></span>
+    <div id="w28" class="abs card" style="left: 40px; top: 646px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 56px; top: 658px; width: 340px; height: 22px;">Spoon set</span>
+    <input id="w28-in" class="abs fixed" style="left: 56px; top: 690px; width: 220px; height: 36px;" type="text" autocomplete="off" spellcheck="false">
+    <button id="w28-go" class="abs fixed" style="left: 290px; top: 688px; width: 110px; height: 40px;" type="button" data-set="#w28-h" data-text="Required">Submit</button>
+    <span id="w28-h" class="abs hint" style="left: 56px; top: 732px; width: 120px; height: 16px;"></span>
+    <div id="w29" class="abs card" style="left: 460px; top: 646px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 476px; top: 658px; width: 340px; height: 22px;">Oven glove</span>
+    <button id="w29-up" class="abs fixed" style="left: 476px; top: 696px; width: 120px; height: 40px;" type="button" data-set="#w29-p" data-text="$57">Upgrade</button>
+    <span id="w29-p" class="abs price" style="left: 610px; top: 704px; width: 70px; height: 24px;">$56</span>
+    <div id="w30" class="abs card" style="left: 880px; top: 646px; width: 380px; height: 130px;"></div>
+    <span class="abs title" style="left: 896px; top: 658px; width: 340px; height: 22px;">Napkins</span>
+    <div id="w30-t" class="abs toggle" style="left: 896px; top: 698px; width: 160px; height: 28px;" data-set="#w30-g" data-text="▾"><span id="w30-g" class="abs glyph" style="left: 4px; top: 4px; width: 16px; height: 20px;">▸</span><span class="abs glyph-label" style="left: 28px; top: 4px; width: 120px; height: 20px;">Details</span></div>
+  </section>
+  <section id="s-icons" class="scene" hidden>
+    <!-- C-COLOUR: icons that change colour; C-RELABEL: accent buttons that relabel themselves; C-FOCUS: empty inputs (focus outline) -->
+    <button id="ic-1" class="abs icon" style="left: 60px; top: 60px; width: 48px; height: 48px;" type="button" data-toggle="on" data-target="#ic-1-s" aria-label="heart"><svg id="ic-1-s" class="ico ico-heart" width="28" height="28" viewBox="0 0 28 28"><path d="M14 25 C 4 17 1 12 1 8 C 1 4 4 1 8 1 C 11 1 13 3 14 5 C 15 3 17 1 20 1 C 24 1 27 4 27 8 C 27 12 24 17 14 25 Z"></path></svg></button>
+    <button id="ic-2" class="abs icon" style="left: 190px; top: 60px; width: 48px; height: 48px;" type="button" data-toggle="on" data-target="#ic-2-s" aria-label="star"><svg id="ic-2-s" class="ico ico-star" width="28" height="28" viewBox="0 0 28 28"><polygon points="14,1 18,10 27,10 20,16 23,26 14,20 5,26 8,16 1,10 10,10"></polygon></svg></button>
+    <button id="ic-3" class="abs icon" style="left: 320px; top: 60px; width: 48px; height: 48px;" type="button" data-toggle="on" data-target="#ic-3-s" aria-label="bookmark"><svg id="ic-3-s" class="ico ico-bookmark" width="28" height="28" viewBox="0 0 28 28"><path d="M5 1 H 23 V 27 L 14 20 L 5 27 Z"></path></svg></button>
+    <button id="ic-4" class="abs icon" style="left: 450px; top: 60px; width: 48px; height: 48px;" type="button" data-toggle="on" data-target="#ic-4-s" aria-label="heart"><svg id="ic-4-s" class="ico ico-heart" width="28" height="28" viewBox="0 0 28 28"><path d="M14 25 C 4 17 1 12 1 8 C 1 4 4 1 8 1 C 11 1 13 3 14 5 C 15 3 17 1 20 1 C 24 1 27 4 27 8 C 27 12 24 17 14 25 Z"></path></svg></button>
+    <button id="ic-5" class="abs icon" style="left: 580px; top: 60px; width: 48px; height: 48px;" type="button" data-toggle="on" data-target="#ic-5-s" aria-label="star"><svg id="ic-5-s" class="ico ico-star" width="28" height="28" viewBox="0 0 28 28"><polygon points="14,1 18,10 27,10 20,16 23,26 14,20 5,26 8,16 1,10 10,10"></polygon></svg></button>
+    <button id="ic-6" class="abs icon" style="left: 710px; top: 60px; width: 48px; height: 48px;" type="button" data-toggle="on" data-target="#ic-6-s" aria-label="bookmark"><svg id="ic-6-s" class="ico ico-bookmark" width="28" height="28" viewBox="0 0 28 28"><path d="M5 1 H 23 V 27 L 14 20 L 5 27 Z"></path></svg></button>
+    <button id="ic-7" class="abs icon" style="left: 840px; top: 60px; width: 48px; height: 48px;" type="button" data-toggle="on" data-target="#ic-7-s" aria-label="heart"><svg id="ic-7-s" class="ico ico-heart" width="28" height="28" viewBox="0 0 28 28"><path d="M14 25 C 4 17 1 12 1 8 C 1 4 4 1 8 1 C 11 1 13 3 14 5 C 15 3 17 1 20 1 C 24 1 27 4 27 8 C 27 12 24 17 14 25 Z"></path></svg></button>
+    <button id="ic-8" class="abs icon" style="left: 970px; top: 60px; width: 48px; height: 48px;" type="button" data-toggle="on" data-target="#ic-8-s" aria-label="star"><svg id="ic-8-s" class="ico ico-star" width="28" height="28" viewBox="0 0 28 28"><polygon points="14,1 18,10 27,10 20,16 23,26 14,20 5,26 8,16 1,10 10,10"></polygon></svg></button>
+    <button id="ic-9" class="abs icon" style="left: 1100px; top: 60px; width: 48px; height: 48px;" type="button" data-toggle="on" data-target="#ic-9-s" aria-label="bookmark"><svg id="ic-9-s" class="ico ico-bookmark" width="28" height="28" viewBox="0 0 28 28"><path d="M5 1 H 23 V 27 L 14 20 L 5 27 Z"></path></svg></button>
+    <button id="rl-1" class="abs fixed" style="left: 40px; top: 170px; width: 126px; height: 40px;" type="button" data-set="#rl-1" data-text="Stop">Start</button>
+    <button id="rl-2" class="abs fixed" style="left: 176px; top: 170px; width: 126px; height: 40px;" type="button" data-set="#rl-2" data-text="Following">Follow</button>
+    <button id="rl-3" class="abs fixed" style="left: 312px; top: 170px; width: 126px; height: 40px;" type="button" data-set="#rl-3" data-text="Added">Add</button>
+    <button id="rl-4" class="abs fixed" style="left: 448px; top: 170px; width: 126px; height: 40px;" type="button" data-set="#rl-4" data-text="Saved">Save</button>
+    <button id="rl-5" class="abs fixed" style="left: 584px; top: 170px; width: 126px; height: 40px;" type="button" data-set="#rl-5" data-text="Pause">Play</button>
+    <button id="rl-6" class="abs fixed" style="left: 720px; top: 170px; width: 126px; height: 40px;" type="button" data-set="#rl-6" data-text="Subscribed">Subscribe</button>
+    <button id="rl-7" class="abs fixed" style="left: 856px; top: 170px; width: 126px; height: 40px;" type="button" data-set="#rl-7" data-text="Joined">Join</button>
+    <button id="rl-8" class="abs fixed" style="left: 992px; top: 170px; width: 126px; height: 40px;" type="button" data-set="#rl-8" data-text="Liked">Like</button>
+    <button id="rl-9" class="abs fixed" style="left: 1128px; top: 170px; width: 126px; height: 40px;" type="button" data-set="#rl-9" data-text="Hide">Show</button>
+    <span class="abs label" style="left: 60px; top: 274px; width: 400px; height: 22px;">Full name</span>
+    <input id="fo-1" class="abs fixed" style="left: 60px; top: 300px; width: 400px; height: 42px;" type="text" autocomplete="off" spellcheck="false">
+    <span class="abs label" style="left: 660px; top: 274px; width: 400px; height: 22px;">Email address</span>
+    <input id="fo-2" class="abs fixed" style="left: 660px; top: 300px; width: 400px; height: 42px;" type="text" autocomplete="off" spellcheck="false">
+    <span class="abs label" style="left: 60px; top: 374px; width: 400px; height: 22px;">Street</span>
+    <input id="fo-3" class="abs fixed" style="left: 60px; top: 400px; width: 400px; height: 42px;" type="text" autocomplete="off" spellcheck="false">
+    <span class="abs label" style="left: 660px; top: 374px; width: 400px; height: 22px;">City</span>
+    <input id="fo-4" class="abs fixed" style="left: 660px; top: 400px; width: 400px; height: 42px;" type="text" autocomplete="off" spellcheck="false">
+    <span class="abs label" style="left: 60px; top: 474px; width: 400px; height: 22px;">Postcode</span>
+    <input id="fo-5" class="abs fixed" style="left: 60px; top: 500px; width: 400px; height: 42px;" type="text" autocomplete="off" spellcheck="false">
+    <span class="abs label" style="left: 660px; top: 474px; width: 400px; height: 22px;">Phone</span>
+    <input id="fo-6" class="abs fixed" style="left: 660px; top: 500px; width: 400px; height: 42px;" type="text" autocomplete="off" spellcheck="false">
+    <span class="abs label" style="left: 60px; top: 574px; width: 400px; height: 22px;">Order note</span>
+    <input id="fo-7" class="abs fixed" style="left: 60px; top: 600px; width: 400px; height: 42px;" type="text" autocomplete="off" spellcheck="false">
+  </section>
+  <section id="s-far1" class="scene" hidden>
+    <!-- elsewhere: a small change far from the clicked button -->
+    <button id="far1-t1" class="abs fixed" style="left: 565px; top: 280px; width: 150px; height: 40px;" type="button" data-set="#far1-c1" data-text="Saved">Save draft</button>
+    <span id="far1-c1" class="abs far" style="left: 60px; top: 60px; width: 140px; height: 20px;"></span>
+    <button id="far1-t2" class="abs fixed" style="left: 565px; top: 340px; width: 150px; height: 40px;" type="button" data-set="#far1-c2" data-text="4 items" data-cart="far1 item 2">Add to list</button>
+    <span id="far1-c2" class="abs far" style="left: 580px; top: 60px; width: 140px; height: 20px;">3 items</span>
+    <button id="far1-t3" class="abs fixed" style="left: 565px; top: 400px; width: 150px; height: 40px;" type="button" data-set="#far1-c3" data-text="Synced">Sync now</button>
+    <span id="far1-c3" class="abs far" style="left: 1080px; top: 60px; width: 140px; height: 20px;">Idle</span>
+    <button id="far1-t4" class="abs fixed" style="left: 565px; top: 460px; width: 150px; height: 40px;" type="button" data-set="#far1-c4" data-text="Copied">Copy link</button>
+    <span id="far1-c4" class="abs far" style="left: 60px; top: 400px; width: 140px; height: 20px;"></span>
+  </section>
+  <section id="s-far2" class="scene" hidden>
+    <!-- elsewhere: a small change far from the clicked button -->
+    <button id="far2-t1" class="abs fixed" style="left: 565px; top: 280px; width: 150px; height: 40px;" type="button" data-set="#far2-c1" data-text="1 new">Refresh</button>
+    <span id="far2-c1" class="abs far" style="left: 1080px; top: 400px; width: 140px; height: 20px;">0 new</span>
+    <button id="far2-t2" class="abs fixed" style="left: 565px; top: 340px; width: 150px; height: 40px;" type="button" data-set="#far2-c2" data-text="Sent">Send note</button>
+    <span id="far2-c2" class="abs far" style="left: 60px; top: 700px; width: 140px; height: 20px;"></span>
+    <button id="far2-t3" class="abs fixed" style="left: 565px; top: 400px; width: 150px; height: 40px;" type="button" data-set="#far2-c3" data-text="Published">Publish</button>
+    <span id="far2-c3" class="abs far" style="left: 580px; top: 700px; width: 140px; height: 20px;">Draft</span>
+    <button id="far2-t4" class="abs fixed" style="left: 565px; top: 460px; width: 150px; height: 40px;" type="button" data-set="#far2-c4" data-text="3 items" data-cart="far2 item 4">Add one</button>
+    <span id="far2-c4" class="abs far" style="left: 1080px; top: 700px; width: 140px; height: 20px;">2 items</span>
+  </section>
+  <section id="s-far3" class="scene" hidden>
+    <!-- elsewhere: a small change far from the clicked button -->
+    <button id="far3-t1" class="abs fixed" style="left: 565px; top: 280px; width: 150px; height: 40px;" type="button" data-set="#far3-c1" data-text="Updated">Update</button>
+    <span id="far3-c1" class="abs far" style="left: 580px; top: 60px; width: 140px; height: 20px;"></span>
+    <button id="far3-t2" class="abs fixed" style="left: 565px; top: 340px; width: 150px; height: 40px;" type="button" data-set="#far3-c2" data-text="On">Turn on</button>
+    <span id="far3-c2" class="abs far" style="left: 1080px; top: 60px; width: 140px; height: 20px;">Off</span>
+    <button id="far3-t3" class="abs fixed" style="left: 565px; top: 400px; width: 150px; height: 40px;" type="button" data-set="#far3-c3" data-text="Added">Add item</button>
+    <span id="far3-c3" class="abs far" style="left: 1080px; top: 400px; width: 140px; height: 20px;"></span>
+    <button id="far3-t4" class="abs fixed" style="left: 565px; top: 460px; width: 150px; height: 40px;" type="button" data-set="#far3-c4" data-text="Saved">Save draft</button>
+    <span id="far3-c4" class="abs far" style="left: 1080px; top: 700px; width: 140px; height: 20px;"></span>
+  </section>
+  <section id="s-far4" class="scene" hidden>
+    <!-- elsewhere: a small change far from the clicked button -->
+    <button id="far4-t1" class="abs fixed" style="left: 565px; top: 280px; width: 150px; height: 40px;" type="button" data-set="#far4-c1" data-text="4 items" data-cart="far4 item 1">Add to list</button>
+    <span id="far4-c1" class="abs far" style="left: 60px; top: 60px; width: 140px; height: 20px;">3 items</span>
+    <button id="far4-t2" class="abs fixed" style="left: 565px; top: 340px; width: 150px; height: 40px;" type="button" data-set="#far4-c2" data-text="Synced">Sync now</button>
+    <span id="far4-c2" class="abs far" style="left: 60px; top: 400px; width: 140px; height: 20px;">Idle</span>
+    <button id="far4-t3" class="abs fixed" style="left: 565px; top: 400px; width: 150px; height: 40px;" type="button" data-set="#far4-c3" data-text="Copied">Copy link</button>
+    <span id="far4-c3" class="abs far" style="left: 60px; top: 700px; width: 140px; height: 20px;"></span>
+    <button id="far4-t4" class="abs fixed" style="left: 565px; top: 460px; width: 150px; height: 40px;" type="button" data-set="#far4-c4" data-text="1 new">Refresh</button>
+    <span id="far4-c4" class="abs far" style="left: 580px; top: 700px; width: 140px; height: 20px;">0 new</span>
+  </section>
+  <section id="s-far5" class="scene" hidden>
+    <!-- elsewhere: a small change far from the clicked button -->
+    <button id="far5-t1" class="abs fixed" style="left: 40px; top: 40px; width: 150px; height: 40px;" type="button" data-set="#far5-c1" data-text="Sent">Send note</button>
+    <span id="far5-c1" class="abs far" style="left: 580px; top: 330px; width: 140px; height: 20px;"></span>
+    <button id="far5-t2" class="abs fixed" style="left: 1090px; top: 40px; width: 150px; height: 40px;" type="button" data-set="#far5-c2" data-text="Published">Publish</button>
+    <span id="far5-c2" class="abs far" style="left: 580px; top: 380px; width: 140px; height: 20px;">Draft</span>
+    <button id="far5-t3" class="abs fixed" style="left: 40px; top: 720px; width: 150px; height: 40px;" type="button" data-set="#far5-c3" data-text="3 items" data-cart="far5 item 3">Add one</button>
+    <span id="far5-c3" class="abs far" style="left: 580px; top: 430px; width: 140px; height: 20px;">2 items</span>
+    <button id="far5-t4" class="abs fixed" style="left: 1090px; top: 720px; width: 150px; height: 40px;" type="button" data-set="#far5-c4" data-text="Updated">Update</button>
+    <span id="far5-c4" class="abs far" style="left: 580px; top: 480px; width: 140px; height: 20px;"></span>
+  </section>
+  <section id="s-far6" class="scene" hidden>
+    <!-- elsewhere: a small change far from the clicked button -->
+    <button id="far6-t1" class="abs fixed" style="left: 565px; top: 310px; width: 150px; height: 40px;" type="button" data-set="#far6-c1" data-text="On">Turn on</button>
+    <span id="far6-c1" class="abs far" style="left: 580px; top: 60px; width: 140px; height: 20px;">Off</span>
+    <button id="far6-t2" class="abs fixed" style="left: 565px; top: 430px; width: 150px; height: 40px;" type="button" data-set="#far6-c2" data-text="Added">Add item</button>
+    <span id="far6-c2" class="abs far" style="left: 580px; top: 700px; width: 140px; height: 20px;"></span>
+  </section>
+  <section id="s-nav" class="scene" hidden>
+    <!-- page: links that navigate (12 keep the site bar, 6 replace everything) -->
+    <h2 class="abs nav-title" style="left: 40px; top: 90px; width: 600px; height: 36px;">Browse the shop</h2>
+    <a id="nav-01" class="abs nav-link" href="?scene=d01" style="left: 40px; top: 160px; width: 300px; height: 28px;">Mugs and cups</a>
+    <a id="nav-02" class="abs nav-link" href="?scene=d02" style="left: 460px; top: 160px; width: 300px; height: 28px;">Tea towels</a>
+    <a id="nav-03" class="abs nav-link" href="?scene=d03" style="left: 880px; top: 160px; width: 300px; height: 28px;">Notebooks</a>
+    <a id="nav-04" class="abs nav-link" href="?scene=d04" style="left: 40px; top: 256px; width: 300px; height: 28px;">Lamps</a>
+    <a id="nav-05" class="abs nav-link" href="?scene=d05" style="left: 460px; top: 256px; width: 300px; height: 28px;">Plant pots</a>
+    <a id="nav-06" class="abs nav-link" href="?scene=d06" style="left: 880px; top: 256px; width: 300px; height: 28px;">Candles</a>
+    <a id="nav-07" class="abs nav-link" href="?scene=d07" style="left: 40px; top: 352px; width: 300px; height: 28px;">Kitchen</a>
+    <a id="nav-08" class="abs nav-link" href="?scene=d08" style="left: 460px; top: 352px; width: 300px; height: 28px;">Bathroom</a>
+    <a id="nav-09" class="abs nav-link" href="?scene=d09" style="left: 880px; top: 352px; width: 300px; height: 28px;">Garden</a>
+    <a id="nav-10" class="abs nav-link" href="?scene=d10" style="left: 40px; top: 448px; width: 300px; height: 28px;">Office</a>
+    <a id="nav-11" class="abs nav-link" href="?scene=d11" style="left: 460px; top: 448px; width: 300px; height: 28px;">Gifts</a>
+    <a id="nav-12" class="abs nav-link" href="?scene=d12" style="left: 880px; top: 448px; width: 300px; height: 28px;">Sale</a>
+    <a id="nav-13" class="abs nav-link" href="?scene=f1" style="left: 40px; top: 544px; width: 300px; height: 28px;">About the shop</a>
+    <a id="nav-14" class="abs nav-link" href="?scene=f2" style="left: 460px; top: 544px; width: 300px; height: 28px;">Journal</a>
+    <a id="nav-15" class="abs nav-link" href="?scene=f3" style="left: 880px; top: 544px; width: 300px; height: 28px;">Workshops</a>
+    <a id="nav-16" class="abs nav-link" href="?scene=f4" style="left: 40px; top: 640px; width: 300px; height: 28px;">Stockists</a>
+    <a id="nav-17" class="abs nav-link" href="?scene=f5" style="left: 460px; top: 640px; width: 300px; height: 28px;">Recipes</a>
+    <a id="nav-18" class="abs nav-link" href="?scene=f6" style="left: 880px; top: 640px; width: 300px; height: 28px;">Gallery</a>
+  </section>
+  <section id="s-d01" class="scene" style="background: #1f3b73;" hidden><h2 class="abs dest-h" style="top: 184px;">Mugs and cups</h2><p class="abs dest-p" style="top: 294px;">Destination 1: a different page under the same site bar.</p></section>
+  <section id="s-d02" class="scene" style="background: #7a1f1f;" hidden><h2 class="abs dest-h" style="top: 184px;">Tea towels</h2><p class="abs dest-p" style="top: 294px;">Destination 2: a different page under the same site bar.</p></section>
+  <section id="s-d03" class="scene" style="background: #1f6b3a;" hidden><h2 class="abs dest-h" style="top: 184px;">Notebooks</h2><p class="abs dest-p" style="top: 294px;">Destination 3: a different page under the same site bar.</p></section>
+  <section id="s-d04" class="scene" style="background: #5b2a86;" hidden><h2 class="abs dest-h" style="top: 184px;">Lamps</h2><p class="abs dest-p" style="top: 294px;">Destination 4: a different page under the same site bar.</p></section>
+  <section id="s-d05" class="scene" style="background: #8a5a00;" hidden><h2 class="abs dest-h" style="top: 184px;">Plant pots</h2><p class="abs dest-p" style="top: 294px;">Destination 5: a different page under the same site bar.</p></section>
+  <section id="s-d06" class="scene" style="background: #0f5f66;" hidden><h2 class="abs dest-h" style="top: 184px;">Candles</h2><p class="abs dest-p" style="top: 294px;">Destination 6: a different page under the same site bar.</p></section>
+  <section id="s-d07" class="scene" style="background: #333333;" hidden><h2 class="abs dest-h" style="top: 184px;">Kitchen</h2><p class="abs dest-p" style="top: 294px;">Destination 7: a different page under the same site bar.</p></section>
+  <section id="s-d08" class="scene" style="background: #7a2357;" hidden><h2 class="abs dest-h" style="top: 184px;">Bathroom</h2><p class="abs dest-p" style="top: 294px;">Destination 8: a different page under the same site bar.</p></section>
+  <section id="s-d09" class="scene" style="background: #2d4a22;" hidden><h2 class="abs dest-h" style="top: 184px;">Garden</h2><p class="abs dest-p" style="top: 294px;">Destination 9: a different page under the same site bar.</p></section>
+  <section id="s-d10" class="scene" style="background: #6b3e1f;" hidden><h2 class="abs dest-h" style="top: 184px;">Office</h2><p class="abs dest-p" style="top: 294px;">Destination 10: a different page under the same site bar.</p></section>
+  <section id="s-d11" class="scene" style="background: #203a5c;" hidden><h2 class="abs dest-h" style="top: 184px;">Gifts</h2><p class="abs dest-p" style="top: 294px;">Destination 11: a different page under the same site bar.</p></section>
+  <section id="s-d12" class="scene" style="background: #5c2035;" hidden><h2 class="abs dest-h" style="top: 184px;">Sale</h2><p class="abs dest-p" style="top: 294px;">Destination 12: a different page under the same site bar.</p></section>
+  <section id="s-f1" class="scene" style="background: #102a43;" hidden><h2 class="abs dest-h" style="top: 300px;">About the shop</h2><p class="abs dest-p" style="top: 410px;">Full page 1: nothing of the previous page is left.</p></section>
+  <section id="s-f2" class="scene" style="background: #3e1f47;" hidden><h2 class="abs dest-h" style="top: 300px;">Journal</h2><p class="abs dest-p" style="top: 410px;">Full page 2: nothing of the previous page is left.</p></section>
+  <section id="s-f3" class="scene" style="background: #1b4332;" hidden><h2 class="abs dest-h" style="top: 300px;">Workshops</h2><p class="abs dest-p" style="top: 410px;">Full page 3: nothing of the previous page is left.</p></section>
+  <section id="s-f4" class="scene" style="background: #6a040f;" hidden><h2 class="abs dest-h" style="top: 300px;">Stockists</h2><p class="abs dest-p" style="top: 410px;">Full page 4: nothing of the previous page is left.</p></section>
+  <section id="s-f5" class="scene" style="background: #3d405b;" hidden><h2 class="abs dest-h" style="top: 300px;">Recipes</h2><p class="abs dest-p" style="top: 410px;">Full page 5: nothing of the previous page is left.</p></section>
+  <section id="s-f6" class="scene" style="background: #264653;" hidden><h2 class="abs dest-h" style="top: 300px;">Gallery</h2><p class="abs dest-p" style="top: 410px;">Full page 6: nothing of the previous page is left.</p></section>
+  <section id="s-stress" class="scene" hidden>
+    <!-- stress (report-only): shadow, lift, ghost, strikethrough, equal-luma swap, full-width row tint -->
+    <div id="card-1" class="abs card-s" style="left: 40px; top: 40px; width: 190px; height: 120px;"><span class="card-t">Card 1</span><span class="card-n">A card that reacts to hover.</span></div>
+    <div id="card-2" class="abs card-s" style="left: 245px; top: 40px; width: 190px; height: 120px;"><span class="card-t">Card 2</span><span class="card-n">A card that reacts to hover.</span></div>
+    <div id="card-3" class="abs card-s" style="left: 450px; top: 40px; width: 190px; height: 120px;"><span class="card-t">Card 3</span><span class="card-n">A card that reacts to hover.</span></div>
+    <div id="card-4" class="abs card-l" style="left: 655px; top: 40px; width: 190px; height: 120px;"><span class="card-t">Card 4</span><span class="card-n">A card that reacts to hover.</span></div>
+    <div id="card-5" class="abs card-l" style="left: 860px; top: 40px; width: 190px; height: 120px;"><span class="card-t">Card 5</span><span class="card-n">A card that reacts to hover.</span></div>
+    <div id="card-6" class="abs card-l" style="left: 1065px; top: 40px; width: 190px; height: 120px;"><span class="card-t">Card 6</span><span class="card-n">A card that reacts to hover.</span></div>
+    <button id="ghost-1" class="abs fixed ghost" style="left: 40px; top: 200px; width: 180px; height: 40px;" type="button">Learn more 1</button>
+    <button id="ghost-2" class="abs fixed ghost" style="left: 245px; top: 200px; width: 180px; height: 40px;" type="button">Learn more 2</button>
+    <button id="ghost-3" class="abs fixed ghost" style="left: 450px; top: 200px; width: 180px; height: 40px;" type="button">Learn more 3</button>
+    <span id="todo-1" class="abs todo" style="left: 700px; top: 200px; width: 220px; height: 24px;" data-toggle="done" data-target="#todo-1">Buy milk</span>
+    <span id="todo-2" class="abs todo" style="left: 700px; top: 240px; width: 220px; height: 24px;" data-toggle="done" data-target="#todo-2">Call the plumber</span>
+    <span id="todo-3" class="abs todo" style="left: 700px; top: 280px; width: 220px; height: 24px;" data-toggle="done" data-target="#todo-3">Water the plants</span>
+    <span id="dot-1" class="abs dot" style="left: 1000px; top: 200px; width: 24px; height: 24px;" data-toggle="on" data-target="#dot-1"></span>
+    <span class="abs dot-l" style="left: 1034px; top: 200px; width: 200px; height: 24px;">Status 1</span>
+    <span id="dot-2" class="abs dot" style="left: 1000px; top: 240px; width: 24px; height: 24px;" data-toggle="on" data-target="#dot-2"></span>
+    <span class="abs dot-l" style="left: 1034px; top: 240px; width: 200px; height: 24px;">Status 2</span>
+    <span id="dot-3" class="abs dot" style="left: 1000px; top: 280px; width: 24px; height: 24px;" data-toggle="on" data-target="#dot-3"></span>
+    <span class="abs dot-l" style="left: 1034px; top: 280px; width: 200px; height: 24px;">Status 3</span>
+    <div id="row-1" class="abs row" style="left: 0px; top: 560px; width: 1280px; height: 48px;"><span class="row-t">Row 1: a full-width list row that tints on hover</span></div>
+    <div id="row-2" class="abs row" style="left: 0px; top: 620px; width: 1280px; height: 48px;"><span class="row-t">Row 2: a full-width list row that tints on hover</span></div>
+    <div id="row-3" class="abs row" style="left: 0px; top: 680px; width: 1280px; height: 48px;"><span class="row-t">Row 3: a full-width list row that tints on hover</span></div>
+  </section>
+  <!-- the site bar: one element, shown by the scene script on nav and d01 .. d12, so it is the same pixels -->
+  <div id="site-bar" class="abs bar" style="left: 0px; top: 0px; width: 1280px; height: 64px;" hidden><span class="abs brand" style="left: 40px; top: 18px; width: 240px; height: 28px;">Outcome Shop</span><span class="abs bar-item" style="left: 1000px; top: 20px; width: 100px; height: 24px;">Help</span><span class="abs bar-item" style="left: 1120px; top: 20px; width: 120px; height: 24px;">Account</span></div>
+<script>
+  (function () {
+    "use strict";
+    var m = /[?&]scene=([a-z0-9-]+)(?:&|$)/.exec(location.search);
+    var name = m ? m[1] : "index";
+    var scene = document.getElementById("s-" + name);
+    if (!scene) {
+      name = "index";
+      scene = document.getElementById("s-index");
+    }
+    scene.hidden = false;
+    if (/^(nav|d[0-9][0-9])$/.test(name)) document.getElementById("site-bar").hidden = false;
+    var state = {scene: name, cart: [], events: []};
+    window.__state = state;
+    window.__probes = JSON.parse(document.getElementById("probes").textContent);
+    document.addEventListener("click", function (ev) {
+      var t = ev.target;
+      if (!(t instanceof Element)) return;
+      var set = t.closest("[data-set]");
+      if (set) {
+        document.querySelector(set.getAttribute("data-set")).textContent = set.getAttribute("data-text");
+        state.events.push(set.id + " set " + set.getAttribute("data-text"));
+        if (set.hasAttribute("data-cart")) state.cart.push(set.getAttribute("data-cart"));
+      }
+      var tog = t.closest("[data-toggle]");
+      if (tog) {
+        document.querySelector(tog.getAttribute("data-target")).classList.toggle(tog.getAttribute("data-toggle"));
+        state.events.push(tog.id + " toggle " + tog.getAttribute("data-toggle"));
+      }
+      var seg = t.closest(".seg");
+      if (seg) {
+        var group = seg.getAttribute("data-group");
+        Array.prototype.forEach.call(document.querySelectorAll('.seg[data-group="' + group + '"]'), function (o) {
+          o.classList.toggle("on", o === seg);
+        });
+        state.events.push(seg.id + " select");
+      }
+    });
+  })();
+</script>
+</body>
+</html>

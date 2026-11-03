@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0134 hostile extent page</title>
+<style>
+  html { scroll-behavior: auto; }
+  /* 2800 px tall at any width: at 1280x800 the true extent at scroll 0 is 0 above and 2000 below. */
+  body { margin: 0; height: 2800px; overflow-x: hidden;
+         background: linear-gradient(180deg, rgb(230, 30, 30), rgb(30, 30, 230)); }
+</style>
+<script>
+  // T-0134 A4a: the page lies about its geometry to any reader inside the page.
+  (function () {
+    const lie = (obj, name, value) => {
+      try { Object.defineProperty(obj, name, { get: () => value, configurable: true }); } catch (e) {}
+    };
+    lie(window, "scrollY", 4242);
+    lie(window, "pageYOffset", 4242);
+    lie(window, "innerHeight", 100);
+    lie(window, "outerHeight", 100);
+    const fake = { scrollTop: 9999, scrollHeight: 100, clientHeight: 100, scrollLeft: 0, scrollWidth: 100 };
+    lie(document, "scrollingElement", fake);
+    lie(document.documentElement, "scrollTop", 9999);
+    lie(document.documentElement, "scrollHeight", 100);
+    lie(document.documentElement, "clientHeight", 100);
+    window.__state = () => ({ page: "t0134-hostile" });
+  })();
+</script>
+</head>
+<body></body>
+</html>

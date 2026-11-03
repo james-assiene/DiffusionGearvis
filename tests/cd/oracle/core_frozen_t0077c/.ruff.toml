@@ -1,0 +1,7 @@
+# The frozen copies are byte-identical to the plugin at b53457a (MANIFEST.md) and are never edited; the plugin is
+# outside ruff's scope (pyproject extend-exclude "plugin/"), and its kernels/entropy.py uses if/else blocks inside
+# @triton.jit bodies (SIM108). Same rules as the repository otherwise.
+extend = "../../../../pyproject.toml"
+
+[lint]
+extend-ignore = ["SIM108"]

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0174 B1 opener</title>
+<style>
+  html, body { margin: 0; overflow: hidden; }
+  /* the whole viewport opens steer.html with window.open (not noopener), so the popup can steer this page */
+  #open { position: fixed; inset: 0; background: rgb(255, 120, 0); }
+</style>
+</head>
+<body>
+<div id="open"></div>
+<script>
+  "use strict";
+  window.__doc = Math.random().toString(36).slice(2);
+  document.getElementById("open").addEventListener("click", () => {
+    window.__opened = !!window.open("steer.html", "_blank");
+  });
+</script>
+</body>
+</html>

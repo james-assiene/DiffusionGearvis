@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>T-0203 noop enter</title>
+<style>
+html, body { margin: 0; overflow: hidden; background: rgb(0, 150, 60); }
+#q { position: fixed; left: 340px; top: 100px; width: 600px; height: 60px; box-sizing: border-box;
+     font: 28px sans-serif; border: 0; background: rgb(255, 255, 255); }
+</style></head>
+<body>
+<form id="f" action="/results.html" method="get"><input id="q" name="q" autocomplete="off"></form>
+<script>
+// Enter in the box is refused by its ``keydown`` handler: nothing submits, nothing navigates.
+document.getElementById("q").addEventListener("keydown", (e) => { if (e.key === "Enter") e.preventDefault(); });
+window.__doc = Math.random().toString(36).slice(2);
+</script>
+</body></html>

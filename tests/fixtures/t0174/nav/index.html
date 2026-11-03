@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0174 B1 navigation cases</title>
+<style>
+  /* A fixed 4x4 grid of 300x180 cells (left 10/330/650/970, top 10/210/410/610), so every target's centre is
+     known by hand: x 160/480/800/1120, y 100/300/500/700 (MANIFEST.md). Nothing scrolls, nothing animates. */
+  html, body { margin: 0; overflow: hidden; background: rgb(240, 240, 240); font: 28px sans-serif; }
+  .cell { position: absolute; width: 300px; height: 180px; box-sizing: border-box; margin: 0; padding: 0;
+          border: 2px solid rgb(60, 60, 60); display: block; text-align: center; line-height: 176px; }
+  a.cell { color: rgb(0, 0, 160); background: rgb(200, 220, 255); text-decoration: none; }
+  button.cell { background: rgb(255, 230, 190); font: 28px sans-serif; }
+  #link { left: 10px; top: 10px; }
+  #hash { left: 330px; top: 10px; }
+  #push { left: 650px; top: 10px; }
+  #replace { left: 970px; top: 10px; }
+  #reload { left: 10px; top: 210px; }
+  #blank { left: 330px; top: 210px; background: rgb(250, 250, 250); }
+  #popup { left: 650px; top: 210px; }
+  #five { left: 970px; top: 210px; }
+  #late { left: 10px; top: 410px; }
+  #back { left: 330px; top: 410px; }
+  #frame { position: absolute; left: 650px; top: 410px; width: 620px; height: 180px; border: 0; margin: 0; }
+  #q { left: 10px; top: 610px; line-height: normal; font: 28px sans-serif; text-align: left; padding: 0 8px; }
+  #go { left: 330px; top: 610px; }
+  #error { left: 650px; top: 610px; color: rgb(180, 30, 30); font-size: 18px; line-height: 24px; }
+  #section { left: 970px; top: 610px; background: rgb(220, 255, 220); }
+</style>
+</head>
+<body>
+<a class="cell" id="link" href="target.html?from=link">link</a>
+<a class="cell" id="hash" href="#section">hash</a>
+<button class="cell" id="push" type="button">pushState</button>
+<button class="cell" id="replace" type="button">replaceState</button>
+<button class="cell" id="reload" type="button">reload</button>
+<div class="cell" id="blank"></div>
+<a class="cell" id="popup" href="target.html?from=popup" target="_blank">popup</a>
+<button class="cell" id="five" type="button">five popups</button>
+<button class="cell" id="late" type="button">late popup</button>
+<button class="cell" id="back" type="button">back</button>
+<iframe id="frame" src="frame_inner.html" title="inner"></iframe>
+<form id="form" autocomplete="off">
+  <input class="cell" type="text" id="q" name="q" autocomplete="off" spellcheck="false">
+  <button class="cell" type="submit" id="go">Go</button>
+</form>
+<p class="cell" id="error" role="alert"></p>
+<div class="cell" id="section">section</div>
+<script>
+  // T-0174 B1 fixture (tests/integration/test_t0174_navigated_browser.py). The page's own record of what happened
+  // in *this* document; the rows read it only to prove a premise (the same document is still showing).
+  "use strict";
+  window.__doc = Math.random().toString(36).slice(2);
+  window.__nav = { pushes: 0, replaces: 0, pops: 0, hashes: 0, popups: 0 };
+  window.addEventListener("popstate", () => { window.__nav.pops += 1; });
+  window.addEventListener("hashchange", () => { window.__nav.hashes += 1; });
+  document.getElementById("push").addEventListener("click", () => {
+    window.__nav.pushes += 1;
+    history.pushState({ n: window.__nav.pushes }, "", "?pushed=" + window.__nav.pushes);
+  });
+  document.getElementById("replace").addEventListener("click", () => {
+    window.__nav.replaces += 1;
+    history.replaceState({ r: window.__nav.replaces }, "", "?replaced=" + window.__nav.replaces);
+  });
+  document.getElementById("reload").addEventListener("click", () => { location.reload(); });
+  document.getElementById("back").addEventListener("click", () => { history.back(); });
+  document.getElementById("five").addEventListener("click", () => {
+    // five windows from one click: with MAX_PAGES = 4 the cap closes the opener and the first of them
+    for (let i = 1; i <= 5; i += 1) {
+      if (window.open("target.html?from=five&i=" + i, "_blank")) window.__nav.popups += 1;
+    }
+  });
+  // the click only arms the late popup; the row fires it with window.__openLate() once the action has returned,
+  // so it opens after the settle whatever the load (T-0111c ruling a918d74's late popup, without a timer)
+  window.__lateArmed = false;
+  document.getElementById("late").addEventListener("click", () => { window.__lateArmed = true; });
+  window.__openLate = () => {
+    if (!window.__lateArmed) return false;
+    const opened = !!window.open("target.html?from=late", "_blank");
+    if (opened) window.__nav.popups += 1;
+    return opened;
+  };
+  // like local_astra/pages/static/web.html: the submit is always prevented; an empty field is refused with a
+  // message and nothing loads, otherwise the page assigns a new location
+  const form = document.getElementById("form");
+  const input = document.getElementById("q");
+  const error = document.getElementById("error");
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const text = input.value.trim();
+    if (!text) {
+      error.textContent = "Type something first";
+      window.__refused = (window.__refused || 0) + 1;
+      return;
+    }
+    error.textContent = "";
+    location.assign("target.html?q=" + encodeURIComponent(text));
+  });
+  // the page watches its own DOM: any node added after load (a script tag, say) is counted
+  window.__added = 0;
+  new MutationObserver((records) => {
+    for (const r of records) window.__added += r.addedNodes.length;
+  }).observe(document, { childList: true, subtree: true });
+</script>
+</body>
+</html>

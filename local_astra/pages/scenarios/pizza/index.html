@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Order pizza online | Domino's</title>
+  <link rel="stylesheet" href="/assets/scenarios.css">
+</head>
+<body class="pizza" data-page="order" data-scenario="d6">
+  <header class="bar">
+    <a class="brand" href="/pizza/">Domino's</a>
+    <nav><span class="muted">Pizza, sides and drinks</span><a href="/pizza/cart.html" data-scn="nav-cart">Cart (<span id="cart-count">0</span>)</a></nav>
+  </header>
+  <main class="page">
+    <h1>Start your order</h1>
+    <div class="toggle" role="group" aria-label="Order type">
+      <button type="button" class="seg" id="method-delivery" data-scn="method-delivery">Delivery</button>
+      <button type="button" class="seg" id="method-carryout" data-scn="method-carryout">Carryout</button>
+    </div>
+    <p class="muted" id="method-note"></p>
+    <form class="search-row" id="store-search" autocomplete="off">
+      <input type="text" id="store-address" name="address" data-scn="location" autocomplete="street-address" placeholder="Street address, city or ZIP">
+      <button type="submit" data-scn="find-stores">Find stores</button>
+    </form>
+    <p class="muted" id="stores-note"></p>
+    <ul class="stores" id="stores"></ul>
+    <section class="menu gone" id="menu">
+      <h2 id="menu-title">Menu</h2>
+      <div class="menu-item">
+        <div>
+          <h3>Pepperoni Pizza</h3>
+          <div class="muted">Hand-tossed crust, tomato sauce, mozzarella and pepperoni.</div>
+          <div class="sizes" role="radiogroup" aria-label="Size">
+            <label data-scn="size-small"><input type="radio" name="pepperoni-size" value="small">Small 10&Prime; &middot; $11.99</label>
+            <label data-scn="size-medium"><input type="radio" name="pepperoni-size" value="medium" checked>Medium 12&Prime; &middot; $14.99</label>
+            <label data-scn="size-large"><input type="radio" name="pepperoni-size" value="large">Large 14&Prime; &middot; $17.99</label>
+          </div>
+        </div>
+        <button type="button" data-scn="add-pepperoni-pizza">Add to order</button>
+      </div>
+      <div class="menu-item">
+        <div>
+          <h3>Cheese Pizza</h3>
+          <div class="muted">Medium 12&Prime;, tomato sauce and mozzarella &middot; $12.99</div>
+        </div>
+        <button type="button" data-scn="add-cheese-pizza">Add to order</button>
+      </div>
+      <p class="added" id="added"></p>
+    </section>
+  </main>
+  <div class="overlay gone" id="upsell" data-scn="upsell">
+    <div class="dialog">
+      <h2>Add 8-piece wings for $7.99?</h2>
+      <p class="muted">Plain, barbecue or hot. Goes well with any pizza.</p>
+      <div class="row">
+        <button type="button" class="ghost" data-scn="upsell-no-thanks">No thanks</button>
+        <button type="button" data-scn="upsell-add-wings">Add wings</button>
+      </div>
+    </div>
+  </div>
+  <footer class="demo-note">Demo copy for testing; not affiliated with Domino's. Stores, prices and distances are made up.</footer>
+  <script src="/assets/scenarios.js"></script>
+</body>
+</html>

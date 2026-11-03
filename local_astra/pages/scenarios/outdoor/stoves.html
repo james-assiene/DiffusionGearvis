@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Camping stoves | Pinecone Outdoor Co-op</title>
+  <link rel="stylesheet" href="/assets/scenarios.css">
+</head>
+<body class="outdoor shop" data-page="stoves" data-scenario="d5">
+  <header class="bar">
+    <span class="brand">Pinecone Outdoor Co-op</span>
+    <nav><span class="muted">Camp &amp; hike</span><a href="/outdoor/cart.html" data-scn="nav-cart">Cart (<span id="cart-count">0</span>)</a></nav>
+  </header>
+  <main class="page">
+    <h1>Camping stoves</h1>
+    <p class="lede"><span id="stove-count"></span> &middot; Members get free shipping on every order.</p>
+    <div class="shop-grid">
+      <aside class="filters" id="filters">
+        <h3>Capacity</h3>
+        <label><input type="checkbox" name="capacity" data-value="1-2" data-scn="filter-1-2-person">1&ndash;2 person</label>
+        <label><input type="checkbox" name="capacity" data-value="3-4" data-scn="filter-3-4-person">3&ndash;4 person</label>
+        <h3>Price</h3>
+        <label><input type="checkbox" name="price" data-value="under-50" data-scn="filter-under-50">Under $50</label>
+        <label><input type="checkbox" name="price" data-value="50-100" data-scn="filter-50-100">$50&ndash;$100</label>
+      </aside>
+      <section class="cards" id="stoves"></section>
+    </div>
+  </main>
+  <footer class="demo-note">Demo copy for testing; not affiliated with REI or any outdoor retailer.</footer>
+  <script src="/assets/scenarios.js"></script>
+</body>
+</html>

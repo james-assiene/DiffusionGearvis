@@ -1,0 +1,149 @@
+<!doctype html>
+<html data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>local_astra HUD (mockup)</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  .app { max-width: 1480px; margin: 0 auto; padding: 18px 28px 28px; display: grid; grid-template-rows: auto 1fr; gap: 18px; min-height: 100vh; }
+  header { display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .logo { width: 30px; height: 30px; border-radius: 9px; background: conic-gradient(from 210deg, var(--accent), var(--accent-2), var(--accent)); box-shadow: 0 0 24px rgba(142,162,255,.35); }
+  .word { font-weight: 700; letter-spacing: -0.02em; font-size: 17px; }
+  .status { display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px 7px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; font-size: 13.5px; }
+  .wave { display: inline-flex; gap: 3px; align-items: center; height: 14px; }
+  .wave i { width: 3px; border-radius: 2px; background: currentColor; display: block; }
+  .controls { display: flex; gap: 10px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--text-2); font-weight: 550; font-size: 13.5px; box-shadow: var(--shadow); }
+  .btn.on { color: var(--green); background: var(--green-soft); border-color: transparent; }
+  .btn .led { width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; }
+  .btn.icon { width: 36px; padding: 0; justify-content: center; }
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 22px; min-height: 0; }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow); }
+  .convo { display: grid; grid-template-rows: 1fr auto; overflow: hidden; }
+  .thread { padding: 26px 34px 10px; display: flex; flex-direction: column; gap: 22px; overflow: hidden; }
+  .u { align-self: flex-end; max-width: 70%; background: var(--bubble); color: var(--text); padding: 11px 16px; border-radius: 18px 18px 6px 18px; font-size: 15px; }
+  .u small { display: block; color: var(--muted); font-size: 11.5px; margin-top: 2px; text-align: right; }
+  .a { display: grid; grid-template-columns: 30px 1fr; gap: 14px; max-width: 860px; }
+  .av { width: 30px; height: 30px; border-radius: 10px; background: conic-gradient(from 210deg, var(--accent), var(--accent-2), var(--accent)); opacity: .9; }
+  .said { font-size: 16.5px; line-height: 1.65; color: var(--text); }
+  .said .pending { color: var(--faint); }
+  .meta { display: flex; gap: 8px; align-items: center; margin-top: 8px; color: var(--muted); font-size: 12px; }
+  .pill { padding: 3px 9px; border-radius: 999px; background: var(--surface-3); color: var(--muted); font-size: 12px; font-weight: 550; }
+  .action { display: inline-flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 12px; border: 1px dashed var(--line-strong); color: var(--text-2); font-size: 13.5px; margin-top: 10px; }
+  .action b { font-weight: 600; color: var(--text); }
+  .action .tag { color: var(--amber); background: var(--amber-soft); padding: 2px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 650; }
+  .card-wrap { margin-top: 14px; max-width: 520px; }
+  .composer { margin: 0 22px 22px; display: flex; align-items: center; gap: 12px; padding: 10px 10px 10px 18px; border-radius: 16px; background: var(--surface-2); border: 1px solid var(--line); }
+  .composer span { color: var(--muted); flex: 1; }
+  .mic { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: var(--accent); color: #0d0f13; font-weight: 800; }
+  .rail { display: flex; flex-direction: column; gap: 18px; min-height: 0; }
+  .rail .panel { padding: 16px 18px; }
+  .rh { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .rh h3 { margin: 0; font-size: 13px; font-weight: 650; letter-spacing: .02em; color: var(--text-2); }
+  .live { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--green); font-weight: 600; }
+  .live i { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
+  .shot { aspect-ratio: 16/10.5; border-radius: 14px; overflow: hidden; background: #f6f3ee; position: relative; border: 1px solid var(--line); }
+  .shot .nav { height: 12%; background: #2f4f3f; }
+  .shot .h { position: absolute; left: 8%; top: 18%; width: 46%; height: 6%; background: #2b2b2b; border-radius: 3px; opacity: .85; }
+  .shot .img { position: absolute; right: 7%; top: 18%; width: 34%; height: 40%; border-radius: 6px; background: linear-gradient(135deg, #f0d36a, #e7a948); }
+  .shot .l { position: absolute; left: 8%; height: 3.2%; background: #9a958c; border-radius: 2px; opacity: .55; }
+  .cap { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; margin-top: 10px; }
+  .noise { display: grid; grid-template-columns: repeat(32, 1fr); gap: 2px; }
+  .noise i { aspect-ratio: 1; border-radius: 2px; background: var(--accent); display: block; }
+  .ctx { display: flex; flex-direction: column; gap: 10px; }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .row .t { font-size: 14px; color: var(--text); }
+  .row .s { font-size: 12px; color: var(--muted); }
+  .sw { width: 34px; height: 20px; border-radius: 999px; background: var(--surface-3); position: relative; flex: none; }
+  .sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--faint); }
+  .sw.on { background: var(--accent); } .sw.on::after { left: 17px; background: white; }
+  .sw.dis { opacity: .45; }
+  .diag { display: flex; justify-content: space-between; color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand">
+      <div class="logo"></div><div class="word">astra</div>
+      <div class="status"><span class="wave"><i style="height:6px"></i><i style="height:12px"></i><i style="height:8px"></i><i style="height:14px"></i><i style="height:5px"></i></span>Speaking</div>
+    </div>
+    <div class="controls">
+      <div class="btn on"><span class="led"></span>Sharing screen</div>
+      <div class="btn">Mic · Headset</div>
+      <div class="btn">Mute</div>
+      <div class="btn icon">⋯</div>
+    </div>
+  </header>
+
+  <div class="grid">
+    <section class="panel convo">
+      <div class="thread">
+        <div class="u">What do you see on the screen?<small>17:09</small></div>
+        <div class="a"><div class="av"></div><div>
+          <div class="said">I see a recipe for a lemon cake on a Kitchen Notes page — butter, sugar, eggs, flour and lemons, with a seven-step method.</div>
+        </div></div>
+
+        <div class="u">Turn this recipe into a shopping list card.<small>17:10</small></div>
+        <div class="a"><div class="av"></div><div>
+          <div class="said">Here's your shopping list for the lemon cake. <span class="pending">Nine items, grouped as they appear in the recipe.</span></div>
+          <div class="meta"><span class="pill">card</span><span>spoken 2.1 s</span></div>
+          <div class="card-wrap">
+            <div class="a2-card">
+              <div class="a2-eyebrow">Lemon cake</div>
+              <div class="a2-h3">Shopping list</div>
+              <ul class="a2-list">
+                <li><span class="a2-tick"></span>225 g unsalted butter</li>
+                <li><span class="a2-tick"></span>225 g caster sugar</li>
+                <li><span class="a2-tick"></span>4 large eggs</li>
+                <li><span class="a2-tick"></span>275 g self-raising flour</li>
+                <li><span class="a2-tick"></span>2 tsp baking powder</li>
+                <li><span class="a2-tick"></span>2 lemons <span style="color:var(--muted);margin-left:auto;font-size:13px">zest + juice</span></li>
+              </ul>
+              <div class="a2-foot">+3 more · from the recipe on your screen</div>
+            </div>
+          </div>
+        </div></div>
+
+        <div class="u">Find me an omelette recipe.<small>17:12</small></div>
+        <div class="a"><div class="av"></div><div>
+          <div class="action"><span>🔍</span>Search <b>“omelette recipe”</b><span class="tag">DRY RUN</span></div>
+        </div></div>
+      </div>
+      <div class="composer"><span>Ask, or just speak…</span><div class="mic">●</div></div>
+    </section>
+
+    <aside class="rail">
+      <div class="panel">
+        <div class="rh"><h3>What I see</h3><span class="live"><i></i>Live</span></div>
+        <div class="shot"><div class="nav"></div><div class="h"></div><div class="img"></div>
+          <div class="l" style="top:30%;width:42%"></div><div class="l" style="top:37%;width:38%"></div><div class="l" style="top:44%;width:40%"></div><div class="l" style="top:51%;width:30%"></div><div class="l" style="top:64%;width:84%"></div><div class="l" style="top:71%;width:80%"></div><div class="l" style="top:78%;width:70%"></div></div>
+        <div class="cap"><span>Chrome · Kitchen Notes</span><span class="num">1176 × 1194</span></div>
+      </div>
+      <div class="panel">
+        <div class="rh"><h3>Thinking</h3><span class="s num" style="font-size:12px;color:var(--muted)">canvas 2 · step 31/48</span></div>
+        <div class="noise" id="noise"></div>
+      </div>
+      <div class="panel">
+        <div class="rh"><h3>Context</h3><span style="font-size:12px;color:var(--muted)">pixels only</span></div>
+        <div class="ctx">
+          <div class="row"><div><div class="t">Page text</div><div class="s">Needs the desktop helper</div></div><span class="sw dis"></span></div>
+          <div class="row"><div><div class="t">Spreadsheet cells</div><div class="s">Needs the desktop helper</div></div><span class="sw dis"></span></div>
+          <div class="row"><div><div class="t">Memory</div><div class="s">3 notes recalled this session</div></div><span class="sw on"></span></div>
+        </div>
+      </div>
+      <div class="panel diag"><span>Diagnostics</span><span class="num">0 dropped · 44 ms ›</span></div>
+    </aside>
+  </div>
+</div>
+<script>
+  const params = new URLSearchParams(location.search);
+  document.documentElement.dataset.theme = params.get('theme') || 'dark';
+  const n = document.getElementById('noise'); let seed = 7;
+  const r = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 32 * 8; i++) { const e = document.createElement('i'); const v = r(); e.style.opacity = (i < 32*5 ? 0.25 + v * 0.75 : 0.06 + v * 0.18).toFixed(2); n.appendChild(e); }
+</script>
+</body>
+</html>

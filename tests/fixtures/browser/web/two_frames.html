@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Two frames</title>
+<style>body{margin:0;font:24px sans-serif}iframe{position:absolute;left:100px;width:700px;height:160px;border:2px solid #333}
+#first{top:40px}#second{top:300px}</style></head>
+<body>
+<!-- the card field is in the SECOND iframe; the first holds an ordinary text field. A guard that reads the first
+     child frame instead of the focused one sees a plain field and types. -->
+<iframe id="first" src="https://shop.example/plain_iframe.html" title="first"></iframe>
+<iframe id="second" src="https://pay.example/card_iframe.html" title="second"></iframe>
+</body>
+</html>

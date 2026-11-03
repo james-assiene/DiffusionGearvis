@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0111c self-closing popup</title>
+<style>
+  html, body { margin: 0; overflow: hidden; }
+  /* the whole viewport is one target: red on the opener, blue on the popup */
+  #open { position: fixed; inset: 0; background: rgb(255, 0, 0); }
+  body.popup #open { background: rgb(0, 0, 255); }
+</style>
+<script src="recorder.js"></script>
+</head>
+<body>
+<div id="open"></div>
+<script>
+  // Opener (no query): a click on #open opens this page with ?popup=1 synchronously (window.open in the click
+  // handler, so it is adopted at the click's own settle).
+  // Popup (?popup=1): blue; it calls window.close() on itself when the row posts "close" on the BroadcastChannel
+  // "t0111c-self-close" (a script-opened window may close itself). The trigger is a message, not a timer, so the
+  // row can take an own frame of the popup first (T-0111c ruling on the round-3 review of e345ef2, mutant S9).
+  const isPopup = new URLSearchParams(location.search).get("popup") === "1";
+  window.__isPopup = isPopup;
+  if (isPopup) {
+    document.body.classList.add("popup");
+    const ch = new BroadcastChannel("t0111c-self-close");
+    ch.onmessage = (e) => { if (e.data === "close") window.close(); };
+    window.__ready = true;
+  } else {
+    document.getElementById("open").addEventListener("click", () => {
+      window.__opened = !!window.open("self_close_popup.html?popup=1", "_blank");
+    });
+  }
+</script>
+</body>
+</html>

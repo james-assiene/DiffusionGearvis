@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Beacon</title></head>
+<body>
+<p>T-0160 B-7 (e)/(h): a page that phones home in the background, to a loopback canary (port from ?c=) and to a name
+that resolves to a private address, every 300 ms and when it is left.</p>
+<script>
+const c = new URLSearchParams(location.search).get("c");
+const targets = ["http://127.0.0.1:" + c + "/beacon", "https://127.0.0.1:" + c + "/beacon", "https://private.example/beacon"];
+function phone() {
+  for (const t of targets) {
+    try { navigator.sendBeacon(t, "x"); } catch (e) {}
+    try { fetch(t, {mode: "no-cors", keepalive: true}).catch(() => {}); } catch (e) {}
+    try { new Image().src = t + "?img=" + Date.now(); } catch (e) {}
+  }
+}
+phone();
+setInterval(phone, 300);
+addEventListener("pagehide", phone);
+</script>
+</body>
+</html>

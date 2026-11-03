@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Review and pay | Frontier Airlines</title>
+  <link rel="stylesheet" href="/assets/scenarios.css">
+</head>
+<body class="flights airline" data-page="checkout" data-scenario="d9" data-airline="f9">
+  <header class="bar">
+    <span class="brand">Frontier Airlines</span>
+    <nav><a href="/flights/">Back to search results</a></nav>
+  </header>
+  <main class="page">
+    <h1>Review your trip and pay</h1>
+    <p class="lede" id="trip"></p>
+    <div class="checkout-form">
+      <div class="field"><label for="checkout-name">Passenger name</label><input type="text" id="checkout-name" name="name" autocomplete="name" data-scn="checkout-name"></div>
+      <div class="field"><label for="checkout-address">Billing address</label><input type="text" id="checkout-address" name="address" autocomplete="street-address" data-scn="checkout-address"></div>
+      <div class="field"><label for="checkout-card">Card number</label><input type="text" id="checkout-card" name="card" autocomplete="cc-number" inputmode="numeric" data-scn="checkout-card"></div>
+    </div>
+    <button type="button" id="place-order" data-scn="place-order">Place order</button>
+    <p class="status" id="placed"></p>
+  </main>
+  <footer class="demo-note">Demo copy for testing; not affiliated with Frontier Airlines or any airline or travel site. Flights and fares are made up.</footer>
+  <script src="/assets/scenarios.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>#134001 - RTX 5090 not listed in Cycles Render Devices on 4.2.3 - Blender Projects (demo copy)</title>
+  <link rel="stylesheet" href="/assets/rtx.css">
+</head>
+<body class="projects" data-page-id="issue-blackwell">
+  <header class="site-bar">
+    <span class="site-name">Blender Projects</span>
+    <a href="/blender-projects/">Issues</a>
+    <span class="host">projects.blender.org</span>
+  </header>
+  <main>
+    <p class="crumbs"><a href="/blender-projects/">blender / blender › Issues</a> › #134001</p>
+    <h1 data-scn="issue-title">RTX 5090 not listed in Cycles Render Devices on 4.2.3</h1>
+    <p><span class="status" data-scn="issue-status">Resolved</span> <span class="meta">#134001 · Module: Cycles · Type: Report</span></p>
+
+    <div class="post" data-scn="issue-report">
+      <p class="who">Report</p>
+      <p>System: Linux and Windows, NVIDIA driver 572.16, Blender 4.2.3 LTS.</p>
+      <p>Under Edit › Preferences › System, the device list is empty on both CUDA and OptiX. Rendering on the GPU
+        prints:</p>
+      <p class="message">CUDA binary kernel for this graphics card compute capability (12.0) not found.</p>
+      <p>Older cards in the same machine show up as expected.</p>
+    </div>
+
+    <div class="post" data-scn="issue-triage">
+      <p class="who">Cycles module, triage</p>
+      <p>Confirmed. The card reports compute capability 12.0 and the 4.2 builds were compiled before kernels for it
+        existed.</p>
+    </div>
+
+    <div class="post" data-scn="issue-resolution">
+      <p class="who">Cycles module, closing comment</p>
+      <p>The Blackwell kernels shipped in 4.4.0. They are not in 4.2 builds and will not be added to them. Install
+        Blender 4.4.0 or later, then pick the card under Cycles Render Devices. Closing as resolved.</p>
+    </div>
+  </main>
+  <footer>Demo copy for testing; not affiliated with the Blender Foundation. Facts on this page are invented.</footer>
+  <script src="/assets/rtx.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>T-0203 link</title>
+<style>html, body { margin: 0; overflow: hidden; }
+#go { position: fixed; inset: 0; display: block; background: rgb(200, 200, 0); }</style></head>
+<body><a id="go" href="/results.html">go</a>
+<script>
+// ``to`` (a same-origin path) replaces the link's target, so a row can point it at a delayed, held, redirected or
+// failing response.
+(function () {
+  const p = new URLSearchParams(location.search);
+  if (p.has("to")) document.getElementById("go").setAttribute("href", p.get("to"));
+  window.__doc = Math.random().toString(36).slice(2);
+})();
+</script>
+</body></html>

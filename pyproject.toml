@@ -1,0 +1,150 @@
+[project]
+name = "diffusion-gearvis"
+version = "0.0.1"
+description = "On-device voice-and-vision assistant: DiffusionGemma on vLLM (RTX 5090), Kyutai STT, Pocket TTS, A2UI surfaces."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+dependencies = [
+  "pydantic>=2.7,<3",
+  "jsonschema>=4.23",
+  "referencing>=0.35",
+  "rfc3339-validator>=0.1.4",
+  "json-repair>=0.63,<0.70",
+  "msgpack>=1.0",
+  "websockets>=13",
+  "httpx>=0.27",
+  "numpy>=1.26",
+  # T-0128c A9: the conductor's relay of the plugin's canvas tap (ZeroMQ SUB on loopback).
+  "pyzmq>=26",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8",
+  "pytest-asyncio>=0.24",
+  "hypothesis>=6.100",
+  "ruff>=0.6",
+  "mypy>=1.11",
+  "types-jsonschema",
+  "pytest-xdist>=3.5",
+]
+# Audio, perception and telemetry stacks are added by the tasks that need them
+# (T-0006 audio I/O, T-0008 HUD source, T-0011 plugin tap). Keep the core light.
+audio = ["sounddevice>=0.5", "soundfile>=0.12"]
+telemetry = ["opentelemetry-api>=1.27", "opentelemetry-sdk>=1.27"]
+vision = ["pillow>=10", "imagehash>=4.3"]
+browser = [
+    "playwright==1.64.0",
+]
+search = [
+    "ddgs==9.16.1",
+]
+
+[project.scripts]
+astra = "local_astra.cli:main"
+diffusion_gearvis = "local_astra.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["local_astra"]
+
+[dependency-groups]
+# T-0063: per-step constrained decoding (T-0062 tree). Not installed by `uv sync --all-extras`;
+# `make cd-test` runs with `--group cd`. torch pins the version inside vllm/vllm-openai:v0.29.0
+# (2.13.0+cu130), CPU build; outlines-core pins what diffgemma-fa ran (docs/ENV.md).
+cd = [
+  "torch==2.13.0",
+  "outlines-core==0.2.14",
+  "tokenizers>=0.21,<1",
+  "triton==3.7.1",
+]
+# T-0011 tier 1b: the canvas tap around the vendored v0.29.0 sampler on CPU torch (tests/stock).
+# Not installed by `uv sync --all-extras`; run with `--group stock`. torch pins the version inside
+# vllm/vllm-openai:v0.29.0 (2.13.0+cu130), CPU build.
+stock = ["torch==2.13.0"]
+
+[tool.uv]
+default-groups = []
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+# T-0063: the vendored diffgemma-fa compiler is kept verbatim (PROVENANCE.md), not reformatted.
+# T-0070: likewise diffgemma-fa's scorers/statistics (local_astra/eval/cd/_vendor/PROVENANCE.md).
+extend-exclude = ["plugin/", "hud/", "local_astra/decoding/_vendor/", "local_astra/eval/cd/_vendor/"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF", "ANN"]
+ignore = ["ANN401", "RUF001", "RUF002", "RUF003", "RUF012", "E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["ANN"]
+"scripts/**" = ["ANN"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unreachable = true
+files = ["local_astra"]
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["json_repair", "json_repair.*", "msgpack", "msgpack.*", "imagehash"]
+ignore_missing_imports = true
+
+# T-0006: the playback backend. sounddevice ships no py.typed marker; it is imported inside
+# local_astra/conductor/audio_device.py only (criterion 12c) and nowhere else in the package.
+[[tool.mypy.overrides]]
+module = ["sounddevice"]
+ignore_missing_imports = true
+
+# T-0063: the vendored diffgemma-fa compiler is kept verbatim (local_astra/decoding/_vendor/PROVENANCE.md);
+# it is not annotated to --strict. outlines_core and tokenizers (the `cd` group) ship no stubs.
+[[tool.mypy.overrides]]
+module = ["local_astra.decoding._vendor", "local_astra.decoding._vendor.*"]
+ignore_errors = true
+
+# T-0070: diffgemma-fa's scorers and statistics, kept verbatim (local_astra/eval/cd/_vendor/PROVENANCE.md).
+[[tool.mypy.overrides]]
+module = ["local_astra.eval.cd._vendor", "local_astra.eval.cd._vendor.*"]
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = ["outlines_core", "outlines_core.*", "tokenizers", "tokenizers.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+asyncio_mode = "auto"
+# T-0046: `gpu` rows never run by accident. A path-only invocation (`pytest tests/eval`) deselects
+# them; a /launch-reviewed run passes an explicit `-m gpu` (or `-m "gpu or audio"`), and a later
+# command-line -m replaces this one.
+addopts = "-ra --strict-markers -m 'not gpu'"
+markers = [
+  "gpu: needs the RTX 5090 box with real services (never runs in the fast suite)",
+  "audio: needs a PipeWire session with a capture and playback device",
+  "desktop: needs a live desktop session (portal, windows)",
+  "slow: > 5 s on hardware or a real service (integration and above); the fast suite selects by -m 'not gpu' only",
+  "contract: same module runs against fake and real backends",
+  "integration: two or more real services",
+  "browser: drives Playwright's pinned Chromium on loopback fixture pages; runs only with ASTRA_BROWSER_TESTS=1 (make browser, T-0111c)",
+  "net: reaches the internet (the ddgs search backend, T-0111b); skips unless ASTRA_LIVE_SEARCH=1 (make search-live); never in the fast suite or -m gpu",
+  "e2e: end-to-end scenario on the 5090 + desktop",
+  "bench: writes turns.jsonl and compares to docs/03 §7 thresholds",
+  "eval: quality evaluation, nightly",
+  "pending(task): written ahead of its implementation; auto-converted to strict xfail until the test-author activates it for task T-NNNN (see tests/conftest.py and docs/09 §Pending tests)",
+]
+filterwarnings = ["error::DeprecationWarning:local_astra.*"]

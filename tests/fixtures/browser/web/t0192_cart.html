@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Cart</title>
+<style>body{margin:0;font:20px sans-serif}a,button{display:block;margin:12px 40px;padding:14px;width:420px;font:20px sans-serif}</style></head>
+<body>
+<!-- T-0192 A: the cart. Every control is a way to (or not to) a checkout; #bump only counts clicks. -->
+<h1>Cart</h1>
+<button id="bump" onclick="window.__bumps=(window.__bumps||0)+1">Update quantity</button>
+<a id="proceed" href="/checkout/entry?proceedToCheckout=1">Proceed to checkout</a>
+<a id="buynow" href="/checkout/entry2">Buy now</a>
+<a id="popup" href="/checkout/T0192TOKq7w3/pay" target="_blank">Checkout in a new window</a>
+<button id="push" onclick="history.pushState({}, '', '/checkout')">Checkout (same document)</button>
+<a id="faq" href="/checkout-faq.html">Checkout questions</a>
+<script>window.__bumps = 0;</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RTX 5090 not showing in Cycles Render Devices - Technical Support - Blender Artists Community (demo copy)</title>
+  <link rel="stylesheet" href="/assets/rtx.css">
+</head>
+<body class="forum" data-page-id="forum-thread">
+  <header class="site-bar">
+    <span class="site-name">Blender Artists Community</span>
+    <a href="/blender-artists/">Latest</a>
+    <a href="/blender-artists/login.html">Log in</a>
+    <span class="host">blenderartists.org</span>
+  </header>
+  <main>
+    <p class="crumbs"><a href="/blender-artists/">Blender Artists</a> › Technical Support › Cycles</p>
+    <h1>RTX 5090 not showing in Cycles Render Devices</h1>
+
+    <div class="post" data-scn="question">
+      <p class="who">pixelmoth</p>
+      <p>I just put an RTX 5090 in my machine. I'm on Blender 4.2.3 and the card does not show up under Cycles Render
+        Devices at all, neither with CUDA nor with OptiX. When I try to render on the GPU I get:</p>
+      <p class="message">CUDA binary kernel for this graphics card compute capability (12.0) not found</p>
+      <p>The driver is the newest one. What am I missing?</p>
+      <p class="likes">4 likes</p>
+    </div>
+
+    <div class="post" data-scn="reply-1">
+      <p class="who">voxelvern</p>
+      <p>Classic driver problem. Do a clean reinstall of the NVIDIA driver with DDU (Display Driver Uninstaller) in
+        safe mode, then install the CUDA Toolkit 12.8 so Blender can find the compiler. That fixed it for me on an
+        older card.</p>
+      <p class="likes">23 likes</p>
+    </div>
+
+    <div class="post" data-scn="reply-2">
+      <p class="who">cycles_tinkerer</p>
+      <p>Your driver is fine, and Blender does not use a separately installed CUDA Toolkit. Blender 4.2.3 simply has
+        no kernels for compute capability 12.0, so the card cannot appear. The Blackwell kernels came with 4.4: see
+        issue #134001 on <a href="/blender-projects/issue-134001.html">projects.blender.org</a> and the 4.4 Cycles
+        release notes on <a href="/blender-notes/4.4-cycles.html">developer.blender.org</a>.</p>
+      <p>Install Blender 4.4, then open Edit › Preferences › System › Cycles Render Devices, choose OptiX and tick
+        the RTX 5090. Finally set Render Properties › Device to GPU Compute.</p>
+      <p class="likes">9 likes</p>
+    </div>
+
+    <p><a class="button" href="/blender-artists/login.html" data-scn="reply">Reply</a></p>
+  </main>
+  <footer>Demo copy for testing; not affiliated with Blender Artists or the Blender Foundation. Facts on this page are invented.</footer>
+  <script src="/assets/rtx.js"></script>
+</body>
+</html>

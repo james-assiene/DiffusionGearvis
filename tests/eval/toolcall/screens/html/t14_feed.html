@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Home - Circle</title><style>
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: "DejaVu Sans", "Liberation Sans", Arial, sans-serif; font-size: 15px; color: #1f2328;
+       background: #f6f7f9; width: 1280px; }
+.top { height: 56px; background: #24292f; color: #fff; display: flex; align-items: center; padding: 0 20px; gap: 18px; }
+.top .brand { font-weight: bold; font-size: 19px; }
+.top a, .top span { color: #d0d7de; text-decoration: none; }
+.side { position: absolute; left: 0; top: 56px; width: 220px; bottom: 0; background: #fff; border-right: 1px solid #d0d7de; padding: 14px; }
+.side div { padding: 9px 10px; border-radius: 6px; margin-bottom: 4px; }
+.side .on { background: #ddf4ff; font-weight: bold; }
+.main { position: absolute; left: 240px; top: 76px; right: 20px; }
+.card { background: #fff; border: 1px solid #d0d7de; border-radius: 8px; padding: 16px; }
+.row { display: flex; gap: 12px; align-items: center; }
+.btn { display: inline-block; padding: 8px 16px; border-radius: 6px; border: 1px solid #1f883d; background: #1f883d; color: #fff; font-weight: bold; }
+.btn.sec { background: #f6f8fa; color: #24292f; border-color: #d0d7de; }
+.btn.red { background: #cf222e; border-color: #cf222e; }
+.btn.blue { background: #0969da; border-color: #0969da; }
+input.f, .f { display: block; width: 100%; height: 38px; border: 1px solid #8c959f; border-radius: 6px; padding: 0 10px; font-size: 15px; background: #fff; font-family: inherit; }
+label { display: block; font-weight: bold; margin: 12px 0 6px; }
+.muted { color: #57606a; }
+.list > div { padding: 12px 14px; border-bottom: 1px solid #eaeef2; background: #fff; }
+.grid { display: grid; gap: 14px; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 10px; background: #eaeef2; font-size: 13px; }
+.toggle { display: inline-block; width: 44px; height: 24px; border-radius: 12px; background: #8c959f; position: relative; vertical-align: middle; }
+.toggle.on { background: #1f883d; }
+.toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 9px; background: #fff; }
+.toggle.on::after { left: 23px; }
+.box { display: inline-block; width: 18px; height: 18px; border: 2px solid #57606a; border-radius: 3px; vertical-align: middle; background: #fff; }
+.box.on { background: #0969da; border-color: #0969da; }
+.strip { display: flex; gap: 14px; overflow-x: auto; overflow-y: hidden; white-space: nowrap; }
+.strip::-webkit-scrollbar { display: none; }
+.thumb { flex: 0 0 auto; width: 220px; height: 150px; border-radius: 8px; color: #fff; font-weight: bold; display: flex; align-items: flex-end; padding: 10px; }
+.sel { background: #b6e3ff; }
+table { border-collapse: collapse; background: #fff; }
+td, th { border: 1px solid #d0d7de; padding: 6px 10px; text-align: left; }
+th { background: #f6f8fa; }
+p { line-height: 1.6; margin: 0 0 14px; }
+</style></head>
+<body>
+<div class="top" style="position:fixed;left:0;right:0;top:0;z-index:2"><span class="brand">Circle</span><span>Home</span><span>Groups</span><span>Messages</span></div><div class="card" style="position:absolute;left:320px;top:72px;width:640px"><textarea class="f" data-t="composer" placeholder="What's on your mind?" style="height:70px;padding:8px"></textarea>
+    <div style="text-align:right;margin-top:8px"><span class="btn blue" data-t="post">Post</span></div></div>
+<div data-t="feed" style="position:absolute;left:320px;top:230px;width:640px;height:560px;overflow-y:auto">
+<div class="card" style="margin-top:14px"><b>Sara Lind</b><p>Finally finished the quilt I started in January. Never again (until next time).</p><span class="btn sec" data-t=like0>Like</span> <span class="btn sec">Comment</span></div><div class="card" style="margin-top:14px"><b>Jonas Weber</b><p>Anyone know a good bike mechanic near the station?</p><span class="btn sec" data-t=like1>Like</span> <span class="btn sec">Comment</span></div><div class="card" style="margin-top:14px"><b>Priya Nair</b><p>Our team won the pub quiz! The tie-break was the height of Ben Nevis.</p><span class="btn sec" data-t=like2>Like</span> <span class="btn sec">Comment</span></div><div class="card" style="margin-top:14px"><b>Omar Haddad</b><p>Sourdough attempt number four. Getting there.</p><span class="btn sec">Like</span> <span class="btn sec">Comment</span></div><div class="card" style="margin-top:14px"><b>Lena Fischer</b><p>Reminder: the book club meets on Thursday, chapter 9 to 14.</p><span class="btn sec">Like</span> <span class="btn sec">Comment</span></div><div class="card" style="margin-top:14px"><b>Mira Sol</b><p>New song out on Friday. Thank you for listening.</p><span class="btn sec">Like</span> <span class="btn sec">Comment</span></div><div class="card" style="margin-top:14px"><b>Workshop Wren</b><p>A sharp chisel is a safe chisel.</p><span class="btn sec">Like</span> <span class="btn sec">Comment</span></div><div class="card" style="margin-top:14px"><b>City Times</b><p>The riverside project enters its second phase.</p><span class="btn sec">Like</span> <span class="btn sec">Comment</span></div></div>
+</body></html>

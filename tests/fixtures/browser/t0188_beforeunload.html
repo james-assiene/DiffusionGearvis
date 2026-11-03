@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>T-0188 beforeunload</title>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { height: 1600px; font: 16px sans-serif; background: #f4efe1; }
+  #field { position: absolute; left: 100px; top: 100px; width: 400px; height: 40px; box-sizing: border-box; }
+</style>
+</head>
+<body>
+<input id="field" type="text" value="">
+<script>
+  // T-0188 (hand-written by the T-0188 test-author, 2026-10-28): a page that refuses to unload, as photopea.com does
+  // once a document is open. `?arm=0` is the control: the same page without the handler.
+  window.__armed = new URLSearchParams(location.search).get("arm") !== "0";
+  if (window.__armed) {
+    window.addEventListener("beforeunload", (e) => { e.preventDefault(); e.returnValue = ""; });
+  }
+</script>
+</body>
+</html>

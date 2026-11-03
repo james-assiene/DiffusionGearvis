@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-0189 prefilled fields</title>
+<style>
+  html, body { margin: 0; overflow: hidden; background: #fafafa; font: 16px monospace; }
+  /* Single-line inputs: x 100..499, 40 px tall, one every 60 px from y 40. Each starts with old text. */
+  input { position: absolute; left: 100px; width: 400px; height: 40px; box-sizing: border-box; font: 16px monospace; }
+  #in-text { top: 40px; }
+  #in-search { top: 100px; }
+  #in-url { top: 160px; }
+  #in-email { top: 220px; }
+  #in-tel { top: 280px; }
+  #in-number { top: 340px; }
+  #in-notype { top: 400px; }
+  #in-pw { top: 460px; }
+  /* Multi-line and rich editors: x 600..1099, 200 px tall, one short first line, so a click at the centre lands
+     below the text and the caret goes to the end of it. */
+  #ta { position: absolute; left: 600px; top: 40px; width: 500px; height: 200px; box-sizing: border-box;
+        font: 16px monospace; resize: none; }
+  #ce { position: absolute; left: 600px; top: 300px; width: 500px; height: 200px; box-sizing: border-box;
+        border: 1px solid #888; background: #fff; padding: 2px; }
+</style>
+<script src="recorder.js"></script>
+</head>
+<body>
+<input id="in-text" type="text" autocomplete="off" value="old-text">
+<input id="in-search" type="search" autocomplete="off" value="old-search">
+<input id="in-url" type="url" autocomplete="off" value="https://old.example/">
+<input id="in-email" type="email" autocomplete="off" value="old@example.org">
+<input id="in-tel" type="tel" autocomplete="off" value="0123456789">
+<input id="in-number" type="number" autocomplete="off" value="12345">
+<input id="in-notype" autocomplete="off" value="old-notype">
+<input id="in-pw" type="password" autocomplete="off" value="old-secret">
+<textarea id="ta" autocomplete="off">old textarea</textarea>
+<div id="ce" contenteditable="true">old editable</div>
+</body>
+</html>
